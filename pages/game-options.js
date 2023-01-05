@@ -1,11 +1,18 @@
+import { useRouter } from "next/router";
 import styles from "../styles/GameOptions.module.css";
 
 const GameOptions = (props) => {
   const { gameType } = props;
+  const router = useRouter();
 
   const formattedGameTypeString = (gameType) => {
     return gameType.split("-").join(" ");
   };
+
+  const playGame = (e) => {
+    e.preventDefault()
+    router.push("/practice-mode")
+  }
 
   return (
     <main className={styles.main}>
@@ -14,6 +21,7 @@ const GameOptions = (props) => {
           {formattedGameTypeString(gameType)} options
         </h1>
       </div>
+      <div className={styles.startButton} onClick={playGame}>Start Game</div>
     </main>
   );
 };
@@ -21,7 +29,6 @@ const GameOptions = (props) => {
 export async function getServerSideProps({ query }) {
   const gameType = query.gameType;
 
-  console.log(gameType);
   return {
     props: {
       gameType,
