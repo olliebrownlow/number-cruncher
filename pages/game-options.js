@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import BackButton from "../components/backButton";
 import styles from "../styles/GameOptions.module.css";
 
 const GameOptions = (props) => {
@@ -10,19 +11,24 @@ const GameOptions = (props) => {
   };
 
   const playGame = (e) => {
-    e.preventDefault()
-    router.push("/practice-mode")
-  }
+    e.preventDefault();
+    router.push("/practice-mode");
+  };
 
   return (
-    <main className={styles.main}>
-      <div className={styles.center}>
-        <h1 className={styles.heading}>
-          {formattedGameTypeString(gameType)} options
-        </h1>
-      </div>
-      <div className={styles.startButton} onClick={playGame}>Start Game</div>
-    </main>
+    <>
+      <BackButton />
+      <main className={styles.main}>
+        <div className={styles.center}>
+          <h1 className={styles.heading}>
+            {formattedGameTypeString(gameType)} options
+          </h1>
+        </div>
+        <div className={styles.startButton} onClick={playGame}>
+          Start Game
+        </div>
+      </main>
+    </>
   );
 };
 
