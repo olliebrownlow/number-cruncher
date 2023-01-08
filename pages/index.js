@@ -1,8 +1,5 @@
-import Link from "next/link";
-import { Inter } from "@next/font/google";
+import GameLink from "../components/gameLink";
 import styles from "../styles/Home.module.css";
-
-const inter = Inter({ subsets: ["latin"] });
 
 const Home = (props) => {
   return (
@@ -13,65 +10,55 @@ const Home = (props) => {
         </div>
 
         <div className={styles.grid}>
-          <Link
-            href={{
-              pathname: "/game-options",
-              query: { gameType: "practice-mode" },
-            }}
-            className={styles.card}
-          >
-            <h2 className={inter.className}>
-              Practice mode <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Select times tables of your choice and get those brain cells
-              working!
-            </p>
-          </Link>
+          <GameLink
+            pathName={"/game-options"}
+            gameType={"practice-mode"}
+            gameTitle={"Practice mode"}
+            gameDescription={
+              "Select times tables of your choice and get those brain cells  working!"
+            }
+          />
 
-          <a href="" className={styles.card}>
-            <h2 className={inter.className}>
-              Streak <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Get one wrong and the streak counter will reset to zero!
-            </p>
-          </a>
+          <GameLink
+            pathName={"/game-options"}
+            gameType={"streak"}
+            gameTitle={"Streak"}
+            gameDescription={
+              "Get one wrong and the streak counter will reset to zero!"
+            }
+          />
 
-          <a href="" className={styles.card}>
-            <h2 className={inter.className}>
-              Play the percentages <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Set a question limit and see how many you can get right.
-            </p>
-          </a>
+          <GameLink
+            pathName={"/game-options"}
+            gameType={"play-the-percentages"}
+            gameTitle={"Play the percentages"}
+            gameDescription={
+              "Set a question limit and see how many you can get right."
+            }
+          />
 
-          <a href="" className={styles.card}>
-            <h2 className={inter.className}>
-              Against the clock <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Set time limits and compete for top scores. Tick tock tick tock...
-            </p>
-          </a>
+          <GameLink
+            pathName={"/game-options"}
+            gameType={"against-the-clock"}
+            gameTitle={"Against the clock"}
+            gameDescription={
+              "Set time limits and compete for top scores. Tick tock tick tock..."
+            }
+          />
 
-          <a href="" className={styles.card}>
-            <h2 className={inter.className}>
-              Journey <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Work through levels of increasing difficulty earning rewards as
-              you go.
-            </p>
-          </a>
+          <GameLink
+            pathName={"/journey"}
+            gameTitle={"Journey"}
+            gameDescription={
+              "Work through levels of increasing difficulty earning rewards as you go."
+            }
+          />
 
-          <a href="" className={styles.card}>
-            <h2 className={inter.className}>
-              About <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>What, who and why..</p>
-          </a>
+          <GameLink
+            pathName={"/about"}
+            gameTitle={"About"}
+            gameDescription={"What, who and why.."}
+          />
         </div>
       </main>
     </>

@@ -12,7 +12,7 @@ const GameOptions = (props) => {
 
   const playGame = (e) => {
     e.preventDefault();
-    router.push("/practice-mode");
+    router.push("/" + gameType);
   };
 
   return (
