@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import BackButton from "../components/backButton";
+import PageHeading from "../components/pageHeading";
 import styles from "../styles/GameOptions.module.css";
 
 const GameOptions = (props) => {
@@ -18,11 +19,7 @@ const GameOptions = (props) => {
   return (
     <>
       <BackButton />
-      <div className={styles.center}>
-        <h1 className={styles.heading}>
-          {formattedGameTypeString(gameType)} options
-        </h1>
-      </div>
+      <PageHeading heading={formattedGameTypeString(gameType) + " options"} />
       <div className={styles.startButton} onClick={playGame}>
         Start Game
       </div>

@@ -1,12 +1,11 @@
+import PageHeading from "../components/pageHeading";
 import GameLink from "../components/gameLink";
 import styles from "../styles/Home.module.css";
 
 const Home = (props) => {
   return (
     <>
-      <div className={styles.center}>
-        <h1 className={styles.heading}>Number Cruncher</h1>
-      </div>
+      <PageHeading heading={"Number Cruncher"} />
 
       <div className={styles.grid}>
         <GameLink

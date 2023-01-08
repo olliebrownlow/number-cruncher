@@ -1,13 +1,11 @@
 import BackButton from "../components/backButton";
-import styles from "../styles/PracticeMode.module.css";
+import PageHeading from "../components/pageHeading";
 
 const PlayThePercentages = (props) => {
   return (
     <>
       <BackButton />
-      <div className={styles.center}>
-        <h1 className={styles.heading}>Play The Percentages</h1>
-      </div>
+      <PageHeading heading={"Play the Percentages"} />
     </>
   );
 };

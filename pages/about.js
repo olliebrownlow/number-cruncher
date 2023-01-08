@@ -1,13 +1,11 @@
 import BackButton from "../components/backButton";
-import styles from "../styles/PracticeMode.module.css";
+import PageHeading from "../components/pageHeading";
 
 const About = (props) => {
   return (
     <>
       <BackButton />
-      <div className={styles.center}>
-        <h1 className={styles.heading}>About</h1>
-      </div>
+      <PageHeading heading={"About"} />
     </>
   );
 };
