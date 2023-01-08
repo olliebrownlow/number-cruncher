@@ -5,11 +5,9 @@ const Journey = (props) => {
   return (
     <>
       <BackButton />
-      <main className={styles.main}>
-        <div className={styles.center}>
-          <h1 className={styles.heading}>Journey</h1>
-        </div>
-      </main>
+      <div className={styles.center}>
+        <h1 className={styles.heading}>Journey</h1>
+      </div>
     </>
   );
 };

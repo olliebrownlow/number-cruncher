@@ -5,11 +5,9 @@ const AgainstTheClock = (props) => {
   return (
     <>
       <BackButton />
-      <main className={styles.main}>
-        <div className={styles.center}>
-          <h1 className={styles.heading}>Against The Clock</h1>
-        </div>
-      </main>
+      <div className={styles.center}>
+        <h1 className={styles.heading}>Against The Clock</h1>
+      </div>
     </>
   );
 };

@@ -5,11 +5,9 @@ const PlayThePercentages = (props) => {
   return (
     <>
       <BackButton />
-      <main className={styles.main}>
-        <div className={styles.center}>
-          <h1 className={styles.heading}>Play The Percentages</h1>
-        </div>
-      </main>
+      <div className={styles.center}>
+        <h1 className={styles.heading}>Play The Percentages</h1>
+      </div>
     </>
   );
 };

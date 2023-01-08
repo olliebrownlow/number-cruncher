@@ -18,16 +18,14 @@ const GameOptions = (props) => {
   return (
     <>
       <BackButton />
-      <main className={styles.main}>
-        <div className={styles.center}>
-          <h1 className={styles.heading}>
-            {formattedGameTypeString(gameType)} options
-          </h1>
-        </div>
-        <div className={styles.startButton} onClick={playGame}>
-          Start Game
-        </div>
-      </main>
+      <div className={styles.center}>
+        <h1 className={styles.heading}>
+          {formattedGameTypeString(gameType)} options
+        </h1>
+      </div>
+      <div className={styles.startButton} onClick={playGame}>
+        Start Game
+      </div>
     </>
   );
 };
