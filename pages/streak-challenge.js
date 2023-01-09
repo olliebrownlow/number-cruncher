@@ -5,7 +5,7 @@ const Streak = (props) => {
   return (
     <>
       <BackButton />
-      <PageHeading heading={"Streak"} />
+      <PageHeading heading={"Streak Challenge"} />
     </>
   );
 };

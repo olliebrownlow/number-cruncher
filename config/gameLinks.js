@@ -2,14 +2,14 @@ const gameLinks = [
   {
     pathName: "/game-options",
     gameType: "practice-mode",
-    gameTitle: "Practice mode",
+    gameTitle: "Practice Mode",
     gameDescription:
       "Select times tables of your choice and get those brain cells  working!",
   },
   {
     pathName: "/game-options",
-    gameType: "streak",
-    gameTitle: "Streak",
+    gameType: "streak-challenge",
+    gameTitle: "Streak Challenge",
     gameDescription: "Get one wrong and the streak counter will reset to zero!",
   },
   {
