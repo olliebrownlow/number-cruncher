@@ -1,26 +1,26 @@
-.counterGrid {
+.answerGrid {
   display: grid;
   text-align: center;
-  grid-template-columns: repeat(2, minmax(25%, auto));
+  grid-template-columns: repeat(3, minmax(33%, auto));
   width: var(--max-width);
-  max-width: 50%;
+  max-width: 90%;
 }
 
-.correctCounter {
+.answerCorrectDisplay {
   font-size: 2rem;
   color: green;
-  padding-bottom: 0.5rem;
+  padding: 1rem 0;
 }
 
-.errorCounter {
+.answerWrongDisplay {
   font-size: 2rem;
   color: red;
-  padding-bottom: 0.5rem;
+  padding: 1rem 0;
 }
 
 /* Tablet and Smaller Desktop */
 @media (min-width: 701px) and (max-width: 1120px) {
-  .counterGrid {
+ .answerGrid {
     grid-template-columns: repeat(2, 50%);
   }
 }

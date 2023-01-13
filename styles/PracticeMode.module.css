@@ -3,18 +3,6 @@
   padding: 0 0 1rem;
 }
 
-.answerCorrectDisplay {
-  font-size: 2rem;
-  color: green;
-  padding: 1rem 0;
-}
-
-.answerWrongDisplay {
-  font-size: 2rem;
-  color: red;
-  padding: 1rem 0;
-}
-
 .formGroup {
   flex: 1;
   display: flex;
@@ -33,23 +21,4 @@
   margin-bottom: 1rem;
   max-width: 8rem;
   padding: 4px 8px;
-}
-
-.answerGrid {
-  display: grid;
-  text-align: center;
-  grid-template-columns: repeat(3, minmax(33%, auto));
-  width: var(--max-width);
-  max-width: 90%;
-}
-
-/* Tablet and Smaller Desktop */
-@media (min-width: 701px) and (max-width: 1120px) {
-  .counterGrid {
-    grid-template-columns: repeat(2, 50%);
-  }
-
-  .answerGrid {
-    grid-template-columns: repeat(2, 50%);
-  }
 }

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import BackButton from "../components/backButton";
 import PageHeading from "../components/pageHeading";
 import RightWrongCounters from "../components/rightWrongCounters";
+import AnswerGrid from "../components/answerGrid";
 import styles from "../styles/PracticeMode.module.css";
 
 const PracticeMode = (props) => {
@@ -12,7 +13,6 @@ const PracticeMode = (props) => {
   const [userAnswer, setUserAnswer] = useState("");
   const [userPrevAnswer, setUserPrevAnswer] = useState("--");
   const [correct, setCorrect] = useState(true);
-  const [timesSign, setTimesSign] = useState("×");
   const [counter, setCounter] = useState();
   const [errorCounter, setErrorCounter] = useState();
 
@@ -67,14 +67,6 @@ const PracticeMode = (props) => {
     }
   };
 
-  const getAnswer = () => {
-    if (prevTable * prevMultiplier) {
-      return prevTable * prevMultiplier;
-    } else {
-      return "--";
-    }
-  };
-
   return (
     <>
       <BackButton />
@@ -101,30 +93,12 @@ const PracticeMode = (props) => {
           Submit
         </button>
       </form>
-      <div className={styles.answerGrid}>
-        <div>question</div>
-        <div>answer</div>
-        <div>your answer</div>
-        {correct ? (
-          <>
-            <div className={styles.answerCorrectDisplay}>
-              {prevTable} {timesSign} {prevMultiplier}
-            </div>
-            <div className={styles.answerCorrectDisplay}>{getAnswer()}</div>
-            <div className={styles.answerCorrectDisplay}>{userPrevAnswer}</div>
-          </>
-        ) : (
-          <>
-            <div className={styles.answerCorrectDisplay}>
-              {prevTable} {timesSign} {prevMultiplier}
-            </div>
-            <div className={styles.answerCorrectDisplay}>{getAnswer()}</div>
-            <div className={styles.answerWrongDisplay}>
-              {userPrevAnswer ? userAnswer : "--"}
-            </div>
-          </>
-        )}
-      </div>
+      <AnswerGrid
+        correct={correct}
+        prevTable={prevTable}
+        prevMultiplier={prevMultiplier}
+        userPrevAnswer={userPrevAnswer}
+      />
     </>
   );
 };
