@@ -1,0 +1,20 @@
+.counterGrid {
+  display: grid;
+  text-align: center;
+  grid-template-columns: repeat(2, minmax(25%, auto));
+  width: var(--max-width);
+  max-width: 50%;
+}
+
+.correctCounter {
+  font-size: 2rem;
+  color: green;
+  padding-bottom: 0.5rem;
+}
+
+.errorCounter {
+  font-size: 2rem;
+  color: red;
+  padding-bottom: 0.5rem;
+}
+

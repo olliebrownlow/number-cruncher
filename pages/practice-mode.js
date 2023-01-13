@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import BackButton from "../components/backButton";
 import PageHeading from "../components/pageHeading";
+import RightWrongCounters from "../components/rightWrongCounters";
 import styles from "../styles/PracticeMode.module.css";
 
 const PracticeMode = (props) => {
@@ -35,6 +36,7 @@ const PracticeMode = (props) => {
       const storedValue = sessionStorage.getItem("errorCounter");
       setErrorCounter(parseInt(storedValue));
     }
+
     setCurrentTable(Math.floor(Math.random() * 11) + 1);
     setCurrentMultiplier(Math.floor(Math.random() * 11) + 1);
     document.getElementById("answer").focus();
@@ -48,7 +50,6 @@ const PracticeMode = (props) => {
   const submitAnswer = (e) => {
     e.preventDefault();
     document.getElementById("answer").focus();
-    setTimesSign("×");
     setPrevTable(currentTable);
     setPrevMultiplier(currentMultiplier);
     setUserPrevAnswer(userAnswer);
@@ -66,17 +67,11 @@ const PracticeMode = (props) => {
     }
   };
 
-  const getSessionItem = (key) => {
-    if (typeof window !== "undefined") {
-      return sessionStorage.getItem(key);
-    }
-  };
-
   const getAnswer = () => {
     if (prevTable * prevMultiplier) {
       return prevTable * prevMultiplier;
     } else {
-      return "--"
+      return "--";
     }
   };
 
@@ -84,16 +79,7 @@ const PracticeMode = (props) => {
     <>
       <BackButton />
       <PageHeading heading={"Practice Mode"} />
-      <div className={styles.counterGrid}>
-        <div className={styles.correctCounter}>
-          {getSessionItem("correctCounter")
-            ? getSessionItem("correctCounter")
-            : 0}
-        </div>
-        <div className={styles.errorCounter}>
-          {getSessionItem("errorCounter") ? getSessionItem("errorCounter") : 0}
-        </div>
-      </div>
+      <RightWrongCounters />
       <div className={styles.questionDisplay}>
         {currentTable} × {currentMultiplier}
       </div>
@@ -133,7 +119,9 @@ const PracticeMode = (props) => {
               {prevTable} {timesSign} {prevMultiplier}
             </div>
             <div className={styles.answerCorrectDisplay}>{getAnswer()}</div>
-            <div className={styles.answerWrongDisplay}>{userPrevAnswer}</div>
+            <div className={styles.answerWrongDisplay}>
+              {userPrevAnswer ? userAnswer : "--"}
+            </div>
           </>
         )}
       </div>
