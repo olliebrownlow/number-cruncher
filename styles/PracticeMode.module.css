@@ -1,0 +1,75 @@
+.correctCounter {
+  font-size: 2rem;
+  color: green;
+  padding-bottom: 0.5rem;
+}
+
+.errorCounter {
+  font-size: 2rem;
+  color: red;
+  padding-bottom: 0.5rem;
+}
+
+.answerCorrectDisplay {
+  font-size: 2rem;
+  color: green;
+  padding: 1rem 0;
+}
+
+.answerWrongDisplay {
+  font-size: 2rem;
+  color: red;
+  padding: 1rem 0;
+}
+
+.questionDisplay {
+  font-size: 4rem;
+  padding: 0 0 1rem;
+}
+
+.formGroup {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.userInput {
+  font-size: 2rem;
+  padding: 4px 8px;
+  margin-bottom: 1rem;
+}
+
+.submitButton {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  max-width: 8rem;
+  padding: 4px 8px;
+}
+
+.counterGrid {
+  display: grid;
+  text-align: center;
+  grid-template-columns: repeat(2, minmax(25%, auto));
+  width: var(--max-width);
+  max-width: 50%;
+}
+
+.answerGrid {
+  display: grid;
+  text-align: center;
+  grid-template-columns: repeat(3, minmax(33%, auto));
+  width: var(--max-width);
+  max-width: 90%;
+}
+
+/* Tablet and Smaller Desktop */
+@media (min-width: 701px) and (max-width: 1120px) {
+  .counterGrid {
+    grid-template-columns: repeat(2, 50%);
+  }
+
+  .answerGrid {
+    grid-template-columns: repeat(2, 50%);
+  }
+}
