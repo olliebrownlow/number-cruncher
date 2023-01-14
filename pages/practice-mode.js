@@ -5,7 +5,6 @@ import RightWrongCounters from "../components/rightWrongCounters";
 import QuestionDisplay from "../components/questionDisplay";
 import AnswerForm from "../components/answerForm";
 import AnswerGrid from "../components/answerGrid";
-import styles from "../styles/PracticeMode.module.css";
 
 const PracticeMode = (props) => {
   const [currentTable, setCurrentTable] = useState(0);
