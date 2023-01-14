@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import BackButton from "../components/backButton";
 import PageHeading from "../components/pageHeading";
 import RightWrongCounters from "../components/rightWrongCounters";
+import QuestionDisplay from "../components/questionDisplay";
 import AnswerGrid from "../components/answerGrid";
 import styles from "../styles/PracticeMode.module.css";
 
@@ -80,9 +81,10 @@ const PracticeMode = (props) => {
       <BackButton />
       <PageHeading heading={"Practice Mode"} />
       <RightWrongCounters resetCounters={resetCounters} reRender={reRender} />
-      <div className={styles.questionDisplay}>
-        {currentTable} × {currentMultiplier}
-      </div>
+      <QuestionDisplay
+        currentTable={currentTable}
+        currentMultiplier={currentMultiplier}
+      />
       <form className={styles.formGroup}>
         <input
           className={styles.userInput}
