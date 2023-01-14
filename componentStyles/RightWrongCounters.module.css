@@ -1,26 +1,32 @@
 .counterGrid {
   display: grid;
   text-align: center;
-  grid-template-columns: repeat(2, minmax(25%, auto));
+  grid-template-columns: repeat(3, minmax(25%, auto));
   width: var(--max-width);
   max-width: 50%;
-}
+  align-items: center;
+  margin-bottom: 0.5rem;
+  }
 
 .correctCounter {
   font-size: 2rem;
   color: green;
-  padding-bottom: 0.5rem;
+}
+
+.reset {
+  border-radius: 2px;
+  padding: 2px 4px;
+  vertical-align: middle;
 }
 
 .errorCounter {
   font-size: 2rem;
   color: red;
-  padding-bottom: 0.5rem;
 }
 
 /* Tablet and Smaller Desktop */
 @media (min-width: 701px) and (max-width: 1120px) {
   .counterGrid {
-    grid-template-columns: repeat(2, 50%);
+    grid-template-columns: repeat(3, 33%);
   }
 }

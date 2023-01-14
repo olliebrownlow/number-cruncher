@@ -1,6 +1,7 @@
 import styles from "../componentStyles/RightWrongCounters.module.css";
 
-const RightWrongCounters = () => {
+const RightWrongCounters = (props) => {
+  const { resetCounters } = props;
 
   const getSessionItem = (key) => {
     if (typeof window !== "undefined") {
@@ -11,12 +12,15 @@ const RightWrongCounters = () => {
   return (
     <div className={styles.counterGrid}>
       <div className={styles.correctCounter}>
-        {getSessionItem("correctCounter")
-          ? getSessionItem("correctCounter")
-          : 0}
+        {getSessionItem("correctCounter")}
+      </div>
+      <div>
+        <button className={styles.reset} onClick={resetCounters}>
+          reset
+        </button>
       </div>
       <div className={styles.errorCounter}>
-        {getSessionItem("errorCounter") ? getSessionItem("errorCounter") : 0}
+        {getSessionItem("errorCounter")}
       </div>
     </div>
   );

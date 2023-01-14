@@ -13,34 +13,42 @@ const PracticeMode = (props) => {
   const [userAnswer, setUserAnswer] = useState("");
   const [userPrevAnswer, setUserPrevAnswer] = useState("--");
   const [correct, setCorrect] = useState(true);
-  const [counter, setCounter] = useState();
-  const [errorCounter, setErrorCounter] = useState();
+  // counter to force re-render of child component.
+  // needed as sessionStorage state changes cannot achieve this.
+  const [reRender, setReRender] = useState(0);
 
   useEffect(() => {
     if (
       typeof window !== "undefined" &&
       sessionStorage.getItem("correctCounter") === null
     ) {
-      setCounter(0);
-    } else {
-      const storedValue = sessionStorage.getItem("correctCounter");
-      setCounter(parseInt(storedValue));
+      sessionStorage.setItem("correctCounter", 0);
     }
 
     if (
       typeof window !== "undefined" &&
       sessionStorage.getItem("errorCounter") === null
     ) {
-      setErrorCounter(0);
-    } else {
-      const storedValue = sessionStorage.getItem("errorCounter");
-      setErrorCounter(parseInt(storedValue));
+      sessionStorage.setItem("errorCounter", 0);
     }
+    document.getElementById("answer").focus();
+  }, []);
 
+  useEffect(() => {
     setCurrentTable(Math.floor(Math.random() * 11) + 1);
     setCurrentMultiplier(Math.floor(Math.random() * 11) + 1);
     document.getElementById("answer").focus();
   }, []);
+
+  const resetCounters = (e) => {
+    e.preventDefault();
+    if (typeof window !== "undefined") {
+      sessionStorage.setItem("correctCounter", 0);
+      sessionStorage.setItem("errorCounter", 0);
+      setReRender(reRender + 1);
+      document.getElementById("answer").focus();
+    }
+  };
 
   const handleChange = (event) => {
     const target = event.target;
@@ -57,12 +65,12 @@ const PracticeMode = (props) => {
     setCurrentTable(Math.floor(Math.random() * 11) + 1);
     setCurrentMultiplier(Math.floor(Math.random() * 11) + 1);
     if (parseInt(userAnswer) === currentTable * currentMultiplier) {
-      setCounter(counter + 1);
-      sessionStorage.setItem("correctCounter", counter + 1);
+      const currentCount = sessionStorage.getItem("correctCounter");
+      sessionStorage.setItem("correctCounter", parseInt(currentCount) + 1);
       setCorrect(true);
     } else {
-      setErrorCounter(errorCounter + 1);
-      sessionStorage.setItem("errorCounter", errorCounter + 1);
+      const currentCount = sessionStorage.getItem("errorCounter");
+      sessionStorage.setItem("errorCounter", parseInt(currentCount) + 1);
       setCorrect(false);
     }
   };
@@ -71,7 +79,7 @@ const PracticeMode = (props) => {
     <>
       <BackButton />
       <PageHeading heading={"Practice Mode"} />
-      <RightWrongCounters />
+      <RightWrongCounters resetCounters={resetCounters} reRender={reRender} />
       <div className={styles.questionDisplay}>
         {currentTable} × {currentMultiplier}
       </div>
@@ -83,7 +91,7 @@ const PracticeMode = (props) => {
           id="answer"
           value={userAnswer}
           required
-          autoFocus
+          autoFocus={true}
           id="answer"
           min="1"
           max="144"
