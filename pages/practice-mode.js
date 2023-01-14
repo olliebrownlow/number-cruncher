@@ -3,6 +3,7 @@ import BackButton from "../components/backButton";
 import PageHeading from "../components/pageHeading";
 import RightWrongCounters from "../components/rightWrongCounters";
 import QuestionDisplay from "../components/questionDisplay";
+import AnswerForm from "../components/answerForm";
 import AnswerGrid from "../components/answerGrid";
 import styles from "../styles/PracticeMode.module.css";
 
@@ -85,24 +86,11 @@ const PracticeMode = (props) => {
         currentTable={currentTable}
         currentMultiplier={currentMultiplier}
       />
-      <form className={styles.formGroup}>
-        <input
-          className={styles.userInput}
-          name="answer"
-          type="number"
-          id="answer"
-          value={userAnswer}
-          required
-          autoFocus={true}
-          id="answer"
-          min="1"
-          max="144"
-          onChange={handleChange}
-        />
-        <button className={styles.submitButton} onClick={submitAnswer}>
-          Submit
-        </button>
-      </form>
+      <AnswerForm
+        userAnswer={userAnswer}
+        handleChange={handleChange}
+        submitAnswer={submitAnswer}
+      />
       <AnswerGrid
         correct={correct}
         prevTable={prevTable}
