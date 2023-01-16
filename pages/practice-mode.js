@@ -36,7 +36,13 @@ const PracticeMode = (props) => {
   }, []);
 
   useEffect(() => {
-    setCurrentTable(Math.floor(Math.random() * 12) + 1);
+    if (typeof window !== "undefined") {
+      const tablesAsString = sessionStorage.getItem("tablesInUse");
+      var tablesArray = JSON.parse("[" + tablesAsString + "]");
+      const shuffledTables = tablesArray.sort(() => 0.5 - Math.random());
+      const randomTable = shuffledTables.slice(0, 1);
+      setCurrentTable(randomTable);
+    }
     setCurrentMultiplier(Math.floor(Math.random() * 12) + 1);
     document.getElementById("answer").focus();
   }, []);
@@ -62,8 +68,10 @@ const PracticeMode = (props) => {
     setPrevTable(currentTable);
     setPrevMultiplier(currentMultiplier);
     setUserPrevAnswer(userAnswer);
-    setUserAnswer("");
-    setCurrentTable(Math.floor(Math.random() * 12) + 1);
+    setUserAnswer("");const tablesAsString = sessionStorage.getItem("tablesInUse");
+    var tablesArray = JSON.parse("[" + tablesAsString + "]");
+    const shuffledTables = tablesArray.sort(() => 0.5 - Math.random());
+    setCurrentTable(shuffledTables.slice(0, 1));
     setCurrentMultiplier(Math.floor(Math.random() * 12) + 1);
     if (parseInt(userAnswer) === currentTable * currentMultiplier) {
       const currentCount = sessionStorage.getItem("correctCounter");

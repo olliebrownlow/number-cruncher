@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import BackButton from "../components/backButton";
 import PageHeading from "../components/pageHeading";
 import StartButton from "../components/startButton";
@@ -17,6 +17,17 @@ const GameOptions = (props) => {
     "hard",
     "odds",
   ];
+
+  useEffect(() => {
+    if (
+      typeof window !== "undefined" &&
+      sessionStorage.getItem("tablesInUse") !== null
+    ) {
+      const tablesAsString = sessionStorage.getItem("tablesInUse");
+      var tablesArray = JSON.parse("[" + tablesAsString + "]");
+      setSelected(tablesArray);
+    }
+  }, []);
 
   const formattedGameTypeString = (gameType) => {
     return gameType.split("-").join(" ");
@@ -72,7 +83,7 @@ const GameOptions = (props) => {
             style={{
               backgroundColor: selected.includes(table) ? "darkGrey" : "",
               color: selected.includes(table) ? "black" : "",
-              fontSize: selected.includes(table) ? "2.5rem": "2rem"
+              fontSize: selected.includes(table) ? "2.5rem" : "2rem",
             }}
           >
             {table}
@@ -94,7 +105,7 @@ const GameOptions = (props) => {
           </div>
         ))}
       </div>
-      <StartButton gameType={gameType} />
+      <StartButton gameType={gameType} selectedTimesTables={selected} />
     </>
   );
 };
