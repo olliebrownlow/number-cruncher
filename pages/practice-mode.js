@@ -36,8 +36,8 @@ const PracticeMode = (props) => {
   }, []);
 
   useEffect(() => {
-    setCurrentTable(Math.floor(Math.random() * 11) + 1);
-    setCurrentMultiplier(Math.floor(Math.random() * 11) + 1);
+    setCurrentTable(Math.floor(Math.random() * 12) + 1);
+    setCurrentMultiplier(Math.floor(Math.random() * 12) + 1);
     document.getElementById("answer").focus();
   }, []);
 
@@ -63,8 +63,8 @@ const PracticeMode = (props) => {
     setPrevMultiplier(currentMultiplier);
     setUserPrevAnswer(userAnswer);
     setUserAnswer("");
-    setCurrentTable(Math.floor(Math.random() * 11) + 1);
-    setCurrentMultiplier(Math.floor(Math.random() * 11) + 1);
+    setCurrentTable(Math.floor(Math.random() * 12) + 1);
+    setCurrentMultiplier(Math.floor(Math.random() * 12) + 1);
     if (parseInt(userAnswer) === currentTable * currentMultiplier) {
       const currentCount = sessionStorage.getItem("correctCounter");
       sessionStorage.setItem("correctCounter", parseInt(currentCount) + 1);

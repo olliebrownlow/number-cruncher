@@ -5,4 +5,7 @@
   font-size: 0.9rem;
   line-height: 1.5;
   padding: 1rem;
+  margin-top: 1rem;
+  white-space: nowrap;
+  text-align: center;
 }
