@@ -7,12 +7,12 @@ const StartButton = (props) => {
 
   const playGame = (e) => {
     e.preventDefault();
-    if (
-      typeof window !== "undefined"
-    ) {
-      sessionStorage.setItem("tablesInUse", selectedTimesTables);
+    if (selectedTimesTables.length > 0) {
+      if (typeof window !== "undefined") {
+        sessionStorage.setItem("tablesInUse", selectedTimesTables);
+      }
+      router.push("/" + gameType);
     }
-    router.push("/" + gameType);
   };
 
   return (

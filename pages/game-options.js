@@ -12,10 +12,12 @@ const GameOptions = (props) => {
   const shortCutTableOptions = [
     "all",
     "easy",
-    "evens",
-    "random",
+    "medium",
     "hard",
+    "clear",
+    "evens",
     "odds",
+    "random",
   ];
 
   useEffect(() => {
@@ -45,7 +47,7 @@ const GameOptions = (props) => {
         setSelected([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
         break;
       case "easy":
-        setSelected([1, 2, 5, 10, 11]);
+        setSelected([1, 2, 10]);
         break;
       case "evens":
         setSelected([2, 4, 6, 8, 10, 12]);
@@ -59,7 +61,7 @@ const GameOptions = (props) => {
         setSelected(randomTables);
         break;
       case "hard":
-        setSelected([3, 4, 6, 7, 8, 9, 12]);
+        setSelected([4, 6, 7, 8, 9, 12]);
         break;
       case "odds":
         setSelected([1, 3, 5, 7, 9, 11]);
@@ -96,10 +98,6 @@ const GameOptions = (props) => {
             key={shortCut}
             className={styles.shortCutOption}
             onClick={() => handleShortCutSelect(shortCut)}
-            // style={{
-            //   backgroundColor: selected.includes(table) ? "darkGrey" : "",
-            //   color: selected.includes(table) ? "black" : "",
-            // }}
           >
             {shortCut}
           </div>
