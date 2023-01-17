@@ -5,8 +5,10 @@ import RightWrongCounters from "../components/rightWrongCounters";
 import QuestionDisplay from "../components/questionDisplay";
 import AnswerForm from "../components/answerForm";
 import AnswerGrid from "../components/answerGrid";
+import styles from "../styles/PracticeMode.module.css";
 
 const PracticeMode = (props) => {
+  const [tablesInPlay, setTablesInPlay] = useState([]);
   const [currentTable, setCurrentTable] = useState(0);
   const [currentMultiplier, setCurrentMultiplier] = useState(0);
   const [prevTable, setPrevTable] = useState("--");
@@ -42,6 +44,8 @@ const PracticeMode = (props) => {
       const shuffledTables = tablesArray.sort(() => 0.5 - Math.random());
       const randomTable = shuffledTables.slice(0, 1);
       setCurrentTable(randomTable);
+      const orderedTables = tablesArray.sort((a, b) => a - b);
+      setTablesInPlay(orderedTables);
     }
     setCurrentMultiplier(Math.floor(Math.random() * 12) + 1);
     document.getElementById("answer").focus();
@@ -68,7 +72,8 @@ const PracticeMode = (props) => {
     setPrevTable(currentTable);
     setPrevMultiplier(currentMultiplier);
     setUserPrevAnswer(userAnswer);
-    setUserAnswer("");const tablesAsString = sessionStorage.getItem("tablesInUse");
+    setUserAnswer("");
+    const tablesAsString = sessionStorage.getItem("tablesInUse");
     var tablesArray = JSON.parse("[" + tablesAsString + "]");
     const shuffledTables = tablesArray.sort(() => 0.5 - Math.random());
     setCurrentTable(shuffledTables.slice(0, 1));
@@ -88,6 +93,21 @@ const PracticeMode = (props) => {
     <>
       <BackButton />
       <PageHeading heading={"Practice Mode"} />
+      <div
+        className={styles.tablesInPlayGrid}
+        style={{
+          gridTemplateColumns:
+            tablesInPlay.length > 8
+              ? `repeat(${Math.ceil(tablesInPlay.length / 2)}, auto)`
+              : `repeat(${tablesInPlay.length}, auto)`,
+        }}
+      >
+        {tablesInPlay.map((table) => (
+          <div className={styles.table} key={table}>
+            {table}
+          </div>
+        ))}
+      </div>
       <RightWrongCounters resetCounters={resetCounters} reRender={reRender} />
       <QuestionDisplay
         currentTable={currentTable}
