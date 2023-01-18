@@ -8,6 +8,7 @@ const GameOptions = (props) => {
   const { gameType } = props;
 
   const [selected, setSelected] = useState([]);
+  const [orderedQuestions, setOrderedQuestions] = useState("mixed up");
   const tables = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
   const shortCutTableOptions = [
     "all",
@@ -19,6 +20,7 @@ const GameOptions = (props) => {
     "odds",
     "random",
   ];
+  const questionOrdering = ["in order", "mixed up"];
 
   useEffect(() => {
     if (
@@ -39,6 +41,10 @@ const GameOptions = (props) => {
     selected.includes(table)
       ? setSelected(selected.filter((s) => s !== table))
       : setSelected([...selected, table]);
+  };
+
+  const handleOrdering = (ordering) => {
+    setOrderedQuestions(ordering);
   };
 
   const handleShortCutSelect = (shortCut) => {
@@ -66,6 +72,14 @@ const GameOptions = (props) => {
       case "odds":
         setSelected([1, 3, 5, 7, 9, 11]);
         break;
+      case "medium":
+        setSelected([3, 5, 11]);
+        break;
+      case "clear":
+        const shuffledTables2 = tables.sort(() => 0.5 - Math.random());
+        const oneTable = shuffledTables2.slice(0, 1);
+        setSelected(oneTable);
+        break;
       default:
         setSelected([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
     }
@@ -75,7 +89,9 @@ const GameOptions = (props) => {
     <>
       <BackButton />
       <PageHeading heading={formattedGameTypeString(gameType) + " options"} />
-      <div className={styles.optionHeading}>select tables</div>
+      <StartButton gameType={gameType} selectedTimesTables={selected} />
+      <div className={styles.spacer}></div>
+      <div className={styles.optionHeading}>tables</div>
       <div className={styles.timestablesGrid}>
         {tables.map((table) => (
           <div
@@ -100,6 +116,24 @@ const GameOptions = (props) => {
             onClick={() => handleShortCutSelect(shortCut)}
           >
             {shortCut}
+          </div>
+        ))}
+      </div>
+      <div className={styles.spacer}></div>
+      <div className={styles.optionHeading}>question order</div>
+      <div className={styles.questionOrderingGrid}>
+        {questionOrdering.map((ordering) => (
+          <div
+            key={ordering}
+            className={styles.ordering}
+            onClick={() => handleOrdering(ordering)}
+            style={{
+              backgroundColor: orderedQuestions === ordering ? "darkGrey" : "",
+              color: orderedQuestions === ordering ? "black" : "",
+              fontSize: orderedQuestions === ordering ? "1.5rem" : "1rem",
+            }}
+          >
+            {ordering}
           </div>
         ))}
       </div>

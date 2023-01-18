@@ -89,6 +89,12 @@ const PracticeMode = (props) => {
     }
   };
 
+  const questionNumber = () => {
+    const right = sessionStorage.getItem("correctCounter");
+    const wrong = sessionStorage.getItem("errorCounter");
+    return parseInt(right) + parseInt(wrong) + 1;
+  };
+
   return (
     <>
       <BackButton />
@@ -110,6 +116,7 @@ const PracticeMode = (props) => {
       </div>
       <RightWrongCounters resetCounters={resetCounters} reRender={reRender} />
       <QuestionDisplay
+        questionNumber={questionNumber()}
         currentTable={currentTable}
         currentMultiplier={currentMultiplier}
       />
