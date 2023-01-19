@@ -1,0 +1,17 @@
+.shortCutTableOptionsGrid {
+  display: grid;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  grid-template-rows: 2rem 2rem;
+  grid-template-columns: 24% 24% 24% 24%;
+  column-gap: 12px;
+  width: var(--max-width);
+  max-width: 90%;
+}
+
+.shortCutOption {
+  border: solid 1px darkgrey;
+  border-radius: 2px;
+  font-size: 1rem;
+}
