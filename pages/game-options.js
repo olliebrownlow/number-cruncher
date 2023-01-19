@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import tables from "../config/tables";
 import BackButton from "../components/backButton";
 import PageHeading from "../components/pageHeading";
 import StartButton from "../components/startButton";
@@ -14,7 +15,6 @@ const GameOptions = (props) => {
   const [orderedQuestions, setOrderedQuestions] = useState("mixed up");
   const [numOfQuestions, setNumOfQuestions] = useState("10");
   const [numOfQuestionsReserved, setNumOfQuestionsReserved] = useState("10");
-  const tables = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
   const shortCutTableOptions = [
     "all",
     "easy",
@@ -53,12 +53,6 @@ const GameOptions = (props) => {
 
   const formattedGameTypeString = (gameType) => {
     return gameType.split("-").join(" ");
-  };
-
-  const handleTableSelect = (table) => {
-    selected.includes(table)
-      ? setSelected(selected.filter((s) => s !== table))
-      : setSelected([...selected, table]);
   };
 
   const handleOrdering = (ordering) => {
@@ -123,11 +117,7 @@ const GameOptions = (props) => {
       />
       <Spacer />
       <OptionHeading optionHeading={"tables"} />
-      <TimesTablesGrid
-        tables={tables}
-        handleTableSelect={handleTableSelect}
-        selected={selected}
-      />      
+      <TimesTablesGrid selected={selected} setSelected={setSelected} />
       <Spacer />
       <div className={styles.shortCutTableOptionsGrid}>
         {shortCutTableOptions.map((shortCut) => (

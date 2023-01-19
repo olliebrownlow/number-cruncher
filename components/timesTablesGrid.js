@@ -1,7 +1,15 @@
 import styles from "../componentStyles/TimesTablesGrid.module.css";
+import tables from "../config/tables";
 
 const TimesTablesGrid = (props) => {
-  const { tables, handleTableSelect, selected } = props;
+  const { selected, setSelected } = props;
+
+  const handleTableSelect = (table) => {
+    selected.includes(table)
+      ? setSelected(selected.filter((s) => s !== table))
+      : setSelected([...selected, table]);
+  };
+
   return (
     <div className={styles.timestablesGrid}>
       {tables.map((table) => (
