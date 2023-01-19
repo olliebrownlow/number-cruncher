@@ -7,8 +7,10 @@ import styles from "../styles/GameOptions.module.css";
 const GameOptions = (props) => {
   const { gameType } = props;
 
-  const [selected, setSelected] = useState([]);
+  const [selected, setSelected] = useState([1]);
   const [orderedQuestions, setOrderedQuestions] = useState("mixed up");
+  const [numOfQuestions, setNumOfQuestions] = useState("10");
+  const [numOfQuestionsReserved, setNumOfQuestionsReserved] = useState("10");
   const tables = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
   const shortCutTableOptions = [
     "all",
@@ -20,7 +22,8 @@ const GameOptions = (props) => {
     "odds",
     "random",
   ];
-  const questionOrdering = ["in order", "mixed up"];
+  const questionOrdering = ["mixed up", "in order"];
+  const noOfQus = ["10", "20", "30", "no limit"];
 
   useEffect(() => {
     if (
@@ -30,6 +33,18 @@ const GameOptions = (props) => {
       const tablesAsString = sessionStorage.getItem("tablesInUse");
       var tablesArray = JSON.parse("[" + tablesAsString + "]");
       setSelected(tablesArray);
+    }
+    if (
+      typeof window !== "undefined" &&
+      sessionStorage.getItem("questionOrdering") !== null
+    ) {
+      setOrderedQuestions(sessionStorage.getItem("questionOrdering"));
+    }
+    if (
+      typeof window !== "undefined" &&
+      sessionStorage.getItem("numOfQuestions") !== null
+    ) {
+      setNumOfQuestions(sessionStorage.getItem("numOfQuestions"));
     }
   }, []);
 
@@ -44,7 +59,17 @@ const GameOptions = (props) => {
   };
 
   const handleOrdering = (ordering) => {
+    if (ordering === "in order") {
+      setNumOfQuestions(selected.length * 12);
+    } else {
+      setNumOfQuestions(numOfQuestionsReserved);
+    }
     setOrderedQuestions(ordering);
+  };
+
+  const handleNumberOfQuestions = (number) => {
+    setNumOfQuestions(number);
+    setNumOfQuestionsReserved(number);
   };
 
   const handleShortCutSelect = (shortCut) => {
@@ -76,9 +101,7 @@ const GameOptions = (props) => {
         setSelected([3, 5, 11]);
         break;
       case "clear":
-        const shuffledTables2 = tables.sort(() => 0.5 - Math.random());
-        const oneTable = shuffledTables2.slice(0, 1);
-        setSelected(oneTable);
+        setSelected([]);
         break;
       default:
         setSelected([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
@@ -89,7 +112,12 @@ const GameOptions = (props) => {
     <>
       <BackButton />
       <PageHeading heading={formattedGameTypeString(gameType) + " options"} />
-      <StartButton gameType={gameType} selectedTimesTables={selected} />
+      <StartButton
+        gameType={gameType}
+        selectedTimesTables={selected}
+        questionOrdering={orderedQuestions}
+        numOfQuestions={numOfQuestions}
+      />
       <div className={styles.spacer}></div>
       <div className={styles.optionHeading}>tables</div>
       <div className={styles.timestablesGrid}>
@@ -137,7 +165,40 @@ const GameOptions = (props) => {
           </div>
         ))}
       </div>
-      <StartButton gameType={gameType} selectedTimesTables={selected} />
+      <div className={styles.spacer}></div>
+      <div className={styles.optionHeading}>number of questions</div>
+      {orderedQuestions === "mixed up" ? (
+        <div className={styles.noOfQuestionsGrid}>
+          {noOfQus.map((number) => (
+            <div
+              key={number}
+              className={styles.number}
+              className={
+                styles.number +
+                " " +
+                `${number === "no limit" ? styles.stretched : ""}`
+              }
+              onClick={() => handleNumberOfQuestions(number)}
+              style={{
+                backgroundColor: numOfQuestions === number ? "darkGrey" : "",
+                color: numOfQuestions === number ? "black" : "",
+                fontSize: numOfQuestions === number ? "1.5rem" : "1rem",
+              }}
+            >
+              {number}
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className={styles.optionHeading}>{selected.length * 12}</div>
+      )}
+      <div className={styles.spacer}></div>
+      <StartButton
+        gameType={gameType}
+        selectedTimesTables={selected}
+        questionOrdering={orderedQuestions}
+        numOfQuestions={numOfQuestions}
+      />
     </>
   );
 };

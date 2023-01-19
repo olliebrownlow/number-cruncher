@@ -59,3 +59,25 @@
   border: solid 1px darkgrey;
   border-radius: 2px;
 }
+
+.noOfQuestionsGrid {
+  display: grid;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  grid-template-rows: 2rem 2rem;
+  grid-template-columns: 25% 25% 25%;
+  column-gap: 12px;
+  width: var(--max-width);
+  max-width: 90%;
+}
+
+.number {
+  border: solid 1px darkgrey;
+  border-radius: 2px;
+}
+
+.stretched {
+  grid-column-start: 1;
+  grid-column-end: 4;
+}

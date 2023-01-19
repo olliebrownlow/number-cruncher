@@ -16,6 +16,8 @@ const PracticeMode = (props) => {
   const [userAnswer, setUserAnswer] = useState("");
   const [userPrevAnswer, setUserPrevAnswer] = useState("--");
   const [correct, setCorrect] = useState(true);
+  const [questionOrdering, setQuestionOrdering] = useState("");
+  const [numOfQuestions, setNumOfQuestions] = useState("");
   // counter to force re-render of child component.
   // needed as sessionStorage state changes cannot achieve this.
   const [reRender, setReRender] = useState(0);
@@ -46,6 +48,10 @@ const PracticeMode = (props) => {
       setCurrentTable(randomTable);
       const orderedTables = tablesArray.sort((a, b) => a - b);
       setTablesInPlay(orderedTables);
+      const questionOrdering = sessionStorage.getItem("questionOrdering");
+      setQuestionOrdering(questionOrdering);
+      const numOfQuestions = sessionStorage.getItem("numOfQuestions");
+      setNumOfQuestions(numOfQuestions);
     }
     setCurrentMultiplier(Math.floor(Math.random() * 12) + 1);
     document.getElementById("answer").focus();
@@ -90,14 +96,20 @@ const PracticeMode = (props) => {
   };
 
   const questionNumber = () => {
-    const right = sessionStorage.getItem("correctCounter");
-    const wrong = sessionStorage.getItem("errorCounter");
+    let right;
+    let wrong;
+    if (typeof window !== "undefined") {
+      right = sessionStorage.getItem("correctCounter");
+      wrong = sessionStorage.getItem("errorCounter");
+    }
     return parseInt(right) + parseInt(wrong) + 1;
   };
 
   return (
     <>
       <BackButton />
+      <div>{numOfQuestions}</div>
+      <div>{questionOrdering}</div>
       <PageHeading heading={"Practice Mode"} />
       <div
         className={styles.tablesInPlayGrid}
