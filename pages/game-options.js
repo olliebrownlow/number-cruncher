@@ -3,6 +3,7 @@ import BackButton from "../components/backButton";
 import PageHeading from "../components/pageHeading";
 import StartButton from "../components/startButton";
 import Spacer from "../components/spacer";
+import OptionHeading from "../components/optionHeading";
 import styles from "../styles/GameOptions.module.css";
 
 const GameOptions = (props) => {
@@ -120,7 +121,7 @@ const GameOptions = (props) => {
         numOfQuestions={numOfQuestions}
       />
       <Spacer />
-      <div className={styles.optionHeading}>tables</div>
+      <OptionHeading optionHeading={"tables"} />
       <div className={styles.timestablesGrid}>
         {tables.map((table) => (
           <div
@@ -149,7 +150,7 @@ const GameOptions = (props) => {
         ))}
       </div>
       <Spacer />
-      <div className={styles.optionHeading}>question order</div>
+      <OptionHeading optionHeading={"question order"} />
       <div className={styles.questionOrderingGrid}>
         {questionOrdering.map((ordering) => (
           <div
@@ -167,7 +168,7 @@ const GameOptions = (props) => {
         ))}
       </div>
       <Spacer />
-      <div className={styles.optionHeading}>number of questions</div>
+      <OptionHeading optionHeading={"number of questions"} />
       {orderedQuestions === "mixed up" ? (
         <div className={styles.noOfQuestionsGrid}>
           {noOfQus.map((number) => (
