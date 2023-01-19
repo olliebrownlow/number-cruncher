@@ -4,6 +4,7 @@ import PageHeading from "../components/pageHeading";
 import StartButton from "../components/startButton";
 import Spacer from "../components/spacer";
 import OptionHeading from "../components/optionHeading";
+import TimesTablesGrid from "../components/timesTablesGrid";
 import styles from "../styles/GameOptions.module.css";
 
 const GameOptions = (props) => {
@@ -122,22 +123,12 @@ const GameOptions = (props) => {
       />
       <Spacer />
       <OptionHeading optionHeading={"tables"} />
-      <div className={styles.timestablesGrid}>
-        {tables.map((table) => (
-          <div
-            key={table}
-            className={styles.table}
-            onClick={() => handleTableSelect(table)}
-            style={{
-              backgroundColor: selected.includes(table) ? "darkGrey" : "",
-              color: selected.includes(table) ? "black" : "",
-              fontSize: selected.includes(table) ? "2.5rem" : "2rem",
-            }}
-          >
-            {table}
-          </div>
-        ))}
-      </div>
+      <TimesTablesGrid
+        tables={tables}
+        handleTableSelect={handleTableSelect}
+        selected={selected}
+      />      
+      <Spacer />
       <div className={styles.shortCutTableOptionsGrid}>
         {shortCutTableOptions.map((shortCut) => (
           <div
