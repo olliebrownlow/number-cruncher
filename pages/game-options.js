@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import BackButton from "../components/backButton";
 import PageHeading from "../components/pageHeading";
 import StartButton from "../components/startButton";
+import Spacer from "../components/spacer";
 import styles from "../styles/GameOptions.module.css";
 
 const GameOptions = (props) => {
@@ -118,7 +119,7 @@ const GameOptions = (props) => {
         questionOrdering={orderedQuestions}
         numOfQuestions={numOfQuestions}
       />
-      <div className={styles.spacer}></div>
+      <Spacer />
       <div className={styles.optionHeading}>tables</div>
       <div className={styles.timestablesGrid}>
         {tables.map((table) => (
@@ -147,7 +148,7 @@ const GameOptions = (props) => {
           </div>
         ))}
       </div>
-      <div className={styles.spacer}></div>
+      <Spacer />
       <div className={styles.optionHeading}>question order</div>
       <div className={styles.questionOrderingGrid}>
         {questionOrdering.map((ordering) => (
@@ -165,7 +166,7 @@ const GameOptions = (props) => {
           </div>
         ))}
       </div>
-      <div className={styles.spacer}></div>
+      <Spacer />
       <div className={styles.optionHeading}>number of questions</div>
       {orderedQuestions === "mixed up" ? (
         <div className={styles.noOfQuestionsGrid}>
@@ -192,7 +193,7 @@ const GameOptions = (props) => {
       ) : (
         <div className={styles.optionHeading}>{selected.length * 12}</div>
       )}
-      <div className={styles.spacer}></div>
+      <Spacer />
       <StartButton
         gameType={gameType}
         selectedTimesTables={selected}

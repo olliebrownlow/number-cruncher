@@ -38,11 +38,6 @@
   font-size: 1rem;
 }
 
-.spacer {
-  content: "";
-  padding: 1rem;
-}
-
 .questionOrderingGrid {
   display: grid;
   text-align: center;
