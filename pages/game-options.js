@@ -6,6 +6,7 @@ import Spacer from "../components/spacer";
 import OptionHeading from "../components/optionHeading";
 import TimesTablesGrid from "../components/timesTablesGrid";
 import ShortCutTableOptionsGrid from "../components/shortCutTableOptionsGrid";
+import QuestionOrderingGrid from "../components/questionOrderingGrid";
 import styles from "../styles/GameOptions.module.css";
 
 const GameOptions = (props) => {
@@ -15,8 +16,7 @@ const GameOptions = (props) => {
   const [orderedQuestions, setOrderedQuestions] = useState("mixed up");
   const [numOfQuestions, setNumOfQuestions] = useState("10");
   const [numOfQuestionsReserved, setNumOfQuestionsReserved] = useState("10");
-  
-  const questionOrdering = ["mixed up", "in order"];
+
   const noOfQus = ["10", "20", "30", "no limit"];
 
   useEffect(() => {
@@ -46,15 +46,6 @@ const GameOptions = (props) => {
     return gameType.split("-").join(" ");
   };
 
-  const handleOrdering = (ordering) => {
-    if (ordering === "in order") {
-      setNumOfQuestions(selected.length * 12);
-    } else {
-      setNumOfQuestions(numOfQuestionsReserved);
-    }
-    setOrderedQuestions(ordering);
-  };
-
   const handleNumberOfQuestions = (number) => {
     setNumOfQuestions(number);
     setNumOfQuestionsReserved(number);
@@ -77,22 +68,13 @@ const GameOptions = (props) => {
       <ShortCutTableOptionsGrid setSelected={setSelected} />
       <Spacer />
       <OptionHeading optionHeading={"question order"} />
-      <div className={styles.questionOrderingGrid}>
-        {questionOrdering.map((ordering) => (
-          <div
-            key={ordering}
-            className={styles.ordering}
-            onClick={() => handleOrdering(ordering)}
-            style={{
-              backgroundColor: orderedQuestions === ordering ? "darkGrey" : "",
-              color: orderedQuestions === ordering ? "black" : "",
-              fontSize: orderedQuestions === ordering ? "1.5rem" : "1rem",
-            }}
-          >
-            {ordering}
-          </div>
-        ))}
-      </div>
+      <QuestionOrderingGrid
+        setNumOfQuestions={setNumOfQuestions}
+        setOrderedQuestions={setOrderedQuestions}
+        selected={selected}
+        numOfQuestionsReserved={numOfQuestionsReserved}
+        orderedQuestions={orderedQuestions}
+      />
       <Spacer />
       <OptionHeading optionHeading={"number of questions"} />
       {orderedQuestions === "mixed up" ? (
