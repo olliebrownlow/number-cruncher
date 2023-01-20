@@ -19,3 +19,8 @@
   grid-column-start: 1;
   grid-column-end: 4;
 }
+
+.optionHeading {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}

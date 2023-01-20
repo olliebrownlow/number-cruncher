@@ -7,7 +7,7 @@ import OptionHeading from "../components/optionHeading";
 import TimesTablesGrid from "../components/timesTablesGrid";
 import ShortCutTableOptionsGrid from "../components/shortCutTableOptionsGrid";
 import QuestionOrderingGrid from "../components/questionOrderingGrid";
-import styles from "../styles/GameOptions.module.css";
+import NoOfQuestionsGrid from "../components/noOfQuestionsGrid";
 
 const GameOptions = (props) => {
   const { gameType } = props;
@@ -16,8 +16,6 @@ const GameOptions = (props) => {
   const [orderedQuestions, setOrderedQuestions] = useState("mixed up");
   const [numOfQuestions, setNumOfQuestions] = useState("10");
   const [numOfQuestionsReserved, setNumOfQuestionsReserved] = useState("10");
-
-  const noOfQus = ["10", "20", "30", "no limit"];
 
   useEffect(() => {
     if (
@@ -46,11 +44,6 @@ const GameOptions = (props) => {
     return gameType.split("-").join(" ");
   };
 
-  const handleNumberOfQuestions = (number) => {
-    setNumOfQuestions(number);
-    setNumOfQuestionsReserved(number);
-  };
-
   return (
     <>
       <BackButton />
@@ -77,31 +70,13 @@ const GameOptions = (props) => {
       />
       <Spacer />
       <OptionHeading optionHeading={"number of questions"} />
-      {orderedQuestions === "mixed up" ? (
-        <div className={styles.noOfQuestionsGrid}>
-          {noOfQus.map((number) => (
-            <div
-              key={number}
-              className={styles.number}
-              className={
-                styles.number +
-                " " +
-                `${number === "no limit" ? styles.stretched : ""}`
-              }
-              onClick={() => handleNumberOfQuestions(number)}
-              style={{
-                backgroundColor: numOfQuestions === number ? "darkGrey" : "",
-                color: numOfQuestions === number ? "black" : "",
-                fontSize: numOfQuestions === number ? "1.5rem" : "1rem",
-              }}
-            >
-              {number}
-            </div>
-          ))}
-        </div>
-      ) : (
-        <div className={styles.optionHeading}>{selected.length * 12}</div>
-      )}
+      <NoOfQuestionsGrid
+        setNumOfQuestions={setNumOfQuestions}
+        setNumOfQuestionsReserved={setNumOfQuestionsReserved}
+        orderedQuestions={orderedQuestions}
+        numOfQuestions={numOfQuestions}
+        selected={selected}
+      />
       <Spacer />
       <StartButton
         gameType={gameType}
