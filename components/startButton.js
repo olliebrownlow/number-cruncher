@@ -10,8 +10,7 @@ const StartButton = (props) => {
   } = props;
   const router = useRouter();
 
-  const playGame = (e) => {
-    e.preventDefault();
+  const playGame = () => {
     if (selectedTimesTables.length > 0) {
       if (typeof window !== "undefined") {
         sessionStorage.setItem("tablesInUse", selectedTimesTables);

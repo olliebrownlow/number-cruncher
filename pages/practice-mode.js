@@ -129,6 +129,7 @@ const PracticeMode = (props) => {
       <RightWrongCounters resetCounters={resetCounters} reRender={reRender} />
       <QuestionDisplay
         questionNumber={questionNumber()}
+        numOfQuestions={numOfQuestions}
         currentTable={currentTable}
         currentMultiplier={currentMultiplier}
       />

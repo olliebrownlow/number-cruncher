@@ -23,6 +23,7 @@ const ShortCutTableOptionsGrid = (props) => {
           Math.floor(Math.random() * 12) + 1
         );
         setSelected(randomTables);
+        tables.sort((a, b) => a - b);
         break;
       case "hard":
         setSelected([4, 6, 7, 8, 9, 12]);

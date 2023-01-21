@@ -16,7 +16,7 @@ const RightWrongCounters = (props) => {
       </div>
       <div>
         <button className={styles.reset} onClick={resetCounters}>
-          reset
+          restart
         </button>
       </div>
       <div className={styles.errorCounter}>
