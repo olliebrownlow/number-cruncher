@@ -5,7 +5,7 @@ import RightWrongCounters from "../components/rightWrongCounters";
 import QuestionDisplay from "../components/questionDisplay";
 import AnswerForm from "../components/answerForm";
 import AnswerGrid from "../components/answerGrid";
-import styles from "../styles/PracticeMode.module.css";
+import TablesInPlayGrid from "../components/tablesInPlayGrid";
 
 const PracticeMode = (props) => {
   const [tablesInPlay, setTablesInPlay] = useState([]);
@@ -111,21 +111,7 @@ const PracticeMode = (props) => {
       <div>{numOfQuestions}</div>
       <div>{questionOrdering}</div>
       <PageHeading heading={"Practice Mode"} />
-      <div
-        className={styles.tablesInPlayGrid}
-        style={{
-          gridTemplateColumns:
-            tablesInPlay.length > 8
-              ? `repeat(${Math.ceil(tablesInPlay.length / 2)}, auto)`
-              : `repeat(${tablesInPlay.length}, auto)`,
-        }}
-      >
-        {tablesInPlay.map((table) => (
-          <div className={styles.table} key={table}>
-            {table}
-          </div>
-        ))}
-      </div>
+      <TablesInPlayGrid tablesInPlay={tablesInPlay} />
       <RightWrongCounters resetCounters={resetCounters} reRender={reRender} />
       <QuestionDisplay
         questionNumber={questionNumber()}
