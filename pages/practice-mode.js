@@ -8,6 +8,7 @@ import AnswerGrid from "../components/answerGrid";
 import TablesInPlayGrid from "../components/tablesInPlayGrid";
 
 const PracticeMode = (props) => {
+  const [finishGame, setFinishGame] = useState(true);
   const [tablesInPlay, setTablesInPlay] = useState([]);
   const [currentTable, setCurrentTable] = useState(0);
   const [currentMultiplier, setCurrentMultiplier] = useState(0);
@@ -36,7 +37,9 @@ const PracticeMode = (props) => {
     ) {
       sessionStorage.setItem("errorCounter", 0);
     }
-    document.getElementById("answer").focus();
+    if (document.getElementById("answer")) {
+      document.getElementById("answer").focus();
+    }
   }, []);
 
   useEffect(() => {
@@ -52,18 +55,25 @@ const PracticeMode = (props) => {
       setQuestionOrdering(questionOrdering);
       const numOfQuestions = sessionStorage.getItem("numOfQuestions");
       setNumOfQuestions(numOfQuestions);
+      const isFinished = sessionStorage.getItem("isFinished");
+      setFinishGame(JSON.parse(isFinished));
     }
     setCurrentMultiplier(Math.floor(Math.random() * 12) + 1);
-    document.getElementById("answer").focus();
+    if (document.getElementById("answer")) {
+      document.getElementById("answer").focus();
+    }
   }, []);
 
   const resetCounters = (e) => {
     e.preventDefault();
     if (typeof window !== "undefined") {
+      setFinishGame(false);
       sessionStorage.setItem("correctCounter", 0);
       sessionStorage.setItem("errorCounter", 0);
       setReRender(reRender + 1);
-      document.getElementById("answer").focus();
+      if (document.getElementById("answer")) {
+        document.getElementById("answer").focus();
+      }
     }
   };
 
@@ -93,6 +103,10 @@ const PracticeMode = (props) => {
       sessionStorage.setItem("errorCounter", parseInt(currentCount) + 1);
       setCorrect(false);
     }
+    if (questionNumber() > numOfQuestions) {
+      setFinishGame(true);
+      sessionStorage.setItem("isFinished", true);
+    }
   };
 
   const questionNumber = () => {
@@ -108,21 +122,22 @@ const PracticeMode = (props) => {
   return (
     <>
       <BackButton />
-      <div>{numOfQuestions}</div>
-      <div>{questionOrdering}</div>
       <PageHeading heading={"Practice Mode"} />
       <TablesInPlayGrid tablesInPlay={tablesInPlay} />
       <RightWrongCounters resetCounters={resetCounters} reRender={reRender} />
       <QuestionDisplay
+        finishGame={finishGame}
         questionNumber={questionNumber()}
         numOfQuestions={numOfQuestions}
         currentTable={currentTable}
         currentMultiplier={currentMultiplier}
       />
       <AnswerForm
+        finishGame={finishGame}
         userAnswer={userAnswer}
         handleChange={handleChange}
         submitAnswer={submitAnswer}
+        resetCounters={resetCounters}
       />
       <AnswerGrid
         correct={correct}

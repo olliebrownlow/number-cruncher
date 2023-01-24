@@ -17,3 +17,21 @@
   max-width: 8rem;
   padding: 4px 8px;
 }
+
+.gameEndOptionsGrid {
+  display: grid;
+  text-align: center;
+  grid-template-columns: 30% 30% 30%;
+  grid-template-rows: 2rem;
+  width: var(--max-width);
+  max-width: 95%;
+  margin-bottom: 1rem;
+  gap: 6px;
+  justify-content: center;
+}
+
+.gameEndButton {
+  border: 1px solid white;
+  border-radius: 4px;
+  padding: 4px;
+}

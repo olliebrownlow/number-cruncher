@@ -1,3 +1,4 @@
+import Spacer from "./spacer";
 import styles from "../componentStyles/QuestionDisplay.module.css";
 
 const QuestionDisplay = (props) => {
@@ -6,21 +7,29 @@ const QuestionDisplay = (props) => {
     currentMultiplier,
     questionNumber,
     numOfQuestions,
+    finishGame,
   } = props;
   return (
     <>
-      {numOfQuestions === "no limit" ? (
-        <div>
-          Qu {questionNumber}
-        </div>
+      {finishGame ? (
+        <>
+          <Spacer size={"0.6rem"}/>
+          <div className={styles.questionDisplay}>-- × --</div>
+        </>
       ) : (
-        <div>
-          Qu {questionNumber}/{numOfQuestions}
-        </div>
+        <>
+          {numOfQuestions === "no limit" ? (
+            <div>Qu {questionNumber}</div>
+          ) : (
+            <div>
+              Qu {questionNumber}/{numOfQuestions}
+            </div>
+          )}
+          <div className={styles.questionDisplay}>
+            {currentTable} × {currentMultiplier}
+          </div>
+        </>
       )}
-      <div className={styles.questionDisplay}>
-        {currentTable} × {currentMultiplier}
-      </div>
     </>
   );
 };
