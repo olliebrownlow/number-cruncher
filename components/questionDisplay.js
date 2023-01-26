@@ -10,7 +10,8 @@ const QuestionDisplay = (props) => {
   } = props;
   return (
     <>
-      {JSON.parse(sessionStorage.getItem("isFinished")) ? (
+      {typeof window !== "undefined" &&
+      JSON.parse(sessionStorage.getItem("isFinished")) ? (
         <>
           <Spacer size={"0.6rem"} />
           <div className={styles.questionDisplay}>-- × --</div>

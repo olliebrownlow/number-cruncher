@@ -7,7 +7,8 @@ const AnswerForm = (props) => {
 
   return (
     <>
-      {JSON.parse(sessionStorage.getItem("isFinished")) ? (
+      {typeof window !== "undefined" &&
+      JSON.parse(sessionStorage.getItem("isFinished")) ? (
         <div className={styles.gameEndOptionsGrid}>
           <div
             className={styles.gameEndButton}
@@ -20,7 +21,9 @@ const AnswerForm = (props) => {
           >
             options
           </div>
-          <div className={styles.gameEndButton} onClick={resetCounters}>replay</div>
+          <div className={styles.gameEndButton} onClick={resetCounters}>
+            replay
+          </div>
           <div className={styles.gameEndButton}>results</div>
         </div>
       ) : (

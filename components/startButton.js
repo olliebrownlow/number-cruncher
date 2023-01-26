@@ -24,6 +24,8 @@ const StartButton = (props) => {
 
         // setup new game
         sessionStorage.setItem("isFinished", false);
+        sessionStorage.setItem("correctCounter", 0);
+        sessionStorage.setItem("errorCounter", 0);
       }
       router.push("/" + gameType);
     }

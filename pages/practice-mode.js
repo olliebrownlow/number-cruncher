@@ -23,25 +23,9 @@ const PracticeMode = (props) => {
   const [reRender, setReRender] = useState(0);
 
   useEffect(() => {
-    if (
-      typeof window !== "undefined" &&
-      sessionStorage.getItem("correctCounter") === null
-    ) {
-      sessionStorage.setItem("correctCounter", 0);
-    }
-
-    if (
-      typeof window !== "undefined" &&
-      sessionStorage.getItem("errorCounter") === null
-    ) {
-      sessionStorage.setItem("errorCounter", 0);
-    }
     if (document.getElementById("answer")) {
       document.getElementById("answer").focus();
     }
-  }, []);
-
-  useEffect(() => {
     if (typeof window !== "undefined") {
       const questionOrdering = sessionStorage.getItem("questionOrdering");
       setQuestionOrdering(questionOrdering);
