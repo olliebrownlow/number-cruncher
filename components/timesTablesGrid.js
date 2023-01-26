@@ -2,12 +2,22 @@ import styles from "../componentStyles/TimesTablesGrid.module.css";
 import tables from "../config/tables";
 
 const TimesTablesGrid = (props) => {
-  const { selected, setSelected } = props;
+  const { selected, setSelected, orderedQuestions, setNumOfQuestions } = props;
 
   const handleTableSelect = (table) => {
-    selected.includes(table)
-      ? setSelected(selected.filter((s) => s !== table))
-      : setSelected([...selected, table]);
+    if (selected.includes(table)) {
+      const newSelected = selected.filter((s) => s !== table);
+      setSelected(newSelected);
+      if (orderedQuestions === "in order") {
+        setNumOfQuestions(newSelected.length * 12);
+      }
+    } else {
+      const newSelected = [...selected, table];
+      setSelected(newSelected);
+      if (orderedQuestions === "in order") {
+        setNumOfQuestions(newSelected.length * 12);
+      }
+    }
   };
 
   return (

@@ -13,7 +13,12 @@ const StartButton = (props) => {
   const playGame = () => {
     if (selectedTimesTables.length > 0) {
       if (typeof window !== "undefined") {
-        sessionStorage.setItem("tablesInUse", selectedTimesTables);
+        const orderedSelectedTables = selectedTimesTables.sort((a, b) => a - b);
+
+        sessionStorage.setItem(
+          "tablesInUse",
+          JSON.stringify(orderedSelectedTables)
+        );
         sessionStorage.setItem("questionOrdering", questionOrdering);
         sessionStorage.setItem("numOfQuestions", numOfQuestions);
       }

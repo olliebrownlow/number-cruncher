@@ -44,21 +44,38 @@ const PracticeMode = (props) => {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const tablesAsString = sessionStorage.getItem("tablesInUse");
-      var tablesArray = JSON.parse("[" + tablesAsString + "]");
-      const shuffledTables = tablesArray.sort(() => 0.5 - Math.random());
-      const randomTable = shuffledTables.slice(0, 1);
-      setCurrentTable(randomTable);
-      const orderedTables = tablesArray.sort((a, b) => a - b);
-      setTablesInPlay(orderedTables);
       const questionOrdering = sessionStorage.getItem("questionOrdering");
       setQuestionOrdering(questionOrdering);
+
       const numOfQuestions = sessionStorage.getItem("numOfQuestions");
       setNumOfQuestions(numOfQuestions);
+
       const isFinished = sessionStorage.getItem("isFinished");
       setFinishGame(JSON.parse(isFinished));
+
+      const tablesArray = JSON.parse(sessionStorage.getItem("tablesInUse"));
+
+      if (questionOrdering === "mixed up") {
+        const shuffledTables = tablesArray.sort(() => 0.5 - Math.random());
+        const randomTable = shuffledTables.slice(0, 1);
+        setCurrentTable(randomTable);
+        setCurrentMultiplier(Math.floor(Math.random() * 12) + 1);
+        const orderedTables = tablesArray.sort((a, b) => a - b);
+        setTablesInPlay(orderedTables);
+      } else {
+        const orderedTables = tablesArray.sort((a, b) => a - b);
+        if (sessionStorage.getItem("currentTable") === null) {
+          sessionStorage.setItem("currentTable", orderedTables[0]);
+          sessionStorage.setItem("currentMultiplier", 1);
+        } else {
+          setCurrentTable(parseInt(sessionStorage.getItem("currentTable")));
+          setCurrentMultiplier(
+            parseInt(sessionStorage.getItem("currentMultiplier"))
+          );
+        }
+        setTablesInPlay(tablesArray);
+      }
     }
-    setCurrentMultiplier(Math.floor(Math.random() * 12) + 1);
     if (document.getElementById("answer")) {
       document.getElementById("answer").focus();
     }
@@ -68,8 +85,22 @@ const PracticeMode = (props) => {
     e.preventDefault();
     if (typeof window !== "undefined") {
       setFinishGame(false);
+      sessionStorage.setItem("isFinished", false);
       sessionStorage.setItem("correctCounter", 0);
       sessionStorage.setItem("errorCounter", 0);
+      const tablesArray = JSON.parse(sessionStorage.getItem("tablesInUse"));
+      if (questionOrdering === "in order") {
+        sessionStorage.setItem("currentMultiplier", 1);
+        setCurrentMultiplier(1);
+        const orderedTables = tablesArray.sort((a, b) => a - b);
+        sessionStorage.setItem("currentTable", orderedTables[0]);
+        setCurrentTable(orderedTables[0]);
+      } else {
+        const shuffledTables = tablesArray.sort(() => 0.5 - Math.random());
+        const randomTable = shuffledTables.slice(0, 1);
+        setCurrentTable(randomTable);
+        setCurrentMultiplier(Math.floor(Math.random() * 12) + 1);
+      }
       setReRender(reRender + 1);
       if (document.getElementById("answer")) {
         document.getElementById("answer").focus();
@@ -89,11 +120,29 @@ const PracticeMode = (props) => {
     setPrevMultiplier(currentMultiplier);
     setUserPrevAnswer(userAnswer);
     setUserAnswer("");
-    const tablesAsString = sessionStorage.getItem("tablesInUse");
-    var tablesArray = JSON.parse("[" + tablesAsString + "]");
-    const shuffledTables = tablesArray.sort(() => 0.5 - Math.random());
-    setCurrentTable(shuffledTables.slice(0, 1));
-    setCurrentMultiplier(Math.floor(Math.random() * 12) + 1);
+    let tablesArray = JSON.parse(sessionStorage.getItem("tablesInUse"));
+    if (questionOrdering === "mixed up") {
+      const shuffledTables = tablesArray.sort(() => 0.5 - Math.random());
+      setCurrentTable(shuffledTables.slice(0, 1));
+      setCurrentMultiplier(Math.floor(Math.random() * 12) + 1);
+    } else {
+      if (currentMultiplier < 12) {
+        const newMultiplier = currentMultiplier + 1;
+        setCurrentMultiplier(newMultiplier);
+        sessionStorage.setItem("currentMultiplier", newMultiplier);
+      } else {
+        const orderedTables = tablesArray.sort((a, b) => a - b);
+        var index = orderedTables.indexOf(currentTable);
+        const newTable = orderedTables[index + 1];
+        setCurrentTable(newTable);
+        sessionStorage.setItem("currentTable", newTable);
+        setCurrentMultiplier(1);
+        sessionStorage.setItem("currentMultiplier", 1);
+      }
+    }
+    // const shuffledTables = tablesArray.sort(() => 0.5 - Math.random());
+    // setCurrentTable(shuffledTables.slice(0, 1));
+    // setCurrentMultiplier(Math.floor(Math.random() * 12) + 1);
     if (parseInt(userAnswer) === currentTable * currentMultiplier) {
       const currentCount = sessionStorage.getItem("correctCounter");
       sessionStorage.setItem("correctCounter", parseInt(currentCount) + 1);
@@ -103,6 +152,7 @@ const PracticeMode = (props) => {
       sessionStorage.setItem("errorCounter", parseInt(currentCount) + 1);
       setCorrect(false);
     }
+    // end game if necessary
     if (questionNumber() > numOfQuestions) {
       setFinishGame(true);
       sessionStorage.setItem("isFinished", true);
@@ -122,6 +172,8 @@ const PracticeMode = (props) => {
   return (
     <>
       <BackButton />
+      <div>{JSON.stringify(finishGame)}</div>
+      <div>{numOfQuestions}</div>
       <PageHeading heading={"Practice Mode"} />
       <TablesInPlayGrid tablesInPlay={tablesInPlay} />
       <RightWrongCounters resetCounters={resetCounters} reRender={reRender} />

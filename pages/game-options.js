@@ -22,8 +22,8 @@ const GameOptions = (props) => {
       typeof window !== "undefined" &&
       sessionStorage.getItem("tablesInUse") !== null
     ) {
-      const tablesAsString = sessionStorage.getItem("tablesInUse");
-      var tablesArray = JSON.parse("[" + tablesAsString + "]");
+      let tablesArray = JSON.parse(sessionStorage.getItem("tablesInUse"));
+
       setSelected(tablesArray);
     }
     if (
@@ -56,9 +56,18 @@ const GameOptions = (props) => {
       />
       <Spacer />
       <OptionHeading optionHeading={"tables"} />
-      <TimesTablesGrid selected={selected} setSelected={setSelected} />
+      <TimesTablesGrid
+        selected={selected}
+        setSelected={setSelected}
+        orderedQuestions={orderedQuestions}
+        setNumOfQuestions={setNumOfQuestions}
+      />
       <Spacer />
-      <ShortCutTableOptionsGrid setSelected={setSelected} />
+      <ShortCutTableOptionsGrid
+        setSelected={setSelected}
+        orderedQuestions={orderedQuestions}
+        setNumOfQuestions={setNumOfQuestions}
+      />
       <Spacer />
       <OptionHeading optionHeading={"question order"} />
       <QuestionOrderingGrid
