@@ -21,6 +21,9 @@ const StartButton = (props) => {
         );
         sessionStorage.setItem("questionOrdering", questionOrdering);
         sessionStorage.setItem("numOfQuestions", numOfQuestions);
+
+        // setup new game
+        sessionStorage.setItem("isFinished", false);
       }
       router.push("/" + gameType);
     }

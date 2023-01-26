@@ -2,12 +2,12 @@ import { useRouter } from "next/router";
 import styles from "../componentStyles/AnswerForm.module.css";
 
 const AnswerForm = (props) => {
-  const { userAnswer, handleChange, submitAnswer, finishGame, resetCounters } = props;
+  const { userAnswer, handleChange, submitAnswer, resetCounters } = props;
   const router = useRouter();
 
   return (
     <>
-      {finishGame ? (
+      {JSON.parse(sessionStorage.getItem("isFinished")) ? (
         <div className={styles.gameEndOptionsGrid}>
           <div
             className={styles.gameEndButton}

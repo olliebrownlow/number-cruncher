@@ -7,13 +7,12 @@ const QuestionDisplay = (props) => {
     currentMultiplier,
     questionNumber,
     numOfQuestions,
-    finishGame,
   } = props;
   return (
     <>
-      {finishGame ? (
+      {JSON.parse(sessionStorage.getItem("isFinished")) ? (
         <>
-          <Spacer size={"0.6rem"}/>
+          <Spacer size={"0.6rem"} />
           <div className={styles.questionDisplay}>-- × --</div>
         </>
       ) : (

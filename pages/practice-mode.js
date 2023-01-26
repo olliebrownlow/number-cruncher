@@ -8,7 +8,6 @@ import AnswerGrid from "../components/answerGrid";
 import TablesInPlayGrid from "../components/tablesInPlayGrid";
 
 const PracticeMode = (props) => {
-  const [finishGame, setFinishGame] = useState(true);
   const [tablesInPlay, setTablesInPlay] = useState([]);
   const [currentTable, setCurrentTable] = useState(0);
   const [currentMultiplier, setCurrentMultiplier] = useState(0);
@@ -50,9 +49,6 @@ const PracticeMode = (props) => {
       const numOfQuestions = sessionStorage.getItem("numOfQuestions");
       setNumOfQuestions(numOfQuestions);
 
-      const isFinished = sessionStorage.getItem("isFinished");
-      setFinishGame(JSON.parse(isFinished));
-
       const tablesArray = JSON.parse(sessionStorage.getItem("tablesInUse"));
 
       if (questionOrdering === "mixed up") {
@@ -84,7 +80,6 @@ const PracticeMode = (props) => {
   const resetCounters = (e) => {
     e.preventDefault();
     if (typeof window !== "undefined") {
-      setFinishGame(false);
       sessionStorage.setItem("isFinished", false);
       sessionStorage.setItem("correctCounter", 0);
       sessionStorage.setItem("errorCounter", 0);
@@ -154,7 +149,6 @@ const PracticeMode = (props) => {
     }
     // end game if necessary
     if (questionNumber() > numOfQuestions) {
-      setFinishGame(true);
       sessionStorage.setItem("isFinished", true);
     }
   };
@@ -172,20 +166,19 @@ const PracticeMode = (props) => {
   return (
     <>
       <BackButton />
-      <div>{JSON.stringify(finishGame)}</div>
+      <div>{JSON.stringify(currentTable)}</div>
+      <div>{JSON.stringify(typeof currentTable)}</div>
       <div>{numOfQuestions}</div>
       <PageHeading heading={"Practice Mode"} />
       <TablesInPlayGrid tablesInPlay={tablesInPlay} />
       <RightWrongCounters resetCounters={resetCounters} reRender={reRender} />
       <QuestionDisplay
-        finishGame={finishGame}
         questionNumber={questionNumber()}
         numOfQuestions={numOfQuestions}
         currentTable={currentTable}
         currentMultiplier={currentMultiplier}
       />
       <AnswerForm
-        finishGame={finishGame}
         userAnswer={userAnswer}
         handleChange={handleChange}
         submitAnswer={submitAnswer}
