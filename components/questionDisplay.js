@@ -1,13 +1,25 @@
+import { useState, useEffect } from "react";
 import Spacer from "./spacer";
 import styles from "../componentStyles/QuestionDisplay.module.css";
 
 const QuestionDisplay = (props) => {
-  const {
-    currentTable,
-    currentMultiplier,
-    questionNumber,
-    numOfQuestions,
-  } = props;
+  const { questionNumber, numOfQuestions } = props;
+
+  const [currentTable, setCurrentTable] = useState([]);
+  const [currentMultiplier, setCurrentMultiplier] = useState([]);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setCurrentTable(parseInt(sessionStorage.getItem("currentTable")));
+      setCurrentMultiplier(
+        parseInt(sessionStorage.getItem("currentMultiplier"))
+      );
+    }
+  }, [
+    typeof window !== "undefined" &&
+      sessionStorage.getItem("currentMultiplier"),
+  ]);
+
   return (
     <>
       {typeof window !== "undefined" &&

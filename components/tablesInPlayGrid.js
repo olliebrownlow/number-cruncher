@@ -1,7 +1,16 @@
+import { useState, useEffect } from "react";
 import styles from "../componentStyles/TablesInPlayGrid.module.css";
 
-const TablesInPlayGrid = (props) => {
-  const { tablesInPlay } = props;
+const TablesInPlayGrid = () => {
+  const [tablesInPlay, setTablesInPlay] = useState([]);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const tablesInPlay = JSON.parse(sessionStorage.getItem("tablesInUse"));
+      setTablesInPlay(tablesInPlay);
+    }
+  }, []);
+
   return (
     <div
       className={styles.tablesInPlayGrid}

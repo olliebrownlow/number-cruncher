@@ -8,7 +8,6 @@ import AnswerGrid from "../components/answerGrid";
 import TablesInPlayGrid from "../components/tablesInPlayGrid";
 
 const PracticeMode = (props) => {
-  const [tablesInPlay, setTablesInPlay] = useState([]);
   const [currentTable, setCurrentTable] = useState(0);
   const [currentMultiplier, setCurrentMultiplier] = useState(0);
   const [prevTable, setPrevTable] = useState("--");
@@ -23,9 +22,6 @@ const PracticeMode = (props) => {
   const [reRender, setReRender] = useState(0);
 
   useEffect(() => {
-    if (document.getElementById("answer")) {
-      document.getElementById("answer").focus();
-    }
     if (typeof window !== "undefined") {
       const questionOrdering = sessionStorage.getItem("questionOrdering");
       setQuestionOrdering(questionOrdering);
@@ -33,28 +29,10 @@ const PracticeMode = (props) => {
       const numOfQuestions = sessionStorage.getItem("numOfQuestions");
       setNumOfQuestions(numOfQuestions);
 
-      const tablesArray = JSON.parse(sessionStorage.getItem("tablesInUse"));
-
-      if (questionOrdering === "mixed up") {
-        const shuffledTables = tablesArray.sort(() => 0.5 - Math.random());
-        const randomTable = shuffledTables.slice(0, 1);
-        setCurrentTable(randomTable);
-        setCurrentMultiplier(Math.floor(Math.random() * 12) + 1);
-        const orderedTables = tablesArray.sort((a, b) => a - b);
-        setTablesInPlay(orderedTables);
-      } else {
-        const orderedTables = tablesArray.sort((a, b) => a - b);
-        if (sessionStorage.getItem("currentTable") === null) {
-          sessionStorage.setItem("currentTable", orderedTables[0]);
-          sessionStorage.setItem("currentMultiplier", 1);
-        } else {
-          setCurrentTable(parseInt(sessionStorage.getItem("currentTable")));
-          setCurrentMultiplier(
-            parseInt(sessionStorage.getItem("currentMultiplier"))
-          );
-        }
-        setTablesInPlay(tablesArray);
-      }
+      setCurrentTable(parseInt(sessionStorage.getItem("currentTable")));
+      setCurrentMultiplier(
+        parseInt(sessionStorage.getItem("currentMultiplier"))
+      );
     }
     if (document.getElementById("answer")) {
       document.getElementById("answer").focus();
@@ -77,8 +55,11 @@ const PracticeMode = (props) => {
       } else {
         const shuffledTables = tablesArray.sort(() => 0.5 - Math.random());
         const randomTable = shuffledTables.slice(0, 1);
+        sessionStorage.setItem("currentTable", randomTable);
         setCurrentTable(randomTable);
-        setCurrentMultiplier(Math.floor(Math.random() * 12) + 1);
+        const randomMultiplier = Math.floor(Math.random() * 12) + 1;
+        sessionStorage.setItem("currentMultiplier", randomMultiplier);
+        setCurrentMultiplier(randomMultiplier);
       }
       setReRender(reRender + 1);
       if (document.getElementById("answer")) {
@@ -102,8 +83,12 @@ const PracticeMode = (props) => {
     let tablesArray = JSON.parse(sessionStorage.getItem("tablesInUse"));
     if (questionOrdering === "mixed up") {
       const shuffledTables = tablesArray.sort(() => 0.5 - Math.random());
-      setCurrentTable(shuffledTables.slice(0, 1));
-      setCurrentMultiplier(Math.floor(Math.random() * 12) + 1);
+      const newTable = shuffledTables.slice(0, 1);
+      setCurrentTable(newTable);
+      sessionStorage.setItem("currentTable", newTable);
+      const newMultplier = Math.floor(Math.random() * 12) + 1;
+      setCurrentMultiplier(newMultplier);
+      sessionStorage.setItem("currentMultiplier", newMultplier);
     } else {
       if (currentMultiplier < 12) {
         const newMultiplier = currentMultiplier + 1;
@@ -119,9 +104,6 @@ const PracticeMode = (props) => {
         sessionStorage.setItem("currentMultiplier", 1);
       }
     }
-    // const shuffledTables = tablesArray.sort(() => 0.5 - Math.random());
-    // setCurrentTable(shuffledTables.slice(0, 1));
-    // setCurrentMultiplier(Math.floor(Math.random() * 12) + 1);
     if (parseInt(userAnswer) === currentTable * currentMultiplier) {
       const currentCount = sessionStorage.getItem("correctCounter");
       sessionStorage.setItem("correctCounter", parseInt(currentCount) + 1);
@@ -153,14 +135,13 @@ const PracticeMode = (props) => {
       <div>{JSON.stringify(currentTable)}</div>
       <div>{JSON.stringify(typeof currentTable)}</div>
       <div>{numOfQuestions}</div>
+      <div>{questionOrdering}</div>
       <PageHeading heading={"Practice Mode"} />
-      <TablesInPlayGrid tablesInPlay={tablesInPlay} />
+      <TablesInPlayGrid />
       <RightWrongCounters resetCounters={resetCounters} reRender={reRender} />
       <QuestionDisplay
         questionNumber={questionNumber()}
         numOfQuestions={numOfQuestions}
-        currentTable={currentTable}
-        currentMultiplier={currentMultiplier}
       />
       <AnswerForm
         userAnswer={userAnswer}
