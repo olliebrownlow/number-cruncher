@@ -18,6 +18,8 @@ const QuestionDisplay = (props) => {
   }, [
     typeof window !== "undefined" &&
       sessionStorage.getItem("currentMultiplier"),
+    typeof window !== "undefined" &&
+      sessionStorage.getItem("currentTable"),
   ]);
 
   return (
