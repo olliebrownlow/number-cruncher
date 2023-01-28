@@ -3,10 +3,11 @@ import Spacer from "./spacer";
 import styles from "../componentStyles/QuestionDisplay.module.css";
 
 const QuestionDisplay = (props) => {
-  const { questionNumber, numOfQuestions } = props;
+  const { questionNumber } = props;
 
   const [currentTable, setCurrentTable] = useState([]);
   const [currentMultiplier, setCurrentMultiplier] = useState([]);
+  const [numOfQuestions, setNumOfQuestions] = useState([]);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -14,12 +15,12 @@ const QuestionDisplay = (props) => {
       setCurrentMultiplier(
         parseInt(sessionStorage.getItem("currentMultiplier"))
       );
+      setNumOfQuestions(sessionStorage.getItem("numOfQuestions"));
     }
   }, [
     typeof window !== "undefined" &&
       sessionStorage.getItem("currentMultiplier"),
-    typeof window !== "undefined" &&
-      sessionStorage.getItem("currentTable"),
+    typeof window !== "undefined" && sessionStorage.getItem("currentTable"),
   ]);
 
   return (

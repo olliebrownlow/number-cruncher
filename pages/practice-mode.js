@@ -7,26 +7,17 @@ import AnswerForm from "../components/answerForm";
 import AnswerGrid from "../components/answerGrid";
 import TablesInPlayGrid from "../components/tablesInPlayGrid";
 
-const PracticeMode = (props) => {
+const PracticeMode = () => {
   const [prevTable, setPrevTable] = useState("--");
   const [prevMultiplier, setPrevMultiplier] = useState("--");
   const [userAnswer, setUserAnswer] = useState("");
   const [userPrevAnswer, setUserPrevAnswer] = useState("--");
   const [correct, setCorrect] = useState(true);
-  const [questionOrdering, setQuestionOrdering] = useState("");
-  const [numOfQuestions, setNumOfQuestions] = useState("");
   // counter to force re-render of child component.
   // needed as sessionStorage state changes cannot achieve this.
   const [reRender, setReRender] = useState(0);
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      const questionOrdering = sessionStorage.getItem("questionOrdering");
-      setQuestionOrdering(questionOrdering);
-
-      const numOfQuestions = sessionStorage.getItem("numOfQuestions");
-      setNumOfQuestions(numOfQuestions);
-    }
     if (document.getElementById("answer")) {
       document.getElementById("answer").focus();
     }
@@ -35,11 +26,13 @@ const PracticeMode = (props) => {
   const resetCounters = (e) => {
     e.preventDefault();
     if (typeof window !== "undefined") {
+      // set counters to zero
       sessionStorage.setItem("isFinished", false);
       sessionStorage.setItem("correctCounter", 0);
       sessionStorage.setItem("errorCounter", 0);
+      // set first question
       const tablesArray = JSON.parse(sessionStorage.getItem("tablesInUse"));
-      if (questionOrdering === "in order") {
+      if (sessionStorage.getItem("questionOrdering") === "in order") {
         sessionStorage.setItem("currentMultiplier", 1);
         const orderedTables = tablesArray.sort((a, b) => a - b);
         sessionStorage.setItem("currentTable", orderedTables[0]);
@@ -49,7 +42,9 @@ const PracticeMode = (props) => {
         const randomMultiplier = Math.floor(Math.random() * 12) + 1;
         sessionStorage.setItem("currentMultiplier", randomMultiplier);
       }
+      // trigger counter reset in child component
       setReRender(reRender + 1);
+      // focus on form text entry box
       if (document.getElementById("answer")) {
         document.getElementById("answer").focus();
       }
@@ -64,12 +59,29 @@ const PracticeMode = (props) => {
   const submitAnswer = (e) => {
     e.preventDefault();
     document.getElementById("answer").focus();
+    // check answer and increment counters
+    if (
+      parseInt(userAnswer) ===
+      parseInt(sessionStorage.getItem("currentTable")) *
+        parseInt(sessionStorage.getItem("currentMultiplier"))
+    ) {
+      const currentCount = sessionStorage.getItem("correctCounter");
+      sessionStorage.setItem("correctCounter", parseInt(currentCount) + 1);
+      setCorrect(true);
+    } else {
+      const currentCount = sessionStorage.getItem("errorCounter");
+      sessionStorage.setItem("errorCounter", parseInt(currentCount) + 1);
+      setCorrect(false);
+    }
+    // save old question and answer
     setPrevTable(parseInt(sessionStorage.getItem("currentTable")));
     setPrevMultiplier(parseInt(sessionStorage.getItem("currentMultiplier")));
     setUserPrevAnswer(userAnswer);
+    // reset user answer for the form
     setUserAnswer("");
+    // set new question
     let tablesArray = JSON.parse(sessionStorage.getItem("tablesInUse"));
-    if (questionOrdering === "mixed up") {
+    if (sessionStorage.getItem("questionOrdering") === "mixed up") {
       const shuffledTables = tablesArray.sort(() => 0.5 - Math.random());
       sessionStorage.setItem("currentTable", shuffledTables.slice(0, 1));
       const newMultplier = Math.floor(Math.random() * 12) + 1;
@@ -88,21 +100,8 @@ const PracticeMode = (props) => {
         sessionStorage.setItem("currentMultiplier", 1);
       }
     }
-    if (
-      parseInt(userAnswer) ===
-      parseInt(sessionStorage.getItem("currentTable")) *
-        parseInt(sessionStorage.getItem("currentMultiplier"))
-    ) {
-      const currentCount = sessionStorage.getItem("correctCounter");
-      sessionStorage.setItem("correctCounter", parseInt(currentCount) + 1);
-      setCorrect(true);
-    } else {
-      const currentCount = sessionStorage.getItem("errorCounter");
-      sessionStorage.setItem("errorCounter", parseInt(currentCount) + 1);
-      setCorrect(false);
-    }
     // end game if necessary
-    if (questionNumber() > numOfQuestions) {
+    if (questionNumber() > parseInt(sessionStorage.getItem("numOfQuestions"))) {
       sessionStorage.setItem("isFinished", true);
     }
   };
@@ -120,15 +119,10 @@ const PracticeMode = (props) => {
   return (
     <>
       <BackButton />
-      <div>{numOfQuestions}</div>
-      <div>{questionOrdering}</div>
       <PageHeading heading={"Practice Mode"} />
       <TablesInPlayGrid />
       <RightWrongCounters resetCounters={resetCounters} reRender={reRender} />
-      <QuestionDisplay
-        questionNumber={questionNumber()}
-        numOfQuestions={numOfQuestions}
-      />
+      <QuestionDisplay questionNumber={questionNumber()} />
       <AnswerForm
         userAnswer={userAnswer}
         handleChange={handleChange}
