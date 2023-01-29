@@ -16,6 +16,7 @@ const GameLink = (props) => {
             }
           : pathName
       }
+      as={gameType ? `/${pathName}/${gameType}` : `/${pathName}`}
       className={styles.card}
     >
       <h2 className={inter.className}>
