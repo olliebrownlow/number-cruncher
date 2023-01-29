@@ -18,6 +18,7 @@ const PracticeMode = () => {
   const [reRender, setReRender] = useState(0);
 
   useEffect(() => {
+    // focus immediately on the answer text box
     if (document.getElementById("answer")) {
       document.getElementById("answer").focus();
     }
@@ -44,6 +45,11 @@ const PracticeMode = () => {
       }
       // trigger counter reset in child component
       setReRender(reRender + 1);
+      // reset answer display grid
+      setPrevTable("--");
+      setPrevMultiplier("--");
+      setUserPrevAnswer("--");
+      setCorrect(true);
       // focus on form text entry box
       if (document.getElementById("answer")) {
         document.getElementById("answer").focus();

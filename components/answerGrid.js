@@ -7,7 +7,6 @@ const AnswerGrid = (props) => {
     if (prevTable * prevMultiplier) {
       return prevTable * prevMultiplier;
     }
-
     return "--";
   };
 
@@ -16,20 +15,16 @@ const AnswerGrid = (props) => {
       <div>question</div>
       <div>answer</div>
       <div>your answer</div>
+      <div className={styles.answerCorrectDisplay}>
+        {prevTable} × {prevMultiplier}
+      </div>
+      <div className={styles.answerCorrectDisplay}>{getAnswer()}</div>
       {correct ? (
         <>
-          <div className={styles.answerCorrectDisplay}>
-            {prevTable} × {prevMultiplier}
-          </div>
-          <div className={styles.answerCorrectDisplay}>{getAnswer()}</div>
           <div className={styles.answerCorrectDisplay}>{userPrevAnswer}</div>
         </>
       ) : (
         <>
-          <div className={styles.answerCorrectDisplay}>
-            {prevTable} × {prevMultiplier}
-          </div>
-          <div className={styles.answerCorrectDisplay}>{getAnswer()}</div>
           <div className={styles.answerWrongDisplay}>
             {userPrevAnswer ? userPrevAnswer : "--"}
           </div>
