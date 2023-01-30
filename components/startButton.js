@@ -41,6 +41,7 @@ const StartButton = (props) => {
           sessionStorage.setItem("currentTable", orderedSelectedTables[0]);
           sessionStorage.setItem("currentMultiplier", 1);
         }
+        sessionStorage.setItem("prevQuestionAnswersArray", "[]");
       }
       router.push("/" + gameType);
     }

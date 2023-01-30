@@ -86,6 +86,7 @@ const GameOptions = (props) => {
         numOfQuestions={numOfQuestions}
         selected={selected}
       />
+      <Spacer />
     </>
   );
 };

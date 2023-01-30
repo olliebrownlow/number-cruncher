@@ -24,7 +24,12 @@ const AnswerForm = (props) => {
           <div className={styles.gameEndButton} onClick={resetCounters}>
             replay
           </div>
-          <div className={styles.gameEndButton}>results</div>
+          <div
+            className={styles.gameEndButton}
+            onClick={() => router.push("/results")}
+          >
+            results
+          </div>
         </div>
       ) : (
         <form className={styles.formGroup}>

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import BackButton from "../components/backButton";
+import Spacer from "../components/spacer";
 import PageHeading from "../components/pageHeading";
 import RightWrongCounters from "../components/rightWrongCounters";
 import QuestionDisplay from "../components/questionDisplay";
@@ -54,7 +55,16 @@ const PracticeMode = () => {
       if (document.getElementById("answer")) {
         document.getElementById("answer").focus();
       }
+      // clear out previous questionAnswers
+      sessionStorage.setItem("prevQuestionAnswersArray", "[]");
     }
+  };
+
+  const isCorrectAnswer = (table, multiplier, userAnswer) => {
+    if (table * multiplier === userAnswer) {
+      return true;
+    }
+    return false;
   };
 
   const handleChange = (event) => {
@@ -83,6 +93,24 @@ const PracticeMode = () => {
     setPrevTable(parseInt(sessionStorage.getItem("currentTable")));
     setPrevMultiplier(parseInt(sessionStorage.getItem("currentMultiplier")));
     setUserPrevAnswer(userAnswer);
+    // store old question and answer
+    const qAArray = JSON.parse(
+      sessionStorage.getItem("prevQuestionAnswersArray")
+    );
+    const qAObject = {
+      id: questionNumber() - 1,
+      table: parseInt(sessionStorage.getItem("currentTable")),
+      multiplier: parseInt(sessionStorage.getItem("currentMultiplier")),
+      userAnswer: parseInt(userAnswer),
+      isCorrect: isCorrectAnswer(
+        parseInt(sessionStorage.getItem("currentTable")),
+        parseInt(sessionStorage.getItem("currentMultiplier")),
+        parseInt(userAnswer)
+      ),
+    };
+    qAArray.push(qAObject);
+    const stringifiedQAArray = JSON.stringify(qAArray);
+    sessionStorage.setItem("prevQuestionAnswersArray", stringifiedQAArray);
     // reset user answer for the form
     setUserAnswer("");
     // set new question
@@ -141,6 +169,7 @@ const PracticeMode = () => {
         prevMultiplier={prevMultiplier}
         userPrevAnswer={userPrevAnswer}
       />
+      <Spacer />
     </>
   );
 };
