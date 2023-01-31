@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import BackButton from "../components/backButton";
+import HomeButton from "../components/homeButton";
 import PageHeading from "../components/pageHeading";
 import StartButton from "../components/startButton";
 import Spacer from "../components/spacer";
@@ -47,6 +48,7 @@ const GameOptions = (props) => {
   return (
     <>
       <BackButton />
+      <HomeButton />
       <PageHeading heading={formattedGameTypeString(gameType) + " options"} />
       <StartButton
         gameType={gameType}

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import BackButton from "../components/backButton";
+import HomeButton from "../components/homeButton";
 import Spacer from "../components/spacer";
 import PageHeading from "../components/pageHeading";
 import RightWrongCounters from "../components/rightWrongCounters";
@@ -153,6 +154,7 @@ const PracticeMode = () => {
   return (
     <>
       <BackButton />
+      <HomeButton />
       <PageHeading heading={"Practice Mode"} />
       <TablesInPlayGrid />
       <RightWrongCounters resetCounters={resetCounters} reRender={reRender} />

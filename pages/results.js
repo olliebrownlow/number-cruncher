@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import HomeButton from "../components/homeButton";
 import BackButton from "../components/backButton";
 import PageHeading from "../components/pageHeading";
 import Spacer from "../components/spacer";
@@ -30,6 +31,7 @@ const Results = () => {
   return (
     <>
       <BackButton />
+      <HomeButton />
       <PageHeading heading={"Practice Mode Results"} />
       <div>
         You got{" "}

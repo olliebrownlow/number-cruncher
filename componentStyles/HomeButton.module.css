@@ -1,10 +1,10 @@
-.backButton {
+.homeButton {
   display: flex;
   flex-direction: column;
   align-items: center;
   position: absolute;
-  right: auto;
-  left: 0;
+  right: 0;
+  left: auto;
   margin: 20px 28px;
   font-size: 0.7rem;
   z-index: 1;
