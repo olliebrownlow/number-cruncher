@@ -1,15 +1,12 @@
-.headingsGrid {
-  display: grid;
+.resultStatement {
   text-align: center;
-  grid-template-columns: repeat(3, minmax(33%, auto));
-  width: var(--max-width);
-  max-width: 90%;
+  font-size: 1.5rem;
 }
 
 .answersGrid {
   display: grid;
   text-align: center;
-  grid-template-columns: repeat(3, minmax(33%, auto));
+  grid-template-columns: repeat(5, minmax(20%, auto));
   width: var(--max-width);
   max-width: 90%;
   padding-bottom: 0.5rem;
@@ -18,18 +15,18 @@
 .row {
   display: flex;
   flex-direction: row;
-  /* align-items: center; */
-  /* justify-content: center; */
   justify-items: center;
   grid-column-start: 1;
   grid-column-end: 4;
-
 }
 
 .filterButton {
   border: 1px solid white;
   border-radius: 4px;
   padding: 4px 6px;
+  font-size: 0.9rem;
+  min-width: 12rem;
+  text-align: center;
 }
 
 .noHeight {

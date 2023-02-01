@@ -3,6 +3,7 @@ import HomeButton from "../components/homeButton";
 import BackButton from "../components/backButton";
 import PageHeading from "../components/pageHeading";
 import Spacer from "../components/spacer";
+import { X, Check } from "react-feather";
 import styles from "../styles/Results.module.css";
 
 const Results = () => {
@@ -18,11 +19,14 @@ const Results = () => {
   };
 
   const getIncorrectQandAs = () => {
-    return qAndAs.filter((qAndA) => qAndA.isCorrect == false);
+    return qAndAs.filter((qAndA) => qAndA.isCorrect === false);
   };
 
-  const areAllCorrect = () => {
-    if (qAndAs.filter((qAndA) => qAndA.isCorrect == false).length === 0) {
+  const areAllCorrectOrIncorrect = () => {
+    if (qAndAs.filter((qAndA) => qAndA.isCorrect === false).length === 0) {
+      return false;
+    }
+    if (qAndAs.filter((qAndA) => qAndA.isCorrect === true).length === 0) {
       return false;
     }
     return true;
@@ -33,26 +37,21 @@ const Results = () => {
       <BackButton />
       <HomeButton />
       <PageHeading heading={"Practice Mode Results"} />
-      <div>
+      <div className={styles.resultStatement}>
         You got{" "}
         {typeof window !== "undefined" &&
           sessionStorage.getItem("correctCounter")}{" "}
         out of{" "}
         {typeof window !== "undefined" &&
           sessionStorage.getItem("numOfQuestions")}{" "}
-        questions right!
-      </div>
-      <Spacer />
-      <div className={styles.headingsGrid}>
-        <div>question</div>
-        <div>answer</div>
-        <div>your answer</div>
+        questions right.
       </div>
       <Spacer />
       {!isFiltered
         ? qAndAs.map((set) => (
             <div key={set.id} className={styles.answersGrid}>
               <>
+                <div>{set.id}.</div>
                 <div>
                   {set.table} × {set.multiplier}
                 </div>
@@ -70,12 +69,30 @@ const Results = () => {
                 >
                   {set.userAnswer ? set.userAnswer : "--"}
                 </div>
+                {set.isCorrect ? (
+                  <div
+                    style={{
+                      color: set.isCorrect ? "green" : "red",
+                    }}
+                  >
+                    <Check size={24} />
+                  </div>
+                ) : (
+                  <div
+                    style={{
+                      color: set.isCorrect ? "green" : "red",
+                    }}
+                  >
+                    <X size={24} />
+                  </div>
+                )}
               </>
             </div>
           ))
         : getIncorrectQandAs().map((set) => (
             <div key={set.id} className={styles.answersGrid}>
               <>
+                <div>{set.id}.</div>
                 <div>
                   {set.table} × {set.multiplier}
                 </div>
@@ -93,11 +110,18 @@ const Results = () => {
                 >
                   {set.userAnswer ? set.userAnswer : "--"}
                 </div>
+                <div
+                  style={{
+                    color: "red",
+                  }}
+                >
+                  <X size={24} />
+                </div>
               </>
             </div>
           ))}
       <Spacer />
-      {areAllCorrect() && (
+      {areAllCorrectOrIncorrect() && (
         <div className={styles.filterButton} onClick={() => toggleFilter()}>
           {isFiltered ? "see all answers" : "see incorrect only"}
         </div>
