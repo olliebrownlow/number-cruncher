@@ -1,0 +1,82 @@
+import styles from "../componentStyles/SelectNoOfQusGrid.module.css";
+
+const SelectNoOfQusGrid = (props) => {
+  const {
+    setNumOfQuestions,
+    setNumOfQuestionsReserved,
+    orderedQuestions,
+    numOfQuestions,
+    numOfQuestionsReserved,
+    selected,
+  } = props;
+
+  const handleDecrementNumberOfQuestions = () => {
+    if (numOfQuestions === "no limit") {
+      setNumOfQuestions(parseInt(numOfQuestionsReserved));
+    }
+    if (numOfQuestionsReserved > 5) {
+      const newNum = parseInt(numOfQuestionsReserved) - 5;
+      setNumOfQuestions(JSON.stringify(newNum));
+      setNumOfQuestionsReserved(JSON.stringify(newNum));
+    }
+  };
+
+  const handleIncrementNumberOfQuestions = () => {
+    if (numOfQuestions === "no limit") {
+      const newNum = parseInt(numOfQuestionsReserved) + 5;
+      setNumOfQuestions(JSON.stringify(newNum));
+      setNumOfQuestionsReserved(JSON.stringify(newNum));
+    } else {
+      const newNum = parseInt(numOfQuestions) + 5;
+      setNumOfQuestions(JSON.stringify(newNum));
+      setNumOfQuestionsReserved(JSON.stringify(newNum));
+    }
+  };
+
+  const handleNoLimit = () => {
+    if (numOfQuestions === "no limit") {
+      setNumOfQuestions(numOfQuestionsReserved);
+    } else {
+      setNumOfQuestions("no limit");
+    }
+  };
+
+  return (
+    <>
+      {orderedQuestions === "mixed up" ? (
+        <div className={styles.noOfQuestionsGrid}>
+          <div
+            className={styles.number}
+            onClick={handleDecrementNumberOfQuestions}
+          >
+            -5
+          </div>
+          <div className={styles.optionHeading}>
+            {numOfQuestions === "no limit" ? "\u221E" : numOfQuestions}
+          </div>
+          <div
+            className={styles.number}
+            onClick={handleIncrementNumberOfQuestions}
+          >
+            +5
+          </div>
+          <div
+            className={styles.stretched}
+            style={{
+              backgroundColor: numOfQuestions === "no limit" ? "darkGrey" : "",
+              color: numOfQuestions === "no limit" ? "black" : "",
+              fontSize: numOfQuestions === "no limit" ? "1.5rem" : "1rem",
+            }}
+            onClick={handleNoLimit}
+          >
+            no limit
+          </div>
+        </div>
+      ) : (
+        <div className={styles.optionHeading}>{selected.length * 12}</div>
+      )}
+    </>
+  );
+};
+
+export default SelectNoOfQusGrid;

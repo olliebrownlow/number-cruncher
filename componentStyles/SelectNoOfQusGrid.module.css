@@ -6,16 +6,19 @@
   grid-template-rows: 2rem 2rem;
   grid-template-columns: 25% 25% 25%;
   column-gap: 12px;
+  row-gap: 8px;
   width: var(--max-width);
   max-width: 90%;
 }
 
 .number {
   border: solid 1px darkgrey;
-  border-radius: 2px;
+  border-radius: 50%;
 }
 
 .stretched {
+  border: solid 1px darkgrey;
+  border-radius: 2px;
   grid-column-start: 1;
   grid-column-end: 4;
 }

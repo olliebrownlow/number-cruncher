@@ -8,7 +8,7 @@ import OptionHeading from "../components/optionHeading";
 import TimesTablesGrid from "../components/timesTablesGrid";
 import ShortCutTableOptionsGrid from "../components/shortCutTableOptionsGrid";
 import QuestionOrderingGrid from "../components/questionOrderingGrid";
-import NoOfQuestionsGrid from "../components/noOfQuestionsGrid";
+import SelectNoOfQusGrid from "../components/selectNoOfQusGrid";
 
 const GameOptions = (props) => {
   const { gameType } = props;
@@ -50,45 +50,59 @@ const GameOptions = (props) => {
       <BackButton />
       <HomeButton />
       <PageHeading heading={formattedGameTypeString(gameType) + " options"} />
-      <StartButton
-        gameType={gameType}
-        selectedTimesTables={selected}
-        questionOrdering={orderedQuestions}
-        numOfQuestions={numOfQuestions}
-      />
-      <Spacer />
-      <OptionHeading optionHeading={"tables"} />
-      <TimesTablesGrid
-        selected={selected}
-        setSelected={setSelected}
-        orderedQuestions={orderedQuestions}
-        setNumOfQuestions={setNumOfQuestions}
-      />
-      <Spacer />
-      <ShortCutTableOptionsGrid
-        setSelected={setSelected}
-        orderedQuestions={orderedQuestions}
-        setNumOfQuestions={setNumOfQuestions}
-      />
-      <Spacer />
-      <OptionHeading optionHeading={"question order"} />
-      <QuestionOrderingGrid
-        setNumOfQuestions={setNumOfQuestions}
-        setOrderedQuestions={setOrderedQuestions}
-        selected={selected}
-        numOfQuestionsReserved={numOfQuestionsReserved}
-        orderedQuestions={orderedQuestions}
-      />
-      <Spacer />
-      <OptionHeading optionHeading={"number of questions"} />
-      <NoOfQuestionsGrid
-        setNumOfQuestions={setNumOfQuestions}
-        setNumOfQuestionsReserved={setNumOfQuestionsReserved}
-        orderedQuestions={orderedQuestions}
-        numOfQuestions={numOfQuestions}
-        selected={selected}
-      />
-      <Spacer />
+      {gameType === "practice-mode" ? (
+        <>
+          <StartButton
+            gameType={gameType}
+            selectedTimesTables={selected}
+            questionOrdering={orderedQuestions}
+            numOfQuestions={numOfQuestions}
+          />
+          <Spacer />
+          <OptionHeading optionHeading={"tables"} />
+          <TimesTablesGrid
+            selected={selected}
+            setSelected={setSelected}
+            orderedQuestions={orderedQuestions}
+            setNumOfQuestions={setNumOfQuestions}
+          />
+          <Spacer />
+          <ShortCutTableOptionsGrid
+            setSelected={setSelected}
+            orderedQuestions={orderedQuestions}
+            setNumOfQuestions={setNumOfQuestions}
+          />
+          <Spacer />
+          <OptionHeading optionHeading={"question order"} />
+          <QuestionOrderingGrid
+            setNumOfQuestions={setNumOfQuestions}
+            setOrderedQuestions={setOrderedQuestions}
+            selected={selected}
+            numOfQuestionsReserved={numOfQuestionsReserved}
+            orderedQuestions={orderedQuestions}
+          />
+          <Spacer />
+          <OptionHeading optionHeading={"number of questions"} />
+          <SelectNoOfQusGrid
+            setNumOfQuestions={setNumOfQuestions}
+            setNumOfQuestionsReserved={setNumOfQuestionsReserved}
+            orderedQuestions={orderedQuestions}
+            numOfQuestions={numOfQuestions}
+            numOfQuestionsReserved={numOfQuestionsReserved}
+            selected={selected}
+          />
+          <Spacer />{" "}
+        </>
+      ) : (
+        <>
+          <Spacer />
+          <div style={{ fontSize: "1.5rem" }}>UndEr cOnstrUctIOn </div>
+          <Spacer />
+          <div style={{ fontSize: "1.5rem" }}>--</div>
+          <Spacer />
+          <div style={{ fontSize: "1.5rem" }}> chEck bAck sOOn</div>
+        </>
+      )}
     </>
   );
 };
