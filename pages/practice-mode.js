@@ -7,6 +7,7 @@ import RightWrongCounters from "../components/rightWrongCounters";
 import QuestionDisplay from "../components/questionDisplay";
 import AnswerForm from "../components/answerForm";
 import AnswerGrid from "../components/answerGrid";
+import EndButton from "../components/endButton";
 import TablesInPlayGrid from "../components/tablesInPlayGrid";
 
 const PracticeMode = () => {
@@ -145,6 +146,13 @@ const PracticeMode = () => {
     return parseInt(right) + parseInt(wrong) + 1;
   };
 
+  const endGame = () => {
+    if (typeof window !== "undefined") {
+      sessionStorage.setItem("isFinished", true);
+      setReRender(reRender + 1);
+    }
+  };
+
   return (
     <>
       <BackButton />
@@ -161,6 +169,15 @@ const PracticeMode = () => {
       />
       <AnswerGrid />
       <Spacer />
+      {typeof window !== "undefined" &&
+        sessionStorage.getItem("numOfQuestions") === "no limit" &&
+        sessionStorage.getItem("isFinished") === "false" && 
+        (
+          <>
+            <EndButton endGame={endGame} />
+            <Spacer />
+          </>
+        )}
     </>
   );
 };

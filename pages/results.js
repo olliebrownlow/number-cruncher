@@ -43,7 +43,8 @@ const Results = () => {
           sessionStorage.getItem("correctCounter")}{" "}
         out of{" "}
         {typeof window !== "undefined" &&
-          sessionStorage.getItem("numOfQuestions")}{" "}
+          parseInt(sessionStorage.getItem("correctCounter")) +
+            parseInt(sessionStorage.getItem("errorCounter"))}{" "}
         questions right.
       </div>
       <Spacer />
