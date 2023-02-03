@@ -1,19 +1,25 @@
 .answerGrid {
   display: grid;
   text-align: center;
-  grid-template-columns: repeat(3, minmax(33%, auto));
+  grid-template-columns: 17% 30% 19% 19% 15%;
+  grid-template-rows: 2rem;
   width: var(--max-width);
-  max-width: 90%;
+  max-width: 95%;
+}
+
+.answerDisplay {
+  font-size: 1.8rem;
+  padding: 1rem 0;
 }
 
 .answerCorrectDisplay {
-  font-size: 2rem;
+  font-size: 1.8rem;
   color: green;
   padding: 1rem 0;
 }
 
 .answerWrongDisplay {
-  font-size: 2rem;
+  font-size: 1.8rem;
   color: red;
   padding: 1rem 0;
 }
@@ -21,6 +27,6 @@
 /* Tablet and Smaller Desktop */
 @media (min-width: 701px) and (max-width: 1120px) {
  .answerGrid {
-    grid-template-columns: repeat(3, 33%);
+    grid-template-columns: repeat(5, 20%);
   }
 }

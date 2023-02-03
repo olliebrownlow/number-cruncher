@@ -9,6 +9,7 @@ import TimesTablesGrid from "../components/timesTablesGrid";
 import ShortCutTableOptionsGrid from "../components/shortCutTableOptionsGrid";
 import QuestionOrderingGrid from "../components/questionOrderingGrid";
 import SelectNoOfQusGrid from "../components/selectNoOfQusGrid";
+import { Activity, Tool } from "react-feather";
 
 const GameOptions = (props) => {
   const { gameType } = props;
@@ -96,11 +97,13 @@ const GameOptions = (props) => {
       ) : (
         <>
           <Spacer />
-          <div style={{ fontSize: "1.5rem" }}>UndEr cOnstrUctIOn </div>
+          <div style={{ fontSize: "1.5rem" }}>
+            <Tool fill={"white"} /> UNDER CONSTRUCTION <Tool fill={"white"} />
+          </div>
           <Spacer />
           <div style={{ fontSize: "1.5rem" }}>--</div>
           <Spacer />
-          <div style={{ fontSize: "1.5rem" }}> chEck bAck sOOn</div>
+          <div style={{ fontSize: "1.5rem" }}> check back soon..</div>
         </>
       )}
     </>

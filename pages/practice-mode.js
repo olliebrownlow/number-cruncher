@@ -10,11 +10,7 @@ import AnswerGrid from "../components/answerGrid";
 import TablesInPlayGrid from "../components/tablesInPlayGrid";
 
 const PracticeMode = () => {
-  const [prevTable, setPrevTable] = useState("--");
-  const [prevMultiplier, setPrevMultiplier] = useState("--");
   const [userAnswer, setUserAnswer] = useState("");
-  const [userPrevAnswer, setUserPrevAnswer] = useState("--");
-  const [correct, setCorrect] = useState(true);
   // counter to force re-render of child component.
   // needed as sessionStorage state changes cannot achieve this.
   const [reRender, setReRender] = useState(0);
@@ -47,11 +43,6 @@ const PracticeMode = () => {
       }
       // trigger counter reset in child component
       setReRender(reRender + 1);
-      // reset answer display grid
-      setPrevTable("--");
-      setPrevMultiplier("--");
-      setUserPrevAnswer("--");
-      setCorrect(true);
       // focus on form text entry box
       if (document.getElementById("answer")) {
         document.getElementById("answer").focus();
@@ -73,9 +64,18 @@ const PracticeMode = () => {
     setUserAnswer(target.value);
   };
 
+  const getUserAnswer = () => {
+    if (userAnswer) {
+      return parseInt(userAnswer);
+    }
+    return "--";
+  };
+
   const submitAnswer = (e) => {
     e.preventDefault();
     document.getElementById("answer").focus();
+    // trigger counter movement in child component when blank answer
+    setReRender(reRender + 1);
     // check answer and increment counters
     if (
       parseInt(userAnswer) ===
@@ -84,16 +84,10 @@ const PracticeMode = () => {
     ) {
       const currentCount = sessionStorage.getItem("correctCounter");
       sessionStorage.setItem("correctCounter", parseInt(currentCount) + 1);
-      setCorrect(true);
     } else {
       const currentCount = sessionStorage.getItem("errorCounter");
       sessionStorage.setItem("errorCounter", parseInt(currentCount) + 1);
-      setCorrect(false);
     }
-    // save old question and answer
-    setPrevTable(parseInt(sessionStorage.getItem("currentTable")));
-    setPrevMultiplier(parseInt(sessionStorage.getItem("currentMultiplier")));
-    setUserPrevAnswer(userAnswer);
     // store old question and answer
     const qAArray = JSON.parse(
       sessionStorage.getItem("prevQuestionAnswersArray")
@@ -102,7 +96,7 @@ const PracticeMode = () => {
       id: questionNumber() - 1,
       table: parseInt(sessionStorage.getItem("currentTable")),
       multiplier: parseInt(sessionStorage.getItem("currentMultiplier")),
-      userAnswer: parseInt(userAnswer),
+      userAnswer: getUserAnswer(),
       isCorrect: isCorrectAnswer(
         parseInt(sessionStorage.getItem("currentTable")),
         parseInt(sessionStorage.getItem("currentMultiplier")),
@@ -165,12 +159,7 @@ const PracticeMode = () => {
         submitAnswer={submitAnswer}
         resetCounters={resetCounters}
       />
-      <AnswerGrid
-        correct={correct}
-        prevTable={prevTable}
-        prevMultiplier={prevMultiplier}
-        userPrevAnswer={userPrevAnswer}
-      />
+      <AnswerGrid />
       <Spacer />
     </>
   );
