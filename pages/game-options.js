@@ -9,11 +9,10 @@ import TimesTablesGrid from "../components/timesTablesGrid";
 import ShortCutTableOptionsGrid from "../components/shortCutTableOptionsGrid";
 import QuestionOrderingGrid from "../components/questionOrderingGrid";
 import SelectNoOfQusGrid from "../components/selectNoOfQusGrid";
-import { Activity, Tool } from "react-feather";
+import { Tool } from "react-feather";
 
-const GameOptions = (props) => {
-  const { gameType } = props;
-
+const GameOptions = () => {
+  const [gameType, setGameType] = useState("");
   const [selected, setSelected] = useState([1]);
   const [orderedQuestions, setOrderedQuestions] = useState("mixed up");
   const [numOfQuestions, setNumOfQuestions] = useState("10");
@@ -25,20 +24,25 @@ const GameOptions = (props) => {
       sessionStorage.getItem("tablesInUse") !== null
     ) {
       let tablesArray = JSON.parse(sessionStorage.getItem("tablesInUse"));
-
       setSelected(tablesArray);
     }
+
     if (
       typeof window !== "undefined" &&
       sessionStorage.getItem("questionOrdering") !== null
     ) {
       setOrderedQuestions(sessionStorage.getItem("questionOrdering"));
     }
+
     if (
       typeof window !== "undefined" &&
       sessionStorage.getItem("numOfQuestions") !== null
     ) {
       setNumOfQuestions(sessionStorage.getItem("numOfQuestions"));
+    }
+    
+    if (typeof window !== "undefined") {
+      setGameType(sessionStorage.getItem("gameType"));
     }
   }, []);
 
@@ -109,15 +113,5 @@ const GameOptions = (props) => {
     </>
   );
 };
-
-export async function getServerSideProps({ query }) {
-  const gameType = query.gameType;
-
-  return {
-    props: {
-      gameType,
-    },
-  };
-}
 
 export default GameOptions;

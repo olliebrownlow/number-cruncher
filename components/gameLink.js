@@ -6,23 +6,19 @@ const inter = Inter({ subsets: ["latin"] });
 
 const GameLink = (props) => {
   const { pathName, gameType, gameTitle, gameDescription } = props;
+
+  const handleGameType = () => {
+    if (typeof window !== "undefined") {
+      sessionStorage.setItem("gameType", gameType);
+    }
+  };
+
   return (
-    <Link
-      href={
-        gameType
-          ? {
-              pathname: pathName,
-              query: { gameType: gameType },
-            }
-          : pathName
-      }
-      as={gameType ? `/${pathName}/${gameType}` : `/${pathName}`}
-      className={styles.card}
-    >
-      <h2 className={inter.className}>
+    <Link href={pathName} className={styles.card}>
+      <h2 className={inter.className} onClick={handleGameType}>
         {gameTitle} <span>-&gt;</span>
+        <p className={inter.className}>{gameDescription}</p>
       </h2>
-      <p className={inter.className}>{gameDescription}</p>
     </Link>
   );
 };
