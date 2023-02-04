@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import HomeButton from "../components/homeButton";
 import BackButton from "../components/backButton";
 import PageHeading from "../components/pageHeading";
+import ResultStatement from "../components/resultStatement";
+import FilterButton from "../components/filterButton";
 import Spacer from "../components/spacer";
 import { X, Check } from "react-feather";
 import styles from "../styles/Results.module.css";
@@ -22,11 +24,10 @@ const Results = () => {
     return qAndAs.filter((qAndA) => qAndA.isCorrect === false);
   };
 
-  const areAllCorrectOrIncorrect = () => {
-    if (qAndAs.filter((qAndA) => qAndA.isCorrect === false).length === 0) {
-      return false;
-    }
-    if (qAndAs.filter((qAndA) => qAndA.isCorrect === true).length === 0) {
+  const isAtLeastOneRightAndOneWrong = () => {
+    const allCorrect = qAndAs.filter((qAndA) => !qAndA.isCorrect).length === 0;
+    const allIncorrect = qAndAs.filter((qAndA) => qAndA.isCorrect).length === 0;
+    if (allCorrect || allIncorrect) {
       return false;
     }
     return true;
@@ -37,16 +38,13 @@ const Results = () => {
       <BackButton />
       <HomeButton />
       <PageHeading heading={"Practice Mode Results"} />
-      <div className={styles.resultStatement}>
-        You got{" "}
-        {typeof window !== "undefined" &&
-          sessionStorage.getItem("correctCounter")}{" "}
-        out of{" "}
-        {typeof window !== "undefined" &&
-          parseInt(sessionStorage.getItem("correctCounter")) +
-            parseInt(sessionStorage.getItem("errorCounter"))}{" "}
-        questions right.
-      </div>
+      <ResultStatement />
+      <Spacer />
+      <FilterButton
+        isAtLeastOneRightAndOneWrong={isAtLeastOneRightAndOneWrong}
+        toggleFilter={toggleFilter}
+        isFiltered={isFiltered}
+      />
       <Spacer />
       {!isFiltered
         ? qAndAs.map((set) => (
@@ -121,13 +119,6 @@ const Results = () => {
               </>
             </div>
           ))}
-      <Spacer />
-      {areAllCorrectOrIncorrect() && (
-        <div className={styles.filterButton} onClick={() => toggleFilter()}>
-          {isFiltered ? "see all answers" : "see incorrect only"}
-        </div>
-      )}
-
       <Spacer />
     </>
   );

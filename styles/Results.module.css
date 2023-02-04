@@ -1,8 +1,3 @@
-.resultStatement {
-  text-align: center;
-  font-size: 1.5rem;
-}
-
 .answersGrid {
   display: grid;
   text-align: center;
@@ -10,25 +5,4 @@
   width: var(--max-width);
   max-width: 90%;
   padding-bottom: 0.5rem;
-}
-
-.row {
-  display: flex;
-  flex-direction: row;
-  justify-items: center;
-  grid-column-start: 1;
-  grid-column-end: 4;
-}
-
-.filterButton {
-  border: 1px solid white;
-  border-radius: 4px;
-  padding: 4px 6px;
-  font-size: 0.9rem;
-  min-width: 12rem;
-  text-align: center;
-}
-
-.noHeight {
-  height: 0px;
 }

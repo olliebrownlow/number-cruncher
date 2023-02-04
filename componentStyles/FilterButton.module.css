@@ -1,0 +1,8 @@
+.filterButton {
+  border: 1px solid white;
+  border-radius: 4px;
+  padding: 6px;
+  font-size: 0.9rem;
+  text-align: center;
+  white-space: nowrap;
+}
