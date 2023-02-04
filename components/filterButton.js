@@ -1,10 +1,10 @@
 import styles from "../componentStyles/FilterButton.module.css";
 
 const FilterButton = (props) => {
-  const { isAtLeastOneRightAndOneWrong, toggleFilter, isFiltered } = props;
+  const { hasAtLeastOneRightAndOneWrong, toggleFilter, isFiltered } = props;
   return (
     <>
-      {isAtLeastOneRightAndOneWrong() && (
+      {hasAtLeastOneRightAndOneWrong() && (
         <div className={styles.filterButton} onClick={() => toggleFilter()}>
           {isFiltered ? "see all answers" : "see incorrect only"}
         </div>
