@@ -9,7 +9,7 @@ import TimesTablesGrid from "../components/timesTablesGrid";
 import ShortCutTableOptionsGrid from "../components/shortCutTableOptionsGrid";
 import QuestionOrderingGrid from "../components/questionOrderingGrid";
 import SelectNoOfQusGrid from "../components/selectNoOfQusGrid";
-import { Tool } from "react-feather";
+import UnderConstruction from "../components/underConstruction";
 
 const GameOptions = () => {
   const [gameType, setGameType] = useState("");
@@ -40,7 +40,7 @@ const GameOptions = () => {
     ) {
       setNumOfQuestions(sessionStorage.getItem("numOfQuestions"));
     }
-    
+
     if (typeof window !== "undefined") {
       setGameType(sessionStorage.getItem("gameType"));
     }
@@ -99,16 +99,7 @@ const GameOptions = () => {
           <Spacer />{" "}
         </>
       ) : (
-        <>
-          <Spacer />
-          <div style={{ fontSize: "1.5rem" }}>
-            <Tool fill={"white"} /> UNDER CONSTRUCTION <Tool fill={"white"} />
-          </div>
-          <Spacer />
-          <div style={{ fontSize: "1.5rem" }}>--</div>
-          <Spacer />
-          <div style={{ fontSize: "1.5rem" }}> check back soon..</div>
-        </>
+        <UnderConstruction />
       )}
     </>
   );
