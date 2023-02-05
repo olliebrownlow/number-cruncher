@@ -1,5 +1,7 @@
 import Head from "next/head";
 import "../styles/globals.css";
+import { Toaster } from "react-hot-toast";
+import { AlertTriangle } from "react-feather";
 import styles from "../styles/AppLayout.module.css";
 
 export default function App({ Component, pageProps }) {
@@ -14,6 +16,17 @@ export default function App({ Component, pageProps }) {
       <main className={styles.main}>
         <Component {...pageProps} />
       </main>
+      <Toaster
+        toastOptions={{
+          style: {
+            textAlign: "center",
+            fontSize: "0.9rem",
+          },
+          error: {
+            icon: <AlertTriangle color="red" size="30px" />,
+          },
+        }}
+      />
     </>
   );
 }

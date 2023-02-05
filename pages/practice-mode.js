@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import toast from "react-hot-toast";
 import BackButton from "../components/backButton";
 import HomeButton from "../components/homeButton";
 import Spacer from "../components/spacer";
@@ -75,64 +76,75 @@ const PracticeMode = () => {
   const submitAnswer = (e) => {
     e.preventDefault();
     document.getElementById("answer").focus();
-    // trigger counter movement in child component when blank answer
-    setReRender(reRender + 1);
-    // check answer and increment counters
     if (
-      parseInt(userAnswer) ===
-      parseInt(sessionStorage.getItem("currentTable")) *
-        parseInt(sessionStorage.getItem("currentMultiplier"))
+      (parseInt(userAnswer) > 0 && parseInt(userAnswer) < 145) ||
+      !userAnswer
     ) {
-      const currentCount = sessionStorage.getItem("correctCounter");
-      sessionStorage.setItem("correctCounter", parseInt(currentCount) + 1);
-    } else {
-      const currentCount = sessionStorage.getItem("errorCounter");
-      sessionStorage.setItem("errorCounter", parseInt(currentCount) + 1);
-    }
-    // store old question and answer
-    const qAArray = JSON.parse(
-      sessionStorage.getItem("prevQuestionAnswersArray")
-    );
-    const qAObject = {
-      id: questionNumber() - 1,
-      table: parseInt(sessionStorage.getItem("currentTable")),
-      multiplier: parseInt(sessionStorage.getItem("currentMultiplier")),
-      userAnswer: getUserAnswer(),
-      isCorrect: isCorrectAnswer(
-        parseInt(sessionStorage.getItem("currentTable")),
-        parseInt(sessionStorage.getItem("currentMultiplier")),
-        parseInt(userAnswer)
-      ),
-    };
-    qAArray.push(qAObject);
-    const stringifiedQAArray = JSON.stringify(qAArray);
-    sessionStorage.setItem("prevQuestionAnswersArray", stringifiedQAArray);
-    // reset user answer for the form
-    setUserAnswer("");
-    // set new question
-    let tablesArray = JSON.parse(sessionStorage.getItem("tablesInUse"));
-    if (sessionStorage.getItem("questionOrdering") === "mixed up") {
-      const shuffledTables = tablesArray.sort(() => 0.5 - Math.random());
-      sessionStorage.setItem("currentTable", shuffledTables.slice(0, 1));
-      const newMultplier = Math.floor(Math.random() * 12) + 1;
-      sessionStorage.setItem("currentMultiplier", newMultplier);
-    } else {
-      if (parseInt(sessionStorage.getItem("currentMultiplier")) < 12) {
-        const newMultiplier =
-          parseInt(sessionStorage.getItem("currentMultiplier")) + 1;
-        sessionStorage.setItem("currentMultiplier", newMultiplier);
+      // trigger counter movement in child component when blank answer
+      setReRender(reRender + 1);
+      // check answer and increment counters
+      if (
+        parseInt(userAnswer) ===
+        parseInt(sessionStorage.getItem("currentTable")) *
+          parseInt(sessionStorage.getItem("currentMultiplier"))
+      ) {
+        const currentCount = sessionStorage.getItem("correctCounter");
+        sessionStorage.setItem("correctCounter", parseInt(currentCount) + 1);
       } else {
-        const orderedTables = tablesArray.sort((a, b) => a - b);
-        var index = orderedTables.indexOf(
-          parseInt(sessionStorage.getItem("currentTable"))
-        );
-        sessionStorage.setItem("currentTable", orderedTables[index + 1]);
-        sessionStorage.setItem("currentMultiplier", 1);
+        const currentCount = sessionStorage.getItem("errorCounter");
+        sessionStorage.setItem("errorCounter", parseInt(currentCount) + 1);
       }
-    }
-    // end game if necessary
-    if (questionNumber() > parseInt(sessionStorage.getItem("numOfQuestions"))) {
-      sessionStorage.setItem("isFinished", true);
+      // store old question and answer
+      const qAArray = JSON.parse(
+        sessionStorage.getItem("prevQuestionAnswersArray")
+      );
+      const qAObject = {
+        id: questionNumber() - 1,
+        table: parseInt(sessionStorage.getItem("currentTable")),
+        multiplier: parseInt(sessionStorage.getItem("currentMultiplier")),
+        userAnswer: getUserAnswer(),
+        isCorrect: isCorrectAnswer(
+          parseInt(sessionStorage.getItem("currentTable")),
+          parseInt(sessionStorage.getItem("currentMultiplier")),
+          parseInt(userAnswer)
+        ),
+      };
+      qAArray.push(qAObject);
+      const stringifiedQAArray = JSON.stringify(qAArray);
+      sessionStorage.setItem("prevQuestionAnswersArray", stringifiedQAArray);
+      // reset user answer for the form
+      setUserAnswer("");
+      // set new question
+      let tablesArray = JSON.parse(sessionStorage.getItem("tablesInUse"));
+      if (sessionStorage.getItem("questionOrdering") === "mixed up") {
+        const shuffledTables = tablesArray.sort(() => 0.5 - Math.random());
+        sessionStorage.setItem("currentTable", shuffledTables.slice(0, 1));
+        const newMultplier = Math.floor(Math.random() * 12) + 1;
+        sessionStorage.setItem("currentMultiplier", newMultplier);
+      } else {
+        if (parseInt(sessionStorage.getItem("currentMultiplier")) < 12) {
+          const newMultiplier =
+            parseInt(sessionStorage.getItem("currentMultiplier")) + 1;
+          sessionStorage.setItem("currentMultiplier", newMultiplier);
+        } else {
+          const orderedTables = tablesArray.sort((a, b) => a - b);
+          var index = orderedTables.indexOf(
+            parseInt(sessionStorage.getItem("currentTable"))
+          );
+          sessionStorage.setItem("currentTable", orderedTables[index + 1]);
+          sessionStorage.setItem("currentMultiplier", 1);
+        }
+      }
+      // end game if necessary
+      if (
+        questionNumber() > parseInt(sessionStorage.getItem("numOfQuestions"))
+      ) {
+        sessionStorage.setItem("isFinished", true);
+      }
+    } else {
+      toast.error("Your answer must be between 1 and 144", {
+        id: "outOfRange",
+      });
     }
   };
 
@@ -171,8 +183,7 @@ const PracticeMode = () => {
       <Spacer />
       {typeof window !== "undefined" &&
         sessionStorage.getItem("numOfQuestions") === "no limit" &&
-        sessionStorage.getItem("isFinished") === "false" && 
-        (
+        sessionStorage.getItem("isFinished") === "false" && (
           <>
             <EndButton endGame={endGame} />
             <Spacer />
