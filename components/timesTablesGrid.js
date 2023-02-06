@@ -4,6 +4,21 @@ import tables from "../config/tables";
 const TimesTablesGrid = (props) => {
   const { selected, setSelected, orderedQuestions, setNumOfQuestions } = props;
 
+  const colours = [
+    "HotPink",
+    "Aqua",
+    "Coral",
+    "DarkOrange",
+    "Gold",
+    "khaki",
+    "Orchid",
+    "Plum",
+    "Silver",
+    "SkyBlue",
+    "Yellow",
+    "Violet",
+  ];
+
   const handleTableSelect = (table) => {
     if (selected.includes(table)) {
       const newSelected = selected.filter((s) => s !== table);
@@ -28,7 +43,9 @@ const TimesTablesGrid = (props) => {
           className={styles.table}
           onClick={() => handleTableSelect(table)}
           style={{
-            backgroundColor: selected.includes(table) ? "darkGrey" : "",
+            backgroundColor: selected.includes(table)
+              ? colours[Math.floor(Math.random() * colours.length)]
+              : "",
             color: selected.includes(table) ? "black" : "",
             fontSize: selected.includes(table) ? "2.5rem" : "2rem",
           }}

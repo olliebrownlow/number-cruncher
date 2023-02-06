@@ -1,8 +1,8 @@
 .answerGrid {
   display: grid;
   text-align: center;
-  grid-template-columns: 17% 30% 19% 19% 15%;
-  grid-template-rows: 2rem;
+  grid-template-columns: 28% 28% 28% 16%;
+  grid-template-rows: 0.7rem 2rem;
   width: var(--max-width);
   max-width: 95%;
 }

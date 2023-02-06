@@ -20,10 +20,10 @@ const AnswerGrid = () => {
 
   return (
     <div className={styles.answerGrid}>
-      {/* question number */}
-      <div className={styles.answerDisplay}>
-        {qAndA ? qAndA.id + "." : "--"}
-      </div>
+      <div>Ques</div>
+      <div>Ans</div>
+      <div>Your Ans</div>
+      <div></div>      
       {/* question */}
       <div className={styles.answerDisplay}>
         {qAndA ? `${qAndA.table} × ${qAndA.multiplier}` : "-- x --"}

@@ -4,6 +4,21 @@ import styles from "../componentStyles/TablesInPlayGrid.module.css";
 const TablesInPlayGrid = () => {
   const [tablesInPlay, setTablesInPlay] = useState([]);
 
+  const colours = [
+    "HotPink",
+    "Aqua",
+    "Coral",
+    "DarkOrange",
+    "Gold",
+    "khaki",
+    "Orchid",
+    "Plum",
+    "Silver",
+    "SkyBlue",
+    "Yellow",
+    "Violet",
+  ];
+
   useEffect(() => {
     if (typeof window !== "undefined") {
       const tablesInPlay = JSON.parse(sessionStorage.getItem("tablesInUse"));
@@ -22,7 +37,14 @@ const TablesInPlayGrid = () => {
       }}
     >
       {tablesInPlay.map((table) => (
-        <div className={styles.table} key={table}>
+        <div
+          className={styles.table}
+          key={table}
+          style={{
+            backgroundColor:
+              colours[Math.floor(Math.random() * colours.length)],
+          }}
+        >
           {table}
         </div>
       ))}
