@@ -1,4 +1,5 @@
 import styles from "../componentStyles/SelectNoOfQusGrid.module.css";
+import colours from "../config/colours";
 
 const SelectNoOfQusGrid = (props) => {
   const {
@@ -60,11 +61,11 @@ const SelectNoOfQusGrid = (props) => {
           -5
         </div>
         {orderedQuestions === "mixed up" ? (
-          <div className={styles.optionHeading}>
-            {numOfQuestions === "no limit" ? "\u221E" : numOfQuestions}
+          <div className={styles.numberOfQuestions}>
+            {numOfQuestions === "no limit" ? "--" : numOfQuestions}
           </div>
         ) : (
-          <div className={styles.optionHeading}>{selected.length * 12}</div>
+          <div className={styles.numberOfQuestions}>{selected.length * 12}</div>
         )}
         <div
           className={styles.number}
@@ -78,8 +79,8 @@ const SelectNoOfQusGrid = (props) => {
         <div
           className={styles.stretched}
           style={{
-            backgroundColor: numOfQuestions === "no limit" ? "darkGrey" : "",
-            color: numOfQuestions === "no limit" ? "black" : "",
+            backgroundColor: numOfQuestions === "no limit" && colours[Math.floor(Math.random() * colours.length)],
+            color: numOfQuestions === "no limit" && "black",
             fontSize: numOfQuestions === "no limit" ? "1.5rem" : "1rem",
             opacity: orderedQuestions === "in order" && "0.3",
           }}

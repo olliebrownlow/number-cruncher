@@ -1,23 +1,9 @@
 import { useState, useEffect } from "react";
 import styles from "../componentStyles/TablesInPlayGrid.module.css";
+import colours from "../config/colours";
 
 const TablesInPlayGrid = () => {
   const [tablesInPlay, setTablesInPlay] = useState([]);
-
-  const colours = [
-    "HotPink",
-    "Aqua",
-    "Coral",
-    "DarkOrange",
-    "Gold",
-    "khaki",
-    "Orchid",
-    "Plum",
-    "Silver",
-    "SkyBlue",
-    "Yellow",
-    "Violet",
-  ];
 
   useEffect(() => {
     if (typeof window !== "undefined") {

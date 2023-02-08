@@ -7,8 +7,15 @@
 
 .userInput {
   font-size: 2rem;
+  font-family: 'Cabin Sketch', cursive;
   padding: 4px 8px;
   margin-bottom: 1rem;
+  max-width: 12rem;
+  border: solid lightgrey;
+  border-width: 4px 3px 3px 4px;
+  border-radius:95% 4% 97% 5%/4% 94% 3% 95%;
+  outline: none;
+  background: transparent;
 }
 
 .submitButton {
@@ -16,6 +23,11 @@
   margin-bottom: 1rem;
   max-width: 8rem;
   padding: 4px 8px;
+  border: solid lightgrey;
+  border-width: 2px 3px 3px 2px;
+  border-radius:4% 94% 3% 95%/95% 4% 97% 5%;
+  background: transparent;
+  font-family: 'Cabin Sketch', cursive;
 }
 
 .gameEndOptionsGrid {
@@ -30,8 +42,23 @@
   justify-content: center;
 }
 
-.gameEndButton {
-  border: 1px solid white;
-  border-radius: 4px;
-  padding: 4px;
+.gameEndButtonOptions {
+  border: solid lightgrey;
+  border-width: 3px 3px 2px 2px;
+  border-radius:95% 4% 97% 5%/4% 94% 3% 95%;
+  padding-top: 4px;
+}
+
+.gameEndButtonReplay {
+  border: solid lightgrey;
+  border-width: 2px 3px 3px 2px;
+  border-radius:4% 94% 3% 95%/95% 4% 97% 5%;
+  padding-top: 4px;
+}
+
+.gameEndButtonResults {
+  border: solid lightgrey;
+  border-width: 3px 2px 2px 3px;
+  border-radius:95% 4% 97% 5%/4% 94% 3% 95%;
+  padding-top: 4px;
 }

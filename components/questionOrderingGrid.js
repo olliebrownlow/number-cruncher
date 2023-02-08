@@ -1,5 +1,6 @@
 import styles from "../componentStyles/QuestionOrderingGrid.module.css";
 import questionOrdering from "../config/questionOrdering";
+import colours from "../config/colours";
 
 const QuestionOrderingGrid = (props) => {
   const {
@@ -27,8 +28,10 @@ const QuestionOrderingGrid = (props) => {
           className={styles.ordering}
           onClick={() => handleOrdering(ordering)}
           style={{
-            backgroundColor: orderedQuestions === ordering ? "darkGrey" : "",
-            color: orderedQuestions === ordering ? "black" : "",
+            backgroundColor:
+              orderedQuestions === ordering &&
+              colours[Math.floor(Math.random() * colours.length)],
+            color: orderedQuestions === ordering && "black",
             fontSize: orderedQuestions === ordering ? "1.5rem" : "1rem",
           }}
         >

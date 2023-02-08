@@ -4,12 +4,12 @@ const ResultStatement = () => {
   return (
     <div className={styles.resultStatement}>
       You got{" "}
-      {typeof window !== "undefined" &&
-        sessionStorage.getItem("correctCounter")}{" "}
+      <span className={styles.enlarged}>{typeof window !== "undefined" &&
+        sessionStorage.getItem("correctCounter")}{" "}</span>
       out of{" "}
-      {typeof window !== "undefined" &&
+      <span className={styles.enlarged}>{typeof window !== "undefined" &&
         parseInt(sessionStorage.getItem("correctCounter")) +
-          parseInt(sessionStorage.getItem("errorCounter"))}{" "}
+          parseInt(sessionStorage.getItem("errorCounter"))}{" "}</span>
       questions right.
     </div>
   );

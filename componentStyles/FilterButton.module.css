@@ -1,6 +1,7 @@
 .filterButton {
-  border: 1px solid white;
-  border-radius: 4px;
+  border: solid lightgrey;
+  border-width: 3px 1px 2px 2px;
+  border-radius:95% 4% 97% 5%/4% 94% 23% 95%;
   padding: 6px;
   font-size: 0.9rem;
   text-align: center;

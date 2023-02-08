@@ -1,4 +1,11 @@
 .resultStatement {
   text-align: center;
   font-size: 1.5rem;
+  max-width: 95%;
+}
+
+.enlarged {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 500;
 }

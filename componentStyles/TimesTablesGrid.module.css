@@ -11,6 +11,7 @@
 }
 
 .table {
-  border: solid 1px darkgrey;
-  border-radius: 50%;
+  border: solid lightgrey;
+  border-width: 2px 1px 1px 2px;
+  border-radius:46% 55% 45% 54%/54% 45% 55% 46%;
 }

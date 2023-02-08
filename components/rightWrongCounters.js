@@ -15,9 +15,9 @@ const RightWrongCounters = (props) => {
         {getSessionItem("correctCounter")}
       </div>
       <div>
-        <button className={styles.reset} onClick={resetCounters}>
+        <div className={styles.reset} onClick={resetCounters}>
           restart
-        </button>
+        </div>
       </div>
       <div className={styles.errorCounter}>
         {getSessionItem("errorCounter")}

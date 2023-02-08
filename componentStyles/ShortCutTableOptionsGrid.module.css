@@ -11,7 +11,8 @@
 }
 
 .shortCutOption {
-  border: solid 1px darkgrey;
-  border-radius: 2px;
+  border: solid lightgrey;
+  border-width: 1px 2px 2px 2px;
+  border-radius:95% 4% 97% 5%/4% 94% 3% 95%;
   font-size: 1rem;
 }

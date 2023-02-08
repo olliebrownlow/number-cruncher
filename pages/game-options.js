@@ -96,7 +96,7 @@ const GameOptions = () => {
             numOfQuestionsReserved={numOfQuestionsReserved}
             selected={selected}
           />
-          <Spacer />{" "}
+          <Spacer />
         </>
       ) : (
         <UnderConstruction />

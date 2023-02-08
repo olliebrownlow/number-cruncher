@@ -10,11 +10,13 @@
 
 .correctCounter {
   font-size: 2rem;
-  color: green;
+  color: lime;
 }
 
 .reset {
-  border-radius: 2px;
+  border: solid lightgrey;
+  border-width: 2px 3px 3px 2px;
+  border-radius:95% 4% 97% 5%/4% 94% 3% 95%;
   padding: 2px 4px;
   vertical-align: middle;
 }

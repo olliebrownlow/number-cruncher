@@ -34,10 +34,10 @@ const QuestionDisplay = (props) => {
       ) : (
         <>
           {numOfQuestions === "no limit" ? (
-            <div>Qu {questionNumber}</div>
+            <div className={styles.questionNum}>Qu {questionNumber}</div>
           ) : (
-            <div>
-              Qu {questionNumber}/{numOfQuestions}
+            <div className={styles.questionNum}>
+              Qu {questionNumber} of {numOfQuestions}
             </div>
           )}
           <div className={styles.questionDisplay}>

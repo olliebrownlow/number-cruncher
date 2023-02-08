@@ -11,7 +11,7 @@ const AnswerForm = (props) => {
       JSON.parse(sessionStorage.getItem("isFinished")) ? (
         <div className={styles.gameEndOptionsGrid}>
           <div
-            className={styles.gameEndButton}
+            className={styles.gameEndButtonOptions}
             onClick={() =>
               router.push({
                 pathname: "/game-options",
@@ -21,11 +21,11 @@ const AnswerForm = (props) => {
           >
             options
           </div>
-          <div className={styles.gameEndButton} onClick={resetCounters}>
+          <div className={styles.gameEndButtonReplay} onClick={resetCounters}>
             replay
           </div>
           <div
-            className={styles.gameEndButton}
+            className={styles.gameEndButtonResults}
             onClick={() => router.push("/results")}
           >
             results
@@ -39,11 +39,8 @@ const AnswerForm = (props) => {
             type="number"
             id="answer"
             value={userAnswer}
-            required
             autoFocus={true}
             id="answer"
-            min="1"
-            max="144"
             onChange={handleChange}
           />
           <button className={styles.submitButton} onClick={submitAnswer}>

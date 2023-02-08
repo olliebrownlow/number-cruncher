@@ -11,6 +11,7 @@
 }
 
 .ordering {
-  border: solid 1px darkgrey;
-  border-radius: 2px;
+  border: solid lightgrey;
+  border-width: 2px 3px 2px 1px;
+  border-radius:4% 94% 3% 95%/95% 4% 97% 5%;
 }

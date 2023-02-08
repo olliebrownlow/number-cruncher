@@ -3,6 +3,7 @@ import HomeButton from "../components/homeButton";
 import PageHeading from "../components/pageHeading";
 import Spacer from "../components/spacer";
 import styles from "../styles/About.module.css";
+import colours from "../config/colours";
 
 const About = () => {
   return (
@@ -11,14 +12,26 @@ const About = () => {
       <HomeButton />
       <PageHeading heading={"About"} />
       <div className={styles.about}>
-        <h3>What..</h3>
+        <h3
+          style={{
+            color: colours[Math.floor(Math.random() * colours.length)],
+          }}
+        >
+          What..
+        </h3>
         <Spacer />
         <p>
           A series of times tables games developed using NextJs, a React
           framework, and deployed on Vercel.
         </p>
         <Spacer />
-        <h3>Who..</h3>
+        <h3
+          style={{
+            color: colours[Math.floor(Math.random() * colours.length)],
+          }}
+        >
+          Who..
+        </h3>
         <Spacer />
         <p>
           This is for all kids (and adults!) anywhere who struggle with, need
@@ -41,7 +54,13 @@ const About = () => {
           o.s.brownlow@gmail.com.
         </p>
         <Spacer />
-        <h3>Why..</h3>
+        <h3
+          style={{
+            color: colours[Math.floor(Math.random() * colours.length)],
+          }}
+        >
+          Why..
+        </h3>
         <Spacer />
         <div className={styles.list}>
           <ul>
