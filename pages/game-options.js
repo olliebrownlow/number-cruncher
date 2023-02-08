@@ -19,6 +19,10 @@ const GameOptions = () => {
   const [numOfQuestionsReserved, setNumOfQuestionsReserved] = useState("10");
 
   useEffect(() => {
+    if (typeof window !== "undefined") {
+      setGameType(sessionStorage.getItem("gameType"));
+    }
+
     if (
       typeof window !== "undefined" &&
       sessionStorage.getItem("tablesInUse") !== null
@@ -40,10 +44,6 @@ const GameOptions = () => {
     ) {
       setNumOfQuestions(sessionStorage.getItem("numOfQuestions"));
     }
-
-    if (typeof window !== "undefined") {
-      setGameType(sessionStorage.getItem("gameType"));
-    }
   }, []);
 
   const formattedGameTypeString = (gameType) => {
@@ -55,7 +55,7 @@ const GameOptions = () => {
       <BackButton />
       <HomeButton />
       <PageHeading heading={formattedGameTypeString(gameType) + " options"} />
-      {gameType === "practice-mode" ? (
+      {gameType === "practice-mode" && (
         <>
           <StartButton
             gameType={gameType}
@@ -98,9 +98,8 @@ const GameOptions = () => {
           />
           <Spacer />
         </>
-      ) : (
-        <UnderConstruction />
       )}
+      {gameType !== "practice-mode" && <UnderConstruction />}
     </>
   );
 };
