@@ -18,7 +18,6 @@ export default function App({ Component, pageProps }) {
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin />
         <link
           href="https://fonts.googleapis.com/css2?family=Cabin+Sketch&display=swap"
-          // href="https://fonts.googleapis.com/css2?family=Seaweed+Script&display=swap"
           rel="stylesheet"
         />
       </Head>
