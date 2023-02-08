@@ -19,8 +19,9 @@ const PageHeading = (props) => {
     <>
       <div className={styles.center}>
         <h1 className={styles.heading} onClick={() => handleClick()}>
-          {formatHeading().map((letter) => (
+          {formatHeading().map((letter, index) => (
             <span
+              key={index}
               style={{
                 color: colours[Math.floor(Math.random() * colours.length)],
               }}

@@ -4,8 +4,24 @@
   align-items: center;
   position: absolute;
   right: auto;
-  left: 0;
+  left: 20%;
   margin: 20px 28px;
-  font-size: 0.7rem;
+  font-size: 0.9rem;
   z-index: 1;
 }
+
+/* Mobile */
+@media (max-width: 700px) {
+  .backButton {
+    left: 5%;
+  }
+}
+
+/* Tablet and Smaller Desktop */
+@media (min-width: 701px) and (max-width: 1120px) {
+  .backButton {
+    left: 12.5%;
+  }
+}
+
+

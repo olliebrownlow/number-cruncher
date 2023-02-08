@@ -63,7 +63,7 @@ const GameOptions = () => {
             questionOrdering={orderedQuestions}
             numOfQuestions={numOfQuestions}
           />
-          <Spacer />
+          <Spacer size={"1.5rem"}/>
           <OptionHeading optionHeading={"tables"} />
           <TimesTablesGrid
             selected={selected}
@@ -77,7 +77,7 @@ const GameOptions = () => {
             orderedQuestions={orderedQuestions}
             setNumOfQuestions={setNumOfQuestions}
           />
-          <Spacer />
+          <Spacer size={"1.5rem"} />
           <OptionHeading optionHeading={"question order"} />
           <QuestionOrderingGrid
             setNumOfQuestions={setNumOfQuestions}
@@ -86,7 +86,7 @@ const GameOptions = () => {
             numOfQuestionsReserved={numOfQuestionsReserved}
             orderedQuestions={orderedQuestions}
           />
-          <Spacer />
+          <Spacer size={"1.5rem"} />
           <OptionHeading optionHeading={"number of questions"} />
           <SelectNoOfQusGrid
             setNumOfQuestions={setNumOfQuestions}
