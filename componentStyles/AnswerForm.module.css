@@ -16,6 +16,7 @@
   border-radius:95% 4% 97% 5%/4% 94% 3% 95%;
   outline: none;
   background: transparent;
+  color: white;
 }
 
 .submitButton {
@@ -28,6 +29,7 @@
   border-radius:4% 94% 3% 95%/95% 4% 97% 5%;
   background: transparent;
   font-family: 'Cabin Sketch', cursive;
+  color: white;
 }
 
 .gameEndOptionsGrid {
