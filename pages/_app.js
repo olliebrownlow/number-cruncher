@@ -6,6 +6,7 @@ import { Toaster } from "react-hot-toast";
 import { AlertTriangle } from "react-feather";
 import styles from "../styles/AppLayout.module.css";
 import chalkboard from "../public/chalkboard.jpg";
+import { Analytics } from "@vercel/analytics/react";
 
 export default function App({ Component, pageProps }) {
   return (
@@ -25,6 +26,7 @@ export default function App({ Component, pageProps }) {
       <main className={styles.main}>
         <ErrorBoundary>
           <Component {...pageProps} />
+          <Analytics />
         </ErrorBoundary>
         <div className={styles.bgWrap}>
           <Image
