@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Image from "next/image";
 import "../styles/globals.css";
+import ErrorBoundary from "../components/error-boundary";
 import { Toaster } from "react-hot-toast";
 import { AlertTriangle } from "react-feather";
 import styles from "../styles/AppLayout.module.css";
@@ -22,7 +23,9 @@ export default function App({ Component, pageProps }) {
         />
       </Head>
       <main className={styles.main}>
-        <Component {...pageProps} />
+        <ErrorBoundary>
+          <Component {...pageProps} />
+        </ErrorBoundary>
         <div className={styles.bgWrap}>
           <Image
             alt="chalkboard"
