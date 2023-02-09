@@ -12,6 +12,18 @@ const About = () => {
       <HomeButton />
       <PageHeading heading={"About"} />
       <div className={styles.about}>
+      <h3
+          style={{
+            color: colours[Math.floor(Math.random() * colours.length)],
+          }}
+        >
+          Quick dedication
+        </h3>
+        <Spacer />
+        <p>
+          For my beautiful daughters, Gabriela and Clarice.
+        </p>
+        <Spacer />
         <h3
           style={{
             color: colours[Math.floor(Math.random() * colours.length)],
