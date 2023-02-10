@@ -10,11 +10,15 @@
   text-transform: capitalize;
   text-align: center;
   max-width: 95%;
+  font-size: 4rem;
 }
 
 /* Mobile */
 @media (max-width: 700px) {
   .center {
     padding: 5rem 0 2rem;
+  }
+  .heading {
+    font-size: 2.5rem;
   }
 } 

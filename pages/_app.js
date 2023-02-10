@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import "../styles/globals.css";
@@ -9,6 +10,12 @@ import chalkboard from "../public/chalkboard.jpg";
 import { Analytics } from "@vercel/analytics/react";
 
 export default function App({ Component, pageProps }) {
+  useEffect(() => {
+    if (localStorage.getItem("achCorrectAnswers") === null) {
+      localStorage.setItem("achCorrectAnswers", 0);
+    }
+  }, []);
+
   return (
     <>
       <Head>

@@ -84,12 +84,21 @@ const PracticeMode = () => {
       setReRender(reRender + 1);
       // check answer and increment counters
       if (
-        parseInt(userAnswer) ===
-        parseInt(sessionStorage.getItem("currentTable")) *
-          parseInt(sessionStorage.getItem("currentMultiplier"))
+        isCorrectAnswer(
+          parseInt(sessionStorage.getItem("currentTable")),
+          parseInt(sessionStorage.getItem("currentMultiplier")),
+          parseInt(userAnswer)
+        )
       ) {
+        // local count
         const currentCount = sessionStorage.getItem("correctCounter");
         sessionStorage.setItem("correctCounter", parseInt(currentCount) + 1);
+        // global count
+        const currentGlobalCount = localStorage.getItem("achCorrectAnswers");
+        localStorage.setItem(
+          "achCorrectAnswers",
+          parseInt(currentGlobalCount) + 1
+        );
       } else {
         const currentCount = sessionStorage.getItem("errorCounter");
         sessionStorage.setItem("errorCounter", parseInt(currentCount) + 1);
