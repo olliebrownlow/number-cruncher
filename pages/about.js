@@ -63,7 +63,7 @@ const About = () => {
           If you have the skills on this front and would be interested in
           getting involved, or if you'd just like to leave any positive feedback
           or constructive suggestions, the email address to contact is
-          o.s.brownlow@gmail.com.
+          numbercruncher2023@gmail.com.
         </p>
         <Spacer />
         <h3

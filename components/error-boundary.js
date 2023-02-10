@@ -72,7 +72,7 @@ class ErrorBoundaryWithRouter extends React.Component {
               <div className={styles.attempts}>
                 if this error persists, please contact
                 <br />
-                o.s.brownlow@gmail.com
+                numbercruncher2023@gmail.com
               </div>
             </>
           ) : (
