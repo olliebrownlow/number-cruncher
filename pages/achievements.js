@@ -4,6 +4,7 @@ import HomeButton from "../components/homeButton";
 import PageHeading from "../components/pageHeading";
 import SubHeading from "../components/subHeading";
 import Spacer from "../components/spacer";
+import ResetAchievementButton from "../components/resetAchievementButton";
 import "react-step-progress-bar/styles.css";
 import { ProgressBar, Step } from "react-step-progress-bar";
 import styles from "../styles/Achievements.module.css";
@@ -11,6 +12,7 @@ import styles from "../styles/Achievements.module.css";
 const Achievements = () => {
   const [correctAnswers, setCorrectAnswers] = useState(0);
   const [currentGoal, setCurrentGoal] = useState(50);
+  const [refresh, setRefresh] = useState(0);
 
   const goals = [10, 25, 100, 250, 1000, 2500, 10000];
 
@@ -21,13 +23,13 @@ const Achievements = () => {
     setCorrectAnswers(numCorrectAnswers);
 
     const reducer = (numCorrectAnswers) => {
-      return function (element, index, array) {
+      return function (element) {
         return element > numCorrectAnswers;
       };
     };
     const reducedGoals = goals.filter(reducer(numCorrectAnswers));
     setCurrentGoal(reducedGoals[0]);
-  }, []);
+  }, [refresh]);
 
   const getPercent = () => {
     return (correctAnswers / currentGoal) * 100;
@@ -58,6 +60,12 @@ const Achievements = () => {
           </Step>
         </ProgressBar>
       </div>
+      <Spacer />
+      <ResetAchievementButton
+        achType={"achCorrectAnswers"}
+        refresh={refresh}
+        setRefresh={setRefresh}
+      />
       <Spacer />
     </>
   );

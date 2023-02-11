@@ -1,0 +1,11 @@
+.resetButton {
+  border: solid lightgrey;
+  border-width: 4px 3px 3px 4px;
+  border-radius:95% 4% 97% 5%/4% 94% 3% 95%;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  padding: 0.5rem;
+  margin-top: 1rem;
+  white-space: nowrap;
+  text-align: center;
+}
