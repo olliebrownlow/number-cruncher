@@ -1,0 +1,41 @@
+.container {
+  width: 75%;
+}
+
+.firstStep {
+  width: 15px;
+  height: 15px;
+  background-color: #90EE90;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.indexedStep {
+  color: white;
+  width: 20px;
+  height: 20px;
+  font-size: 0.9rem;
+  background-color: rgba(211, 211, 211, 1);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.label {
+  position: absolute;
+  bottom: 22px;
+  top: auto;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.standing {
+  position: absolute;
+  bottom: 20px;
+  top: auto;
+  font-size: 1.75rem;
+  font-weight: 700;
+}

@@ -1,0 +1,17 @@
+.left {
+  display: flex;
+  align-self: flex-start;
+  margin: 0 5%;
+  width: 100%;
+}
+
+.heading {
+  font-size: 2rem;
+}
+
+/* Mobile */
+@media (max-width: 700px) {
+  .heading {
+    font-size: 1.2rem;
+  }
+} 
