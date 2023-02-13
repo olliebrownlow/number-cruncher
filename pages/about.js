@@ -12,7 +12,7 @@ const About = () => {
       <HomeButton />
       <PageHeading heading={"About"} />
       <div className={styles.about}>
-      <h3
+        <h3
           style={{
             color: colours[Math.floor(Math.random() * colours.length)],
           }}
@@ -21,7 +21,8 @@ const About = () => {
         </h3>
         <Spacer />
         <p>
-          For my beautiful daughters, Gabriela and Clarice.
+          For my beautiful daughters, Gabriela and Clarice, and neices, Seren,
+          Nina and Faerydae.
         </p>
         <Spacer />
         <h3
@@ -51,18 +52,18 @@ const About = () => {
         </p>
         <Spacer />
         <p>
-          It has been developed mainly on a smart phone by a lone programmer and
-          parent, in their spare time and with no technical help beyond Google
-          and the documentation available for the tech stack in use.
+          I have developed this mainly on a smart phone, in my spare time and
+          with no technical help beyond Google and the documentation available
+          for the tech stack in use. It looks and works best on your phone.
         </p>
         <Spacer />
         <p>
-          Suggestions on game play, and other ideas, offered by the developer's
-          offspring have been gratefully received and very often incorporated,
-          but clearly, the greatest need here is to make the game look better.
-          If you have the skills on this front and would be interested in
-          getting involved, or if you'd just like to leave any positive feedback
-          or constructive suggestions, the email address to contact is
+          Suggestions on game play, and other ideas, offered by my children and
+          neices have been gratefully received and very often incorporated, but
+          clearly, the greatest need here is to make the game look better. If
+          you have the skills on this front and would be interested in getting
+          involved, or if you'd just like to leave any positive feedback or
+          constructive suggestions, the email address to contact is
           numbercruncher2023@gmail.com.
         </p>
         <Spacer />
@@ -98,14 +99,15 @@ const About = () => {
           stored in the browser. To wipe this info, you would need to either
           delete all browser data, or browser data for just this site in
           particular, normally achievable through the browser settings options.
+          Again, there are often reset buttons on the screens.
         </p>
         <Spacer />
         <p>
-          A cosequence of the "no sign in" decision is that if more than one
-          person on any particular device wishes to play the games and keep
-          their progress and scores individually, this would only be possible if
-          the players used separate browsers, e.g., one could use chrome while
-          another uses firefox and a third uses edge or safari etc.
+          Note that a consequence of the "no sign in" decision is that if more
+          than one person on a particular device wishes to play the games and
+          keep their progress and scores individually, this would only be
+          possible if the players used separate browsers, e.g., one could use
+          chrome while another uses firefox and a third uses edge or safari etc.
         </p>
         <Spacer />
       </div>
