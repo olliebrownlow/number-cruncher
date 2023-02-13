@@ -6,7 +6,7 @@
   width: 15px;
   height: 15px;
   background-color: #90EE90;
-  border-radius: 50%;
+  border-radius: 40% 60% 52% 70%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -18,7 +18,7 @@
   height: 20px;
   font-size: 0.9rem;
   background-color: rgba(211, 211, 211, 1);
-  border-radius: 50%;
+  border-radius: 40% 60% 52% 70%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -38,4 +38,43 @@
   top: auto;
   font-size: 1.75rem;
   font-weight: 700;
+}
+
+.awardGrid {
+  display: grid;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  grid-template-rows: 3.5rem;
+  grid-template-columns: 10% 10% 15% 15% 20% 20%;
+  column-gap: 8px;
+  width: 90%;
+}
+
+.award1 {
+  fill: silver;
+  color: silver;
+}
+
+.award2 {
+  fill: goldenrod;
+  color: goldenrod
+}
+
+.award3 {
+  fill: gold;
+  color: gold;
+}
+
+.complete {
+  font-size: 3rem;
+  font-weight: 700;
+}
+
+.bgWrap {
+  position: fixed;
+  height: 50%;
+  width: 100%;
+  overflow: hidden;
+  z-index: 0;
 }

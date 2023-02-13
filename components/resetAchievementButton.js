@@ -37,8 +37,8 @@ const ResetAchievementButton = (props) => {
           closeModal={closeModal}
           windowOnClick={windowOnClick}
           handleReset={resetAchievement}
-          titleText={"reset your correct answers"}
-          subText={" your progress and any trophies will be lost!"}
+          titleText={"reset your correct answers score"}
+          subText={" Your progress and any trophies will be lost!"}
         />
       )}
     </>

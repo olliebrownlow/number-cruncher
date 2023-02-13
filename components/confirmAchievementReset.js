@@ -1,7 +1,6 @@
 import ReactDOM from "react-dom";
-import { Info } from "react-feather";
 import Image from "next/image";
-import Spacer from "../components/spacer"
+import Spacer from "../components/spacer";
 import chalkboard from "../public/modalChalkboard2.jpg";
 import styles from "../componentStyles/ConfirmAchievementReset.module.css";
 
@@ -18,11 +17,9 @@ const ConfirmReset = (props) => {
             quality={100}
             fill
             priority
-            // sizes="100%"
-            // style={{ objectFit: "cover" }}
           />
         </div>
-        <Spacer size={"0.25rem"}/>
+        <Spacer size={"0.25rem"} />
         <div className={styles.exclamationMark}>!</div>
         <div className={styles.text}>
           Are you sure you want to {titleText}?{" "}
@@ -35,12 +32,7 @@ const ConfirmReset = (props) => {
             Confirm
           </button>
         </div>
-        {subText && (
-          <div className={styles.subText}>
-            <Info size={14} />
-            {subText}
-          </div>
-        )}
+        {subText && <div className={styles.subText}>{subText}</div>}
       </div>
     </aside>,
     document.body

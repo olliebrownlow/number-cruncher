@@ -3,7 +3,7 @@ import styles from "../componentStyles/SubHeading.module.css";
 import colours from "../config/colours";
 
 const SubHeading = (props) => {
-  const { subheading } = props;
+  const { subheading, position } = props;
   const [refresh, setRefresh] = useState(0);
 
   const handleClick = () => {
@@ -12,7 +12,7 @@ const SubHeading = (props) => {
 
   return (
     <>
-      <div className={styles.left}>
+      <div className={position === "left" ? styles.left : styles.center}>
         <h1
           className={styles.heading}
           onClick={() => handleClick()}

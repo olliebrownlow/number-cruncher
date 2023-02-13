@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import Head from "next/head";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import "../styles/globals.css";
 import ErrorBoundary from "../components/error-boundary";
 import { Toaster } from "react-hot-toast";
@@ -10,10 +11,13 @@ import chalkboard from "../public/chalkboard.jpg";
 import { Analytics } from "@vercel/analytics/react";
 
 export default function App({ Component, pageProps }) {
+  const router = useRouter();
+
   useEffect(() => {
     if (localStorage.getItem("achCorrectAnswers") === null) {
       localStorage.setItem("achCorrectAnswers", 0);
     }
+    router.prefetch("/achievements");
   }, []);
 
   return (
@@ -47,7 +51,6 @@ export default function App({ Component, pageProps }) {
           />
         </div>
       </main>
-
       <Toaster
         toastOptions={{
           style: {

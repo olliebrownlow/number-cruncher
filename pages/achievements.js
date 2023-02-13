@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import BackButton from "../components/backButton";
 import HomeButton from "../components/homeButton";
 import PageHeading from "../components/pageHeading";
@@ -7,6 +8,14 @@ import Spacer from "../components/spacer";
 import ResetAchievementButton from "../components/resetAchievementButton";
 import "react-step-progress-bar/styles.css";
 import { ProgressBar, Step } from "react-step-progress-bar";
+import { SlBadge } from "react-icons/sl";
+import { FaAward, FaMedal } from "react-icons/fa";
+import { BiMedal } from "react-icons/bi";
+import { BsTrophy } from "react-icons/bs";
+import { GiTrophy } from "react-icons/gi";
+import { AiOutlineLock } from "react-icons/ai";
+import { GiDiamondTrophy } from "react-icons/gi";
+import cardChalkboard from "../public/cardChalkboard.jpg";
 import styles from "../styles/Achievements.module.css";
 
 const Achievements = () => {
@@ -14,7 +23,8 @@ const Achievements = () => {
   const [currentGoal, setCurrentGoal] = useState(50);
   const [refresh, setRefresh] = useState(0);
 
-  const goals = [10, 25, 100, 250, 1000, 2500, 10000];
+  const goals = [10, 20, 50, 100, 200, 500, 1000];
+  // const goals = [1, 2, 3, 4, 5, 6, 7];
 
   useEffect(() => {
     const numCorrectAnswers = parseInt(
@@ -40,26 +50,191 @@ const Achievements = () => {
       <BackButton />
       <HomeButton />
       <PageHeading heading={"Achievements"} />
-      <SubHeading subheading={"All-time correct answers:"} />
-      <Spacer size={"2rem"} />
-      <div className={styles.container}>
-        <ProgressBar
-          filledBackground="linear-gradient(to right, #90EE90, #006400)"
-          percent={getPercent()}
-        >
-          <Step>{() => <div className={styles.firstStep}></div>}</Step>
-          <Step>
-            {() => <div className={styles.standing}>{correctAnswers}</div>}
-          </Step>
-          <Step>
-            {() => (
-              <div className={styles.indexedStep}>
-                <div className={styles.label}>{currentGoal}</div>
-              </div>
-            )}
-          </Step>
-        </ProgressBar>
+      <SubHeading subheading={"All-time correct answers"} position={"center"} />
+      <Spacer size={"0.5rem"} />
+      <SubHeading subheading={"Your awards"} position={"left"} />
+      <Spacer size={"0.5rem"} />
+      {/* <div className={styles.bgWrap}>
+        <Image
+          alt="chalkboard"
+          src={cardChalkboard}
+          quality={100}
+          fill
+          priority
+        />
+      </div> */}
+      <div className={styles.awardGrid}>
+        {currentGoal <= goals[0] ? (
+          <div
+            className={styles.award1}
+            style={{
+              fontSize: "1.5rem",
+            }}
+          >
+            <AiOutlineLock />
+          </div>
+        ) : (
+          <div>
+            <SlBadge
+              className={styles.award1}
+              style={{
+                fontSize: "1.5rem",
+              }}
+            />
+            <div>{goals[0]}</div>
+          </div>
+        )}
+        {currentGoal <= goals[1] ? (
+          <div
+            className={styles.award1}
+            style={{
+              fontSize: "1.75rem",
+            }}
+          >
+            <AiOutlineLock />
+          </div>
+        ) : (
+          <div>
+            <FaAward
+              className={styles.award1}
+              style={{
+                fontSize: "1.75rem",
+              }}
+            />
+            <div>{goals[1]}</div>
+          </div>
+        )}
+        {currentGoal <= goals[2] ? (
+          <div
+            className={styles.award2}
+            style={{
+              fontSize: "2rem",
+            }}
+          >
+            <AiOutlineLock />
+          </div>
+        ) : (
+          <div>
+            <BiMedal
+              className={styles.award2}
+              style={{
+                fontSize: "2.4rem",
+              }}
+            />
+            <div>{goals[2]}</div>
+          </div>
+        )}
+        {currentGoal <= goals[3] ? (
+          <div
+            className={styles.award2}
+            style={{
+              fontSize: "2.25rem",
+            }}
+          >
+            <AiOutlineLock />
+          </div>
+        ) : (
+          <div>
+            <FaMedal
+              className={styles.award2}
+              style={{
+                fontSize: "2.5rem",
+              }}
+            />
+            <div>{goals[3]}</div>
+          </div>
+        )}
+        {currentGoal <= goals[4] ? (
+          <div
+            className={styles.award3}
+            style={{
+              fontSize: "2.5rem",
+            }}
+          >
+            <AiOutlineLock />
+          </div>
+        ) : (
+          <div>
+            <BsTrophy
+              className={styles.award3}
+              style={{
+                fontSize: "3rem",
+              }}
+            />
+            <div>{goals[4]}</div>
+          </div>
+        )}
+        {currentGoal <= goals[5] ? (
+          <div
+            className={styles.award3}
+            style={{
+              fontSize: "2.75rem",
+            }}
+          >
+            <AiOutlineLock />
+          </div>
+        ) : (
+          <div>
+            <GiTrophy
+              className={styles.award3}
+              style={{
+                fontSize: "3.75rem",
+              }}
+            />
+            <div>{goals[5]}</div>
+          </div>
+        )}
       </div>
+      <Spacer size={"1rem"} />
+      {currentGoal <= goals[6] ? (
+        <div
+          className={styles.award3}
+          style={{
+            fontSize: "6.5rem",
+          }}
+        >
+          <AiOutlineLock />
+        </div>
+      ) : (
+        <>
+          <GiDiamondTrophy
+            className={styles.award3}
+            style={{
+              fontSize: "6.5rem",
+            }}
+          />
+          <div>{goals[6]}</div>
+        </>
+      )}
+      {correctAnswers >= goals[6] ? (
+        <>
+          <Spacer />
+
+          <div className={styles.complete}>{correctAnswers}</div>
+        </>
+      ) : (
+        <>
+          <Spacer size={"2rem"} />
+          <div className={styles.container}>
+            <ProgressBar
+              filledBackground="linear-gradient(to right, #90EE90, #006400)"
+              percent={getPercent()}
+            >
+              <Step>{() => <div className={styles.firstStep}></div>}</Step>
+              <Step>
+                {() => <div className={styles.standing}>{correctAnswers}</div>}
+              </Step>
+              <Step>
+                {() => (
+                  <div className={styles.indexedStep}>
+                    <div className={styles.label}>{currentGoal}</div>
+                  </div>
+                )}
+              </Step>
+            </ProgressBar>
+          </div>
+        </>
+      )}
       <Spacer />
       <ResetAchievementButton
         achType={"achCorrectAnswers"}

@@ -5,6 +5,12 @@
   width: 100%;
 }
 
+.center {
+  text-align: center;
+  margin: 0 5%;
+  width: 100%;
+}
+
 .heading {
   font-size: 2rem;
 }
