@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import "../styles/globals.css";
 import ErrorBoundary from "../components/error-boundary";
 import { Toaster } from "react-hot-toast";
-import { AlertTriangle } from "react-feather";
+import { AlertTriangle, Award } from "react-feather";
 import styles from "../styles/AppLayout.module.css";
 import chalkboard from "../public/chalkboard.jpg";
 import { Analytics } from "@vercel/analytics/react";
@@ -55,10 +55,18 @@ export default function App({ Component, pageProps }) {
         toastOptions={{
           style: {
             textAlign: "center",
-            fontSize: "0.9rem",
+            fontSize: "1.5rem",
           },
           error: {
-            icon: <AlertTriangle color="red" size="30px" />,
+            icon: <AlertTriangle color="red" size="50px" />,
+          },
+          success: {
+            icon: <Award color="gold" size="190px" />,
+            style: {
+              background: "dimgrey",
+              color: "white",
+            },
+            duration: 7000,
           },
         }}
       />

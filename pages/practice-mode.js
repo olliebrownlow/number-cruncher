@@ -10,6 +10,7 @@ import AnswerForm from "../components/answerForm";
 import AnswerGrid from "../components/answerGrid";
 import EndButton from "../components/endButton";
 import TablesInPlayGrid from "../components/tablesInPlayGrid";
+import correctAnswerGoals from "../config/correctAnswerGoals";
 
 const PracticeMode = () => {
   const [userAnswer, setUserAnswer] = useState("");
@@ -94,11 +95,24 @@ const PracticeMode = () => {
         const currentCount = sessionStorage.getItem("correctCounter");
         sessionStorage.setItem("correctCounter", parseInt(currentCount) + 1);
         // global count
-        const currentGlobalCount = localStorage.getItem("achCorrectAnswers");
-        localStorage.setItem(
-          "achCorrectAnswers",
-          parseInt(currentGlobalCount) + 1
+        const currentGlobalCount = parseInt(
+          localStorage.getItem("achCorrectAnswers")
         );
+        localStorage.setItem("achCorrectAnswers", currentGlobalCount + 1);
+        // check for new award
+        if (correctAnswerGoals.includes(currentGlobalCount + 1)) {
+          const index = correctAnswerGoals.indexOf(currentGlobalCount + 1);
+          toast.success(
+            `NEW AWARD!!!\nYou've got a new award for getting ${
+              currentGlobalCount + 1
+            } questions correct! \n Next target\n${
+              correctAnswerGoals[index + 1]
+            }`,
+            {
+              id: "correctAnswersAchievement",
+            }
+          );
+        }
       } else {
         const currentCount = sessionStorage.getItem("errorCounter");
         sessionStorage.setItem("errorCounter", parseInt(currentCount) + 1);

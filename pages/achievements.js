@@ -6,6 +6,7 @@ import PageHeading from "../components/pageHeading";
 import SubHeading from "../components/subHeading";
 import Spacer from "../components/spacer";
 import ResetAchievementButton from "../components/resetAchievementButton";
+import correctAnswerGoals from "../config/correctAnswerGoals";
 import "react-step-progress-bar/styles.css";
 import { ProgressBar, Step } from "react-step-progress-bar";
 import { SlBadge } from "react-icons/sl";
@@ -23,9 +24,6 @@ const Achievements = () => {
   const [currentGoal, setCurrentGoal] = useState(50);
   const [refresh, setRefresh] = useState(0);
 
-  const goals = [10, 20, 50, 100, 200, 500, 1000];
-  // const goals = [1, 2, 3, 4, 5, 6, 7];
-
   useEffect(() => {
     const numCorrectAnswers = parseInt(
       localStorage.getItem("achCorrectAnswers")
@@ -37,7 +35,7 @@ const Achievements = () => {
         return element > numCorrectAnswers;
       };
     };
-    const reducedGoals = goals.filter(reducer(numCorrectAnswers));
+    const reducedGoals = correctAnswerGoals.filter(reducer(numCorrectAnswers));
     setCurrentGoal(reducedGoals[0]);
   }, [refresh]);
 
@@ -64,7 +62,7 @@ const Achievements = () => {
         />
       </div> */}
       <div className={styles.awardGrid}>
-        {currentGoal <= goals[0] ? (
+        {currentGoal <= correctAnswerGoals[0] ? (
           <div
             className={styles.award1}
             style={{
@@ -81,10 +79,10 @@ const Achievements = () => {
                 fontSize: "1.5rem",
               }}
             />
-            <div>{goals[0]}</div>
+            <div>{correctAnswerGoals[0]}</div>
           </div>
         )}
-        {currentGoal <= goals[1] ? (
+        {currentGoal <= correctAnswerGoals[1] ? (
           <div
             className={styles.award1}
             style={{
@@ -101,10 +99,10 @@ const Achievements = () => {
                 fontSize: "1.75rem",
               }}
             />
-            <div>{goals[1]}</div>
+            <div>{correctAnswerGoals[1]}</div>
           </div>
         )}
-        {currentGoal <= goals[2] ? (
+        {currentGoal <= correctAnswerGoals[2] ? (
           <div
             className={styles.award2}
             style={{
@@ -121,10 +119,10 @@ const Achievements = () => {
                 fontSize: "2.4rem",
               }}
             />
-            <div>{goals[2]}</div>
+            <div>{correctAnswerGoals[2]}</div>
           </div>
         )}
-        {currentGoal <= goals[3] ? (
+        {currentGoal <= correctAnswerGoals[3] ? (
           <div
             className={styles.award2}
             style={{
@@ -141,10 +139,10 @@ const Achievements = () => {
                 fontSize: "2.5rem",
               }}
             />
-            <div>{goals[3]}</div>
+            <div>{correctAnswerGoals[3]}</div>
           </div>
         )}
-        {currentGoal <= goals[4] ? (
+        {currentGoal <= correctAnswerGoals[4] ? (
           <div
             className={styles.award3}
             style={{
@@ -161,10 +159,10 @@ const Achievements = () => {
                 fontSize: "3rem",
               }}
             />
-            <div>{goals[4]}</div>
+            <div>{correctAnswerGoals[4]}</div>
           </div>
         )}
-        {currentGoal <= goals[5] ? (
+        {currentGoal <= correctAnswerGoals[5] ? (
           <div
             className={styles.award3}
             style={{
@@ -181,12 +179,12 @@ const Achievements = () => {
                 fontSize: "3.75rem",
               }}
             />
-            <div>{goals[5]}</div>
+            <div>{correctAnswerGoals[5]}</div>
           </div>
         )}
       </div>
       <Spacer size={"1rem"} />
-      {currentGoal <= goals[6] ? (
+      {currentGoal <= correctAnswerGoals[6] ? (
         <div
           className={styles.award3}
           style={{
@@ -203,10 +201,10 @@ const Achievements = () => {
               fontSize: "6.5rem",
             }}
           />
-          <div>{goals[6]}</div>
+          <div>{correctAnswerGoals[6]}</div>
         </>
       )}
-      {correctAnswers >= goals[6] ? (
+      {correctAnswers >= correctAnswerGoals[6] ? (
         <>
           <Spacer />
 
