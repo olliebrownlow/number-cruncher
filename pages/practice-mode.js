@@ -73,6 +73,17 @@ const PracticeMode = () => {
     }
     return "--";
   };
+  
+  const getToastMessage = (index, currentGlobalCount) => {
+    if (correctAnswerGoals[index + 1]) {
+      return `NEW AWARD!!!\nClaim your award for getting ${
+        currentGlobalCount + 1
+      } questions correct! \n Next target\n${correctAnswerGoals[index + 1]}`;
+    }
+    return `NEW AWARD!!!\nClaim your award for getting ${
+      currentGlobalCount + 1
+    } questions correct!`;
+  };
 
   const submitAnswer = (e) => {
     e.preventDefault();
@@ -102,16 +113,17 @@ const PracticeMode = () => {
         // check for new award
         if (correctAnswerGoals.includes(currentGlobalCount + 1)) {
           const index = correctAnswerGoals.indexOf(currentGlobalCount + 1);
-          toast.success(
-            `NEW AWARD!!!\nYou've got a new award for getting ${
-              currentGlobalCount + 1
-            } questions correct! \n Next target\n${
-              correctAnswerGoals[index + 1]
-            }`,
-            {
-              id: "correctAnswersAchievement",
-            }
+          const isATCAClaimedArray = JSON.parse(
+            localStorage.getItem("isATCAClaimed")
           );
+          isATCAClaimedArray[index] = 0;
+          localStorage.setItem(
+            "isATCAClaimed",
+            JSON.stringify(isATCAClaimedArray)
+          );
+          toast.success(getToastMessage(index, currentGlobalCount), {
+            id: "correctAnswersAchievement",
+          });
         }
       } else {
         const currentCount = sessionStorage.getItem("errorCounter");

@@ -17,6 +17,10 @@ export default function App({ Component, pageProps }) {
     if (localStorage.getItem("achCorrectAnswers") === null) {
       localStorage.setItem("achCorrectAnswers", 0);
     }
+    if (localStorage.getItem("isATCAClaimed") === null) {
+      const isATCAClaimed = [false, false, false, false, false, false, false];
+      localStorage.setItem("isATCAClaimed", JSON.stringify(isATCAClaimed));
+    }
     router.prefetch("/achievements");
   }, []);
 
@@ -66,7 +70,7 @@ export default function App({ Component, pageProps }) {
               background: "dimgrey",
               color: "white",
             },
-            duration: 7000,
+            duration: 6000,
           },
         }}
       />

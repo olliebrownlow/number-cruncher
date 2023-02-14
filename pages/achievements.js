@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import Image from "next/image";
 import BackButton from "../components/backButton";
 import HomeButton from "../components/homeButton";
 import PageHeading from "../components/pageHeading";
@@ -16,13 +15,13 @@ import { BsTrophy } from "react-icons/bs";
 import { GiTrophy } from "react-icons/gi";
 import { AiOutlineLock } from "react-icons/ai";
 import { GiDiamondTrophy } from "react-icons/gi";
-import cardChalkboard from "../public/cardChalkboard.jpg";
 import styles from "../styles/Achievements.module.css";
 
 const Achievements = () => {
   const [correctAnswers, setCorrectAnswers] = useState(0);
   const [currentGoal, setCurrentGoal] = useState(50);
   const [refresh, setRefresh] = useState(0);
+  const [aTCAClaimed, setATCAClaimed] = useState([]);
 
   useEffect(() => {
     const numCorrectAnswers = parseInt(
@@ -37,10 +36,21 @@ const Achievements = () => {
     };
     const reducedGoals = correctAnswerGoals.filter(reducer(numCorrectAnswers));
     setCurrentGoal(reducedGoals[0]);
+    const isATCAClaimed = JSON.parse(localStorage.getItem("isATCAClaimed"));
+    setATCAClaimed(isATCAClaimed);
   }, [refresh]);
 
   const getPercent = () => {
     return (correctAnswers / currentGoal) * 100;
+  };
+
+  const claimAward = (index) => {
+    const isATCAClaimedArray = JSON.parse(
+      localStorage.getItem("isATCAClaimed")
+    );
+    isATCAClaimedArray[index] = true;
+    localStorage.setItem("isATCAClaimed", JSON.stringify(isATCAClaimedArray));
+    setATCAClaimed(isATCAClaimedArray);
   };
 
   return (
@@ -52,15 +62,6 @@ const Achievements = () => {
       <Spacer size={"0.5rem"} />
       <SubHeading subheading={"Your awards"} position={"left"} />
       <Spacer size={"0.5rem"} />
-      {/* <div className={styles.bgWrap}>
-        <Image
-          alt="chalkboard"
-          src={cardChalkboard}
-          quality={100}
-          fill
-          priority
-        />
-      </div> */}
       <div className={styles.awardGrid}>
         {currentGoal <= correctAnswerGoals[0] ? (
           <div
@@ -70,6 +71,17 @@ const Achievements = () => {
             }}
           >
             <AiOutlineLock />
+          </div>
+        ) : aTCAClaimed[0] === 0 ? (
+          <div
+            className={styles.award1}
+            style={{
+              fontSize: "1.5rem",
+            }}
+            onClick={() => claimAward(0)}
+          >
+            <AiOutlineLock />
+            <div className={styles.claim}>claim</div>
           </div>
         ) : (
           <div>
@@ -91,6 +103,17 @@ const Achievements = () => {
           >
             <AiOutlineLock />
           </div>
+        ) : aTCAClaimed[1] === 0 ? (
+          <div
+            className={styles.award1}
+            style={{
+              fontSize: "1.75rem",
+            }}
+            onClick={() => claimAward(1)}
+          >
+            <AiOutlineLock />
+            <div className={styles.claim}>claim</div>
+          </div>
         ) : (
           <div>
             <FaAward
@@ -110,6 +133,17 @@ const Achievements = () => {
             }}
           >
             <AiOutlineLock />
+          </div>
+        ) : aTCAClaimed[2] === 0 ? (
+          <div
+            className={styles.award2}
+            style={{
+              fontSize: "2rem",
+            }}
+            onClick={() => claimAward(2)}
+          >
+            <AiOutlineLock />
+            <div className={styles.claim}>claim</div>
           </div>
         ) : (
           <div>
@@ -131,6 +165,17 @@ const Achievements = () => {
           >
             <AiOutlineLock />
           </div>
+        ) : aTCAClaimed[3] === 0 ? (
+          <div
+            className={styles.award2}
+            style={{
+              fontSize: "2.25rem",
+            }}
+            onClick={() => claimAward(3)}
+          >
+            <AiOutlineLock />
+            <div className={styles.claim}>claim</div>
+          </div>
         ) : (
           <div>
             <FaMedal
@@ -151,6 +196,17 @@ const Achievements = () => {
           >
             <AiOutlineLock />
           </div>
+        ) : aTCAClaimed[4] === 0 ? (
+          <div
+            className={styles.award3}
+            style={{
+              fontSize: "2.5rem",
+            }}
+            onClick={() => claimAward(4)}
+          >
+            <AiOutlineLock />
+            <div className={styles.claim}>claim</div>
+          </div>
         ) : (
           <div>
             <BsTrophy
@@ -170,6 +226,17 @@ const Achievements = () => {
             }}
           >
             <AiOutlineLock />
+          </div>
+        ) : aTCAClaimed[5] === 0 ? (
+          <div
+            className={styles.award3}
+            style={{
+              fontSize: "2.75rem",
+            }}
+            onClick={() => claimAward(5)}
+          >
+            <AiOutlineLock />
+            <div className={styles.claim}>claim</div>
           </div>
         ) : (
           <div>
@@ -193,6 +260,17 @@ const Achievements = () => {
         >
           <AiOutlineLock />
         </div>
+      ) : aTCAClaimed[6] === 0 ? (
+        <div
+          className={styles.award3}
+          style={{
+            fontSize: "6.5rem",
+          }}
+          onClick={() => claimAward(6)}
+        >
+          <AiOutlineLock />
+          <div className={styles.mainClaim}>claim</div>
+        </div>
       ) : (
         <>
           <GiDiamondTrophy
@@ -207,8 +285,11 @@ const Achievements = () => {
       {correctAnswers >= correctAnswerGoals[6] ? (
         <>
           <Spacer />
-
-          <div className={styles.complete}>{correctAnswers}</div>
+          <div className={styles.completed}>
+            Congratulations, achievement completed!
+          </div>
+          <Spacer />
+          <div className={styles.current}>{correctAnswers}</div>
         </>
       ) : (
         <>
@@ -233,11 +314,12 @@ const Achievements = () => {
           </div>
         </>
       )}
-      <Spacer />
+      <Spacer size={"0.5rem"} />
       <ResetAchievementButton
         achType={"achCorrectAnswers"}
         refresh={refresh}
         setRefresh={setRefresh}
+        setATCAClaimed={setATCAClaimed}
       />
       <Spacer />
     </>

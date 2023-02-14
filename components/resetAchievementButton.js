@@ -3,7 +3,7 @@ import ConfirmReset from "../components/confirmAchievementReset";
 import styles from "../componentStyles/resetAchievementButton.module.css";
 
 const ResetAchievementButton = (props) => {
-  const { achType, refresh, setRefresh } = props;
+  const { achType, refresh, setRefresh, setATCAClaimed } = props;
 
   const [showConfirmReset, setShowConfirmReset] = useState(false);
 
@@ -21,6 +21,9 @@ const ResetAchievementButton = (props) => {
   const resetAchievement = () => {
     setShowConfirmReset(false);
     localStorage.setItem(achType, 0);
+    const isATCAClaimed = [false, false, false, false, false, false, false];
+    localStorage.setItem("isATCAClaimed", JSON.stringify(isATCAClaimed));
+    setATCAClaimed(isATCAClaimed);
     setRefresh(refresh + 1);
   };
 
@@ -30,7 +33,7 @@ const ResetAchievementButton = (props) => {
         className={styles.resetButton}
         onClick={() => setShowConfirmReset(true)}
       >
-        Reset this achievement
+        Reset this achievement?
       </div>
       {showConfirmReset && (
         <ConfirmReset

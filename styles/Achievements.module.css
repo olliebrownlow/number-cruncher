@@ -46,7 +46,7 @@
   align-items: center;
   justify-content: center;
   grid-template-rows: 3.5rem;
-  grid-template-columns: 10% 10% 15% 15% 20% 20%;
+  grid-template-columns: 10% 12% 14% 16% 18% 20%;
   column-gap: 8px;
   width: 90%;
 }
@@ -54,21 +54,30 @@
 .award1 {
   fill: silver;
   color: silver;
+  line-height: 0.75;
 }
 
 .award2 {
   fill: goldenrod;
-  color: goldenrod
+  color: goldenrod;
+  line-height: 0.75;
 }
 
 .award3 {
   fill: gold;
   color: gold;
+  line-height: 0.75;
 }
 
-.complete {
+.completed {
+  font-size: 2rem;
+  text-align: center;
+}
+
+.current {
   font-size: 3rem;
   font-weight: 700;
+  text-align: center;
 }
 
 .bgWrap {
@@ -78,3 +87,16 @@
   overflow: hidden;
   z-index: 0;
 }
+
+.claim {
+  font-size: 0.75rem;
+  color: #90EE90;
+  text-align: center;
+}
+
+.mainClaim {
+  font-size: 2rem;
+  color: #90EE90;
+  text-align: center;
+}
+
