@@ -5,12 +5,28 @@ import chalkboard from "../public/modalChalkboard2.jpg";
 import { AiOutlineUnlock } from "react-icons/ai";
 import icons from "../config/icons";
 import styles from "../componentStyles/CelebrateAwardClaim.module.css";
+import Confetti from "react-confetti";
 
 const CelebrateAwardClaim = (props) => {
-  const { closeModal, windowOnClick, subText, index } = props;
+  const { closeModal, windowOnClick, index } = props;
+  const height = window.innerHeight;
+  const width = window.innerWidth;
 
   return ReactDOM.createPortal(
     <aside className={styles.modalCover} onClick={windowOnClick}>
+      <Confetti
+        width={width}
+        height={height}
+        confettiSource={{
+          x: height / 4,
+          y: width,
+          w: 0,
+          h: 0,
+        }}
+        numberOfPieces={1000}
+        recycle={false}
+        tweenDuration={12000}
+      />
       <div className={styles.modalArea}>
         <div className={styles.bgWrap}>
           <Image

@@ -302,7 +302,7 @@ const Achievements = () => {
         <>
           <Spacer />
           <div className={styles.completed}>
-            Congratulations, achievement completed!
+            Congratulations, all awards collected and achievement completed!
           </div>
           <Spacer />
           <div className={styles.current}>{correctAnswers}</div>
@@ -342,7 +342,6 @@ const Achievements = () => {
         <CelebrateAwardClaim
           closeModal={closeCelebrationModal}
           windowOnClick={celebrationWindowOnClick}
-          // handleReset={resetAchievement}
           index={index}
         />
       )}
