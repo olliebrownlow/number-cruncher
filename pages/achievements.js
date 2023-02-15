@@ -5,6 +5,7 @@ import PageHeading from "../components/pageHeading";
 import SubHeading from "../components/subHeading";
 import Spacer from "../components/spacer";
 import ResetAchievementButton from "../components/resetAchievementButton";
+import CelebrateAwardClaim from "../components/celebrateAwardClaim";
 import correctAnswerGoals from "../config/correctAnswerGoals";
 import "react-step-progress-bar/styles.css";
 import { ProgressBar, Step } from "react-step-progress-bar";
@@ -22,6 +23,8 @@ const Achievements = () => {
   const [currentGoal, setCurrentGoal] = useState(50);
   const [refresh, setRefresh] = useState(0);
   const [aTCAClaimed, setATCAClaimed] = useState([]);
+  const [showCelebration, setShowCelebration] = useState(false);
+  const [index, setIndex] = useState(0);
 
   useEffect(() => {
     const numCorrectAnswers = parseInt(
@@ -45,12 +48,25 @@ const Achievements = () => {
   };
 
   const claimAward = (index) => {
+    setShowCelebration(true);
     const isATCAClaimedArray = JSON.parse(
       localStorage.getItem("isATCAClaimed")
     );
     isATCAClaimedArray[index] = true;
     localStorage.setItem("isATCAClaimed", JSON.stringify(isATCAClaimedArray));
+    setIndex(index);
     setATCAClaimed(isATCAClaimedArray);
+  };
+
+  const closeCelebrationModal = () => {
+    setShowCelebration(false);
+  };
+
+  // close modal from window surrounding the modal itself
+  const celebrationWindowOnClick = (event) => {
+    if (event.target === event.currentTarget) {
+      setShowCelebration(false);
+    }
   };
 
   return (
@@ -322,6 +338,14 @@ const Achievements = () => {
         setATCAClaimed={setATCAClaimed}
       />
       <Spacer />
+      {showCelebration && (
+        <CelebrateAwardClaim
+          closeModal={closeCelebrationModal}
+          windowOnClick={celebrationWindowOnClick}
+          // handleReset={resetAchievement}
+          index={index}
+        />
+      )}
     </>
   );
 };
