@@ -94,6 +94,27 @@
   text-align: center;
 }
 
+.target1 {
+  font-size: 0.9rem;
+  color: white;
+  text-align: center;
+  line-height: 0.7rem;
+}
+
+.target2 {
+  font-size: 0.9rem;
+  color: white;
+  text-align: center;
+  line-height: 0.6rem;
+}
+
+.target3 {
+  font-size: 0.9rem;
+  color: white;
+  text-align: center;
+  line-height: 0.5rem;
+}
+
 .mainClaim {
   font-size: 2rem;
   color: #90EE90;

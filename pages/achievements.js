@@ -87,6 +87,7 @@ const Achievements = () => {
             }}
           >
             <AiOutlineLock />
+            <div className={styles.target1}>{correctAnswerGoals[0]}</div>
           </div>
         ) : aTCAClaimed[0] === 0 ? (
           <div
@@ -107,7 +108,7 @@ const Achievements = () => {
                 fontSize: "1.5rem",
               }}
             />
-            <div>{correctAnswerGoals[0]}</div>
+            <div className={styles.target1}>{correctAnswerGoals[0]}</div>
           </div>
         )}
         {currentGoal <= correctAnswerGoals[1] ? (
@@ -118,6 +119,7 @@ const Achievements = () => {
             }}
           >
             <AiOutlineLock />
+            <div className={styles.target1}>{correctAnswerGoals[1]}</div>
           </div>
         ) : aTCAClaimed[1] === 0 ? (
           <div
@@ -138,7 +140,7 @@ const Achievements = () => {
                 fontSize: "1.75rem",
               }}
             />
-            <div>{correctAnswerGoals[1]}</div>
+            <div className={styles.target1}>{correctAnswerGoals[1]}</div>
           </div>
         )}
         {currentGoal <= correctAnswerGoals[2] ? (
@@ -149,6 +151,7 @@ const Achievements = () => {
             }}
           >
             <AiOutlineLock />
+            <div className={styles.target2}>{correctAnswerGoals[2]}</div>
           </div>
         ) : aTCAClaimed[2] === 0 ? (
           <div
@@ -169,7 +172,7 @@ const Achievements = () => {
                 fontSize: "2.4rem",
               }}
             />
-            <div>{correctAnswerGoals[2]}</div>
+            <div className={styles.target2}>{correctAnswerGoals[2]}</div>
           </div>
         )}
         {currentGoal <= correctAnswerGoals[3] ? (
@@ -180,6 +183,7 @@ const Achievements = () => {
             }}
           >
             <AiOutlineLock />
+            <div className={styles.target2}>{correctAnswerGoals[3]}</div>
           </div>
         ) : aTCAClaimed[3] === 0 ? (
           <div
@@ -200,7 +204,7 @@ const Achievements = () => {
                 fontSize: "2.5rem",
               }}
             />
-            <div>{correctAnswerGoals[3]}</div>
+            <div className={styles.target2}>{correctAnswerGoals[3]}</div>
           </div>
         )}
         {currentGoal <= correctAnswerGoals[4] ? (
@@ -211,6 +215,7 @@ const Achievements = () => {
             }}
           >
             <AiOutlineLock />
+            <div className={styles.target3}>{correctAnswerGoals[4]}</div>
           </div>
         ) : aTCAClaimed[4] === 0 ? (
           <div
@@ -231,7 +236,7 @@ const Achievements = () => {
                 fontSize: "3rem",
               }}
             />
-            <div>{correctAnswerGoals[4]}</div>
+            <div className={styles.target2}>{correctAnswerGoals[4]}</div>
           </div>
         )}
         {currentGoal <= correctAnswerGoals[5] ? (
@@ -242,6 +247,7 @@ const Achievements = () => {
             }}
           >
             <AiOutlineLock />
+            <div className={styles.target3}>{correctAnswerGoals[5]}</div>
           </div>
         ) : aTCAClaimed[5] === 0 ? (
           <div
@@ -262,20 +268,23 @@ const Achievements = () => {
                 fontSize: "3.75rem",
               }}
             />
-            <div>{correctAnswerGoals[5]}</div>
+            <div className={styles.target3}>{correctAnswerGoals[5]}</div>
           </div>
         )}
       </div>
       <Spacer size={"1rem"} />
       {currentGoal <= correctAnswerGoals[6] ? (
-        <div
-          className={styles.award3}
-          style={{
-            fontSize: "6.5rem",
-          }}
-        >
-          <AiOutlineLock />
-        </div>
+        <>
+          <div
+            className={styles.award3}
+            style={{
+              fontSize: "6.5rem",
+            }}
+          >
+            <AiOutlineLock />
+            <div className={styles.target3}>{correctAnswerGoals[6]}</div>
+          </div>
+        </>
       ) : aTCAClaimed[6] === 0 ? (
         <div
           className={styles.award3}
@@ -295,7 +304,7 @@ const Achievements = () => {
               fontSize: "6.5rem",
             }}
           />
-          <div>{correctAnswerGoals[6]}</div>
+          <div className={styles.target3}>{correctAnswerGoals[6]}</div>
         </>
       )}
       {correctAnswers >= correctAnswerGoals[6] ? (
@@ -309,7 +318,7 @@ const Achievements = () => {
         </>
       ) : (
         <>
-          <Spacer size={"2rem"} />
+          <Spacer size={"2.5rem"} />
           <div className={styles.container}>
             <ProgressBar
               filledBackground="linear-gradient(to right, #90EE90, #006400)"

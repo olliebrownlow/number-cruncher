@@ -10,6 +10,7 @@
   transform: translate(-50%, -50%);
   background-color: rgba(0, 0, 0, 0.6);
 }
+
 .modalArea {
   position: fixed;
   display: flex;
@@ -25,6 +26,7 @@
   color: white;
   font-size: 20px;
 }
+
 .bgWrap {
   position: fixed;
   height: 100%;
@@ -32,21 +34,25 @@
   overflow: hidden;
   z-index: -10;
 }
+
 .text {
   margin: 0 0 16px 0;
   font-weight: 600;
   font-size: 2rem;
 }
+
 .subText {
   font-size: 16px;
   color: lightgrey;
   margin-top: 12px;
   width: 90%;
 }
+
 .button {
   display: flex;
   justify-content: space-between;
 }
+
 .closeButton {
   background-color: transparent;
   color: white;
