@@ -54,7 +54,13 @@ const About = () => {
         <p>
           I have developed this mainly on a smart phone, in my spare time and
           with no technical help beyond Google and the documentation available
-          for the tech stack in use. It looks and works best on your phone.
+          for the tech stack in use.{" "}
+          <b style={{ fontSize: "1.5rem", color: "yellow" }}>
+            Note that it looks and works best on your phone.
+          </b>{" "}
+          Page element sizes and styling may not look quite right on tablets,
+          pcs and other larger devices, although I will try to fix these
+          differences as and when I can.
         </p>
         <Spacer />
         <p>
@@ -63,8 +69,10 @@ const About = () => {
           clearly, the greatest need here is to make the game look better. If
           you have the skills on this front and would be interested in getting
           involved, or if you'd just like to leave any positive feedback or
-          constructive suggestions, the email address to contact is
-          numbercruncher2023@gmail.com.
+          constructive suggestions, the email address to contact is{" "}
+          <b style={{ fontSize: "1.35rem", color: "yellow" }}>
+            numbercruncher2023@gmail.com
+          </b>
         </p>
         <Spacer />
         <h3
