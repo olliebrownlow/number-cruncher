@@ -1,10 +1,10 @@
-.achievementsButton {
+.historyButton {
   display: flex;
   flex-direction: column;
   align-items: center;
   position: absolute;
-  left: auto;
-  right: 20%;
+  left: 20%;
+  right: auto;
   margin: 20px 28px;
   font-size: 0.9rem;
   z-index: 1;
@@ -12,14 +12,14 @@
 
 /* Mobile */
 @media (max-width: 700px) {
-  .achievementsButton {
-    right: 5%;
+  .historyButton {
+    left: 5%;
   }
 }
 
 /* Tablet and Smaller Desktop */
 @media (min-width: 701px) and (max-width: 1120px) {
-  .achievementsButton {
-    right: 12.5%;
+  .historyButton {
+    left: 12.5%;
   }
 }

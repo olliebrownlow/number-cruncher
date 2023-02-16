@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { Award } from "react-feather";
+import { FiAward } from "react-icons/fi";
 import styles from "../componentStyles/AchievementsButton.module.css";
 
 const AchievementsButton = () => {
@@ -7,8 +7,11 @@ const AchievementsButton = () => {
 
   return (
     <>
-      <div className={styles.achievementsButton} onClick={() => router.push("/achievements")}>
-        <Award size={16} /> achievements
+      <div
+        className={styles.achievementsButton}
+        onClick={() => router.push("/achievements")}
+      >
+        <FiAward size={16} /> achievements
       </div>
     </>
   );
