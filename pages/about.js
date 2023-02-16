@@ -1,6 +1,7 @@
 import BackButton from "../components/backButton";
 import HomeButton from "../components/homeButton";
 import PageHeading from "../components/pageHeading";
+import ReleaseTable from "../components/releaseTable";
 import Spacer from "../components/spacer";
 import styles from "../styles/About.module.css";
 import colours from "../config/colours";
@@ -111,12 +112,22 @@ const About = () => {
         </p>
         <Spacer />
         <p>
-          Note that a consequence of the "no sign in" decision is that if more
+          Finally, a consequence of the "no sign in" decision is that if more
           than one person on a particular device wishes to play the games and
           keep their progress and scores individually, this would only be
           possible if the players used separate browsers, e.g., one could use
           chrome while another uses firefox and a third uses edge or safari etc.
         </p>
+        <Spacer />
+        <h3
+          style={{
+            color: colours[Math.floor(Math.random() * colours.length)],
+          }}
+        >
+          Release history
+        </h3>
+        <Spacer />
+        <ReleaseTable />
         <Spacer />
       </div>
     </>

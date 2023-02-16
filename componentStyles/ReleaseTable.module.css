@@ -1,0 +1,13 @@
+.releaseTableGrid {
+  display: grid;
+  grid-template-columns: 22% 22% 56%;
+  grid-template-rows: 1.5rem;
+  max-width: 100%;
+}
+
+.releaseTableCell {
+  text-align: center;
+  border: 1px solid lightgrey;
+  font-size: 1rem;
+  border-radius: 2px;
+}

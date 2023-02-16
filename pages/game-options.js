@@ -47,7 +47,7 @@ const GameOptions = () => {
   }, []);
 
   const formattedGameTypeString = (gameType) => {
-    return gameType.split("-").join(" ");
+    return gameType.split("-").join(" ").toLowerCase();
   };
 
   return (
