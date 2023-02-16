@@ -25,7 +25,6 @@ a {
 button input {
   background: transparent;
   font-family: 'Cabin Sketch', cursive;
-  /* font-family: 'Seaweed Script', cursive; */
 }
 
 @media (prefers-color-scheme: dark) {

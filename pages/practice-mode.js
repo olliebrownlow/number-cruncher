@@ -10,6 +10,7 @@ import AnswerForm from "../components/answerForm";
 import AnswerGrid from "../components/answerGrid";
 import EndButton from "../components/endButton";
 import TablesInPlayGrid from "../components/tablesInPlayGrid";
+import correctAnswerGoals from "../config/correctAnswerGoals";
 
 const PracticeMode = () => {
   const [userAnswer, setUserAnswer] = useState("");
@@ -72,6 +73,17 @@ const PracticeMode = () => {
     }
     return "--";
   };
+  
+  const getToastMessage = (index, currentGlobalCount) => {
+    if (correctAnswerGoals[index + 1]) {
+      return `NEW AWARD!!!\nClaim your award for getting ${
+        currentGlobalCount + 1
+      } questions correct! \n Next target\n${correctAnswerGoals[index + 1]}`;
+    }
+    return `NEW AWARD!!!\nClaim your award for getting ${
+      currentGlobalCount + 1
+    } questions correct!`;
+  };
 
   const submitAnswer = (e) => {
     e.preventDefault();
@@ -84,12 +96,35 @@ const PracticeMode = () => {
       setReRender(reRender + 1);
       // check answer and increment counters
       if (
-        parseInt(userAnswer) ===
-        parseInt(sessionStorage.getItem("currentTable")) *
-          parseInt(sessionStorage.getItem("currentMultiplier"))
+        isCorrectAnswer(
+          parseInt(sessionStorage.getItem("currentTable")),
+          parseInt(sessionStorage.getItem("currentMultiplier")),
+          parseInt(userAnswer)
+        )
       ) {
+        // local count
         const currentCount = sessionStorage.getItem("correctCounter");
         sessionStorage.setItem("correctCounter", parseInt(currentCount) + 1);
+        // global count
+        const currentGlobalCount = parseInt(
+          localStorage.getItem("achCorrectAnswers")
+        );
+        localStorage.setItem("achCorrectAnswers", currentGlobalCount + 1);
+        // check for new award
+        if (correctAnswerGoals.includes(currentGlobalCount + 1)) {
+          const index = correctAnswerGoals.indexOf(currentGlobalCount + 1);
+          const isATCAClaimedArray = JSON.parse(
+            localStorage.getItem("isATCAClaimed")
+          );
+          isATCAClaimedArray[index] = 0;
+          localStorage.setItem(
+            "isATCAClaimed",
+            JSON.stringify(isATCAClaimedArray)
+          );
+          toast.success(getToastMessage(index, currentGlobalCount), {
+            id: "correctAnswersAchievement",
+          });
+        }
       } else {
         const currentCount = sessionStorage.getItem("errorCounter");
         sessionStorage.setItem("errorCounter", parseInt(currentCount) + 1);
