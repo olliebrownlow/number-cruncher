@@ -11,6 +11,7 @@ import AnswerGrid from "../components/answerGrid";
 import EndButton from "../components/endButton";
 import TablesInPlayGrid from "../components/tablesInPlayGrid";
 import correctAnswerGoals from "../config/correctAnswerGoals";
+// import historyInfo from "../config/historyInfo";
 
 const PracticeMode = () => {
   const [userAnswer, setUserAnswer] = useState("");
@@ -73,7 +74,7 @@ const PracticeMode = () => {
     }
     return "--";
   };
-  
+
   const getToastMessage = (index, currentGlobalCount) => {
     if (correctAnswerGoals[index + 1]) {
       return `NEW AWARD!!!\nClaim your award for getting ${
@@ -94,6 +95,12 @@ const PracticeMode = () => {
     ) {
       // trigger counter movement in child component when blank answer
       setReRender(reRender + 1);
+      // setup global answer tracking for history
+      const historyInfo = JSON.parse(localStorage.getItem("historyInfo"));
+      const tableIndex = parseInt(sessionStorage.getItem("currentTable")) - 1;
+      const multiplierIndex = parseInt(
+        sessionStorage.getItem("currentMultiplier") - 1
+      );
       // check answer and increment counters
       if (
         isCorrectAnswer(
@@ -102,15 +109,18 @@ const PracticeMode = () => {
           parseInt(userAnswer)
         )
       ) {
-        // local count
+        // local correct answer count
         const currentCount = sessionStorage.getItem("correctCounter");
         sessionStorage.setItem("correctCounter", parseInt(currentCount) + 1);
-        // global count
+        // global correct answer count for achievements
         const currentGlobalCount = parseInt(
           localStorage.getItem("achCorrectAnswers")
         );
         localStorage.setItem("achCorrectAnswers", currentGlobalCount + 1);
-        // check for new award
+        // global correct answer tracking for history
+        historyInfo[tableIndex][multiplierIndex].push(true);
+        localStorage.setItem("historyInfo", JSON.stringify(historyInfo));
+        // check for new AllTimeCorrectAnswer award
         if (correctAnswerGoals.includes(currentGlobalCount + 1)) {
           const index = correctAnswerGoals.indexOf(currentGlobalCount + 1);
           const isATCAClaimedArray = JSON.parse(
@@ -126,8 +136,12 @@ const PracticeMode = () => {
           });
         }
       } else {
+        // local incorrect answer count
         const currentCount = sessionStorage.getItem("errorCounter");
         sessionStorage.setItem("errorCounter", parseInt(currentCount) + 1);
+        // global incorrect answer tracking for history
+        historyInfo[tableIndex][multiplierIndex].push(false);
+        localStorage.setItem("historyInfo", JSON.stringify(historyInfo));
       }
       // store old question and answer
       const qAArray = JSON.parse(

@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import "../styles/globals.css";
 import ErrorBoundary from "../components/error-boundary";
+import historyInfo from "../config/historyInfo";
 import { Toaster } from "react-hot-toast";
 import { AlertTriangle, Award } from "react-feather";
 import styles from "../styles/AppLayout.module.css";
@@ -20,6 +21,9 @@ export default function App({ Component, pageProps }) {
     if (localStorage.getItem("isATCAClaimed") === null) {
       const isATCAClaimed = [false, false, false, false, false, false, false];
       localStorage.setItem("isATCAClaimed", JSON.stringify(isATCAClaimed));
+    }
+    if (localStorage.getItem("historyInfo") === null) {
+      localStorage.setItem("historyInfo", JSON.stringify(historyInfo));
     }
     router.prefetch("/achievements");
   }, []);
