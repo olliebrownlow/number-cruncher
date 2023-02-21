@@ -1,3 +1,53 @@
+.timeframeGrid {
+  display: grid;
+  /* grid-template-rows: 2rem 2rem; */
+  grid-template-columns: 16% 16% 16% 16% 16%;
+  text-align: center;
+  width: 94%;
+  gap: 8px;
+  font-size: 0.9rem;
+}
+
+.topRowTimeframeOptionLeft {
+  border: solid lightgrey;
+  border-width: 2px 3px 2px 1px;
+  border-radius:4% 94% 3% 95%/95% 4% 97% 5%;
+  grid-column-start: 2;
+  grid-column-end: 4;
+}
+
+.topRowTimeframeOptionRight {
+  border: solid lightgrey;
+  border-width: 2px 3px 2px 1px;
+  border-radius:4% 94% 3% 95%/95% 4% 97% 5%;
+  grid-column-start: 4;
+  grid-column-end: 6;
+}
+
+.secondRowTimeframeOptionLeft {
+  border: solid lightgrey;
+  border-width: 2px 3px 2px 1px;
+  border-radius:4% 94% 3% 95%/95% 4% 97% 5%;
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
+
+.secondRowTimeframeOptionMiddle {
+  border: solid lightgrey;
+  border-width: 2px 3px 2px 1px;
+  border-radius:4% 94% 3% 95%/95% 4% 97% 5%;
+  grid-column-start: 3;
+  grid-column-end: 5;
+}
+
+.secondRowTimeframeOptionRight {
+  border: solid lightgrey;
+  border-width: 2px 3px 2px 1px;
+  border-radius:4% 94% 3% 95%/95% 4% 97% 5%;
+  grid-column-start: 5;
+  grid-column-end: 7;
+}
+
 .globalResultsContainer {
   display: grid;
   grid-template-columns: 50% 50%;
@@ -26,7 +76,6 @@
 .card {
   text-align: center;
   width: 11rem;
-  /* border-width: 6px 4px 5px 6px; */
   border-radius:95% 4% 97% 5%/4% 94% 3% 95%;
 }
 
@@ -34,6 +83,12 @@
   font-size: 1.5rem;
   padding-top: 8px;
   font-weight: 700;
+}
+
+.localResultsContainer {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  text-align: center;
 }
 
 .noDataContainer {
@@ -65,8 +120,12 @@
   margin-bottom: 6px;
 }
 
-.container {
+.globalProgressBarContainer {
   width: 75%;
+}
+
+.localProgressBarContainer {
+  margin: 0 10%;  
 }
 
 .firstStep {
@@ -79,14 +138,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.label {
-  position: absolute;
-  bottom: 22px;
-  top: auto;
-  font-size: 0.9rem;
-  font-weight: 700;
 }
 
 .standing {

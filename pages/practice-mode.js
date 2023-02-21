@@ -101,6 +101,8 @@ const PracticeMode = () => {
       const multiplierIndex = parseInt(
         sessionStorage.getItem("currentMultiplier") - 1
       );
+      const todaysDate = new Date().toISOString().split("T")[0];
+      // const todaysDate = "2022-01-01"
       // check answer and increment counters
       if (
         isCorrectAnswer(
@@ -118,7 +120,7 @@ const PracticeMode = () => {
         );
         localStorage.setItem("achCorrectAnswers", currentGlobalCount + 1);
         // global correct answer tracking for history
-        historyInfo[tableIndex][multiplierIndex].push(true);
+        historyInfo[tableIndex][multiplierIndex].push([true, todaysDate]);
         localStorage.setItem("historyInfo", JSON.stringify(historyInfo));
         // check for new AllTimeCorrectAnswer award
         if (correctAnswerGoals.includes(currentGlobalCount + 1)) {
@@ -140,7 +142,7 @@ const PracticeMode = () => {
         const currentCount = sessionStorage.getItem("errorCounter");
         sessionStorage.setItem("errorCounter", parseInt(currentCount) + 1);
         // global incorrect answer tracking for history
-        historyInfo[tableIndex][multiplierIndex].push(false);
+        historyInfo[tableIndex][multiplierIndex].push([false, todaysDate]);
         localStorage.setItem("historyInfo", JSON.stringify(historyInfo));
       }
       // store old question and answer

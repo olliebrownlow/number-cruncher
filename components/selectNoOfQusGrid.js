@@ -79,7 +79,9 @@ const SelectNoOfQusGrid = (props) => {
         <div
           className={styles.stretched}
           style={{
-            backgroundColor: numOfQuestions === "no limit" && colours[Math.floor(Math.random() * colours.length)],
+            backgroundColor:
+              numOfQuestions === "no limit" &&
+              colours[Math.floor(Math.random() * colours.length)],
             color: numOfQuestions === "no limit" && "black",
             fontSize: numOfQuestions === "no limit" ? "1.5rem" : "1rem",
             opacity: orderedQuestions === "in order" && "0.3",
