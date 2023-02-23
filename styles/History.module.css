@@ -1,11 +1,11 @@
 .timeframeGrid {
   display: grid;
-  /* grid-template-rows: 2rem 2rem; */
+  grid-template-rows: 2rem 2rem;
   grid-template-columns: 16% 16% 16% 16% 16%;
   text-align: center;
   width: 94%;
   gap: 8px;
-  font-size: 0.9rem;
+  /* font-size: 0.9rem; */
 }
 
 .topRowTimeframeOptionLeft {

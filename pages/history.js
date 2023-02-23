@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import BackButton from "../components/backButton";
 import HomeButton from "../components/homeButton";
 import PageHeading from "../components/pageHeading";
@@ -12,35 +12,44 @@ const History = () => {
   const tableIndexes = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 
   const [refresh, setRefresh] = useState(0);
-  const [timeframe, setTimeframe] = useState(3650);
+  const [timeframeStatus, setTimeframeStatus] = useState(0);
+
+  useEffect(() => {
+    setTimeframeStatus(JSON.parse(sessionStorage.getItem("timeframe")));
+  }, []);
 
   const handleClick = () => {
     setRefresh(refresh + 1);
   };
 
   const handleTimeframeClick = (timeframe) => {
-    setTimeframe(timeframe);
+    if (typeof window !== "undefined") {
+      sessionStorage.setItem("timeframe", timeframe);
+    }
+    setTimeframeStatus(timeframe);
   };
 
   const getNumberOfDays = (dateOfRecord) => {
     const date1 = new Date(dateOfRecord);
-    const date2 = new Date();
+    const today = new Date().toISOString().split("T")[0];
+    const date2 = new Date(today);
     const oneDayInMS = 1000 * 60 * 60 * 24;
     const diffInTime = date2.getTime() - date1.getTime();
     const diffInDays = Math.round(diffInTime / oneDayInMS);
-    // same day = 1
-    return diffInDays;
+    // same day = 0
+    return diffInDays + 1;
   };
 
   const totalGlobalCount = (isCorrect) => {
     if (typeof window !== "undefined") {
       const storage = JSON.parse(localStorage.getItem("historyInfo"));
+      const timeframe = JSON.parse(sessionStorage.getItem("timeframe"));
       let total = 0;
       for (let i = 0; i < 12; i++) {
         for (let j = 0; j < 12; j++) {
           const count = storage[i][j]
             .filter((x) => x[0] === isCorrect)
-            .filter((x) => getNumberOfDays(x[1]) <= timeframe).length;
+            .filter((y) => getNumberOfDays(y[1]) <= timeframe).length;
           total = total + count;
         }
       }
@@ -51,6 +60,7 @@ const History = () => {
   const getTotalCountForTable = (tableIndex, isCorrect) => {
     if (typeof window !== "undefined") {
       const storage = JSON.parse(localStorage.getItem("historyInfo"));
+      const timeframe = JSON.parse(sessionStorage.getItem("timeframe"));
       let total = 0;
       for (let i = 0; i < 12; i++) {
         const count = storage[tableIndex][i]
@@ -65,13 +75,20 @@ const History = () => {
   const orderedTableArray = (tableIndex) => {
     let arr = [];
     if (typeof window !== "undefined") {
+      const timeframe = JSON.parse(sessionStorage.getItem("timeframe"));
       const tableHistory = JSON.parse(localStorage.getItem("historyInfo"));
       const tableHistoryArray = tableHistory[tableIndex];
       tableHistoryArray.forEach((element, index) => {
         const multiplier = index + 1;
-        const correct = element.filter((x) => x[0] === true).length;
-        const incorrect = element.filter((x) => x[0] === false).length;
-        arr.push([multiplier, correct, incorrect]);
+        const correct = element
+          .filter((x) => x[0] === true)
+          .filter((y) => getNumberOfDays(y[1]) <= timeframe).length;
+        const incorrect = element
+          .filter((x) => x[0] === false)
+          .filter((y) => getNumberOfDays(y[1]) <= timeframe).length;
+        if (incorrect) {
+          arr.push([multiplier, correct, incorrect]);
+        }
       });
     }
     arr.sort(function (a, b) {
@@ -81,6 +98,10 @@ const History = () => {
   };
 
   const getGlobalHealth = () => {
+    if (totalGlobalCount(true) === 0 && totalGlobalCount(false) === 0) {
+      return 0;
+    }
+
     return (
       (totalGlobalCount(true) /
         (totalGlobalCount(false) + totalGlobalCount(true))) *
@@ -131,36 +152,70 @@ const History = () => {
       <BackButton />
       <HomeButton />
       <PageHeading heading={"History"} />
-      {/* <div>days: {getNumberOfDays("2023-2-21")}</div>
-      <div>today: {new Date().toISOString().split("T")[0]}</div> */}
+      {/* timeframe option buttons */}
       <div className={styles.timeframeGrid}>
         <div
           className={styles.topRowTimeframeOptionLeft}
           onClick={() => handleTimeframeClick(1)}
+          style={{
+            backgroundColor:
+              timeframeStatus === 1 &&
+              colours[Math.floor(Math.random() * colours.length)],
+            color: timeframeStatus === 1 && "black",
+            fontSize: timeframeStatus === 1 ? "1.3rem" : "0.9rem",
+          }}
         >
           Today
         </div>
         <div
           className={styles.topRowTimeframeOptionRight}
           onClick={() => handleTimeframeClick(2)}
+          style={{
+            backgroundColor:
+              timeframeStatus === 2 &&
+              colours[Math.floor(Math.random() * colours.length)],
+            color: timeframeStatus === 2 && "black",
+            fontSize: timeframeStatus === 2 ? "1.3rem" : "0.9rem",
+          }}
         >
           Last 2 days
         </div>
         <div
           className={styles.secondRowTimeframeOptionLeft}
           onClick={() => handleTimeframeClick(7)}
+          style={{
+            backgroundColor:
+              timeframeStatus === 7 &&
+              colours[Math.floor(Math.random() * colours.length)],
+            color: timeframeStatus === 7 && "black",
+            fontSize: timeframeStatus === 7 ? "1.3rem" : "0.9rem",
+          }}
         >
           Last 7 days
         </div>
         <div
           className={styles.secondRowTimeframeOptionMiddle}
           onClick={() => handleTimeframeClick(30)}
+          style={{
+            backgroundColor:
+              timeframeStatus === 30 &&
+              colours[Math.floor(Math.random() * colours.length)],
+            color: timeframeStatus === 30 && "black",
+            fontSize: timeframeStatus === 30 ? "1.1rem" : "0.9rem",
+          }}
         >
           Last 30 days
         </div>
         <div
           className={styles.secondRowTimeframeOptionRight}
           onClick={() => handleTimeframeClick(3650)}
+          style={{
+            backgroundColor:
+              timeframeStatus === 3650 &&
+              colours[Math.floor(Math.random() * colours.length)],
+            color: timeframeStatus === 3650 && "black",
+            fontSize: timeframeStatus === 3650 ? "1.3rem" : "0.9rem",
+          }}
         >
           All time
         </div>
@@ -183,7 +238,9 @@ const History = () => {
           <Step>
             {() => (
               <div className={styles.standing}>
-                {getGlobalHealth() !== "NaN" ? getGlobalHealth() + "%" : ""}
+                {getGlobalHealth() !== "NaN" && getGlobalHealth() !== 0
+                  ? getGlobalHealth() + "%"
+                  : ""}
               </div>
             )}
           </Step>
@@ -193,12 +250,11 @@ const History = () => {
       <Spacer />
       <div className={styles.cardContainer} onClick={() => handleClick()}>
         {tableIndexes.map((tableIndex) => (
-          <>
+          <React.Fragment key={tableIndex}>
             {getTotalCountForTable(tableIndex, true) ||
             getTotalCountForTable(tableIndex, false) ? (
               <>
                 <div
-                  key={tableIndex}
                   className={styles.card}
                   style={{
                     border: `${
@@ -217,8 +273,8 @@ const History = () => {
                     {tableIndex + 1} times table
                   </div>
                   <div className={styles.localResultsContainer}>
-                    <div className={styles.fact}>correct</div>
-                    <div className={styles.fact}>incorrect</div>
+                    <div className={styles.fact}>Correct</div>
+                    <div className={styles.fact}>Incorrect</div>
                     <div
                       className={styles.fact}
                       style={{
@@ -241,6 +297,9 @@ const History = () => {
                     <ProgressBar
                       percent={getLocalHealth(tableIndex)}
                       filledBackground={getColour(getLocalHealth(tableIndex))}
+                      unfilledBackground={
+                        getLocalHealth(tableIndex) === "0" ? "red" : ""
+                      }
                       height={7.5}
                     >
                       <Step>
@@ -261,27 +320,35 @@ const History = () => {
                     </ProgressBar>
                   </div>
                   <Spacer size="0.25rem" />
-                  <div className={styles.fact}>most common errors</div>
-                  <div className={styles.tableContainer}>
-                    <div className={styles.gridEntry}>Ques.</div>
-                    <div className={styles.gridEntry}>Correct</div>
-                    <div className={styles.gridEntry}>Incorrect</div>
-                    {orderedTableArray(tableIndex).map((row) => (
-                      <>
-                        <div className={styles.gridEntry}>
-                          {tableIndex + 1} × {row[0]}
-                        </div>
-                        <div className={styles.gridEntry}>{row[1]}</div>
-                        <div className={styles.gridEntry}>{row[2]}</div>
-                      </>
-                    ))}
-                  </div>
+                  {orderedTableArray(tableIndex).length ? (
+                    <>
+                      <div className={styles.fact}>Most Common Errors</div>
+                      <div className={styles.tableContainer}>
+                        <div className={styles.gridEntry}>Ques.</div>
+                        <div className={styles.gridEntry}>Correct</div>
+                        <div className={styles.gridEntry}>Incorrect</div>
+                        {orderedTableArray(tableIndex).map((row) => (
+                          <React.Fragment key={row}>
+                            <div className={styles.gridEntry}>
+                              {tableIndex + 1} × {row[0]}
+                            </div>
+                            <div className={styles.gridEntry}>{row[1]}</div>
+                            <div className={styles.gridEntry}>{row[2]}</div>
+                          </React.Fragment>
+                        ))}
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <Spacer size={"0.5rem"} />
+                    </>
+                  )}
                 </div>
               </>
             ) : (
-              <></>
+              <React.Fragment key={tableIndex}></React.Fragment>
             )}
-          </>
+          </React.Fragment>
         ))}
       </div>
       <Spacer />

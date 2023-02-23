@@ -11,7 +11,6 @@ import AnswerGrid from "../components/answerGrid";
 import EndButton from "../components/endButton";
 import TablesInPlayGrid from "../components/tablesInPlayGrid";
 import correctAnswerGoals from "../config/correctAnswerGoals";
-// import historyInfo from "../config/historyInfo";
 
 const PracticeMode = () => {
   const [userAnswer, setUserAnswer] = useState("");
