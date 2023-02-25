@@ -3,6 +3,7 @@ import BackButton from "../components/backButton";
 import HomeButton from "../components/homeButton";
 import PageHeading from "../components/pageHeading";
 import Spacer from "../components/spacer";
+import SeeDetailedTableHistory from "../components/seeDetailedTableHistory";
 import "react-step-progress-bar/styles.css";
 import { ProgressBar, Step } from "react-step-progress-bar";
 import styles from "../styles/History.module.css";
@@ -13,13 +14,28 @@ const History = () => {
 
   const [refresh, setRefresh] = useState(0);
   const [timeframeStatus, setTimeframeStatus] = useState(0);
+  const [showTableHistory, setShowTableHistory] = useState(false);
+  const [tableModalIndex, setTableModalIndex] = useState(0);
 
   useEffect(() => {
     setTimeframeStatus(JSON.parse(sessionStorage.getItem("timeframe")));
   }, []);
 
-  const handleClick = () => {
+  const closeTableHistoryModal = () => {
+    setShowTableHistory(false);
+  };
+
+  // close modal from window surrounding the modal itself
+  const tableHistoryWindowOnClick = (event) => {
+    if (event.target === event.currentTarget) {
+      setShowTableHistory(false);
+    }
+  };
+
+  const handleClick = (tableIndex) => {
     setRefresh(refresh + 1);
+    setShowTableHistory(true);
+    setTableModalIndex(tableIndex);
   };
 
   const handleTimeframeClick = (timeframe) => {
@@ -72,7 +88,7 @@ const History = () => {
     }
   };
 
-  const orderedTableArray = (tableIndex) => {
+  const orderedTableArray = (tableIndex, splicer, showAll) => {
     let arr = [];
     if (typeof window !== "undefined") {
       const timeframe = JSON.parse(sessionStorage.getItem("timeframe"));
@@ -86,15 +102,23 @@ const History = () => {
         const incorrect = element
           .filter((x) => x[0] === false)
           .filter((y) => getNumberOfDays(y[1]) <= timeframe).length;
-        if (incorrect) {
+        if (showAll) {
           arr.push([multiplier, correct, incorrect]);
+        } else {
+          if (incorrect) {
+            arr.push([multiplier, correct, incorrect]);
+            arr.sort(function (a, b) {
+              return b[2] - a[2];
+            });
+          }
         }
       });
     }
-    arr.sort(function (a, b) {
-      return b[2] - a[2];
-    });
-    return arr.splice(0, 5);
+
+    // arr.sort(function (a, b) {
+    //   return b[2] - a[2];
+    // });
+    return arr.splice(0, splicer);
   };
 
   const getGlobalHealth = () => {
@@ -248,7 +272,7 @@ const History = () => {
         </ProgressBar>
       </div>
       <Spacer />
-      <div className={styles.cardContainer} onClick={() => handleClick()}>
+      <div className={styles.cardContainer}>
         {tableIndexes.map((tableIndex) => (
           <React.Fragment key={tableIndex}>
             {getTotalCountForTable(tableIndex, true) ||
@@ -261,6 +285,7 @@ const History = () => {
                       colours[Math.floor(Math.random() * colours.length)]
                     } solid 6px`,
                   }}
+                  onClick={() => handleClick(tableIndex)}
                 >
                   <div
                     className={styles.title}
@@ -308,9 +333,7 @@ const History = () => {
                       <Step>
                         {() => (
                           <div className={styles.standing}>
-                            {getLocalHealth(tableIndex) !== "NaN"
-                              ? getLocalHealth(tableIndex) + "%"
-                              : ""}
+                            {getLocalHealth(tableIndex) + "%"}
                           </div>
                         )}
                       </Step>
@@ -320,14 +343,14 @@ const History = () => {
                     </ProgressBar>
                   </div>
                   <Spacer size="0.25rem" />
-                  {orderedTableArray(tableIndex).length ? (
+                  {orderedTableArray(tableIndex, 5, false).length ? (
                     <>
                       <div className={styles.fact}>Most Common Errors</div>
                       <div className={styles.tableContainer}>
                         <div className={styles.gridEntry}>Ques.</div>
                         <div className={styles.gridEntry}>Correct</div>
                         <div className={styles.gridEntry}>Incorrect</div>
-                        {orderedTableArray(tableIndex).map((row) => (
+                        {orderedTableArray(tableIndex, 5, false).map((row) => (
                           <React.Fragment key={row}>
                             <div className={styles.gridEntry}>
                               {tableIndex + 1} × {row[0]}
@@ -352,6 +375,17 @@ const History = () => {
         ))}
       </div>
       <Spacer />
+      {showTableHistory && (
+        <SeeDetailedTableHistory
+          closeModal={closeTableHistoryModal}
+          windowOnClick={tableHistoryWindowOnClick}
+          tableIndex={tableModalIndex}
+          getTotalCountForTable={getTotalCountForTable}
+          getLocalHealth={getLocalHealth}
+          orderedTableArray={orderedTableArray}
+          getColour={getColour}
+        />
+      )}
     </>
   );
 };
