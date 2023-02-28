@@ -5,19 +5,19 @@ import styles from "../componentStyles/HistoryButton.module.css";
 const HistoryButton = () => {
   const router = useRouter();
 
-  const goToHistory = () => {
+  const goToProgressHistory = () => {
     if (
       typeof window !== "undefined" &&
       sessionStorage.getItem("timeframe") === null
     ) {
       sessionStorage.setItem("timeframe", 1);
     }
-    router.push("/history");
+    router.push("/progressHistory");
   };
 
   return (
     <>
-      <div className={styles.historyButton} onClick={() => goToHistory()}>
+      <div className={styles.historyButton} onClick={() => goToProgressHistory()}>
         <GiProgression size={16} />progress
       </div>
     </>

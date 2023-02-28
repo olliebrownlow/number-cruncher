@@ -6,10 +6,10 @@ import Spacer from "../components/spacer";
 import SeeDetailedTableHistory from "../components/seeDetailedTableHistory";
 import "react-step-progress-bar/styles.css";
 import { ProgressBar, Step } from "react-step-progress-bar";
-import styles from "../styles/History.module.css";
+import styles from "../styles/ProgressHistory.module.css";
 import colours from "../config/colours";
 
-const History = () => {
+const ProgressHistory = () => {
   const tableIndexes = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 
   const [refresh, setRefresh] = useState(0);
@@ -386,4 +386,4 @@ const History = () => {
   );
 };
 
-export default History;
+export default ProgressHistory;
