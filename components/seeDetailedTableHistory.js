@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import Spacer from "../components/spacer";
 import Image from "next/image";
-import chalkboard from "../public/modalChalkboard2.jpg";
+import chalkboard from "../public/chalkboard.jpg";
 import "react-step-progress-bar/styles.css";
 import { ProgressBar, Step } from "react-step-progress-bar";
 import colours from "../config/colours";
@@ -25,11 +25,18 @@ const SeeDetailedTableHistory = (props) => {
 
   return ReactDOM.createPortal(
     <aside
-      className={styles.modalCover + ` ${styles.fadeIn}`}
+      className={styles.modalCover + ` ${styles.zoomIn}`}
       onClick={windowOnClick}
     >
       <div className={styles.modalArea}>
-        <div className={styles.bgWrap}>
+        <div
+          className={styles.bgWrap}
+          style={{
+            border: `${
+              colours[Math.floor(Math.random() * colours.length)]
+            } solid 6px`,
+          }}
+        >
           <Image
             alt="chalkboard"
             src={chalkboard}

@@ -114,10 +114,6 @@ const History = () => {
         }
       });
     }
-
-    // arr.sort(function (a, b) {
-    //   return b[2] - a[2];
-    // });
     return arr.splice(0, splicer);
   };
 
@@ -175,7 +171,7 @@ const History = () => {
     <>
       <BackButton />
       <HomeButton />
-      <PageHeading heading={"History"} />
+      <PageHeading heading={"Progress history"} />
       {/* timeframe option buttons */}
       <div className={styles.timeframeGrid}>
         <div

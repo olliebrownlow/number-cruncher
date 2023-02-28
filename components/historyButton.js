@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { HiOutlineClipboardList } from "react-icons/hi";
+import { GiProgression } from "react-icons/gi";
 import styles from "../componentStyles/HistoryButton.module.css";
 
 const HistoryButton = () => {
@@ -18,7 +18,7 @@ const HistoryButton = () => {
   return (
     <>
       <div className={styles.historyButton} onClick={() => goToHistory()}>
-        <HiOutlineClipboardList size={16} /> history
+        <GiProgression size={16} />progress
       </div>
     </>
   );
