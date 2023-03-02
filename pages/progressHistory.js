@@ -3,6 +3,7 @@ import BackButton from "../components/backButton";
 import HomeButton from "../components/homeButton";
 import PageHeading from "../components/pageHeading";
 import Spacer from "../components/spacer";
+import TimeframeOptions from "../components/timeframeOptions.js";
 import SeeDetailedTableHistory from "../components/seeDetailedTableHistory";
 import "react-step-progress-bar/styles.css";
 import { ProgressBar, Step } from "react-step-progress-bar";
@@ -172,74 +173,10 @@ const ProgressHistory = () => {
       <BackButton />
       <HomeButton />
       <PageHeading heading={"Progress history"} />
-      {/* timeframe option buttons */}
-      <div className={styles.timeframeGrid}>
-        <div
-          className={styles.topRowTimeframeOptionLeft}
-          onClick={() => handleTimeframeClick(1)}
-          style={{
-            backgroundColor:
-              timeframeStatus === 1 &&
-              colours[Math.floor(Math.random() * colours.length)],
-            color: timeframeStatus === 1 && "black",
-            fontSize: timeframeStatus === 1 ? "1.3rem" : "0.9rem",
-          }}
-        >
-          Today
-        </div>
-        <div
-          className={styles.topRowTimeframeOptionRight}
-          onClick={() => handleTimeframeClick(2)}
-          style={{
-            backgroundColor:
-              timeframeStatus === 2 &&
-              colours[Math.floor(Math.random() * colours.length)],
-            color: timeframeStatus === 2 && "black",
-            fontSize: timeframeStatus === 2 ? "1.3rem" : "0.9rem",
-          }}
-        >
-          Last 2 days
-        </div>
-        <div
-          className={styles.secondRowTimeframeOptionLeft}
-          onClick={() => handleTimeframeClick(7)}
-          style={{
-            backgroundColor:
-              timeframeStatus === 7 &&
-              colours[Math.floor(Math.random() * colours.length)],
-            color: timeframeStatus === 7 && "black",
-            fontSize: timeframeStatus === 7 ? "1.3rem" : "0.9rem",
-          }}
-        >
-          Last 7 days
-        </div>
-        <div
-          className={styles.secondRowTimeframeOptionMiddle}
-          onClick={() => handleTimeframeClick(30)}
-          style={{
-            backgroundColor:
-              timeframeStatus === 30 &&
-              colours[Math.floor(Math.random() * colours.length)],
-            color: timeframeStatus === 30 && "black",
-            fontSize: timeframeStatus === 30 ? "1.1rem" : "0.9rem",
-          }}
-        >
-          Last 30 days
-        </div>
-        <div
-          className={styles.secondRowTimeframeOptionRight}
-          onClick={() => handleTimeframeClick(3650)}
-          style={{
-            backgroundColor:
-              timeframeStatus === 3650 &&
-              colours[Math.floor(Math.random() * colours.length)],
-            color: timeframeStatus === 3650 && "black",
-            fontSize: timeframeStatus === 3650 ? "1.3rem" : "0.9rem",
-          }}
-        >
-          All time
-        </div>
-      </div>
+      <TimeframeOptions
+        timeframeStatus={timeframeStatus}
+        handleTimeframeClick={handleTimeframeClick}
+      />
       <Spacer />
       <div className={styles.globalResultsContainer}>
         <div className={styles.globalResults}>correct</div>
