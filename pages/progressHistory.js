@@ -4,6 +4,7 @@ import HomeButton from "../components/homeButton";
 import PageHeading from "../components/pageHeading";
 import Spacer from "../components/spacer";
 import TimeframeOptions from "../components/timeframeOptions.js";
+import GlobalResultsGrid from "../components/globalResultsGrid";
 import SeeDetailedTableHistory from "../components/seeDetailedTableHistory";
 import "react-step-progress-bar/styles.css";
 import { ProgressBar, Step } from "react-step-progress-bar";
@@ -178,14 +179,9 @@ const ProgressHistory = () => {
         handleTimeframeClick={handleTimeframeClick}
       />
       <Spacer />
-      <div className={styles.globalResultsContainer}>
-        <div className={styles.globalResults}>correct</div>
-        <div className={styles.globalResults}>incorrect</div>
-        <div className={styles.globalResults}>{totalGlobalCount(true)}</div>
-        <div className={styles.globalResults}>{totalGlobalCount(false)}</div>
-      </div>
+      <GlobalResultsGrid totalGlobalCount={totalGlobalCount} />
       <div className={styles.globalHealth}>health</div>
-      <Spacer />
+      <Spacer size={"0.75rem"} />
       <div className={styles.globalProgressBarContainer}>
         <ProgressBar
           percent={getGlobalHealth()}
@@ -307,6 +303,9 @@ const ProgressHistory = () => {
           </React.Fragment>
         ))}
       </div>
+      {totalGlobalCount(true) === 0 && totalGlobalCount(false) === 0 && (
+        <div className={styles.noProgress}>No progess history. Start practising to see something here.</div>
+      )}
       <Spacer />
       {showTableHistory && (
         <SeeDetailedTableHistory

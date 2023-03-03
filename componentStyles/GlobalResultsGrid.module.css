@@ -1,0 +1,12 @@
+.globalResultsContainer {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  text-align: center;
+  width: 85%;
+}
+
+.globalResults {
+  font-size: 1.5rem;
+  padding-top: 8px;
+  font-weight: 700;
+}

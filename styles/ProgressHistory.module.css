@@ -1,16 +1,3 @@
-.globalResultsContainer {
-  display: grid;
-  grid-template-columns: 50% 50%;
-  text-align: center;
-  width: 85%;
-}
-
-.globalResults {
-  font-size: 1.5rem;
-  padding-top: 8px;
-  font-weight: 700;
-}
-
 .globalHealth {
   font-size: 1.5rem;
 }
@@ -96,4 +83,10 @@
   top: auto;
   font-size: 0.9rem;
   font-weight: 700;
+}
+
+.noProgress {
+  text-align: center;
+  font-size: 2rem;
+  width: 85%;
 }
