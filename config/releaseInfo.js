@@ -5,6 +5,12 @@ const releaseInfo = [
     features: "New feature(s)",
   },
   {
+    release: "3",
+    date: "Mar 4th 2023",
+    features:
+      "Progress history tracking to monitor user progress over time",
+  },
+  {
     release: "2",
     date: "Feb 16th 2023",
     features:
