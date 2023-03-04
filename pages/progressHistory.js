@@ -5,15 +5,14 @@ import PageHeading from "../components/pageHeading";
 import Spacer from "../components/spacer";
 import TimeframeOptions from "../components/timeframeOptions.js";
 import GlobalResultsGrid from "../components/globalResultsGrid";
+import ProgressHistoryCards from "../components/progressHistoryCards";
 import SeeDetailedTableHistory from "../components/seeDetailedTableHistory";
 import { getColour } from "../utils/getColour";
 import "react-step-progress-bar/styles.css";
 import { ProgressBar, Step } from "react-step-progress-bar";
 import styles from "../styles/ProgressHistory.module.css";
-import colours from "../config/colours";
 
 const ProgressHistory = () => {
-  const tableIndexes = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 
   const [refresh, setRefresh] = useState(0);
   const [timeframeStatus, setTimeframeStatus] = useState(0);
@@ -158,6 +157,7 @@ const ProgressHistory = () => {
         <ProgressBar
           percent={getGlobalHealth()}
           filledBackground={getColour(getGlobalHealth())}
+          unfilledBackground={getGlobalHealth() === "0" ? "red" : ""}
         >
           <Step>{() => <div className={styles.firstStep}></div>}</Step>
           <Step>
@@ -173,108 +173,12 @@ const ProgressHistory = () => {
         </ProgressBar>
       </div>
       <Spacer />
-      <div className={styles.cardContainer}>
-        {tableIndexes.map((tableIndex) => (
-          <React.Fragment key={tableIndex}>
-            {getTotalCountForTable(tableIndex, true) ||
-            getTotalCountForTable(tableIndex, false) ? (
-              <>
-                <div
-                  className={styles.card}
-                  style={{
-                    border: `${
-                      colours[Math.floor(Math.random() * colours.length)]
-                    } solid 6px`,
-                  }}
-                  onClick={() => handleClick(tableIndex)}
-                >
-                  <div
-                    className={styles.title}
-                    style={{
-                      color: `${
-                        colours[Math.floor(Math.random() * colours.length)]
-                      }`,
-                    }}
-                  >
-                    {tableIndex + 1} times table
-                  </div>
-                  <div className={styles.localResultsContainer}>
-                    <div className={styles.fact}>Correct</div>
-                    <div className={styles.fact}>Incorrect</div>
-                    <div
-                      className={styles.fact}
-                      style={{
-                        fontWeight: "900",
-                      }}
-                    >
-                      {getTotalCountForTable(tableIndex, true)}
-                    </div>
-                    <div
-                      className={styles.fact}
-                      style={{
-                        fontWeight: "900",
-                      }}
-                    >
-                      {getTotalCountForTable(tableIndex, false)}
-                    </div>
-                  </div>
-                  <Spacer size="0.75rem" />
-                  <div className={styles.localProgressBarContainer}>
-                    <ProgressBar
-                      percent={getLocalHealth(tableIndex)}
-                      filledBackground={getColour(getLocalHealth(tableIndex))}
-                      unfilledBackground={
-                        getLocalHealth(tableIndex) === "0" ? "red" : ""
-                      }
-                      height={7.5}
-                    >
-                      <Step>
-                        {() => <div className={styles.firstStep}></div>}
-                      </Step>
-                      <Step>
-                        {() => (
-                          <div className={styles.standing}>
-                            {getLocalHealth(tableIndex) + "%"}
-                          </div>
-                        )}
-                      </Step>
-                      <Step>
-                        {() => <div className={styles.indexedStep}></div>}
-                      </Step>
-                    </ProgressBar>
-                  </div>
-                  <Spacer size="0.25rem" />
-                  {orderedTableArray(tableIndex, 5, false).length ? (
-                    <>
-                      <div className={styles.fact}>Most Common Errors</div>
-                      <div className={styles.tableContainer}>
-                        <div className={styles.gridEntry}>Ques.</div>
-                        <div className={styles.gridEntry}>Correct</div>
-                        <div className={styles.gridEntry}>Incorrect</div>
-                        {orderedTableArray(tableIndex, 5, false).map((row) => (
-                          <React.Fragment key={row}>
-                            <div className={styles.gridEntry}>
-                              {tableIndex + 1} × {row[0]}
-                            </div>
-                            <div className={styles.gridEntry}>{row[1]}</div>
-                            <div className={styles.gridEntry}>{row[2]}</div>
-                          </React.Fragment>
-                        ))}
-                      </div>
-                    </>
-                  ) : (
-                    <>
-                      <Spacer size={"0.5rem"} />
-                    </>
-                  )}
-                </div>
-              </>
-            ) : (
-              <React.Fragment key={tableIndex}></React.Fragment>
-            )}
-          </React.Fragment>
-        ))}
-      </div>
+      <ProgressHistoryCards
+        getTotalCountForTable={getTotalCountForTable}
+        handleClick={handleClick}
+        getLocalHealth={getLocalHealth}
+        orderedTableArray={orderedTableArray}
+      />
       {totalGlobalCount(true) === 0 && totalGlobalCount(false) === 0 && (
         <div className={styles.noProgress}>
           No progess history. Start practising to see something here.
