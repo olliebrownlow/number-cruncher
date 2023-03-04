@@ -2,67 +2,8 @@
   font-size: 1.5rem;
 }
 
-.cardContainer {
-  display: grid;
-  grid-template-columns: 50% 50%;
-  row-gap: 12px;
-  column-gap: 2px;
-  max-width: 100%;
-}
-
-.card {
-  text-align: center;
-  width: 11rem;
-  border-radius:95% 4% 97% 5%/4% 94% 3% 95%;
-}
-
-.title {
-  font-size: 1.5rem;
-  padding-top: 8px;
-  font-weight: 700;
-}
-
-.localResultsContainer {
-  display: grid;
-  grid-template-columns: 50% 50%;
-  text-align: center;
-}
-
-.noDataContainer {
-  display: table;
-  height: 75%;
-  margin-bottom: 24px;
-}
-
-.noData {
-  font-size: 1.25rem;
-  display: table-cell;
-  vertical-align: middle;
-}
-
-.fact {
-  font-size: 0.9rem;
-  padding-top: 4px;
-}
-
-.gridEntry {
-  font-size: 0.9rem;
-  padding-top: 4px;
-}
-
-.tableContainer {
-  display: grid;
-  grid-template-columns: 30% 35% 35%;
-  max-width: 100%;
-  margin-bottom: 6px;
-}
-
 .globalProgressBarContainer {
   width: 75%;
-}
-
-.localProgressBarContainer {
-  margin: 0 10%;  
 }
 
 .firstStep {

@@ -3,7 +3,7 @@ import Spacer from "../components/spacer";
 import { getColour } from "../utils/getColour";
 import "react-step-progress-bar/styles.css";
 import { ProgressBar, Step } from "react-step-progress-bar";
-import styles from "../styles/ProgressHistory.module.css";
+import styles from "../componentStyles/ProgressHistoryCards.module.css";
 import colours from "../config/colours";
 
 const ProgressHistoryCards = (props) => {
