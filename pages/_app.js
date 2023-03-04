@@ -78,7 +78,7 @@ export default function App({ Component, pageProps }) {
               background: "dimgrey",
               color: "white",
             },
-            duration: 6000,
+            duration: 5000,
           },
         }}
       />
