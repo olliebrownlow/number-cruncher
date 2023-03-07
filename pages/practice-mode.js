@@ -76,12 +76,13 @@ const PracticeMode = () => {
       storePreviousQuestionAndAnswer(userAnswer);
       // reset user answer for the form
       setUserAnswer("");
-      setNewQuestion();
-      // end game if necessary
+      // end game if necessary or set new question
       if (
         questionNumber() > parseInt(sessionStorage.getItem("numOfQuestions"))
       ) {
         endGame();
+      } else {
+        setNewQuestion();
       }
     } else {
       toast.error("Your answer must be between 1 and 144", {
