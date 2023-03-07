@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import styles from "../componentStyles/AnswerForm.module.css";
 
 const AnswerForm = (props) => {
-  const { userAnswer, handleChange, submitAnswer, resetCounters } = props;
+  const { userAnswer, handleChange, submitAnswer, resetGame } = props;
   const router = useRouter();
 
   return (
@@ -21,7 +21,7 @@ const AnswerForm = (props) => {
           >
             options
           </div>
-          <div className={styles.gameEndButtonReplay} onClick={resetCounters}>
+          <div className={styles.gameEndButtonReplay} onClick={resetGame}>
             replay
           </div>
           <div

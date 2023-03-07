@@ -1,7 +1,7 @@
 import styles from "../componentStyles/RightWrongCounters.module.css";
 
 const RightWrongCounters = (props) => {
-  const { resetCounters } = props;
+  const { resetGame } = props;
 
   const getSessionItem = (key) => {
     if (typeof window !== "undefined") {
@@ -15,7 +15,7 @@ const RightWrongCounters = (props) => {
         {getSessionItem("correctCounter")}
       </div>
       <div>
-        <div className={styles.reset} onClick={resetCounters}>
+        <div className={styles.reset} onClick={resetGame}>
           restart
         </div>
       </div>

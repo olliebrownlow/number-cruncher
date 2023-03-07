@@ -10,7 +10,21 @@ import AnswerForm from "../components/answerForm";
 import AnswerGrid from "../components/answerGrid";
 import EndButton from "../components/endButton";
 import TablesInPlayGrid from "../components/tablesInPlayGrid";
-import correctAnswerGoals from "../config/correctAnswerGoals";
+import {
+  focusOnAnswerTextBox,
+  setCountersToZero,
+  setFirstQuestion,
+  resetPreviousQuestionAnswersArray,
+  isUserAnswerPassedOrInRange,
+  isCorrectAnswer,
+  incrementAnswerCounter,
+  incrementAchCorrectAnswers,
+  addAnswerToHistoryInfo,
+  isNewAchCorrectAnswersAwardDue,
+  storePreviousQuestionAndAnswer,
+  questionNumber,
+  setNewQuestion,
+} from "../core/gamePlayLogic";
 
 const PracticeMode = () => {
   const [userAnswer, setUserAnswer] = useState("");
@@ -19,193 +33,22 @@ const PracticeMode = () => {
   const [reRender, setReRender] = useState(0);
 
   useEffect(() => {
-    // focus immediately on the answer text box
-    if (document.getElementById("answer")) {
-      document.getElementById("answer").focus();
-    }
+    focusOnAnswerTextBox();
   }, []);
 
-  const resetCounters = (e) => {
+  const resetGame = (e) => {
     e.preventDefault();
-    if (typeof window !== "undefined") {
-      // set counters to zero
-      sessionStorage.setItem("isFinished", false);
-      sessionStorage.setItem("correctCounter", 0);
-      sessionStorage.setItem("errorCounter", 0);
-      // set first question
-      const tablesArray = JSON.parse(sessionStorage.getItem("tablesInUse"));
-      if (sessionStorage.getItem("questionOrdering") === "in order") {
-        sessionStorage.setItem("currentMultiplier", 1);
-        const orderedTables = tablesArray.sort((a, b) => a - b);
-        sessionStorage.setItem("currentTable", orderedTables[0]);
-      } else {
-        const shuffledTables = tablesArray.sort(() => 0.5 - Math.random());
-        sessionStorage.setItem("currentTable", shuffledTables.slice(0, 1));
-        const randomMultiplier = Math.floor(Math.random() * 12) + 1;
-        sessionStorage.setItem("currentMultiplier", randomMultiplier);
-      }
-      // trigger counter reset in child component
-      setReRender(reRender + 1);
-      // focus on form text entry box
-      if (document.getElementById("answer")) {
-        document.getElementById("answer").focus();
-      }
-      // clear out previous questionAnswers
-      sessionStorage.setItem("prevQuestionAnswersArray", "[]");
-    }
-  };
-
-  const isCorrectAnswer = (table, multiplier, userAnswer) => {
-    if (table * multiplier === userAnswer) {
-      return true;
-    }
-    return false;
+    setCountersToZero();
+    setFirstQuestion();
+    // trigger counter reset in child component
+    setReRender(reRender + 1);
+    focusOnAnswerTextBox();
+    resetPreviousQuestionAnswersArray();
   };
 
   const handleChange = (event) => {
     const target = event.target;
     setUserAnswer(target.value);
-  };
-
-  const getUserAnswer = () => {
-    if (userAnswer) {
-      return parseInt(userAnswer);
-    }
-    return "--";
-  };
-
-  const getToastMessage = (index, currentGlobalCount) => {
-    if (correctAnswerGoals[index + 1]) {
-      return `NEW AWARD!!!\nClaim your award for getting ${
-        currentGlobalCount + 1
-      } questions correct! \n Next target\n${correctAnswerGoals[index + 1]}`;
-    }
-    return `NEW AWARD!!!\nClaim your award for getting ${
-      currentGlobalCount + 1
-    } questions correct!`;
-  };
-
-  const submitAnswer = (e) => {
-    e.preventDefault();
-    document.getElementById("answer").focus();
-    if (
-      (parseInt(userAnswer) > 0 && parseInt(userAnswer) < 145) ||
-      !userAnswer
-    ) {
-      // trigger counter movement in child component when blank answer
-      setReRender(reRender + 1);
-      // setup global answer tracking for history
-      const historyInfo = JSON.parse(localStorage.getItem("historyInfo"));
-      const tableIndex = parseInt(sessionStorage.getItem("currentTable")) - 1;
-      const multiplierIndex = parseInt(
-        sessionStorage.getItem("currentMultiplier") - 1
-      );
-      const todaysDate = new Date().toISOString().split("T")[0];
-      // const todaysDate = "2022-01-01"
-      // check answer and increment counters
-      if (
-        isCorrectAnswer(
-          parseInt(sessionStorage.getItem("currentTable")),
-          parseInt(sessionStorage.getItem("currentMultiplier")),
-          parseInt(userAnswer)
-        )
-      ) {
-        // local correct answer count
-        const currentCount = sessionStorage.getItem("correctCounter");
-        sessionStorage.setItem("correctCounter", parseInt(currentCount) + 1);
-        // global correct answer count for achievements
-        const currentGlobalCount = parseInt(
-          localStorage.getItem("achCorrectAnswers")
-        );
-        localStorage.setItem("achCorrectAnswers", currentGlobalCount + 1);
-        // global correct answer tracking for history
-        historyInfo[tableIndex][multiplierIndex].push([true, todaysDate]);
-        localStorage.setItem("historyInfo", JSON.stringify(historyInfo));
-        // check for new AllTimeCorrectAnswer award
-        if (correctAnswerGoals.includes(currentGlobalCount + 1)) {
-          const index = correctAnswerGoals.indexOf(currentGlobalCount + 1);
-          const isATCAClaimedArray = JSON.parse(
-            localStorage.getItem("isATCAClaimed")
-          );
-          isATCAClaimedArray[index] = 0;
-          localStorage.setItem(
-            "isATCAClaimed",
-            JSON.stringify(isATCAClaimedArray)
-          );
-          toast.success(getToastMessage(index, currentGlobalCount), {
-            id: "correctAnswersAchievement",
-          });
-        }
-      } else {
-        // local incorrect answer count
-        const currentCount = sessionStorage.getItem("errorCounter");
-        sessionStorage.setItem("errorCounter", parseInt(currentCount) + 1);
-        // global incorrect answer tracking for history
-        historyInfo[tableIndex][multiplierIndex].push([false, todaysDate]);
-        localStorage.setItem("historyInfo", JSON.stringify(historyInfo));
-      }
-      // store old question and answer
-      const qAArray = JSON.parse(
-        sessionStorage.getItem("prevQuestionAnswersArray")
-      );
-      const qAObject = {
-        id: questionNumber() - 1,
-        table: parseInt(sessionStorage.getItem("currentTable")),
-        multiplier: parseInt(sessionStorage.getItem("currentMultiplier")),
-        userAnswer: getUserAnswer(),
-        isCorrect: isCorrectAnswer(
-          parseInt(sessionStorage.getItem("currentTable")),
-          parseInt(sessionStorage.getItem("currentMultiplier")),
-          parseInt(userAnswer)
-        ),
-      };
-      qAArray.push(qAObject);
-      const stringifiedQAArray = JSON.stringify(qAArray);
-      sessionStorage.setItem("prevQuestionAnswersArray", stringifiedQAArray);
-      // reset user answer for the form
-      setUserAnswer("");
-      // set new question
-      let tablesArray = JSON.parse(sessionStorage.getItem("tablesInUse"));
-      if (sessionStorage.getItem("questionOrdering") === "mixed up") {
-        const shuffledTables = tablesArray.sort(() => 0.5 - Math.random());
-        sessionStorage.setItem("currentTable", shuffledTables.slice(0, 1));
-        const newMultplier = Math.floor(Math.random() * 12) + 1;
-        sessionStorage.setItem("currentMultiplier", newMultplier);
-      } else {
-        if (parseInt(sessionStorage.getItem("currentMultiplier")) < 12) {
-          const newMultiplier =
-            parseInt(sessionStorage.getItem("currentMultiplier")) + 1;
-          sessionStorage.setItem("currentMultiplier", newMultiplier);
-        } else {
-          const orderedTables = tablesArray.sort((a, b) => a - b);
-          var index = orderedTables.indexOf(
-            parseInt(sessionStorage.getItem("currentTable"))
-          );
-          sessionStorage.setItem("currentTable", orderedTables[index + 1]);
-          sessionStorage.setItem("currentMultiplier", 1);
-        }
-      }
-      // end game if necessary
-      if (
-        questionNumber() > parseInt(sessionStorage.getItem("numOfQuestions"))
-      ) {
-        sessionStorage.setItem("isFinished", true);
-      }
-    } else {
-      toast.error("Your answer must be between 1 and 144", {
-        id: "outOfRange",
-      });
-    }
-  };
-
-  const questionNumber = () => {
-    let right;
-    let wrong;
-    if (typeof window !== "undefined") {
-      right = sessionStorage.getItem("correctCounter");
-      wrong = sessionStorage.getItem("errorCounter");
-    }
-    return parseInt(right) + parseInt(wrong) + 1;
   };
 
   const endGame = () => {
@@ -215,19 +58,51 @@ const PracticeMode = () => {
     }
   };
 
+  const submitAnswer = (e) => {
+    e.preventDefault();
+    focusOnAnswerTextBox();
+    if (isUserAnswerPassedOrInRange(userAnswer)) {
+      // trigger counter movement in child component when blank answer
+      setReRender(reRender + 1);
+      if (isCorrectAnswer(userAnswer)) {
+        incrementAnswerCounter("correctCounter");
+        incrementAchCorrectAnswers();
+        addAnswerToHistoryInfo(true);
+        isNewAchCorrectAnswersAwardDue();
+      } else {
+        incrementAnswerCounter("errorCounter");
+        addAnswerToHistoryInfo(false);
+      }
+      storePreviousQuestionAndAnswer(userAnswer);
+      // reset user answer for the form
+      setUserAnswer("");
+      setNewQuestion();
+      // end game if necessary
+      if (
+        questionNumber() > parseInt(sessionStorage.getItem("numOfQuestions"))
+      ) {
+        endGame();
+      }
+    } else {
+      toast.error("Your answer must be between 1 and 144", {
+        id: "outOfRange",
+      });
+    }
+  };
+
   return (
     <>
       <BackButton />
       <HomeButton />
       <PageHeading heading={"Practice Mode"} />
       <TablesInPlayGrid />
-      <RightWrongCounters resetCounters={resetCounters} reRender={reRender} />
+      <RightWrongCounters resetGame={resetGame} reRender={reRender} />
       <QuestionDisplay questionNumber={questionNumber()} />
       <AnswerForm
         userAnswer={userAnswer}
         handleChange={handleChange}
         submitAnswer={submitAnswer}
-        resetCounters={resetCounters}
+        resetGame={resetGame}
       />
       <AnswerGrid />
       <Spacer />
