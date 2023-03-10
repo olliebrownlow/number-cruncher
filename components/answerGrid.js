@@ -23,14 +23,14 @@ const AnswerGrid = () => {
       <div>Ques</div>
       <div>Ans</div>
       <div>Your Ans</div>
-      <div></div>      
+      <div></div>
       {/* question */}
       <div className={styles.answerDisplay}>
         {qAndA ? `${qAndA.table} × ${qAndA.multiplier}` : "-- x --"}
       </div>
       {/* correct answer*/}
       <div className={styles.answerCorrectDisplay}>
-        {qAndA ? qAndA.table * qAndA.multiplier : "--"}
+        {qAndA ? `${qAndA.table * qAndA.multiplier}` : "--"}
       </div>
       {/* user answer*/}
       {qAndA && !qAndA.isCorrect ? (
