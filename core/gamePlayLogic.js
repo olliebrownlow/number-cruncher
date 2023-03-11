@@ -17,13 +17,18 @@ export const setCountersToZero = () => {
 
 export const setFirstQuestion = () => {
   if (typeof window !== "undefined") {
-    const tablesArray = JSON.parse(sessionStorage.getItem("tablesInUse"));
-    if (sessionStorage.getItem("questionOrdering") === "in order") {
+    const gt = sessionStorage.getItem("gameType");
+    const gameOptions = JSON.parse(sessionStorage.getItem(`${gt}GameOptions`));
+    if (gameOptions.questionOrdering === "in order") {
+      sessionStorage.setItem(
+        "currentTable",
+        gameOptions.orderedSelectedTables[0]
+      );
       sessionStorage.setItem("currentMultiplier", 1);
-      const orderedTables = tablesArray.sort((a, b) => a - b);
-      sessionStorage.setItem("currentTable", orderedTables[0]);
     } else {
-      const shuffledTables = tablesArray.sort(() => 0.5 - Math.random());
+      const shuffledTables = gameOptions.orderedSelectedTables.sort(
+        () => 0.5 - Math.random()
+      );
       sessionStorage.setItem("currentTable", shuffledTables.slice(0, 1));
       const randomMultiplier = Math.floor(Math.random() * 12) + 1;
       sessionStorage.setItem("currentMultiplier", randomMultiplier);
@@ -135,23 +140,29 @@ export const questionNumber = () => {
 };
 
 export const setNewQuestion = () => {
-  let tablesArray = JSON.parse(sessionStorage.getItem("tablesInUse"));
-  if (sessionStorage.getItem("questionOrdering") === "mixed up") {
-    const shuffledTables = tablesArray.sort(() => 0.5 - Math.random());
+  const gt = sessionStorage.getItem("gameType");
+  const gameOptions = JSON.parse(sessionStorage.getItem(`${gt}GameOptions`));
+
+  if (gameOptions.questionOrdering === "mixed up") {
+    const shuffledTables = gameOptions.orderedSelectedTables.sort(
+      () => 0.5 - Math.random()
+    );
     sessionStorage.setItem("currentTable", shuffledTables.slice(0, 1));
-    const newMultplier = Math.floor(Math.random() * 12) + 1;
-    sessionStorage.setItem("currentMultiplier", newMultplier);
+    const newMultiplier = Math.floor(Math.random() * 12) + 1;
+    sessionStorage.setItem("currentMultiplier", newMultiplier);
   } else {
     if (parseInt(sessionStorage.getItem("currentMultiplier")) < 12) {
       const newMultiplier =
         parseInt(sessionStorage.getItem("currentMultiplier")) + 1;
       sessionStorage.setItem("currentMultiplier", newMultiplier);
     } else {
-      const orderedTables = tablesArray.sort((a, b) => a - b);
-      var index = orderedTables.indexOf(
+      var index = gameOptions.orderedSelectedTables.indexOf(
         parseInt(sessionStorage.getItem("currentTable"))
       );
-      sessionStorage.setItem("currentTable", orderedTables[index + 1]);
+      sessionStorage.setItem(
+        "currentTable",
+        gameOptions.orderedSelectedTables[index + 1]
+      );
       sessionStorage.setItem("currentMultiplier", 1);
     }
   }

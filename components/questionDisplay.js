@@ -10,13 +10,11 @@ const QuestionDisplay = (props) => {
   const [numOfQuestions, setNumOfQuestions] = useState([]);
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      setCurrentTable(parseInt(sessionStorage.getItem("currentTable")));
-      setCurrentMultiplier(
-        parseInt(sessionStorage.getItem("currentMultiplier"))
-      );
-      setNumOfQuestions(sessionStorage.getItem("numOfQuestions"));
-    }
+    setCurrentTable(parseInt(sessionStorage.getItem("currentTable")));
+    setCurrentMultiplier(parseInt(sessionStorage.getItem("currentMultiplier")));
+    const gt = sessionStorage.getItem("gameType");
+    const gameOptions = JSON.parse(sessionStorage.getItem(`${gt}GameOptions`));
+    setNumOfQuestions(gameOptions.numOfQuestions);
   }, [
     typeof window !== "undefined" &&
       sessionStorage.getItem("currentMultiplier"),

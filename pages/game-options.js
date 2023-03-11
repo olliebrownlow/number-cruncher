@@ -19,30 +19,22 @@ const GameOptions = () => {
   const [numOfQuestionsReserved, setNumOfQuestionsReserved] = useState("10");
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      setGameType(sessionStorage.getItem("gameType"));
+    const gt = sessionStorage.getItem("gameType");
+    setGameType(gt);
+
+    if (gt === "practice-mode") {
+      setSelected([1]);
+    } else {
+      setSelected([1, 2, 10]);
     }
 
-    if (
-      typeof window !== "undefined" &&
-      sessionStorage.getItem("tablesInUse") !== null
-    ) {
-      let tablesArray = JSON.parse(sessionStorage.getItem("tablesInUse"));
-      setSelected(tablesArray);
-    }
-
-    if (
-      typeof window !== "undefined" &&
-      sessionStorage.getItem("questionOrdering") !== null
-    ) {
-      setOrderedQuestions(sessionStorage.getItem("questionOrdering"));
-    }
-
-    if (
-      typeof window !== "undefined" &&
-      sessionStorage.getItem("numOfQuestions") !== null
-    ) {
-      setNumOfQuestions(sessionStorage.getItem("numOfQuestions"));
+    if (sessionStorage.getItem(`${gt}GameOptions`) !== null) {
+      const gameOptions = JSON.parse(
+        sessionStorage.getItem(`${gt}GameOptions`)
+      );
+      setSelected(gameOptions.orderedSelectedTables);
+      setOrderedQuestions(gameOptions.questionOrdering);
+      setNumOfQuestions(gameOptions.numOfQuestions);
     }
   }, []);
 
@@ -63,13 +55,14 @@ const GameOptions = () => {
             questionOrdering={orderedQuestions}
             numOfQuestions={numOfQuestions}
           />
-          <Spacer size={"1.5rem"}/>
+          <Spacer size={"1.5rem"} />
           <OptionHeading optionHeading={"tables"} />
           <TimesTablesGrid
             selected={selected}
             setSelected={setSelected}
             orderedQuestions={orderedQuestions}
             setNumOfQuestions={setNumOfQuestions}
+            gameType={gameType}
           />
           <Spacer />
           <ShortCutTableOptionsGrid
@@ -99,7 +92,35 @@ const GameOptions = () => {
           <Spacer />
         </>
       )}
-      {gameType !== "practice-mode" && <UnderConstruction />}
+      {gameType === "streak-challenge" && (
+        <>
+          <StartButton
+            gameType={gameType}
+            selectedTimesTables={selected}
+            questionOrdering={"mixed up"}
+            numOfQuestions={"no limit"}
+          />
+          <Spacer size={"1.5rem"} />
+          <OptionHeading optionHeading={"tables"} />
+          <TimesTablesGrid
+            selected={selected}
+            setSelected={setSelected}
+            orderedQuestions={"mixed up"}
+            setNumOfQuestions={setNumOfQuestions}
+            gameType={gameType}
+          />
+          <Spacer />
+          <ShortCutTableOptionsGrid
+            setSelected={setSelected}
+            orderedQuestions={"mixed up"}
+            setNumOfQuestions={setNumOfQuestions}
+          />
+          <Spacer />
+        </>
+      )}
+      {gameType !== "practice-mode" && gameType !== "streak-challenge" && (
+        <UnderConstruction />
+      )}
     </>
   );
 };

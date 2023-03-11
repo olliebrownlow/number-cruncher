@@ -14,19 +14,23 @@ const StartButton = (props) => {
   const playGame = () => {
     if (selectedTimesTables.length > 0) {
       if (typeof window !== "undefined") {
-        // setup new game
-        sessionStorage.setItem("questionOrdering", questionOrdering);
-        sessionStorage.setItem("numOfQuestions", numOfQuestions);
+        // setup basic options
         const orderedSelectedTables = selectedTimesTables.sort((a, b) => a - b);
+        const basicOptionsObject = {
+          questionOrdering: questionOrdering,
+          numOfQuestions: numOfQuestions,
+          orderedSelectedTables: orderedSelectedTables,
+        };
         sessionStorage.setItem(
-          "tablesInUse",
-          JSON.stringify(orderedSelectedTables)
+          `${gameType}GameOptions`,
+          JSON.stringify(basicOptionsObject)
         );
-
         sessionStorage.setItem("isFinished", false);
         sessionStorage.setItem("correctCounter", 0);
         sessionStorage.setItem("errorCounter", 0);
-      
+        sessionStorage.setItem("prevQuestionAnswersArray", "[]");
+
+        // set first question
         if (questionOrdering === "mixed up") {
           const randomisedSelectedTables = selectedTimesTables.sort(
             () => 0.5 - Math.random()
@@ -41,7 +45,6 @@ const StartButton = (props) => {
           sessionStorage.setItem("currentTable", orderedSelectedTables[0]);
           sessionStorage.setItem("currentMultiplier", 1);
         }
-        sessionStorage.setItem("prevQuestionAnswersArray", "[]");
       }
       router.push("/" + gameType);
     } else {

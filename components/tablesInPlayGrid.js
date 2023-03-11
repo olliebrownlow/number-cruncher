@@ -6,10 +6,9 @@ const TablesInPlayGrid = () => {
   const [tablesInPlay, setTablesInPlay] = useState([]);
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      const tablesInPlay = JSON.parse(sessionStorage.getItem("tablesInUse"));
-      setTablesInPlay(tablesInPlay);
-    }
+    const gt = sessionStorage.getItem("gameType");
+    const gameOptions = JSON.parse(sessionStorage.getItem(`${gt}GameOptions`));
+    setTablesInPlay(gameOptions.orderedSelectedTables);
   }, []);
 
   return (

@@ -77,9 +77,11 @@ const PracticeMode = () => {
       // reset user answer for the form
       setUserAnswer("");
       // end game if necessary or set new question
-      if (
-        questionNumber() > parseInt(sessionStorage.getItem("numOfQuestions"))
-      ) {
+      const gt = sessionStorage.getItem("gameType");
+      const gameOptions = JSON.parse(
+        sessionStorage.getItem(`${gt}GameOptions`)
+      );
+      if (questionNumber() > gameOptions.numOfQuestions) {
         endGame();
       } else {
         setNewQuestion();
@@ -108,7 +110,6 @@ const PracticeMode = () => {
       <AnswerGrid />
       <Spacer />
       {typeof window !== "undefined" &&
-        sessionStorage.getItem("numOfQuestions") === "no limit" &&
         sessionStorage.getItem("isFinished") === "false" && (
           <>
             <EndButton endGame={endGame} />
