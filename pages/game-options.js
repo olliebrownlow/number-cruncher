@@ -62,7 +62,6 @@ const GameOptions = () => {
             setSelected={setSelected}
             orderedQuestions={orderedQuestions}
             setNumOfQuestions={setNumOfQuestions}
-            gameType={gameType}
           />
           <Spacer />
           <ShortCutTableOptionsGrid
@@ -107,7 +106,6 @@ const GameOptions = () => {
             setSelected={setSelected}
             orderedQuestions={"mixed up"}
             setNumOfQuestions={setNumOfQuestions}
-            gameType={gameType}
           />
           <Spacer />
           <ShortCutTableOptionsGrid

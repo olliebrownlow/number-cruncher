@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import toast from "react-hot-toast";
+import { getDifficultyLevel } from "../utils/getDifficultyLevel";
 import styles from "../componentStyles/StartButton.module.css";
 
 const StartButton = (props) => {
@@ -20,6 +21,7 @@ const StartButton = (props) => {
           questionOrdering: questionOrdering,
           numOfQuestions: numOfQuestions,
           orderedSelectedTables: orderedSelectedTables,
+          difficultyLevel: getDifficultyLevel(orderedSelectedTables),
         };
         sessionStorage.setItem(
           `${gameType}GameOptions`,

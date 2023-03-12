@@ -20,7 +20,7 @@ import {
   incrementAnswerCounter,
   incrementAchCorrectAnswers,
   addAnswerToHistoryInfo,
-  isNewAchCorrectAnswersAwardDue,
+  newAchCorrectAnswersAwardIfDue,
   storePreviousQuestionAndAnswer,
   questionNumber,
   setNewQuestion,
@@ -68,7 +68,7 @@ const PracticeMode = () => {
         incrementAnswerCounter("correctCounter");
         incrementAchCorrectAnswers();
         addAnswerToHistoryInfo(true);
-        isNewAchCorrectAnswersAwardDue();
+        newAchCorrectAnswersAwardIfDue();
       } else {
         incrementAnswerCounter("errorCounter");
         addAnswerToHistoryInfo(false);

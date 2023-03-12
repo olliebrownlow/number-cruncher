@@ -8,7 +8,6 @@ import GlobalResultsGrid from "../components/globalResultsGrid";
 import ProgressHistoryCards from "../components/progressHistoryCards";
 import SeeDetailedTableHistory from "../components/seeDetailedTableHistory";
 import {
-  getNumberOfDays,
   totalGlobalCount,
   getTotalCountForTable,
   orderedTableArray,

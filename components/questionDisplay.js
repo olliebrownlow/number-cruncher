@@ -8,11 +8,13 @@ const QuestionDisplay = (props) => {
   const [currentTable, setCurrentTable] = useState([]);
   const [currentMultiplier, setCurrentMultiplier] = useState([]);
   const [numOfQuestions, setNumOfQuestions] = useState([]);
+  const [gameType, setGameType] = useState("");
 
   useEffect(() => {
     setCurrentTable(parseInt(sessionStorage.getItem("currentTable")));
     setCurrentMultiplier(parseInt(sessionStorage.getItem("currentMultiplier")));
     const gt = sessionStorage.getItem("gameType");
+    setGameType(gt);
     const gameOptions = JSON.parse(sessionStorage.getItem(`${gt}GameOptions`));
     setNumOfQuestions(gameOptions.numOfQuestions);
   }, [
@@ -31,12 +33,18 @@ const QuestionDisplay = (props) => {
         </>
       ) : (
         <>
-          {numOfQuestions === "no limit" ? (
-            <div className={styles.questionNum}>Qu {questionNumber}</div>
+          {gameType === "practice-mode" ? (
+            <>
+              {numOfQuestions === "no limit" ? (
+                <div className={styles.questionNum}>Qu {questionNumber}</div>
+              ) : (
+                <div className={styles.questionNum}>
+                  Qu {questionNumber} of {numOfQuestions}
+                </div>
+              )}
+            </>
           ) : (
-            <div className={styles.questionNum}>
-              Qu {questionNumber} of {numOfQuestions}
-            </div>
+            <></>
           )}
           <div className={styles.questionDisplay}>
             {currentTable} × {currentMultiplier}

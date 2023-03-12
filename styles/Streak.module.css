@@ -1,0 +1,36 @@
+.level {
+  font-size: 1.5rem;
+  white-space: nowrap;
+}
+
+.streakBarContainer {
+  width: 75%;
+}
+
+.firstStep {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.indexedStep {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.standing {
+  position: absolute;
+  text-align: center;
+  bottom: 10px;
+  top: auto;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.label {
+  position: absolute;
+  bottom: 40px;
+  top: auto;
+  font-size: 0.9rem;
+}

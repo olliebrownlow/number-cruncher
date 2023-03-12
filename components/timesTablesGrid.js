@@ -3,28 +3,20 @@ import colours from "../config/colours";
 import tables from "../config/tables";
 
 const TimesTablesGrid = (props) => {
-  const {
-    selected,
-    setSelected,
-    orderedQuestions,
-    setNumOfQuestions,
-    gameType,
-  } = props;
+  const { selected, setSelected, orderedQuestions, setNumOfQuestions } = props;
 
   const handleTableSelect = (table) => {
-    if (gameType === "practice-mode") {
-      if (selected.includes(table)) {
-        const newSelected = selected.filter((s) => s !== table);
-        setSelected(newSelected);
-        if (orderedQuestions === "in order") {
-          setNumOfQuestions(newSelected.length * 12);
-        }
-      } else {
-        const newSelected = [...selected, table];
-        setSelected(newSelected);
-        if (orderedQuestions === "in order") {
-          setNumOfQuestions(newSelected.length * 12);
-        }
+    if (selected.includes(table)) {
+      const newSelected = selected.filter((s) => s !== table);
+      setSelected(newSelected);
+      if (orderedQuestions === "in order") {
+        setNumOfQuestions(newSelected.length * 12);
+      }
+    } else {
+      const newSelected = [...selected, table];
+      setSelected(newSelected);
+      if (orderedQuestions === "in order") {
+        setNumOfQuestions(newSelected.length * 12);
       }
     }
   };

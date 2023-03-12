@@ -89,7 +89,7 @@ const getToastMessage = (index, currentGlobalCount) => {
   return `NEW AWARD!!!\nClaim your award for getting ${currentGlobalCount} questions correct!`;
 };
 
-export const isNewAchCorrectAnswersAwardDue = () => {
+export const newAchCorrectAnswersAwardIfDue = () => {
   const currentGlobalCount = parseInt(
     localStorage.getItem("achCorrectAnswers")
   );
