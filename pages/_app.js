@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import "../styles/globals.css";
 import ErrorBoundary from "../components/error-boundary";
 import historyInfo from "../config/historyInfo";
+import bestStreaksByDifficulty from "../config/bestStreaksByDifficulty";
 import { Toaster } from "react-hot-toast";
 import { AlertTriangle, Award } from "react-feather";
 import styles from "../styles/AppLayout.module.css";
@@ -24,6 +25,12 @@ export default function App({ Component, pageProps }) {
     }
     if (localStorage.getItem("historyInfo") === null) {
       localStorage.setItem("historyInfo", JSON.stringify(historyInfo));
+    }
+    if (localStorage.getItem("bestStreaksByDifficulty") === null) {
+      localStorage.setItem(
+        "bestStreaksByDifficulty",
+        JSON.stringify(bestStreaksByDifficulty)
+      );
     }
     router.prefetch("/achievements");
   }, []);
