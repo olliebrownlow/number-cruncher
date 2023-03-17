@@ -12,3 +12,5 @@ yarn dev
 
 Open [http://localhost:3000](http://localhost:3000) in your browser to start playing.
 
+Deployed at [https://number-cruncher.vercel.app/](https://number-cruncher.vercel.app/).
+
