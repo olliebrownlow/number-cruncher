@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@fireworks-js/react": "^2.10.2",
     "@next/font": "13.1.1",
     "@vercel/analytics": "^0.1.8",
     "next": "13.1.1",
