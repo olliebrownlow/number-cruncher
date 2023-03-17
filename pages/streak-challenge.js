@@ -9,8 +9,10 @@ import AnswerGrid from "../components/answerGrid";
 import EndButton from "../components/endButton";
 import Spacer from "../components/spacer";
 import { getColour } from "../utils/getColour";
+import { getGameEndMessage } from "../utils/getGameEndMessage";
 import "react-step-progress-bar/styles.css";
 import { ProgressBar, Step } from "react-step-progress-bar";
+import { Fireworks } from "@fireworks-js/react";
 import styles from "../styles/Streak.module.css";
 import {
   focusOnAnswerTextBox,
@@ -33,6 +35,7 @@ const Streak = () => {
   const [level, setLevel] = useState("Other");
   const [gameStartBest, setGameStartBest] = useState(0);
   const [reRender, setReRender] = useState(0);
+  const [animation, setAnimation] = useState(false);
 
   useEffect(() => {
     focusOnAnswerTextBox();
@@ -68,16 +71,27 @@ const Streak = () => {
   };
 
   const endGame = () => {
+    setAnimation(true);
     if (typeof window !== "undefined") {
+      // store current best streak for level
+      const bestStreaksByDifficulty = JSON.parse(
+        localStorage.getItem("bestStreaksByDifficulty")
+      );
+      const bestStreakForThisLevel = bestStreaksByDifficulty[level][0];
+      sessionStorage.setItem(
+        "bestStreakForThisLevel",
+        JSON.stringify(bestStreakForThisLevel)
+      );
+      // end game
       sessionStorage.setItem("isFinished", true);
       // check if we have an un-added new top 3 streak and add it if necessary
       const bestStreakReserve = JSON.parse(
         localStorage.getItem("bestStreakReserve")
       );
       if (bestStreakReserve && !bestStreakReserve.added) {
-        const bestStreaksByDifficulty = JSON.parse(
-          localStorage.getItem("bestStreaksByDifficulty")
-        );
+        // const bestStreaksByDifficulty = JSON.parse(
+        //   localStorage.getItem("bestStreaksByDifficulty")
+        // );
         switch (bestStreakReserve.level) {
           case "Easy":
             // push new streak
@@ -226,6 +240,10 @@ const Streak = () => {
     return (getCorrectAnswerCount() / gameStartBest) * 100;
   };
 
+  const stopAnimation = () => {
+    setAnimation(false);
+  };
+
   return (
     <>
       <BackButton />
@@ -303,20 +321,44 @@ const Streak = () => {
         JSON.parse(sessionStorage.getItem("isFinished")) && (
           <>
             <Spacer />
-            {getCorrectAnswerCount() > gameStartBest ? (
+            {getCorrectAnswerCount() >
+            parseInt(sessionStorage.getItem("bestStreakForThisLevel")) ? (
               <>
-                <div className={styles.newBest}>Amazing!</div>
+                {animation && (
+                  <Fireworks
+                    options={{
+                      rocketsPoint: {
+                        min: 50,
+                        max: 50,
+                      },
+                    }}
+                    style={{
+                      top: 0,
+                      left: 0,
+                      width: "100%",
+                      height: "100%",
+                      position: "fixed",
+                      background: "#000",
+                    }}
+                    onClick={() => stopAnimation()}
+                  />
+                )}
+                <div className={styles.newBest}>{getGameEndMessage(101)}</div>
                 <div className={styles.newBest}>NEW BEST STREAK!!</div>
+                {animation && (
+                  <div
+                    className={
+                      styles.newFinalBestStreak + ` ${styles.backOutDown}`
+                    }
+                  >
+                    {parseInt(sessionStorage.getItem("bestStreakForThisLevel"))}
+                  </div>
+                )}
                 <div
                   className={
-                    styles.newFinalBestStreak + ` ${styles.backOutDown}`
-                  }
-                >
-                  {gameStartBest}
-                </div>
-                <div
-                  className={
-                    styles.newFinalBestStreak + ` ${styles.bounceInUp}`
+                    animation
+                      ? styles.newFinalBestStreak + ` ${styles.bounceInUp}`
+                      : styles.newFinalBestStreak
                   }
                 >
                   {getCorrectAnswerCount()}
@@ -324,7 +366,9 @@ const Streak = () => {
               </>
             ) : (
               <>
-                <div className={styles.newBest}>unlucky</div>
+                <div className={styles.newBest}>
+                  {getGameEndMessage(getPercentageOfBest())}
+                </div>
                 <div className={styles.newFinalBestStreak}>
                   {getCorrectAnswerCount()}
                 </div>

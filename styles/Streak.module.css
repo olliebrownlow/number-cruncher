@@ -39,6 +39,7 @@
 .newBest  {
   text-align: center;
   font-size: 1.75rem;
+  z-index: 5;
 }
 
 .newBestStreak {
@@ -48,7 +49,7 @@
 
 .newFinalBestStreak {
   text-align: center;
-  font-size: 5rem;
+  font-size: 8rem;
 }
 
 @-webkit-keyframes backOutDown { 
