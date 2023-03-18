@@ -16,6 +16,7 @@ const PageHeading = (props) => {
   }, [refresh]);
 
   const formatHeading = () => {
+    console.log(heading)
     const headingArray = heading.split("");
     return headingArray;
   };

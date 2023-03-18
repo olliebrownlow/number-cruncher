@@ -36,7 +36,7 @@ const Results = () => {
     <>
       <BackButton />
       <HomeButton />
-      <PageHeading heading={"Practice Mode Results"} />
+      <PageHeading heading={"Practice Mode results"} />
       <ResultStatement />
       <Spacer />
       <FilterButton

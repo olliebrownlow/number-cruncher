@@ -39,7 +39,11 @@ const GameOptions = () => {
   }, []);
 
   const formattedGameTypeString = (gameType) => {
-    return gameType.split("-").join(" ").toLowerCase();
+    const arr = gameType.split("-");
+    const capitalisedArray = arr.map(function (el) {
+      return el.charAt(0).toUpperCase() + el.slice(1);
+    });
+    return capitalisedArray.join(" ");
   };
 
   return (
