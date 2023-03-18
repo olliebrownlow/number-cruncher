@@ -32,6 +32,39 @@ export default function App({ Component, pageProps }) {
         JSON.stringify(bestStreaksByDifficulty)
       );
     }
+    // check if we have an un-added new top 3 streak and add it if necessary
+    const bestStreakReserve = JSON.parse(
+      localStorage.getItem("bestStreakReserve")
+    );
+    // check location - we dont want to add it if we're playing streak challenge
+    const locationArray = location.href.split("/");
+    const isPlayingStreak = locationArray.indexOf("streak-challenge") >= 0;
+    if (!isPlayingStreak && bestStreakReserve && !bestStreakReserve.added) {
+      const bestStreaksByDifficulty = JSON.parse(
+        localStorage.getItem("bestStreaksByDifficulty")
+      );
+      // push new streak
+      bestStreaksByDifficulty[bestStreakReserve.level].push(
+        bestStreakReserve.streak
+      );
+      // order descending
+      bestStreaksByDifficulty[bestStreakReserve.level].sort(function (a, b) {
+        return b - a;
+      });
+      // remove lowest
+      bestStreaksByDifficulty[bestStreakReserve.level].pop();
+      // resave back to local storage
+      localStorage.setItem(
+        "bestStreaksByDifficulty",
+        JSON.stringify(bestStreaksByDifficulty)
+      );
+      // mark streak as added
+      bestStreakReserve.added = true;
+      localStorage.setItem(
+        "bestStreakReserve",
+        JSON.stringify(bestStreakReserve)
+      );
+    }
     router.prefetch("/achievements");
   }, []);
 

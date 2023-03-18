@@ -89,58 +89,21 @@ const Streak = () => {
         localStorage.getItem("bestStreakReserve")
       );
       if (bestStreakReserve && !bestStreakReserve.added) {
-        // const bestStreaksByDifficulty = JSON.parse(
-        //   localStorage.getItem("bestStreaksByDifficulty")
-        // );
-        switch (bestStreakReserve.level) {
-          case "Easy":
-            // push new streak
-            bestStreaksByDifficulty.Easy.push(bestStreakReserve.streak);
-            // order descending
-            bestStreaksByDifficulty.Easy.sort(function (a, b) {
-              return b - a;
-            });
-            // remove lowest
-            bestStreaksByDifficulty.Easy.pop();
-            // resave back to local storage
-            localStorage.setItem(
-              "bestStreaksByDifficulty",
-              JSON.stringify(bestStreaksByDifficulty)
-            );
-            break;
-          case "Medium":
-            bestStreaksByDifficulty.Medium.push(bestStreakReserve.streak);
-            bestStreaksByDifficulty.Medium.sort(function (a, b) {
-              return b - a;
-            });
-            bestStreaksByDifficulty.Medium.pop();
-            localStorage.setItem(
-              "bestStreaksByDifficulty",
-              JSON.stringify(bestStreaksByDifficulty)
-            );
-            break;
-          case "Hard":
-            bestStreaksByDifficulty.Hard.push(bestStreakReserve.streak);
-            bestStreaksByDifficulty.Hard.sort(function (a, b) {
-              return b - a;
-            });
-            bestStreaksByDifficulty.Hard.pop();
-            localStorage.setItem(
-              "bestStreaksByDifficulty",
-              JSON.stringify(bestStreaksByDifficulty)
-            );
-            break;
-          default:
-            bestStreaksByDifficulty.Other.push(bestStreakReserve.streak);
-            bestStreaksByDifficulty.Other.sort(function (a, b) {
-              return b - a;
-            });
-            bestStreaksByDifficulty.Other.pop();
-            localStorage.setItem(
-              "bestStreaksByDifficulty",
-              JSON.stringify(bestStreaksByDifficulty)
-            );
-        }
+        // push new streak
+        bestStreaksByDifficulty[bestStreakReserve.level].push(
+          bestStreakReserve.streak
+        );
+        // order descending
+        bestStreaksByDifficulty[bestStreakReserve.level].sort(function (a, b) {
+          return b - a;
+        });
+        // remove lowest
+        bestStreaksByDifficulty[bestStreakReserve.level].pop();
+        // resave back to local storage
+        localStorage.setItem(
+          "bestStreaksByDifficulty",
+          JSON.stringify(bestStreaksByDifficulty)
+        );
         // mark streak as added
         bestStreakReserve.added = true;
         localStorage.setItem(
