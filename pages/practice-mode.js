@@ -106,6 +106,7 @@ const PracticeMode = () => {
         handleChange={handleChange}
         submitAnswer={submitAnswer}
         resetGame={resetGame}
+        destination={"results"}
       />
       <AnswerGrid />
       <Spacer />

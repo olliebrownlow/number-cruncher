@@ -2,7 +2,13 @@ import { useRouter } from "next/router";
 import styles from "../componentStyles/AnswerForm.module.css";
 
 const AnswerForm = (props) => {
-  const { userAnswer, handleChange, submitAnswer, resetGame } = props;
+  const {
+    userAnswer,
+    handleChange,
+    submitAnswer,
+    resetGame,
+    destination,
+  } = props;
   const router = useRouter();
 
   return (
@@ -26,9 +32,9 @@ const AnswerForm = (props) => {
           </div>
           <div
             className={styles.gameEndButtonResults}
-            onClick={() => router.push("/results")}
+            onClick={() => router.push("/" + destination)}
           >
-            results
+            {destination}
           </div>
         </div>
       ) : (

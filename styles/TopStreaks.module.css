@@ -1,0 +1,58 @@
+.area {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 40%;
+  color: white;
+  margin-bottom: 10px;
+}
+
+.container {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  /* border-top: olive solid 5px; */
+}
+
+.stats {
+  position: relative;
+  padding: 90px 0 60px 0;
+  transform: rotate(-7.5deg);
+  -webkit-transform: rotate(-7.5deg); 
+  -moz-transform: rotate(-7.5deg); 
+  text-align: center;
+}
+
+.streakLevel {
+  font-size: 2rem;
+}
+
+.bestStreak {
+  font-size: 4.5rem;
+  font-weight: 400;
+  padding: 8px;
+  color: gold;
+}
+
+.secondStreak {
+  font-size: 2.2rem;
+  font-weight: 100;
+  padding: 8px;
+  color: silver;
+}
+
+.thirdStreak {
+  font-size: 1.5rem;
+  font-weight: 100;
+  padding: 8px;
+  color: goldenrod;
+}
+
+/* Mobile */
+@media (max-width: 700px) {
+  .area {
+    width: 90%;
+  }
+}

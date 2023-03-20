@@ -345,6 +345,7 @@ const Streak = () => {
         handleChange={handleChange}
         submitAnswer={submitAnswer}
         resetGame={resetGame}
+        destination={"topStreaks"}
       />
       <AnswerGrid />
       <Spacer />
