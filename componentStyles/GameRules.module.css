@@ -1,0 +1,45 @@
+.rulesGrid {
+  display: grid;
+  grid-template-columns: 96%;
+  width: 95%;
+}
+
+.rulesNumber {
+  text-align: center;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.rulesCell {
+  text-align: center;
+  font-size: 1rem;
+  padding-bottom: 8px;
+  margin: 4px;
+}
+
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.fadeIn {
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
+  -webkit-animation-duration: 500ms;
+  animation-duration: 500ms;
+  animation-iteration-count: 1;
+  -webkit-animation-iteration-count: 1;
+  animation-fill-mode: both;
+  -webkit-animation-fill-mode: both;
+}
