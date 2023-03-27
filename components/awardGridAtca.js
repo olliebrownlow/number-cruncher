@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import Spacer from "../components/spacer";
 import AwardLocked from "../components/awardLocked";
 import AwardUnclaimed from "../components/awardUnclaimed";
@@ -9,21 +10,56 @@ import CelebrateAwardClaim from "../components/celebrateAwardClaim";
 import correctAnswerGoals from "../config/correctAnswerGoals";
 import styles from "../componentStyles/Awards.module.css";
 
-const AwardGridAtca = (props) => {
-  const {
-    currentGoal,
-    aTCAClaimed,
-    claimAward,
-    getPercent,
-    correctAnswers,
-    refresh,
-    setRefresh,
-    setATCAClaimed,
-    showCelebration,
-    closeCelebrationModal,
-    celebrationWindowOnClick,
-    index,
-  } = props;
+const AwardGridAtca = () => {
+  const [correctAnswers, setCorrectAnswers] = useState(0);
+  const [currentGoal, setCurrentGoal] = useState(50);
+  const [aTCAClaimed, setATCAClaimed] = useState([]);
+  const [refresh, setRefresh] = useState(0);
+  const [showCelebration, setShowCelebration] = useState(false);
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const numCorrectAnswers = parseInt(
+      localStorage.getItem("achCorrectAnswers")
+    );
+    setCorrectAnswers(numCorrectAnswers);
+
+    const reducer = (numCorrectAnswers) => {
+      return function (element) {
+        return element > numCorrectAnswers;
+      };
+    };
+    const reducedGoals = correctAnswerGoals.filter(reducer(numCorrectAnswers));
+    setCurrentGoal(reducedGoals[0]);
+    const isATCAClaimed = JSON.parse(localStorage.getItem("isATCAClaimed"));
+    setATCAClaimed(isATCAClaimed);
+  }, [refresh]);
+
+  const closeCelebrationModal = () => {
+    setShowCelebration(false);
+  };
+
+  // close modal from window surrounding the modal itself
+  const celebrationWindowOnClick = (event) => {
+    if (event.target === event.currentTarget) {
+      setShowCelebration(false);
+    }
+  };
+
+  const getPercent = () => {
+    return (correctAnswers / currentGoal) * 100;
+  };
+
+  const claimAward = (index) => {
+    setShowCelebration(true);
+    const isATCAClaimedArray = JSON.parse(
+      localStorage.getItem("isATCAClaimed")
+    );
+    isATCAClaimedArray[index] = true;
+    localStorage.setItem("isATCAClaimed", JSON.stringify(isATCAClaimedArray));
+    setIndex(index);
+    setATCAClaimed(isATCAClaimedArray);
+  };
 
   return (
     <>
