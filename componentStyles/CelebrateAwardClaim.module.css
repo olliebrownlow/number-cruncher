@@ -73,14 +73,14 @@
 }
 
 .medal1 {
-  fill: silver;
-  color: silver;
+  fill: goldenrod;
+  color: goldenrod;
   font-size: 8rem;
 }
 
 .medal2 {
-  fill: goldenrod;
-  color: goldenrod;
+  fill: silver;
+  color: silver;
   font-size: 8rem;
 }
 
