@@ -268,6 +268,7 @@ const AwardGridAtca = () => {
           closeModal={closeCelebrationModal}
           windowOnClick={celebrationWindowOnClick}
           index={index}
+          iconType={"medalIcons"}
         />
       )}
     </div>

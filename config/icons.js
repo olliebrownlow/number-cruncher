@@ -1,12 +1,19 @@
 import { SlBadge } from "react-icons/sl";
-import { FaAward, FaMedal } from "react-icons/fa";
+import { FaAward, FaMedal, FaSun } from "react-icons/fa";
 import { BiMedal } from "react-icons/bi";
-import { BsTrophy } from "react-icons/bs";
-import { GiTrophy } from "react-icons/gi";
-import { GiDiamondTrophy } from "react-icons/gi";
+import { BsTrophy, BsSun } from "react-icons/bs";
+import {
+  GiTrophy,
+  GiBarbedSun,
+  GiSun,
+  GiHeraldicSun,
+  GiSundial,
+  GiDiamondTrophy,
+  GiUbisoftSun,
+} from "react-icons/gi";
 import styles from "../componentStyles/CelebrateAwardClaim.module.css";
 
-const icons = [
+export const medalIcons = [
   <SlBadge className={styles.medal1 + ` ${styles.fadeInDownDelayed}`} />,
   <FaAward className={styles.medal1 + ` ${styles.fadeInDownDelayed}`} />,
   <BiMedal className={styles.medal2 + ` ${styles.fadeInDownDelayed}`} />,
@@ -16,4 +23,12 @@ const icons = [
   <GiDiamondTrophy className={styles.medal3 + ` ${styles.fadeInDownDelayed}`} />,
 ];
 
-export default icons;
+export const sunIcons = [
+  <BsSun className={styles.medal1 + ` ${styles.fadeInDownDelayed}`} />,
+  <FaSun className={styles.medal1 + ` ${styles.fadeInDownDelayed}`} />,
+  <GiSun className={styles.medal2 + ` ${styles.fadeInDownDelayed}`} />,
+  <GiBarbedSun className={styles.medal2 + ` ${styles.fadeInDownDelayed}`} />,
+  <GiUbisoftSun className={styles.medal3 + ` ${styles.fadeInDownDelayed}`} />,
+  <GiHeraldicSun className={styles.medal3 + ` ${styles.fadeInDownDelayed}`} />,
+  <GiSundial className={styles.medal3 + ` ${styles.fadeInDownDelayed}`} />,
+];

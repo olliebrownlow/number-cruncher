@@ -99,7 +99,7 @@ const AwardGridStreakEasy = () => {
             correctAnswerGoal={streakEasyGoals[0]}
             awardStyle={"award1"}
             targetStyle={"target1"}
-            awardType={"atcaAwards"}
+            awardType={"streakEasyAwards"}
             awardIndex={0}
           />
         )}
@@ -123,7 +123,7 @@ const AwardGridStreakEasy = () => {
             correctAnswerGoal={streakEasyGoals[1]}
             awardStyle={"award1"}
             targetStyle={"target1"}
-            awardType={"atcaAwards"}
+            awardType={"streakEasyAwards"}
             awardIndex={1}
           />
         )}
@@ -147,7 +147,7 @@ const AwardGridStreakEasy = () => {
             correctAnswerGoal={streakEasyGoals[2]}
             awardStyle={"award2"}
             targetStyle={"target2"}
-            awardType={"atcaAwards"}
+            awardType={"streakEasyAwards"}
             awardIndex={2}
           />
         )}
@@ -171,7 +171,7 @@ const AwardGridStreakEasy = () => {
             correctAnswerGoal={streakEasyGoals[3]}
             awardStyle={"award2"}
             targetStyle={"target2"}
-            awardType={"atcaAwards"}
+            awardType={"streakEasyAwards"}
             awardIndex={3}
           />
         )}
@@ -195,7 +195,7 @@ const AwardGridStreakEasy = () => {
             correctAnswerGoal={streakEasyGoals[4]}
             awardStyle={"award3"}
             targetStyle={"target3"}
-            awardType={"atcaAwards"}
+            awardType={"streakEasyAwards"}
             awardIndex={4}
           />
         )}
@@ -219,7 +219,7 @@ const AwardGridStreakEasy = () => {
             correctAnswerGoal={streakEasyGoals[5]}
             awardStyle={"award3"}
             targetStyle={"target3"}
-            awardType={"atcaAwards"}
+            awardType={"streakEasyAwards"}
             awardIndex={5}
           />
         )}
@@ -245,7 +245,7 @@ const AwardGridStreakEasy = () => {
           correctAnswerGoal={streakEasyGoals[6]}
           awardStyle={"award3"}
           targetStyle={"target3"}
-          awardType={"atcaAwards"}
+          awardType={"streakEasyAwards"}
           awardIndex={6}
         />
       )}
@@ -273,6 +273,7 @@ const AwardGridStreakEasy = () => {
           closeModal={closeCelebrationModal}
           windowOnClick={celebrationWindowOnClick}
           index={index}
+          iconType={"sunIcons"}
         />
       )}
     </div>

@@ -1,9 +1,16 @@
 import { SlBadge } from "react-icons/sl";
-import { FaAward, FaMedal } from "react-icons/fa";
+import { FaAward, FaMedal, FaSun } from "react-icons/fa";
 import { BiMedal } from "react-icons/bi";
-import { BsTrophy } from "react-icons/bs";
-import { GiTrophy } from "react-icons/gi";
-import { GiDiamondTrophy } from "react-icons/gi";
+import { BsTrophy, BsSun } from "react-icons/bs";
+import {
+  GiTrophy,
+  GiBarbedSun,
+  GiSun,
+  GiHeraldicSun,
+  GiSundial,
+  GiDiamondTrophy,
+  GiUbisoftSun,
+} from "react-icons/gi";
 import styles from "../componentStyles/Awards.module.css";
 
 const AwardClaimed = (props) => {
@@ -20,6 +27,8 @@ const AwardClaimed = (props) => {
     switch (awardType) {
       case "atcaAwards":
         return atcaAwards;
+      case "streakEasyAwards":
+        return streakEasyAwards;
       default:
         return atcaAwards;
     }
@@ -63,6 +72,51 @@ const AwardClaimed = (props) => {
       }}
     />,
     <GiDiamondTrophy
+      className={styles[awardStyle]}
+      style={{
+        fontSize: fontSize,
+      }}
+    />,
+  ];
+
+  const streakEasyAwards = [
+    <BsSun
+      className={styles[awardStyle]}
+      style={{
+        fontSize: fontSize,
+      }}
+    />,
+    <FaSun
+      className={styles[awardStyle]}
+      style={{
+        fontSize: fontSize,
+      }}
+    />,
+    <GiSun
+      className={styles[awardStyle]}
+      style={{
+        fontSize: fontSize,
+      }}
+    />,
+    <GiBarbedSun
+      className={styles[awardStyle]}
+      style={{
+        fontSize: fontSize,
+      }}
+    />,
+    <GiUbisoftSun
+      className={styles[awardStyle]}
+      style={{
+        fontSize: fontSize,
+      }}
+    />,
+    <GiHeraldicSun
+      className={styles[awardStyle]}
+      style={{
+        fontSize: fontSize,
+      }}
+    />,
+    <GiSundial
       className={styles[awardStyle]}
       style={{
         fontSize: fontSize,

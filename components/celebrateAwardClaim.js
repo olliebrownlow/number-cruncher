@@ -3,14 +3,25 @@ import Image from "next/image";
 import Spacer from "../components/spacer";
 import chalkboard from "../public/modalChalkboard2.jpg";
 import { AiOutlineUnlock } from "react-icons/ai";
-import icons from "../config/icons";
+import { medalIcons, sunIcons } from "../config/icons";
 import styles from "../componentStyles/CelebrateAwardClaim.module.css";
 import Confetti from "react-confetti";
 
 const CelebrateAwardClaim = (props) => {
-  const { closeModal, windowOnClick, index } = props;
+  const { closeModal, windowOnClick, index, iconType } = props;
   const height = window.innerHeight;
   const width = window.innerWidth;
+
+  const getIconType = () => {
+    switch (iconType) {
+      case "medalIcons":
+        return medalIcons;
+      case "sunIcons":
+        return sunIcons;
+      default:
+        medalIcons;
+    }
+  };
 
   return ReactDOM.createPortal(
     <aside className={styles.modalCover} onClick={windowOnClick}>
@@ -40,7 +51,7 @@ const CelebrateAwardClaim = (props) => {
         <Spacer size={"0.5rem"} />
         <div className={styles.text}>New Award!!</div>
         <AiOutlineUnlock className={styles.padlock + ` ${styles.pivotdrop}`} />
-        {icons[index]}
+        {getIconType()[index]}
         <Spacer size={"0.5rem"} />
         <div className={styles.button}>
           <div
