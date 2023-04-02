@@ -8,32 +8,36 @@ import AwardsCompleted from "../components/awardsCompleted";
 import AwardProgress from "../components/awardProgress";
 import ResetAchievementButton from "../components/resetAchievementButton";
 import CelebrateAwardClaim from "../components/celebrateAwardClaim";
-import { correctAnswerGoals } from "../config/achievementGoals";
+import { streakEasyGoals } from "../config/achievementGoals";
 import styles from "../componentStyles/Awards.module.css";
 
-const AwardGridAtca = () => {
-  const [correctAnswers, setCorrectAnswers] = useState(0);
+const AwardGridStreakEasy = () => {
+  const [bestStreak, setBestStreak] = useState(0);
   const [currentGoal, setCurrentGoal] = useState(50);
-  const [aTCAClaimed, setATCAClaimed] = useState([]);
+  const [isClaimed, setIsClaimed] = useState([]);
   const [refresh, setRefresh] = useState(0);
   const [showCelebration, setShowCelebration] = useState(false);
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
-    const numCorrectAnswers = parseInt(
-      localStorage.getItem("achCorrectAnswers")
+    const bestStreaksByDifficulty = JSON.parse(
+      localStorage.getItem("bestStreaksByDifficulty")
     );
-    setCorrectAnswers(numCorrectAnswers);
+    setBestStreak(bestStreaksByDifficulty.Easy[0]);
 
     const reducer = (numCorrectAnswers) => {
       return function (element) {
         return element > numCorrectAnswers;
       };
     };
-    const reducedGoals = correctAnswerGoals.filter(reducer(numCorrectAnswers));
+    const reducedGoals = streakEasyGoals.filter(
+      reducer(bestStreaksByDifficulty.Easy[0])
+    );
     setCurrentGoal(reducedGoals[0]);
-    const isATCAClaimed = JSON.parse(localStorage.getItem("isATCAClaimed"));
-    setATCAClaimed(isATCAClaimed);
+    const isAwardClaimed = JSON.parse(
+      localStorage.getItem("isStreakEasyClaimed")
+    );
+    setIsClaimed(isAwardClaimed);
   }, [refresh]);
 
   const closeCelebrationModal = () => {
@@ -48,36 +52,36 @@ const AwardGridAtca = () => {
   };
 
   const getPercent = () => {
-    return (correctAnswers / currentGoal) * 100;
+    return (bestStreak / currentGoal) * 100;
   };
 
   const claimAward = (index) => {
     setShowCelebration(true);
-    const isATCAClaimedArray = JSON.parse(
-      localStorage.getItem("isATCAClaimed")
+    const isClaimedArray = JSON.parse(
+      localStorage.getItem("isStreakEasyClaimed")
     );
-    isATCAClaimedArray[index] = true;
-    localStorage.setItem("isATCAClaimed", JSON.stringify(isATCAClaimedArray));
+    isClaimedArray[index] = true;
+    localStorage.setItem("isStreakEasyClaimed", JSON.stringify(isClaimedArray));
     setIndex(index);
-    setATCAClaimed(isATCAClaimedArray);
+    setIsClaimed(isClaimedArray);
   };
 
   return (
     <div className={styles.achievementContainer}>
       <Spacer size={"0.5rem"} />
-      <SubHeading subheading={"All-time Correct Answers"} position={"center"} />
+      <SubHeading subheading={"Best Streak Easy Level"} position={"center"} />
       <Spacer size={"0.5rem"} />
       <SubHeading subheading={"Your awards"} position={"left"} />
       <Spacer size={"0.5rem"} />
       <div className={styles.awardGrid}>
-        {currentGoal <= correctAnswerGoals[0] ? (
+        {currentGoal <= streakEasyGoals[0] ? (
           <AwardLocked
             fontSize={"1.5rem"}
-            correctAnswerGoal={correctAnswerGoals[0]}
+            correctAnswerGoal={streakEasyGoals[0]}
             awardStyle={"award1"}
             targetStyle={"target1"}
           />
-        ) : aTCAClaimed[0] === 0 ? (
+        ) : isClaimed[0] === 0 ? (
           <AwardUnclaimed
             fontSize={"1.5rem"}
             awardStyle={"award1"}
@@ -87,21 +91,21 @@ const AwardGridAtca = () => {
         ) : (
           <AwardClaimed
             fontSize={"1.5rem"}
-            correctAnswerGoal={correctAnswerGoals[0]}
+            correctAnswerGoal={streakEasyGoals[0]}
             awardStyle={"award1"}
             targetStyle={"target1"}
             awardType={"atcaAwards"}
             awardIndex={0}
           />
         )}
-        {currentGoal <= correctAnswerGoals[1] ? (
+        {currentGoal <= streakEasyGoals[1] ? (
           <AwardLocked
             fontSize={"1.75rem"}
-            correctAnswerGoal={correctAnswerGoals[1]}
+            correctAnswerGoal={streakEasyGoals[1]}
             awardStyle={"award1"}
             targetStyle={"target1"}
           />
-        ) : aTCAClaimed[1] === 0 ? (
+        ) : isClaimed[1] === 0 ? (
           <AwardUnclaimed
             fontSize={"1.75rem"}
             awardStyle={"award1"}
@@ -111,21 +115,21 @@ const AwardGridAtca = () => {
         ) : (
           <AwardClaimed
             fontSize={"1.75rem"}
-            correctAnswerGoal={correctAnswerGoals[1]}
+            correctAnswerGoal={streakEasyGoals[1]}
             awardStyle={"award1"}
             targetStyle={"target1"}
             awardType={"atcaAwards"}
             awardIndex={1}
           />
         )}
-        {currentGoal <= correctAnswerGoals[2] ? (
+        {currentGoal <= streakEasyGoals[2] ? (
           <AwardLocked
             fontSize={"2rem"}
-            correctAnswerGoal={correctAnswerGoals[2]}
+            correctAnswerGoal={streakEasyGoals[2]}
             awardStyle={"award2"}
             targetStyle={"target2"}
           />
-        ) : aTCAClaimed[2] === 0 ? (
+        ) : isClaimed[2] === 0 ? (
           <AwardUnclaimed
             fontSize={"2rem"}
             awardStyle={"award2"}
@@ -135,21 +139,21 @@ const AwardGridAtca = () => {
         ) : (
           <AwardClaimed
             fontSize={"2.4rem"}
-            correctAnswerGoal={correctAnswerGoals[2]}
+            correctAnswerGoal={streakEasyGoals[2]}
             awardStyle={"award2"}
             targetStyle={"target2"}
             awardType={"atcaAwards"}
             awardIndex={2}
           />
         )}
-        {currentGoal <= correctAnswerGoals[3] ? (
+        {currentGoal <= streakEasyGoals[3] ? (
           <AwardLocked
             fontSize={"2.25rem"}
-            correctAnswerGoal={correctAnswerGoals[3]}
+            correctAnswerGoal={streakEasyGoals[3]}
             awardStyle={"award2"}
             targetStyle={"target2"}
           />
-        ) : aTCAClaimed[3] === 0 ? (
+        ) : isClaimed[3] === 0 ? (
           <AwardUnclaimed
             fontSize={"2.25rem"}
             awardStyle={"award2"}
@@ -159,21 +163,21 @@ const AwardGridAtca = () => {
         ) : (
           <AwardClaimed
             fontSize={"2.5rem"}
-            correctAnswerGoal={correctAnswerGoals[3]}
+            correctAnswerGoal={streakEasyGoals[3]}
             awardStyle={"award2"}
             targetStyle={"target2"}
             awardType={"atcaAwards"}
             awardIndex={3}
           />
         )}
-        {currentGoal <= correctAnswerGoals[4] ? (
+        {currentGoal <= streakEasyGoals[4] ? (
           <AwardLocked
             fontSize={"2.5rem"}
-            correctAnswerGoal={correctAnswerGoals[4]}
+            correctAnswerGoal={streakEasyGoals[4]}
             awardStyle={"award3"}
             targetStyle={"target3"}
           />
-        ) : aTCAClaimed[4] === 0 ? (
+        ) : isClaimed[4] === 0 ? (
           <AwardUnclaimed
             fontSize={"2.5rem"}
             awardStyle={"award3"}
@@ -183,21 +187,21 @@ const AwardGridAtca = () => {
         ) : (
           <AwardClaimed
             fontSize={"3rem"}
-            correctAnswerGoal={correctAnswerGoals[4]}
+            correctAnswerGoal={streakEasyGoals[4]}
             awardStyle={"award3"}
             targetStyle={"target3"}
             awardType={"atcaAwards"}
             awardIndex={4}
           />
         )}
-        {currentGoal <= correctAnswerGoals[5] ? (
+        {currentGoal <= streakEasyGoals[5] ? (
           <AwardLocked
             fontSize={"2.75rem"}
-            correctAnswerGoal={correctAnswerGoals[5]}
+            correctAnswerGoal={streakEasyGoals[5]}
             awardStyle={"award3"}
             targetStyle={"target3"}
           />
-        ) : aTCAClaimed[5] === 0 ? (
+        ) : isClaimed[5] === 0 ? (
           <AwardUnclaimed
             fontSize={"2.75rem"}
             awardStyle={"award3"}
@@ -207,7 +211,7 @@ const AwardGridAtca = () => {
         ) : (
           <AwardClaimed
             fontSize={"3.75rem"}
-            correctAnswerGoal={correctAnswerGoals[5]}
+            correctAnswerGoal={streakEasyGoals[5]}
             awardStyle={"award3"}
             targetStyle={"target3"}
             awardType={"atcaAwards"}
@@ -216,14 +220,14 @@ const AwardGridAtca = () => {
         )}
       </div>
       <Spacer size={"1rem"} />
-      {currentGoal <= correctAnswerGoals[6] ? (
+      {currentGoal <= streakEasyGoals[6] ? (
         <AwardLocked
           fontSize={"6.5rem"}
-          correctAnswerGoal={correctAnswerGoals[6]}
+          correctAnswerGoal={streakEasyGoals[6]}
           awardStyle={"award3"}
           targetStyle={"target3"}
         />
-      ) : aTCAClaimed[6] === 0 ? (
+      ) : isClaimed[6] === 0 ? (
         <AwardUnclaimed
           fontSize={"6.5rem"}
           awardStyle={"award3"}
@@ -233,29 +237,30 @@ const AwardGridAtca = () => {
       ) : (
         <AwardClaimed
           fontSize={"6.5rem"}
-          correctAnswerGoal={correctAnswerGoals[6]}
+          correctAnswerGoal={streakEasyGoals[6]}
           awardStyle={"award3"}
           targetStyle={"target3"}
           awardType={"atcaAwards"}
           awardIndex={6}
         />
       )}
-      {correctAnswers >= correctAnswerGoals[6] ? (
-        <AwardsCompleted correctAnswers={correctAnswers} />
+      {bestStreak >= streakEasyGoals[6] ? (
+        <AwardsCompleted correctAnswers={bestStreak} />
       ) : (
         <AwardProgress
           getPercent={getPercent}
-          correctAnswers={correctAnswers}
+          correctAnswers={bestStreak}
           currentGoal={currentGoal}
         />
       )}
       <Spacer size={"0.5rem"} />
       <ResetAchievementButton
-        achType={"achCorrectAnswers"}
+        achType={"bestStreaksByDifficulty"}
         refresh={refresh}
         setRefresh={setRefresh}
-        setClaimed={setATCAClaimed}
-        isClaimedArray={"isATCAClaimed"}
+        setClaimed={setIsClaimed}
+        isClaimedArray={"isStreakEasyClaimed"}
+        level={"Easy"}
       />
       <Spacer />
       {showCelebration && (
@@ -269,4 +274,4 @@ const AwardGridAtca = () => {
   );
 };
 
-export default AwardGridAtca;
+export default AwardGridStreakEasy;

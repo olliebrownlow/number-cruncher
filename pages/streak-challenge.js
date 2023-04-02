@@ -26,23 +26,45 @@ import {
   incrementAchCorrectAnswers,
   addAnswerToHistoryInfo,
   newAchCorrectAnswersAwardIfDue,
+  // newAchStreakAwardIfDue,
   storePreviousQuestionAndAnswer,
   questionNumber,
   setNewQuestion,
 } from "../core/gamePlayLogic";
+import {
+  streakEasyGoals,
+  streakMediumGoals,
+  streakHardGoals,
+} from "../config/achievementGoals";
 
 const Streak = () => {
   const [userAnswer, setUserAnswer] = useState("");
   const [level, setLevel] = useState("Other");
+  const [goals, setGoals] = useState(undefined);
   const [gameStartBest, setGameStartBest] = useState(0);
   const [reRender, setReRender] = useState(0);
   const [animation, setAnimation] = useState(false);
 
   useEffect(() => {
     focusOnAnswerTextBox();
+
+    const getLevelGoals = (level) => {
+      switch (level) {
+        case "Easy":
+          return streakEasyGoals;
+        case "Medium":
+          return streakMediumGoals;
+        case "Hard":
+          return streakHardGoals;
+        default:
+          return undefined;
+      }
+    };
+
     const gt = sessionStorage.getItem("gameType");
     const gameOptions = JSON.parse(sessionStorage.getItem(`${gt}GameOptions`));
     setLevel(gameOptions.difficultyLevel);
+    setGoals(getLevelGoals(gameOptions.difficultyLevel));
     const bestStreaksByDifficulty = JSON.parse(
       localStorage.getItem("bestStreaksByDifficulty")
     );
@@ -116,6 +138,19 @@ const Streak = () => {
     }
   };
 
+  const getLevelAchievementClaimedArray = () => {
+    switch (level) {
+      case "Easy":
+        return JSON.parse(localStorage.getItem("isStreakEasyClaimed"));
+      case "Medium":
+        return JSON.parse(localStorage.getItem("isStreakMediumClaimed"));
+      case "Hard":
+        return JSON.parse(localStorage.getItem("isStreakHardClaimed"));
+      default:
+        return undefined;
+    }
+  };
+
   const submitAnswer = (e) => {
     e.preventDefault();
     focusOnAnswerTextBox();
@@ -142,6 +177,50 @@ const Streak = () => {
         incrementAchCorrectAnswers();
         addAnswerToHistoryInfo(true);
         newAchCorrectAnswersAwardIfDue();
+        // newAchStreakAwardIfDue();
+        if (
+          goals &&
+          goals.includes(JSON.parse(sessionStorage.getItem("correctCounter")))
+        ) {
+          const index = goals.indexOf(
+            JSON.parse(sessionStorage.getItem("correctCounter"))
+          );
+          if (getLevelAchievementClaimedArray()[index] === false) {
+            if (level === "Easy") {
+              const arr = JSON.parse(
+                localStorage.getItem("isStreakEasyClaimed")
+              );
+              arr[index] = 0;
+              localStorage.setItem("isStreakEasyClaimed", JSON.stringify(arr));
+            }
+            if (level === "Medium") {
+              const arr = JSON.parse(
+                localStorage.getItem("isStreakMediumClaimed")
+              );
+              arr[index] = 0;
+              localStorage.setItem(
+                "isStreakMediumClaimed",
+                JSON.stringify(arr)
+              );
+            }
+            if (level === "Hard") {
+              const arr = JSON.parse(
+                localStorage.getItem("isStreakHardClaimed")
+              );
+              arr[index] = 0;
+              localStorage.setItem("isStreakHardClaimed", JSON.stringify(arr));
+            }
+            toast.success(
+              getToastMessage(
+                index,
+                JSON.parse(sessionStorage.getItem("correctCounter"))
+              ),
+              {
+                id: "streakAchievement",
+              }
+            );
+          }
+        }
         storePreviousQuestionAndAnswer(userAnswer);
         setNewQuestion();
       } else {
@@ -156,6 +235,15 @@ const Streak = () => {
         id: "outOfRange",
       });
     }
+  };
+
+  const getToastMessage = (index, currentStreakCount) => {
+    if (goals[index + 1]) {
+      return `NEW AWARD!!!\nClaim your award for getting a streak of ${currentStreakCount}! \n Next target\n${
+        goals[index + 1]
+      }`;
+    }
+    return `NEW AWARD!!!\nClaim your award for getting a streak of ${currentStreakCount}!`;
   };
 
   const getCorrectAnswerCount = () => {

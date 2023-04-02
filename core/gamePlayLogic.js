@@ -1,5 +1,5 @@
 import toast from "react-hot-toast";
-import correctAnswerGoals from "../config/correctAnswerGoals";
+import { correctAnswerGoals } from "../config/achievementGoals";
 
 export const focusOnAnswerTextBox = () => {
   if (document.getElementById("answer")) {
@@ -104,6 +104,10 @@ export const newAchCorrectAnswersAwardIfDue = () => {
       id: "correctAnswersAchievement",
     });
   }
+};
+
+export const newAchStreakAwardIfDue = (level) => {
+  
 };
 
 export const storePreviousQuestionAndAnswer = (userAnswer) => {

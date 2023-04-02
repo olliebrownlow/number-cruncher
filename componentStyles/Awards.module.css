@@ -1,3 +1,14 @@
+.achievementContainer {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  width: 92%;
+  border: solid lightgrey;
+  border-width: 2px 3px 3px 2px;
+  border-radius:99% 2% 97% 5%/2% 99% 3% 97%;
+}
+
 .awardGrid {
   display: grid;
   text-align: center;

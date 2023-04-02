@@ -6,7 +6,7 @@ import "../styles/globals.css";
 import ErrorBoundary from "../components/error-boundary";
 import historyInfo from "../config/historyInfo";
 import bestStreaksByDifficulty from "../config/bestStreaksByDifficulty";
-import { Toaster } from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 import { AlertTriangle, Award } from "react-feather";
 import styles from "../styles/AppLayout.module.css";
 import chalkboard from "../public/chalkboard.jpg";
@@ -22,6 +22,18 @@ export default function App({ Component, pageProps }) {
     if (localStorage.getItem("isATCAClaimed") === null) {
       const isATCAClaimed = [false, false, false, false, false, false, false];
       localStorage.setItem("isATCAClaimed", JSON.stringify(isATCAClaimed));
+    }
+    if (localStorage.getItem("isStreakEasyClaimed") === null) {
+      const isStreakEasyClaimed = [false, false, false, false, false, false, false];
+      localStorage.setItem("isStreakEasyClaimed", JSON.stringify(isStreakEasyClaimed));
+    }
+    if (localStorage.getItem("isStreakMediumClaimed") === null) {
+      const isStreakMediumClaimed = [false, false, false, false, false, false, false];
+      localStorage.setItem("isStreakMediumClaimed", JSON.stringify(isStreakMediumClaimed));
+    }
+    if (localStorage.getItem("isStreakHardClaimed") === null) {
+      const isStreakHardClaimed = [false, false, false, false, false, false, false];
+      localStorage.setItem("isStreakHardClaimed", JSON.stringify(isStreakHardClaimed));
     }
     if (localStorage.getItem("historyInfo") === null) {
       localStorage.setItem("historyInfo", JSON.stringify(historyInfo));
