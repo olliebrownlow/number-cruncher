@@ -65,7 +65,12 @@ const AwardGridAtca = () => {
   return (
     <div className={styles.achievementContainer}>
       <Spacer size={"0.5rem"} />
-      <SubHeading subheading={"All-time Correct Answers"} position={"center"} />
+      <SubHeading
+        subheading={"Correct Answers"}
+        position={"center"}
+        fontSize={"2.5rem"}
+      />
+      <SubHeading subheading={"(All-time)"} position={"center"} />
       <Spacer size={"0.5rem"} />
       <SubHeading subheading={"Your awards"} position={"left"} />
       <Spacer size={"0.5rem"} />

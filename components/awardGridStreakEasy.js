@@ -69,7 +69,12 @@ const AwardGridStreakEasy = () => {
   return (
     <div className={styles.achievementContainer}>
       <Spacer size={"0.5rem"} />
-      <SubHeading subheading={"Best Streak Easy Level"} position={"center"} />
+      <SubHeading
+        subheading={"Best Streak"}
+        position={"center"}
+        fontSize={"2.5rem"}
+      />
+      <SubHeading subheading={"(Easy Level)"} position={"center"} />
       <Spacer size={"0.5rem"} />
       <SubHeading subheading={"Your awards"} position={"left"} />
       <Spacer size={"0.5rem"} />

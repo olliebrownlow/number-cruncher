@@ -3,7 +3,7 @@ import styles from "../componentStyles/SubHeading.module.css";
 import colours from "../config/colours";
 
 const SubHeading = (props) => {
-  const { subheading, position } = props;
+  const { subheading, position, fontSize } = props;
   const [refresh, setRefresh] = useState(0);
 
   const handleClick = () => {
@@ -18,6 +18,7 @@ const SubHeading = (props) => {
           onClick={() => handleClick()}
           style={{
             color: colours[Math.floor(Math.random() * colours.length)],
+            fontSize: fontSize,
           }}
         >
           {subheading}
