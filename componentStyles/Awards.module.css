@@ -70,6 +70,11 @@
   text-align: center;
 }
 
+.currentBest {
+  font-size: 1rem;
+  text-align: center;
+}
+
 .current {
   font-size: 3rem;
   font-weight: 700;

@@ -1,8 +1,9 @@
 import BackButton from "../components/backButton";
 import HomeButton from "../components/homeButton";
 import PageHeading from "../components/pageHeading";
-import AwardGridStreakEasy from "../components/awardGridStreakEasy";
 import AwardGridAtca from "../components/awardGridAtca";
+import AwardGridStreakEasy from "../components/awardGridStreakEasy";
+import AwardGridStreakMedium from "../components/awardGridStreakMedium";
 import Spacer from "../components/spacer";
 
 const Achievements = () => {
@@ -14,6 +15,8 @@ const Achievements = () => {
       <AwardGridAtca />
       <Spacer />
       <AwardGridStreakEasy />
+      <Spacer />
+      <AwardGridStreakMedium />
       <Spacer />
     </>
   );

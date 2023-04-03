@@ -10,6 +10,7 @@ const AwardsCompleted = (props) => {
         Congratulations, achievement complete!
       </div>
       <Spacer />
+      <div className={styles.currentBest}>Current best</div>
       <div className={styles.current}>{correctAnswers}</div>
     </>
   );
