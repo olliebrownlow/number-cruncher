@@ -1,6 +1,7 @@
 import { SlBadge } from "react-icons/sl";
+import { SiMeteor } from "react-icons/si";
 import { FaAward, FaMedal, FaSun } from "react-icons/fa";
-import { BiMedal } from "react-icons/bi";
+import { BiMedal, BiMeteor } from "react-icons/bi";
 import { BsTrophy, BsSun, BsStar } from "react-icons/bs";
 import {
   GiTrophy,
@@ -16,6 +17,11 @@ import {
   GiPolarStar,
   GiMoebiusStar,
   GiStarSwirl,
+  GiFragmentedMeteor,
+  GiCometSpark,
+  GiBurningMeteor,
+  GiFallingOvoid,
+  GiUnfriendlyFire,
 } from "react-icons/gi";
 import styles from "../componentStyles/CelebrateAwardClaim.module.css";
 
@@ -51,4 +57,20 @@ export const starIcons = [
   <GiPolarStar className={styles.medal3 + ` ${styles.fadeInDownDelayed}`} />,
   <GiMoebiusStar className={styles.medal3 + ` ${styles.fadeInDownDelayed}`} />,
   <GiStarSwirl className={styles.medal3 + ` ${styles.fadeInDownDelayed}`} />,
+];
+
+export const meteorIcons = [
+  <SiMeteor className={styles.medal1 + ` ${styles.fadeInDownDelayed}`} />,
+  <BiMeteor className={styles.medal1 + ` ${styles.fadeInDownDelayed}`} />,
+  <GiFragmentedMeteor
+    className={styles.medal2 + ` ${styles.fadeInDownDelayed}`}
+  />,
+  <GiCometSpark className={styles.medal2 + ` ${styles.fadeInDownDelayed}`} />,
+  <GiBurningMeteor
+    className={styles.medal3 + ` ${styles.fadeInDownDelayed}`}
+  />,
+  <GiFallingOvoid className={styles.medal3 + ` ${styles.fadeInDownDelayed}`} />,
+  <GiUnfriendlyFire
+    className={styles.medal3 + ` ${styles.fadeInDownDelayed}`}
+  />,
 ];

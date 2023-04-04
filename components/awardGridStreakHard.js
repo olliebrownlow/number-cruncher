@@ -273,7 +273,7 @@ const AwardGridStreakHard = () => {
           closeModal={closeCelebrationModal}
           windowOnClick={celebrationWindowOnClick}
           index={index}
-          iconType={"starIcons"}
+          iconType={"meteorIcons"}
         />
       )}
     </div>

@@ -10,6 +10,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { AlertTriangle, Award } from "react-feather";
 import styles from "../styles/AppLayout.module.css";
 import chalkboard from "../public/chalkboard.jpg";
+import { focusOnAnswerTextBox } from "../core/gamePlayLogic";
 import { Analytics } from "@vercel/analytics/react";
 
 export default function App({ Component, pageProps }) {
@@ -24,16 +25,49 @@ export default function App({ Component, pageProps }) {
       localStorage.setItem("isATCAClaimed", JSON.stringify(isATCAClaimed));
     }
     if (localStorage.getItem("isStreakEasyClaimed") === null) {
-      const isStreakEasyClaimed = [false, false, false, false, false, false, false];
-      localStorage.setItem("isStreakEasyClaimed", JSON.stringify(isStreakEasyClaimed));
+      const isStreakEasyClaimed = [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+      ];
+      localStorage.setItem(
+        "isStreakEasyClaimed",
+        JSON.stringify(isStreakEasyClaimed)
+      );
     }
     if (localStorage.getItem("isStreakMediumClaimed") === null) {
-      const isStreakMediumClaimed = [false, false, false, false, false, false, false];
-      localStorage.setItem("isStreakMediumClaimed", JSON.stringify(isStreakMediumClaimed));
+      const isStreakMediumClaimed = [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+      ];
+      localStorage.setItem(
+        "isStreakMediumClaimed",
+        JSON.stringify(isStreakMediumClaimed)
+      );
     }
     if (localStorage.getItem("isStreakHardClaimed") === null) {
-      const isStreakHardClaimed = [false, false, false, false, false, false, false];
-      localStorage.setItem("isStreakHardClaimed", JSON.stringify(isStreakHardClaimed));
+      const isStreakHardClaimed = [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+      ];
+      localStorage.setItem(
+        "isStreakHardClaimed",
+        JSON.stringify(isStreakHardClaimed)
+      );
     }
     if (localStorage.getItem("historyInfo") === null) {
       localStorage.setItem("historyInfo", JSON.stringify(historyInfo));
@@ -80,6 +114,11 @@ export default function App({ Component, pageProps }) {
     router.prefetch("/achievements");
   }, []);
 
+  const closeToast = () => {
+    toast.dismiss();
+    focusOnAnswerTextBox();
+  };
+
   return (
     <>
       <Head>
@@ -115,25 +154,27 @@ export default function App({ Component, pageProps }) {
           />
         </div>
       </main>
-      <Toaster
-        toastOptions={{
-          style: {
-            textAlign: "center",
-            fontSize: "1.5rem",
-          },
-          error: {
-            icon: <AlertTriangle color="red" size="50px" />,
-          },
-          success: {
-            icon: <Award color="gold" size="190px" />,
+      <div onClick={() => closeToast()}>
+        <Toaster
+          toastOptions={{
             style: {
-              background: "dimgrey",
-              color: "white",
+              textAlign: "center",
+              fontSize: "1.5rem",
             },
-            duration: 5000,
-          },
-        }}
-      />
+            error: {
+              icon: <AlertTriangle color="red" size="50px" />,
+            },
+            success: {
+              icon: <Award color="gold" size="190px" />,
+              style: {
+                background: "dimgrey",
+                color: "white",
+              },
+              duration: 5000,
+            },
+          }}
+        />
+      </div>
     </>
   );
 }
