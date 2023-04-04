@@ -138,7 +138,7 @@ const AwardGridAtca = () => {
           />
         ) : (
           <AwardClaimed
-            fontSize={"2.4rem"}
+            fontSize={"2.1rem"}
             correctAnswerGoal={correctAnswerGoals[2]}
             awardStyle={"award2"}
             targetStyle={"target2"}
@@ -162,7 +162,7 @@ const AwardGridAtca = () => {
           />
         ) : (
           <AwardClaimed
-            fontSize={"2.5rem"}
+            fontSize={"2.75rem"}
             correctAnswerGoal={correctAnswerGoals[3]}
             awardStyle={"award2"}
             targetStyle={"target2"}
@@ -186,7 +186,7 @@ const AwardGridAtca = () => {
           />
         ) : (
           <AwardClaimed
-            fontSize={"3rem"}
+            fontSize={"3.25rem"}
             correctAnswerGoal={correctAnswerGoals[4]}
             awardStyle={"award3"}
             targetStyle={"target3"}

@@ -20,7 +20,7 @@ import {
   setCountersToZero,
   setFirstQuestion,
   resetPreviousQuestionAnswersArray,
-  isUserAnswerPassedOrInRange,
+  isUserAnswerInRange,
   isCorrectAnswer,
   incrementAnswerCounter,
   incrementAchCorrectAnswers,
@@ -154,7 +154,7 @@ const Streak = () => {
   const submitAnswer = (e) => {
     e.preventDefault();
     focusOnAnswerTextBox();
-    if (isUserAnswerPassedOrInRange(userAnswer)) {
+    if (isUserAnswerInRange(userAnswer)) {
       // trigger counter movement in child component when blank answer
       setReRender(reRender + 1);
       if (isCorrectAnswer(userAnswer)) {

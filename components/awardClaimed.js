@@ -1,10 +1,9 @@
 import { SlBadge } from "react-icons/sl";
 import { SiMeteor } from "react-icons/si";
 import { FaAward, FaMedal, FaSun } from "react-icons/fa";
-import { BiMedal, BiMeteor } from "react-icons/bi";
-import { BsTrophy, BsSun, BsStar } from "react-icons/bs";
+import { BiMeteor } from "react-icons/bi";
+import { BsSun, BsStar } from "react-icons/bs";
 import {
-  GiTrophy,
   GiBarbedSun,
   GiSun,
   GiHeraldicSun,
@@ -20,9 +19,11 @@ import {
   GiFragmentedMeteor,
   GiBurningMeteor,
   GiCometSpark,
-  GiFireDash,
   GiUnfriendlyFire,
   GiFallingOvoid,
+  GiTrophyCup,
+  GiLaurelsTrophy,
+  GiStarMedal,
 } from "react-icons/gi";
 import styles from "../componentStyles/Awards.module.css";
 
@@ -64,25 +65,25 @@ const AwardClaimed = (props) => {
         fontSize: fontSize,
       }}
     />,
-    <BiMedal
-      className={styles[awardStyle]}
-      style={{
-        fontSize: fontSize,
-      }}
-    />,
     <FaMedal
       className={styles[awardStyle]}
       style={{
         fontSize: fontSize,
       }}
     />,
-    <BsTrophy
+    <GiStarMedal
       className={styles[awardStyle]}
       style={{
         fontSize: fontSize,
       }}
     />,
-    <GiTrophy
+    <GiTrophyCup
+      className={styles[awardStyle]}
+      style={{
+        fontSize: fontSize,
+      }}
+    />,
+    <GiLaurelsTrophy
       className={styles[awardStyle]}
       style={{
         fontSize: fontSize,

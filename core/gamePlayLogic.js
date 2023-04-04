@@ -48,6 +48,10 @@ export const isUserAnswerPassedOrInRange = (userAnswer) => {
   );
 };
 
+export const isUserAnswerInRange = (userAnswer) => {
+  return parseInt(userAnswer) > 0 && parseInt(userAnswer) < 145;
+};
+
 export const isCorrectAnswer = (userAnswer) => {
   const table = parseInt(sessionStorage.getItem("currentTable"));
   const multiplier = parseInt(sessionStorage.getItem("currentMultiplier"));
@@ -106,9 +110,7 @@ export const newAchCorrectAnswersAwardIfDue = () => {
   }
 };
 
-export const newAchStreakAwardIfDue = (level) => {
-  
-};
+export const newAchStreakAwardIfDue = (level) => {};
 
 export const storePreviousQuestionAndAnswer = (userAnswer) => {
   const qAArray = JSON.parse(

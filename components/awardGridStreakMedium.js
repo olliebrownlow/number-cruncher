@@ -167,7 +167,7 @@ const AwardGridStreakMedium = () => {
           />
         ) : (
           <AwardClaimed
-            fontSize={"2.5rem"}
+            fontSize={"2.75rem"}
             correctAnswerGoal={streakMediumGoals[3]}
             awardStyle={"award2"}
             targetStyle={"target2"}
@@ -191,7 +191,7 @@ const AwardGridStreakMedium = () => {
           />
         ) : (
           <AwardClaimed
-            fontSize={"3rem"}
+            fontSize={"3.5rem"}
             correctAnswerGoal={streakMediumGoals[4]}
             awardStyle={"award3"}
             targetStyle={"target3"}

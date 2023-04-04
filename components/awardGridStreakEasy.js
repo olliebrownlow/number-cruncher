@@ -167,7 +167,7 @@ const AwardGridStreakEasy = () => {
           />
         ) : (
           <AwardClaimed
-            fontSize={"2.5rem"}
+            fontSize={"2.75rem"}
             correctAnswerGoal={streakEasyGoals[3]}
             awardStyle={"award2"}
             targetStyle={"target2"}
