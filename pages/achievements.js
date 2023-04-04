@@ -4,6 +4,7 @@ import PageHeading from "../components/pageHeading";
 import AwardGridAtca from "../components/awardGridAtca";
 import AwardGridStreakEasy from "../components/awardGridStreakEasy";
 import AwardGridStreakMedium from "../components/awardGridStreakMedium";
+import AwardGridStreakHard from "../components/awardGridStreakHard";
 import Spacer from "../components/spacer";
 
 const Achievements = () => {
@@ -17,6 +18,8 @@ const Achievements = () => {
       <AwardGridStreakEasy />
       <Spacer />
       <AwardGridStreakMedium />
+      <Spacer />
+      <AwardGridStreakHard />
       <Spacer />
     </>
   );

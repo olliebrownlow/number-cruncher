@@ -1,6 +1,7 @@
 import { SlBadge } from "react-icons/sl";
+import { SiMeteor } from "react-icons/si";
 import { FaAward, FaMedal, FaSun } from "react-icons/fa";
-import { BiMedal } from "react-icons/bi";
+import { BiMedal, BiMeteor } from "react-icons/bi";
 import { BsTrophy, BsSun, BsStar } from "react-icons/bs";
 import {
   GiTrophy,
@@ -16,6 +17,12 @@ import {
   GiBeveledStar,
   GiPolarStar,
   GiMoebiusStar,
+  GiFragmentedMeteor,
+  GiBurningMeteor,
+  GiCometSpark,
+  GiFireDash,
+  GiUnfriendlyFire,
+  GiFallingOvoid,
 } from "react-icons/gi";
 import styles from "../componentStyles/Awards.module.css";
 
@@ -37,6 +44,8 @@ const AwardClaimed = (props) => {
         return streakEasyAwards;
       case "streakMediumAwards":
         return streakMediumAwards;
+      case "streakHardAwards":
+        return streakHardAwards;
       default:
         return atcaAwards;
     }
@@ -170,6 +179,51 @@ const AwardClaimed = (props) => {
       }}
     />,
     <GiStarSwirl
+      className={styles[awardStyle]}
+      style={{
+        fontSize: fontSize,
+      }}
+    />,
+  ];
+
+  const streakHardAwards = [
+    <SiMeteor
+      className={styles[awardStyle]}
+      style={{
+        fontSize: fontSize,
+      }}
+    />,
+    <BiMeteor
+      className={styles[awardStyle]}
+      style={{
+        fontSize: fontSize,
+      }}
+    />,
+    <GiFragmentedMeteor
+      className={styles[awardStyle]}
+      style={{
+        fontSize: fontSize,
+      }}
+    />,
+    <GiCometSpark
+      className={styles[awardStyle]}
+      style={{
+        fontSize: fontSize,
+      }}
+    />,
+    <GiBurningMeteor
+      className={styles[awardStyle]}
+      style={{
+        fontSize: fontSize,
+      }}
+    />,
+    <GiFallingOvoid
+      className={styles[awardStyle]}
+      style={{
+        fontSize: fontSize,
+      }}
+    />,
+    <GiUnfriendlyFire
       className={styles[awardStyle]}
       style={{
         fontSize: fontSize,
