@@ -10,6 +10,6 @@ export const streakMediumGoals = [10, 20, 40, 80, 150, 250, 400];
 // for testing
 // export const streakMediumGoals = [1, 2, 3, 4, 5, 6, 7];
 
-// export const streakHardGoals = [20, 40, 80, 150, 250, 400, 600];
+export const streakHardGoals = [20, 40, 80, 150, 250, 400, 600];
 // for testing
-export const streakHardGoals = [1, 2, 3, 4, 5, 6, 7];
+// export const streakHardGoals = [1, 2, 3, 4, 5, 6, 7];

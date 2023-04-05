@@ -1,7 +1,6 @@
 import { SlBadge } from "react-icons/sl";
 import { SiMeteor } from "react-icons/si";
 import { FaAward, FaMedal, FaSun } from "react-icons/fa";
-import { BiMeteor } from "react-icons/bi";
 import { BsSun, BsStar } from "react-icons/bs";
 import {
   GiBarbedSun,
@@ -19,11 +18,12 @@ import {
   GiFragmentedMeteor,
   GiBurningMeteor,
   GiCometSpark,
-  GiUnfriendlyFire,
   GiFallingOvoid,
   GiTrophyCup,
   GiLaurelsTrophy,
   GiStarMedal,
+  GiFallingBlob,
+  GiBurningDot,
 } from "react-icons/gi";
 import styles from "../componentStyles/Awards.module.css";
 
@@ -194,13 +194,19 @@ const AwardClaimed = (props) => {
         fontSize: fontSize,
       }}
     />,
-    <BiMeteor
+    <GiFragmentedMeteor
       className={styles[awardStyle]}
       style={{
         fontSize: fontSize,
       }}
     />,
-    <GiFragmentedMeteor
+    <GiBurningDot
+      className={styles[awardStyle]}
+      style={{
+        fontSize: fontSize,
+      }}
+    />,
+    <GiFallingBlob
       className={styles[awardStyle]}
       style={{
         fontSize: fontSize,
@@ -219,12 +225,6 @@ const AwardClaimed = (props) => {
       }}
     />,
     <GiFallingOvoid
-      className={styles[awardStyle]}
-      style={{
-        fontSize: fontSize,
-      }}
-    />,
-    <GiUnfriendlyFire
       className={styles[awardStyle]}
       style={{
         fontSize: fontSize,

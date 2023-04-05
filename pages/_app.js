@@ -112,6 +112,7 @@ export default function App({ Component, pageProps }) {
       );
     }
     router.prefetch("/achievements");
+    router.prefetch("/progress");
   }, []);
 
   const closeToast = () => {

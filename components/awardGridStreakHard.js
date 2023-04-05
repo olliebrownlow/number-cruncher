@@ -119,7 +119,7 @@ const AwardGridStreakHard = () => {
           />
         ) : (
           <AwardClaimed
-            fontSize={"1.5rem"}
+            fontSize={"2rem"}
             correctAnswerGoal={streakHardGoals[1]}
             awardStyle={"award1"}
             targetStyle={"target1"}
@@ -143,7 +143,7 @@ const AwardGridStreakHard = () => {
           />
         ) : (
           <AwardClaimed
-            fontSize={"2.4rem"}
+            fontSize={"2rem"}
             correctAnswerGoal={streakHardGoals[2]}
             awardStyle={"award2"}
             targetStyle={"target2"}
