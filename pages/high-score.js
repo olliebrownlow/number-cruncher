@@ -1,13 +1,13 @@
 import BackButton from "../components/backButton";
 import PageHeading from "../components/pageHeading";
 
-const PlayThePercentages = (props) => {
+const HighScore = (props) => {
   return (
     <>
       <BackButton />
-      <PageHeading heading={"Play the Percentages"} />
+      <PageHeading heading={"High Score"} />
     </>
   );
 };
 
-export default PlayThePercentages;
+export default HighScore;

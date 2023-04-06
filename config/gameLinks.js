@@ -4,7 +4,7 @@ const gameLinks = [
     gameType: "practice-mode",
     gameTitle: "Practice Mode",
     gameDescription:
-      "Select times tables of your choice and get those brain cells  working!",
+      "Select times tables of your choice and get those brain cells working!",
   },
   {
     pathName: "/game-options",
@@ -14,16 +14,16 @@ const gameLinks = [
   },
   {
     pathName: "/game-options",
-    gameType: "play-the-percentages",
-    gameTitle: "Play the Percentages",
-    gameDescription: "Set a question limit and see how many you can get right.",
+    gameType: "high-score",
+    gameTitle: "High Score",
+    gameDescription: "Get one wrong and you'll lose a life. How many points can you score before the game ends?",
   },
   {
     pathName: "/game-options",
     gameType: "against-the-clock",
     gameTitle: "Against the Clock",
     gameDescription:
-      "Set time limits and compete for top scores. Tick tock tick tock...",
+      "Set a time limit and compete for top scores. Tick tock tick tock...",
   },
   {
     pathName: "/journey",

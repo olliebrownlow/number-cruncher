@@ -8,9 +8,10 @@ const GameRules = (props) => {
       case "practice-mode":
         return [
           {
-            Aim: "Answer as many correctly as you can.",
+            Aim: "Just practice! No timers, no scores, no worries.",
             "Tip one": "End the game at any point using the game end button.",
-            "Tip two": "Correct answers count towards gaining achievement awards.",
+            "Tip two":
+              "Correct answers count towards gaining achievement awards.",
           },
         ];
       case "streak-challenge":
@@ -20,7 +21,7 @@ const GameRules = (props) => {
               "Set best streaks by getting as many answers correct in a row as you can.",
             Rule: "The game ends when you get one wrong.",
             Tip:
-              "Only streaks on easy, medium and hard times table settings count towards gaining streak achievement awards.",
+              "Only streaks on easy, medium and hard times tables settings count towards gaining streak achievement awards.",
           },
         ];
       default:

@@ -57,24 +57,24 @@ const GameOptions = () => {
       <BackButton />
       <HomeButton />
       <PageHeading heading={formattedGameTypeString(gameType) + " options"} />
-      <div
-        onClick={() => toggleGameRules()}
-        style={{
-          whiteSpace: "noWrap",
-          textAlign: "center",
-          fontSize: "1.5rem",
-          marginBottom: "12px",
-          padding: "4px 12px",
-          border: "solid lightgrey",
-          borderWidth: "2px 1px 3px 2px",
-          borderRadius: "15% 4% 87% 5%/24% 4% 13% 5%",
-        }}
-      >
-        Game rules and tips
-      </div>
-      {showGameRules && <GameRules gameType={gameType} />}
       {gameType === "practice-mode" && (
         <>
+          <div
+            onClick={() => toggleGameRules()}
+            style={{
+              whiteSpace: "noWrap",
+              textAlign: "center",
+              fontSize: "1.5rem",
+              marginBottom: "12px",
+              padding: "4px 12px",
+              border: "solid lightgrey",
+              borderWidth: "2px 1px 3px 2px",
+              borderRadius: "15% 4% 87% 5%/24% 4% 13% 5%",
+            }}
+          >
+            Game rules and tips
+          </div>
+          {showGameRules && <GameRules gameType={gameType} />}
           <StartButton
             gameType={gameType}
             selectedTimesTables={selected}
@@ -119,6 +119,22 @@ const GameOptions = () => {
       )}
       {gameType === "streak-challenge" && (
         <>
+          <div
+            onClick={() => toggleGameRules()}
+            style={{
+              whiteSpace: "noWrap",
+              textAlign: "center",
+              fontSize: "1.5rem",
+              marginBottom: "12px",
+              padding: "4px 12px",
+              border: "solid lightgrey",
+              borderWidth: "2px 1px 3px 2px",
+              borderRadius: "15% 4% 87% 5%/24% 4% 13% 5%",
+            }}
+          >
+            Game rules and tips
+          </div>
+          {showGameRules && <GameRules gameType={gameType} />}
           <StartButton
             gameType={gameType}
             selectedTimesTables={selected}
