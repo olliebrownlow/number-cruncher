@@ -1,7 +1,6 @@
 .releaseTableGrid {
   display: grid;
   grid-template-columns: 22% 22% 56%;
-  grid-template-rows: 1.5rem;
   max-width: 100%;
 }
 

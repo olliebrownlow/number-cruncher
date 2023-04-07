@@ -5,6 +5,12 @@ const releaseInfo = [
     features: "New feature(s)",
   },
   {
+    release: "4",
+    date: "Apr 7th 2023",
+    features:
+      "Streak challenge and 3 related achievement goals",
+  },
+  {
     release: "3",
     date: "Mar 4th 2023",
     features:
