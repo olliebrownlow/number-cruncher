@@ -24,6 +24,14 @@
   max-width: 30ch;
 }
 
+.new {
+  font-size: 0.9rem;
+  color: limegreen;
+  transform: rotate(-7.5deg);
+  -webkit-transform: rotate(-7.5deg); 
+  -moz-transform: rotate(-7.5deg); 
+}
+
 /* Mobile */
 @media (max-width: 700px) {
  .card {

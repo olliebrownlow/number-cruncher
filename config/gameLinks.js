@@ -11,12 +11,14 @@ const gameLinks = [
     gameType: "streak-challenge",
     gameTitle: "Streak Challenge",
     gameDescription: "Get one wrong and the streak counter will reset to zero!",
+    new: "New!",
   },
   {
     pathName: "/game-options",
     gameType: "high-score",
     gameTitle: "High Score",
-    gameDescription: "Get one wrong and you'll lose a life. How many points can you score before the game ends?",
+    gameDescription:
+      "Get one wrong and you'll lose a life. How many points can you score before the game ends?",
   },
   {
     pathName: "/game-options",
@@ -28,7 +30,8 @@ const gameLinks = [
   {
     pathName: "/journey",
     gameTitle: "Journey",
-    gameDescription: "Work through levels of increasing difficulty earning rewards as you go.",
+    gameDescription:
+      "Work through levels of increasing difficulty earning rewards as you go.",
   },
   {
     pathName: "/about",

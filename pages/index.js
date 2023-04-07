@@ -19,6 +19,7 @@ const Home = () => {
             gameType={link.gameType}
             gameTitle={link.gameTitle}
             gameDescription={link.gameDescription}
+            newly={link.new}
           />
         ))}
       </div>

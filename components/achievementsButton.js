@@ -32,7 +32,7 @@ const AchievementsButton = () => {
     <>
       {achievementsToClaim && (
         <div className={styles.claimMarker}>
-          <RxDotFilled size={24} color={"limegreen"} />
+          <RxDotFilled size={24} color={"dodgerblue"} />
         </div>
       )}
       <div
