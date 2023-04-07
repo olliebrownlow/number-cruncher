@@ -27,6 +27,8 @@
 .new {
   font-size: 0.9rem;
   color: limegreen;
+  height: 0;
+  margin-bottom: 1.1rem;
   transform: rotate(-7.5deg);
   -webkit-transform: rotate(-7.5deg); 
   -moz-transform: rotate(-7.5deg); 
