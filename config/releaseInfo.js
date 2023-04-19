@@ -5,6 +5,12 @@ const releaseInfo = [
     features: "New feature(s)",
   },
   {
+    release: "5",
+    date: "Apr 19th 2023",
+    features:
+      "New repeat user achievement for use of number cruncher on consecutive days",
+  },
+  {
     release: "4",
     date: "Apr 7th 2023",
     features:
