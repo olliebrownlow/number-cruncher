@@ -27,11 +27,16 @@ const ResetAchievementButton = (props) => {
 
   const resetAchievement = () => {
     setShowConfirmReset(false);
-    if (typeof JSON.parse(localStorage.getItem(achType)) === "object") {
+    if (Array.isArray(JSON.parse(localStorage.getItem(achType)))) {
+      // returnUsage
+      localStorage.setItem(achType, JSON.stringify(["1980-01-01", 0, 0]));
+    } else if (typeof JSON.parse(localStorage.getItem(achType)) === "object") {
+      // streak-challenge
       const achObject = JSON.parse(localStorage.getItem(achType));
       achObject[level] = [0, 0, 0];
       localStorage.setItem(achType, JSON.stringify(achObject));
     } else {
+      // practice-mode
       localStorage.setItem(achType, 0);
     }
     const resetArray = [false, false, false, false, false, false, false];

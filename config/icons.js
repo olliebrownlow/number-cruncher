@@ -1,5 +1,5 @@
 import { SlBadge } from "react-icons/sl";
-import { SiMeteor } from "react-icons/si";
+import { SiMeteor, SiDungeonsanddragons } from "react-icons/si";
 import { FaAward, FaMedal, FaSun } from "react-icons/fa";
 import { BsSun, BsStar } from "react-icons/bs";
 import {
@@ -24,8 +24,28 @@ import {
   GiLaurelsTrophy,
   GiFallingBlob,
   GiBurningDot,
+  GiSeatedMouse,
+  GiGecko,
+  GiSeaTurtle,
+  GiElephantHead,
+  GiSnake,
+  GiTigerHead,
 } from "react-icons/gi";
 import styles from "../componentStyles/CelebrateAwardClaim.module.css";
+
+export const animalIcons = [
+  <GiSeatedMouse className={styles.medal1 + ` ${styles.fadeInDownDelayed}`} />,
+  <GiGecko className={styles.medal1 + ` ${styles.fadeInDownDelayed}`} />,
+  <GiSeaTurtle className={styles.medal2 + ` ${styles.fadeInDownDelayed}`} />,
+  <GiElephantHead className={styles.medal2 + ` ${styles.fadeInDownDelayed}`} />,
+  <GiSnake className={styles.medal3 + ` ${styles.fadeInDownDelayed}`} />,
+  <GiTigerHead
+    className={styles.medal3 + ` ${styles.fadeInDownDelayed}`}
+  />,
+  <SiDungeonsanddragons
+    className={styles.medal3 + ` ${styles.fadeInDownDelayed}`}
+  />,
+];
 
 export const medalIcons = [
   <SlBadge className={styles.medal1 + ` ${styles.fadeInDownDelayed}`} />,

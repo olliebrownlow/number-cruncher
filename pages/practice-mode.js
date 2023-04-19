@@ -16,6 +16,8 @@ import {
   setFirstQuestion,
   resetPreviousQuestionAnswersArray,
   isUserAnswerPassedOrInRange,
+  trackAppUsageLoyalty,
+  newReturnUsageAwardIfDue,
   isCorrectAnswer,
   incrementAnswerCounter,
   incrementAchCorrectAnswers,
@@ -58,12 +60,21 @@ const PracticeMode = () => {
     }
   };
 
+  const getDateYesterday = () => {
+    const todayFull = new Date();
+    const yesterdayInMS = todayFull.setDate(todayFull.getDate() - 1);
+    return new Date(yesterdayInMS).toISOString().split("T")[0];
+  };
+
   const submitAnswer = (e) => {
     e.preventDefault();
     focusOnAnswerTextBox();
     if (isUserAnswerPassedOrInRange(userAnswer)) {
       // trigger counter movement in child component when blank answer
       setReRender(reRender + 1);
+      // app loyalty tracking
+      trackAppUsageLoyalty();
+      newReturnUsageAwardIfDue();
       if (isCorrectAnswer(userAnswer)) {
         incrementAnswerCounter("correctCounter");
         incrementAchCorrectAnswers();

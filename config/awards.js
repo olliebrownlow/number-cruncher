@@ -1,5 +1,5 @@
 import { SlBadge } from "react-icons/sl";
-import { SiMeteor } from "react-icons/si";
+import { SiMeteor, SiDungeonsanddragons } from "react-icons/si";
 import { FaAward, FaMedal, FaSun } from "react-icons/fa";
 import { BsSun, BsStar } from "react-icons/bs";
 import {
@@ -24,8 +24,59 @@ import {
   GiStarMedal,
   GiFallingBlob,
   GiBurningDot,
+  GiSeatedMouse,
+  GiGecko,
+  GiSeaTurtle,
+  GiElephantHead,
+  GiSnake,
+  GiTigerHead,
 } from "react-icons/gi";
 import styles from "../componentStyles/Awards.module.css";
+
+export const returnUsageAwards = (fontSize, awardStyle) => [
+  <GiSeatedMouse
+    className={styles[awardStyle]}
+    style={{
+      fontSize: fontSize,
+    }}
+  />,
+  <GiGecko
+    className={styles[awardStyle]}
+    style={{
+      fontSize: fontSize,
+    }}
+  />,
+  <GiSeaTurtle
+    className={styles[awardStyle]}
+    style={{
+      fontSize: fontSize,
+    }}
+  />,
+  <GiElephantHead
+    className={styles[awardStyle]}
+    style={{
+      fontSize: fontSize,
+    }}
+  />,
+  <GiSnake
+    className={styles[awardStyle]}
+    style={{
+      fontSize: fontSize,
+    }}
+  />,
+  <GiTigerHead
+    className={styles[awardStyle]}
+    style={{
+      fontSize: fontSize,
+    }}
+  />,
+  <SiDungeonsanddragons
+    className={styles[awardStyle]}
+    style={{
+      fontSize: fontSize,
+    }}
+  />,
+];
 
 export const atcaAwards = (fontSize, awardStyle) => [
   <SlBadge

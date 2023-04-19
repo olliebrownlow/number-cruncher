@@ -7,7 +7,8 @@ import ErrorBoundary from "../components/error-boundary";
 import historyInfo from "../config/historyInfo";
 import bestStreaksByDifficulty from "../config/bestStreaksByDifficulty";
 import toast, { Toaster } from "react-hot-toast";
-import { AlertTriangle, Award } from "react-feather";
+import { FiAlertTriangle, FiAward } from "react-icons/fi";
+import { TbCalendarStats } from "react-icons/tb";
 import styles from "../styles/AppLayout.module.css";
 import chalkboard from "../public/chalkboard.jpg";
 import { focusOnAnswerTextBox } from "../core/gamePlayLogic";
@@ -16,54 +17,43 @@ import { Analytics } from "@vercel/analytics/react";
 export default function App({ Component, pageProps }) {
   const router = useRouter();
 
+  const defaultClaimedArray = [false, false, false, false, false, false, false];
+
   useEffect(() => {
+    if (localStorage.getItem("returnUsage") === null) {
+      // date last used, current streak, all time best
+      localStorage.setItem("returnUsage", JSON.stringify(["1980-01-01", 0, 0]));
+    }
+    if (localStorage.getItem("isReturnUsageClaimed") === null) {
+      const isReturnUsageClaimed = defaultClaimedArray;
+      localStorage.setItem(
+        "isReturnUsageClaimed",
+        JSON.stringify(isReturnUsageClaimed)
+      );
+    }
     if (localStorage.getItem("achCorrectAnswers") === null) {
       localStorage.setItem("achCorrectAnswers", 0);
     }
     if (localStorage.getItem("isATCAClaimed") === null) {
-      const isATCAClaimed = [false, false, false, false, false, false, false];
+      const isATCAClaimed = defaultClaimedArray;
       localStorage.setItem("isATCAClaimed", JSON.stringify(isATCAClaimed));
     }
     if (localStorage.getItem("isStreakEasyClaimed") === null) {
-      const isStreakEasyClaimed = [
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-      ];
+      const isStreakEasyClaimed = defaultClaimedArray;
       localStorage.setItem(
         "isStreakEasyClaimed",
         JSON.stringify(isStreakEasyClaimed)
       );
     }
     if (localStorage.getItem("isStreakMediumClaimed") === null) {
-      const isStreakMediumClaimed = [
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-      ];
+      const isStreakMediumClaimed = defaultClaimedArray;
       localStorage.setItem(
         "isStreakMediumClaimed",
         JSON.stringify(isStreakMediumClaimed)
       );
     }
     if (localStorage.getItem("isStreakHardClaimed") === null) {
-      const isStreakHardClaimed = [
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-      ];
+      const isStreakHardClaimed = defaultClaimedArray;
       localStorage.setItem(
         "isStreakHardClaimed",
         JSON.stringify(isStreakHardClaimed)
@@ -163,16 +153,24 @@ export default function App({ Component, pageProps }) {
               fontSize: "1.5rem",
             },
             error: {
-              icon: <AlertTriangle color="red" size="50px" />,
+              icon: <FiAlertTriangle color="red" size="50px" />,
             },
             success: {
-              icon: <Award color="gold" size="190px" />,
+              icon: <FiAward color="gold" size="190px" />,
               style: {
                 background: "dimgrey",
                 color: "white",
               },
               duration: 5000,
             },
+            loading: {
+              icon: <TbCalendarStats color="white" size="50px" />,
+              style: {
+                background: "black",
+                color: "white",
+              },
+              duration: 5000,
+            }
           }}
         />
       </div>

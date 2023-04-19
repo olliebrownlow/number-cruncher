@@ -21,6 +21,8 @@ import {
   setFirstQuestion,
   resetPreviousQuestionAnswersArray,
   isUserAnswerInRange,
+  trackAppUsageLoyalty,
+  newReturnUsageAwardIfDue,
   isCorrectAnswer,
   incrementAnswerCounter,
   incrementAchCorrectAnswers,
@@ -32,6 +34,7 @@ import {
   setNewQuestion,
 } from "../core/gamePlayLogic";
 import {
+  returnUserGoals,
   streakEasyGoals,
   streakMediumGoals,
   streakHardGoals,
@@ -157,6 +160,37 @@ const Streak = () => {
     if (isUserAnswerInRange(userAnswer)) {
       // trigger counter movement in child component when blank answer
       setReRender(reRender + 1);
+      // app loyalty tracking
+      trackAppUsageLoyalty();
+      newReturnUsageAwardIfDue();
+      // if (
+      //   returnUserGoals.includes(
+      //     JSON.parse(localStorage.getItem("returnUsage"))[1]
+      //   )
+      // ) {
+      //   const index = returnUserGoals.indexOf(
+      //     JSON.parse(localStorage.getItem("returnUsage"))[1]
+      //   );
+      //   if (
+      //     JSON.parse(localStorage.getItem("isReturnUsageClaimed"))[index] ===
+      //     false
+      //   ) {
+      //     const arr = JSON.parse(localStorage.getItem("isReturnUsageClaimed"));
+      //     arr[index] = 0;
+      //     localStorage.setItem("isReturnUsageClaimed", JSON.stringify(arr));
+      //     toast.success(
+      //       getReturnUserToastMessage(
+      //         returnUserGoals,
+      //         index,
+      //         JSON.parse(localStorage.getItem("returnUsage"))[1]
+      //       ),
+      //       {
+      //         id: "returnUsageAchievementInStreak",
+      //       }
+      //     );
+      //   }
+      // }
+
       if (isCorrectAnswer(userAnswer)) {
         incrementAnswerCounter("correctCounter");
         // reserve best for addition to best streaks later
@@ -212,6 +246,7 @@ const Streak = () => {
             }
             toast.success(
               getToastMessage(
+                goals,
                 index,
                 JSON.parse(sessionStorage.getItem("correctCounter"))
               ),
@@ -237,7 +272,7 @@ const Streak = () => {
     }
   };
 
-  const getToastMessage = (index, currentStreakCount) => {
+  const getToastMessage = (goals, index, currentStreakCount) => {
     if (goals[index + 1]) {
       return `NEW AWARD!!!\nClaim your award for getting a streak of ${currentStreakCount}! \n Next target\n${
         goals[index + 1]

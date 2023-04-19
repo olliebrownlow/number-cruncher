@@ -3,7 +3,13 @@ import Image from "next/image";
 import Spacer from "../components/spacer";
 import chalkboard from "../public/modalChalkboard2.jpg";
 import { AiOutlineUnlock } from "react-icons/ai";
-import { medalIcons, sunIcons, starIcons, meteorIcons } from "../config/icons";
+import {
+  animalIcons,
+  medalIcons,
+  sunIcons,
+  starIcons,
+  meteorIcons,
+} from "../config/icons";
 import styles from "../componentStyles/CelebrateAwardClaim.module.css";
 import Confetti from "react-confetti";
 
@@ -14,6 +20,8 @@ const CelebrateAwardClaim = (props) => {
 
   const getIconType = () => {
     switch (iconType) {
+      case "animalIcons":
+        return animalIcons;
       case "medalIcons":
         return medalIcons;
       case "sunIcons":

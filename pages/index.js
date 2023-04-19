@@ -1,16 +1,35 @@
 import PageHeading from "../components/pageHeading";
 import gameLinks from "../config/gameLinks";
-import AchievementsButton from "../components/achievementsButton"
-import HistoryButton from "../components/historyButton"
+import AchievementsButton from "../components/achievementsButton";
+import HistoryButton from "../components/historyButton";
 import GameLink from "../components/gameLink";
 import styles from "../styles/Home.module.css";
 
 const Home = () => {
+  const localStorageSpace = () => {
+    if (typeof window !== "undefined") {
+      var _lsTotal = 0,
+        _xLen,
+        _x;
+      for (_x in localStorage) {
+        if (!localStorage.hasOwnProperty(_x)) {
+          continue;
+        }
+        _xLen = (localStorage[_x].length + _x.length) * 2;
+        _lsTotal += _xLen;
+      }
+      console.log(
+        "Used localStorage = " + (_lsTotal / 1024).toFixed(2) + " KB"
+      );
+    }
+  };
+
   return (
     <>
       <AchievementsButton />
       <HistoryButton />
       <PageHeading heading={"Number Cruncher"} />
+      {localStorageSpace()}
       <div className={styles.grid}>
         {gameLinks.map((link) => (
           <GameLink

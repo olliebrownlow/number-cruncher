@@ -1,4 +1,5 @@
 import {
+  returnUsageAwards,
   atcaAwards,
   streakEasyAwards,
   streakMediumAwards,
@@ -7,6 +8,8 @@ import {
 
 export const getAwards = (awardType, fontSize, awardStyle) => {
   switch (awardType) {
+    case "returnUsageAwards":
+      return returnUsageAwards(fontSize, awardStyle);
     case "atcaAwards":
       return atcaAwards(fontSize, awardStyle);
     case "streakEasyAwards":

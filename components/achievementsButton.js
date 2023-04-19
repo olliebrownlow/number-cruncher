@@ -9,6 +9,10 @@ const AchievementsButton = () => {
   const [achievementsToClaim, setAchievementsToClaim] = useState(false);
 
   useEffect(() => {
+    const isReturnUsageClaimed = JSON.parse(
+      localStorage.getItem("isReturnUsageClaimed")
+    );
+    const isATCAClaimed = JSON.parse(localStorage.getItem("isATCAClaimed"));
     const isStreakEasyClaimed = JSON.parse(
       localStorage.getItem("isStreakEasyClaimed")
     );
@@ -20,6 +24,8 @@ const AchievementsButton = () => {
     );
 
     if (
+      isReturnUsageClaimed.includes(0) ||
+      isATCAClaimed.includes(0) ||
       isStreakEasyClaimed.includes(0) ||
       isStreakMediumClaimed.includes(0) ||
       isStreakHardClaimed.includes(0)

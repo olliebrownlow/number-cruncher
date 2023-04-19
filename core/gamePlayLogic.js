@@ -1,5 +1,8 @@
 import toast from "react-hot-toast";
-import { correctAnswerGoals } from "../config/achievementGoals";
+import {
+  returnUserGoals,
+  correctAnswerGoals,
+} from "../config/achievementGoals";
 
 export const focusOnAnswerTextBox = () => {
   if (document.getElementById("answer")) {
@@ -84,13 +87,22 @@ export const addAnswerToHistoryInfo = (isCorrect) => {
   localStorage.setItem("historyInfo", JSON.stringify(historyInfo));
 };
 
-const getToastMessage = (index, currentGlobalCount) => {
-  if (correctAnswerGoals[index + 1]) {
+const getAtcaToastMessage = (goals, index, currentGlobalCount) => {
+  if (goals[index + 1]) {
     return `NEW AWARD!!!\nClaim your award for getting ${currentGlobalCount} questions correct! \n Next target\n${
-      correctAnswerGoals[index + 1]
+      goals[index + 1]
     }`;
   }
   return `NEW AWARD!!!\nClaim your award for getting ${currentGlobalCount} questions correct!`;
+};
+
+const getReturnUserToastMessage = (goals, index, currentStreakCount) => {
+  if (goals[index + 1]) {
+    return `NEW AWARD!!!\nClaim your award for using number cruncher ${currentStreakCount} days in a row! \n Next target\n${
+      goals[index + 1]
+    }`;
+  }
+  return `NEW AWARD!!!\nClaim your award for using number cruncher ${currentStreakCount} days in a row!`;
 };
 
 export const newAchCorrectAnswersAwardIfDue = () => {
@@ -104,13 +116,91 @@ export const newAchCorrectAnswersAwardIfDue = () => {
     );
     isATCAClaimedArray[index] = 0;
     localStorage.setItem("isATCAClaimed", JSON.stringify(isATCAClaimedArray));
-    toast.success(getToastMessage(index, currentGlobalCount), {
-      id: "correctAnswersAchievement",
-    });
+    toast.success(
+      getAtcaToastMessage(correctAnswerGoals, index, currentGlobalCount),
+      {
+        id: "correctAnswersAchievement",
+      }
+    );
   }
 };
 
 export const newAchStreakAwardIfDue = (level) => {};
+
+export const trackAppUsageLoyalty = () => {
+  const returnUsage = JSON.parse(localStorage.getItem("returnUsage"));
+  const todayFull = new Date();
+  const yesterdayInMS = todayFull.setDate(todayFull.getDate() - 1);
+  const today = new Date().toISOString().split("T")[0];
+  const yesterday = new Date(yesterdayInMS).toISOString().split("T")[0];
+  const returnUsageDate = returnUsage[0];
+  if (returnUsageDate === today) {
+    // do nothing - user has already played today
+    console.log("DOING NOTHING");
+  } else {
+    if (returnUsageDate === yesterday) {
+      // increment returnUsage count
+      returnUsage[1] = returnUsage[1] + 1;
+      // check if new best and save
+      if (returnUsage[2] < returnUsage[1]) {
+        returnUsage[2] = returnUsage[1];
+      }
+    } else {
+      // check if first time playing and increment all time best
+      if (returnUsage[2] === 0) {
+        returnUsage[2] = 1;
+      }
+      // set returnUsage count to 1
+      returnUsage[1] = 1;
+    }
+    // set today's date
+    returnUsage[0] = today;
+    // save new returnUsage
+    localStorage.setItem("returnUsage", JSON.stringify(returnUsage));
+    // update user on current streak if no award due
+    const currentStreak = JSON.parse(localStorage.getItem("returnUsage"))[1];
+    const index = returnUserGoals.indexOf(currentStreak);
+    if (
+      !returnUserGoals.includes(currentStreak) ||
+      (index >= 0 && JSON.parse(localStorage.getItem("isReturnUsageClaimed"))[index] !== false)
+    ) {
+      toast.loading(
+        "Days used in a row \n" +
+          JSON.parse(localStorage.getItem("returnUsage"))[1],
+        {
+          id: "returnUsageUpdate",
+        }
+      );
+    }
+  }
+};
+
+export const newReturnUsageAwardIfDue = () => {
+  if (
+    returnUserGoals.includes(JSON.parse(localStorage.getItem("returnUsage"))[1])
+  ) {
+    const index = returnUserGoals.indexOf(
+      JSON.parse(localStorage.getItem("returnUsage"))[1]
+    );
+    if (
+      JSON.parse(localStorage.getItem("isReturnUsageClaimed"))[index] === false
+    ) {
+      const arr = JSON.parse(localStorage.getItem("isReturnUsageClaimed"));
+      arr[index] = 0;
+      localStorage.setItem("isReturnUsageClaimed", JSON.stringify(arr));
+      toast.success(
+        getReturnUserToastMessage(
+          returnUserGoals,
+          index,
+          JSON.parse(localStorage.getItem("returnUsage"))[1]
+        ),
+        {
+          id: "returnUsageAchievementInStreak",
+        }
+      );
+    }
+  }
+};
 
 export const storePreviousQuestionAndAnswer = (userAnswer) => {
   const qAArray = JSON.parse(
