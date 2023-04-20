@@ -6,7 +6,7 @@ const releaseInfo = [
   },
   {
     release: "5",
-    date: "Apr 19th 2023",
+    date: "Apr 20th 2023",
     features:
       "New repeat user achievement for use of number cruncher on consecutive days",
   },
