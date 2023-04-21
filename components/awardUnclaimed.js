@@ -1,4 +1,4 @@
-import { AiOutlineLock } from "react-icons/ai";
+import { AiOutlineUnlock } from "react-icons/ai";
 import styles from "../componentStyles/Awards.module.css";
 
 const AwardUnclaimed = (props) => {
@@ -11,7 +11,7 @@ const AwardUnclaimed = (props) => {
       }}
       onClick={() => claimAward(claimIndex)}
     >
-      <AiOutlineLock />
+      <AiOutlineUnlock />
       <div className={styles.claim}>claim</div>
     </div>
   );
