@@ -103,7 +103,10 @@ export default function App({ Component, pageProps }) {
     }
     router.prefetch("/achievements");
     router.prefetch("/progress");
-  }, []);
+  }, [
+    typeof window !== "undefined" &&
+      localStorage.getItem("bestStreakReserve"),
+  ]);
 
   const closeToast = () => {
     toast.dismiss();
