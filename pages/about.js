@@ -5,6 +5,10 @@ import ReleaseTable from "../components/releaseTable";
 import Spacer from "../components/spacer";
 import styles from "../styles/About.module.css";
 import colours from "../config/colours";
+import { FaLaptopCode } from "react-icons/fa";
+import { RxVercelLogo } from "react-icons/rx";
+import { MdPhoneIphone } from "react-icons/md";
+import { RiGitMergeLine } from "react-icons/ri";
 
 const About = () => {
   return (
@@ -126,6 +130,13 @@ const About = () => {
         >
           Release history
         </h3>
+        <Spacer size={"0.25rem"} />
+        <div className={styles.releaseIcons}>
+          <FaLaptopCode size={32} color={colours[8]} /> -&gt;
+          <RiGitMergeLine size={32} color={colours[7]} /> -&gt;
+          <RxVercelLogo size={32} color={colours[5]} /> -&gt;
+          <MdPhoneIphone size={32} color={colours[10]} />
+        </div>
         <Spacer />
         <ReleaseTable />
         <Spacer />

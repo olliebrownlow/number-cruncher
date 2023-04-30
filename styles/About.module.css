@@ -9,6 +9,14 @@
   margin-left: 20%;
 }
 
+.releaseIcons {
+  display: grid;
+  grid-template-columns: 10% 10% 10% 10% 10% 10% 10%;
+  justify-content: center;
+  justify-items: center;
+  white-space: nowrap;
+}
+
 /* Tablet and Smaller Desktop */
 @media (min-width: 701px) and (max-width: 1120px) {
   .about {
