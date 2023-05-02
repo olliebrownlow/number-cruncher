@@ -27,6 +27,8 @@ import {
   questionNumber,
   setNewQuestion,
 } from "../core/gamePlayLogic";
+import { GiOpenTreasureChest } from "react-icons/gi";
+import styles from "../componentStyles/PageHeading.module.css";
 
 const PracticeMode = () => {
   const [userAnswer, setUserAnswer] = useState("");
@@ -60,12 +62,6 @@ const PracticeMode = () => {
     }
   };
 
-  const getDateYesterday = () => {
-    const todayFull = new Date();
-    const yesterdayInMS = todayFull.setDate(todayFull.getDate() - 1);
-    return new Date(yesterdayInMS).toISOString().split("T")[0];
-  };
-
   const submitAnswer = (e) => {
     e.preventDefault();
     focusOnAnswerTextBox();
@@ -80,6 +76,42 @@ const PracticeMode = () => {
         incrementAchCorrectAnswers();
         addAnswerToHistoryInfo(true);
         newAchCorrectAnswersAwardIfDue();
+        // check if on hard level and
+        const gt = sessionStorage.getItem("gameType");
+        const gameOptions = JSON.parse(
+          sessionStorage.getItem(`${gt}GameOptions`)
+        );
+        // if hidden click treasure is unlocked and challenge not comolete and
+        const hiddenAwardClicks = JSON.parse(
+          localStorage.getItem("hiddenAwardClicks")
+        );
+        if (
+          gameOptions.difficultyLevel === "Hard" &&
+          hiddenAwardClicks.unlocked &&
+          !hiddenAwardClicks.challengeCompleted &&
+          // use correct counter to check for 10 correct answers
+          JSON.parse(sessionStorage.getItem("correctCounter")) === 20
+        ) {
+          // mark challenge as complete
+          const hiddenAwardClicks = JSON.parse(
+            localStorage.getItem("hiddenAwardClicks")
+          );
+          hiddenAwardClicks.challengeCompleted = true;
+          localStorage.setItem(
+            "hiddenAwardClicks",
+            JSON.stringify(hiddenAwardClicks)
+          );
+          // trigger toast
+          toast.custom(
+            <div onClick={() => toast.remove()} className={styles.toast}>
+              <div> TREASURE CHEST UNLOCKED! </div>
+              <div className={styles.treasureChest}>
+                <GiOpenTreasureChest />
+              </div>
+              <div> go to achievements</div>
+            </div>
+          );
+        }
       } else {
         incrementAnswerCounter("errorCounter");
         addAnswerToHistoryInfo(false);

@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
+import toast from "react-hot-toast";
 import styles from "../componentStyles/PageHeading.module.css";
+import { GiLockedChest } from "react-icons/gi";
 import colours from "../config/colours";
 
 const PageHeading = (props) => {
@@ -22,6 +24,28 @@ const PageHeading = (props) => {
 
   const handleClick = () => {
     setRefresh(refresh + 1);
+    const hiddenAwardClicks = JSON.parse(
+      localStorage.getItem("hiddenAwardClicks")
+    );
+    if (
+      refresh + 1 === 20 &&
+      heading === "Number Cruncher" &&
+      !hiddenAwardClicks.unlocked
+    ) {
+      hiddenAwardClicks.unlocked = true;
+      localStorage.setItem(
+        "hiddenAwardClicks",
+        JSON.stringify(hiddenAwardClicks)
+      );
+      toast.custom(
+        <div onClick={() => toast.remove()} className={styles.toast}>
+          <div> BURIED TREASURE FOUND! </div>
+          <div className={styles.treasureChest}>
+          <GiLockedChest /></div>
+          <div> go to achievements</div>
+        </div>
+      );
+    }
   };
 
   return (

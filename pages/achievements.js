@@ -6,6 +6,7 @@ import AwardGridAtca from "../components/awardGridAtca";
 import AwardGridStreakEasy from "../components/awardGridStreakEasy";
 import AwardGridStreakMedium from "../components/awardGridStreakMedium";
 import AwardGridStreakHard from "../components/awardGridStreakHard";
+import HiddenAwardClicks from "../components/hiddenAwardClicks";
 import Spacer from "../components/spacer";
 
 const Achievements = () => {
@@ -23,6 +24,8 @@ const Achievements = () => {
       <AwardGridStreakMedium />
       <Spacer />
       <AwardGridStreakHard />
+      <Spacer />
+      <HiddenAwardClicks />
       <Spacer />
     </>
   );

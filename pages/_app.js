@@ -59,6 +59,17 @@ export default function App({ Component, pageProps }) {
         JSON.stringify(isStreakHardClaimed)
       );
     }
+    if (localStorage.getItem("hiddenAwardClicks") === null) {
+      const hiddenAwardClicks = {
+        unlocked: false,
+        challengeCompleted: false,
+        awardClaimed: false,
+      };
+      localStorage.setItem(
+        "hiddenAwardClicks",
+        JSON.stringify(hiddenAwardClicks)
+      );
+    }
     if (localStorage.getItem("historyInfo") === null) {
       localStorage.setItem("historyInfo", JSON.stringify(historyInfo));
     }
@@ -104,8 +115,7 @@ export default function App({ Component, pageProps }) {
     router.prefetch("/achievements");
     router.prefetch("/progress");
   }, [
-    typeof window !== "undefined" &&
-      localStorage.getItem("bestStreakReserve"),
+    typeof window !== "undefined" && localStorage.getItem("bestStreakReserve"),
   ]);
 
   const closeToast = () => {
@@ -173,7 +183,7 @@ export default function App({ Component, pageProps }) {
                 color: "white",
               },
               duration: 5000,
-            }
+            },
           }}
         />
       </div>

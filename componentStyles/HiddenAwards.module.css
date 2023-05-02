@@ -1,0 +1,87 @@
+.achievementContainer {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  width: 92%;
+  border: solid lightgrey;
+  border-width: 2px 3px 3px 2px;
+  border-radius:99% 2% 97% 5%/2% 99% 3% 97%;
+}
+
+.chest {
+  color: darkgoldenrod;
+  line-height: 0rem;
+  font-size: 10rem;
+}
+
+.gems {
+  color: deeppink;
+  line-height: 0rem;
+  font-size: 10rem;
+}
+
+.status {
+  display: inline-block;
+  border: solid darkgoldenrod;
+  border-width: 4px 3px 3px 4px;
+  border-radius:95% 4% 97% 5%/4% 94% 3% 95%;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin-top: 1rem;
+  padding: 8px;
+  white-space: nowrap;
+}
+
+.clue {
+  text-align: center;
+  font-weight: 700;
+  font-size: 1rem;
+  white-space: nowrap;
+  line-height: 24px;
+}
+
+.target3 {
+  font-size: 0.9rem;
+  color: white;
+  text-align: center;
+  line-height: 0.5rem;
+}
+
+.claim {
+  font-size: 0.75rem;
+  color: #90EE90;
+  text-align: center;
+}
+
+.completed {
+  font-size: 2rem;
+  text-align: center;
+}
+
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.fadeIn {
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
+  -webkit-animation-duration: 500ms;
+  animation-duration: 500ms;
+  animation-iteration-count: 1;
+  -webkit-animation-iteration-count: 1;
+  animation-fill-mode: both;
+  -webkit-animation-fill-mode: both;
+}
