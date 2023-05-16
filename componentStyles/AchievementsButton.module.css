@@ -23,7 +23,10 @@
 /* Mobile */
 @media (max-width: 700px) {
   .achievementsButton {
-    right: 5%;
+    right: -2%;
+  }
+  .claimMarker {
+    right: 12%;
   }
 }
 

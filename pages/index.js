@@ -1,6 +1,7 @@
 import PageHeading from "../components/pageHeading";
 import gameLinks from "../config/gameLinks";
 import AchievementsButton from "../components/achievementsButton";
+import GemCount from "../components/gemCount";
 import HistoryButton from "../components/historyButton";
 import GameLink from "../components/gameLink";
 import styles from "../styles/Home.module.css";
@@ -27,6 +28,7 @@ const Home = () => {
   return (
     <>
       <AchievementsButton />
+      <GemCount fixedPosition={false} />
       <HistoryButton />
       <PageHeading heading={"Number Cruncher"} />
       {localStorageSpace()}

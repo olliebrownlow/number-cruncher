@@ -8,10 +8,12 @@ import AwardsCompleted from "../components/awardsCompleted";
 import AwardProgress from "../components/awardProgress";
 import ResetAchievementButton from "../components/resetAchievementButton";
 import CelebrateAwardClaim from "../components/celebrateAwardClaim";
+import { handleGems } from "../core/gemLogic";
 import { streakHardGoals } from "../config/achievementGoals";
 import styles from "../componentStyles/Awards.module.css";
 
-const AwardGridStreakHard = () => {
+const AwardGridStreakHard = (props) => {
+  const { reload, setReload } = props;
   const [bestStreak, setBestStreak] = useState(0);
   const [currentGoal, setCurrentGoal] = useState(50);
   const [isClaimed, setIsClaimed] = useState([]);
@@ -42,12 +44,16 @@ const AwardGridStreakHard = () => {
 
   const closeCelebrationModal = () => {
     setShowCelebration(false);
+    handleGems("streakHardGems", index);
+    setReload(reload + 1);
   };
 
   // close modal from window surrounding the modal itself
   const celebrationWindowOnClick = (event) => {
     if (event.target === event.currentTarget) {
       setShowCelebration(false);
+      handleGems("streakHardGems", index);
+      setReload(reload + 1);
     }
   };
 
@@ -274,6 +280,7 @@ const AwardGridStreakHard = () => {
           windowOnClick={celebrationWindowOnClick}
           index={index}
           iconType={"meteorIcons"}
+          gemType={"streakHardGems"}
         />
       )}
     </div>

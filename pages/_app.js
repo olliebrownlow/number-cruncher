@@ -8,7 +8,6 @@ import historyInfo from "../config/historyInfo";
 import bestStreaksByDifficulty from "../config/bestStreaksByDifficulty";
 import toast, { Toaster } from "react-hot-toast";
 import { FiAlertTriangle, FiAward } from "react-icons/fi";
-import { TbCalendarStats } from "react-icons/tb";
 import styles from "../styles/AppLayout.module.css";
 import chalkboard from "../public/chalkboard.jpg";
 import { focusOnAnswerTextBox } from "../core/gamePlayLogic";
@@ -18,8 +17,27 @@ export default function App({ Component, pageProps }) {
   const router = useRouter();
 
   const defaultClaimedArray = [false, false, false, false, false, false, false];
+  const defaultGemsArray = [
+    [false, 1],
+    [false, 2],
+    [false, 3],
+    [false, 4],
+    [false, 5],
+    [false, 7],
+    [false, 10],
+  ];
 
   useEffect(() => {
+    if (localStorage.getItem("gemCount") === null) {
+      // reset all localstorage if game already played before introduction of gems
+      if (localStorage.getItem("returnUsage") != null) {
+        localStorage.clear();
+      }
+      localStorage.setItem("gemCount", 0);
+    }
+    if (localStorage.getItem("dailyBonusGemDate") === null) {
+      localStorage.setItem("dailyBonusGemDate", "1980-01-01");
+    }
     if (localStorage.getItem("returnUsage") === null) {
       // date last used, current streak, all time best
       localStorage.setItem("returnUsage", JSON.stringify(["1980-01-01", 0, 0]));
@@ -31,12 +49,20 @@ export default function App({ Component, pageProps }) {
         JSON.stringify(isReturnUsageClaimed)
       );
     }
+    if (localStorage.getItem("returnUsageGems") === null) {
+      const returnUsageGems = defaultGemsArray;
+      localStorage.setItem("returnUsageGems", JSON.stringify(returnUsageGems));
+    }
     if (localStorage.getItem("achCorrectAnswers") === null) {
       localStorage.setItem("achCorrectAnswers", 0);
     }
     if (localStorage.getItem("isATCAClaimed") === null) {
       const isATCAClaimed = defaultClaimedArray;
       localStorage.setItem("isATCAClaimed", JSON.stringify(isATCAClaimed));
+    }
+    if (localStorage.getItem("atcaGems") === null) {
+      const atcaGems = defaultGemsArray;
+      localStorage.setItem("atcaGems", JSON.stringify(atcaGems));
     }
     if (localStorage.getItem("isStreakEasyClaimed") === null) {
       const isStreakEasyClaimed = defaultClaimedArray;
@@ -45,11 +71,22 @@ export default function App({ Component, pageProps }) {
         JSON.stringify(isStreakEasyClaimed)
       );
     }
+    if (localStorage.getItem("streakEasyGems") === null) {
+      const streakEasyGems = defaultGemsArray;
+      localStorage.setItem("streakEasyGems", JSON.stringify(streakEasyGems));
+    }
     if (localStorage.getItem("isStreakMediumClaimed") === null) {
       const isStreakMediumClaimed = defaultClaimedArray;
       localStorage.setItem(
         "isStreakMediumClaimed",
         JSON.stringify(isStreakMediumClaimed)
+      );
+    }
+    if (localStorage.getItem("streakMediumGems") === null) {
+      const streakMediumGems = defaultGemsArray;
+      localStorage.setItem(
+        "streakMediumGems",
+        JSON.stringify(streakMediumGems)
       );
     }
     if (localStorage.getItem("isStreakHardClaimed") === null) {
@@ -59,11 +96,19 @@ export default function App({ Component, pageProps }) {
         JSON.stringify(isStreakHardClaimed)
       );
     }
+    if (localStorage.getItem("streakHardGems") === null) {
+      const streakHardGems = defaultGemsArray;
+      localStorage.setItem("streakHardGems", JSON.stringify(streakHardGems));
+    }
     if (localStorage.getItem("hiddenAwardClicks") === null) {
       const hiddenAwardClicks = {
+        unlockCost: 30,
         unlocked: false,
+        found: false,
         challengeCompleted: false,
         awardClaimed: false,
+        awardGems: 10,
+        gemsClaimed: false,
       };
       localStorage.setItem(
         "hiddenAwardClicks",
@@ -172,14 +217,6 @@ export default function App({ Component, pageProps }) {
               icon: <FiAward color="gold" size="190px" />,
               style: {
                 background: "dimgrey",
-                color: "white",
-              },
-              duration: 5000,
-            },
-            loading: {
-              icon: <TbCalendarStats color="white" size="50px" />,
-              style: {
-                background: "black",
                 color: "white",
               },
               duration: 5000,

@@ -27,12 +27,14 @@ const AchievementsButton = () => {
     );
 
     if (
-      isReturnUsageClaimed.includes(0) ||
-      isATCAClaimed.includes(0) ||
-      isStreakEasyClaimed.includes(0) ||
-      isStreakMediumClaimed.includes(0) ||
-      isStreakHardClaimed.includes(0) ||
-      (hiddenAwardClicks.challengeCompleted && !hiddenAwardClicks.awardClaimed)
+      (isReturnUsageClaimed && isReturnUsageClaimed.includes(0)) ||
+      (isATCAClaimed && isATCAClaimed.includes(0)) ||
+      (isStreakEasyClaimed && isStreakEasyClaimed.includes(0)) ||
+      (isStreakMediumClaimed && isStreakMediumClaimed.includes(0)) ||
+      (isStreakHardClaimed && isStreakHardClaimed.includes(0)) ||
+      (hiddenAwardClicks &&
+        hiddenAwardClicks.challengeCompleted &&
+        !hiddenAwardClicks.awardClaimed)
     ) {
       setAchievementsToClaim(true);
     } else setAchievementsToClaim(false);

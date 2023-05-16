@@ -40,7 +40,8 @@ const About = () => {
         <Spacer />
         <p>
           A series of times tables games developed using NextJs, a React
-          framework, and deployed on Vercel.
+          framework, and deployed on Vercel. Players can collect gems to 
+          unlock games and hidden challenges.
         </p>
         <Spacer />
         <h3

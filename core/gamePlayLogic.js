@@ -3,6 +3,10 @@ import {
   returnUserGoals,
   correctAnswerGoals,
 } from "../config/achievementGoals";
+import { SlDiamond } from "react-icons/sl";
+import { TbCalendarStats } from "react-icons/tb";
+import { FiAward } from "react-icons/fi";
+import styles from "../componentStyles/CustomToast.module.css";
 
 export const focusOnAnswerTextBox = () => {
   if (document.getElementById("answer")) {
@@ -134,6 +138,8 @@ export const trackAppUsageLoyalty = () => {
   const today = new Date().toISOString().split("T")[0];
   const yesterday = new Date(yesterdayInMS).toISOString().split("T")[0];
   const returnUsageDate = returnUsage[0];
+  const bonusGemDate = localStorage.getItem("dailyBonusGemDate");
+
   if (returnUsageDate === today) {
     // do nothing - user has already played today
     console.log("DOING NOTHING");
@@ -157,25 +163,41 @@ export const trackAppUsageLoyalty = () => {
     returnUsage[0] = today;
     // save new returnUsage
     localStorage.setItem("returnUsage", JSON.stringify(returnUsage));
+    // increment gem count by one if not already claimed
+    if (bonusGemDate !== today) {
+      var gemCount = parseInt(localStorage.getItem("gemCount"));
+      gemCount = gemCount + 1;
+      localStorage.setItem("gemCount", gemCount);
+    }
     // update user on current streak if no award due
     const currentStreak = JSON.parse(localStorage.getItem("returnUsage"))[1];
     const index = returnUserGoals.indexOf(currentStreak);
     if (
       !returnUserGoals.includes(currentStreak) ||
-      (index >= 0 && JSON.parse(localStorage.getItem("isReturnUsageClaimed"))[index] !== false)
+      (index >= 0 &&
+        JSON.parse(localStorage.getItem("isReturnUsageClaimed"))[index] !==
+          false)
     ) {
-      toast.loading(
-        "Days used in a row \n" +
-          JSON.parse(localStorage.getItem("returnUsage"))[1],
-        {
-          id: "returnUsageUpdate",
-        }
+      toast.custom(
+        <div className={styles.toast}>
+          <TbCalendarStats color="white" size="50px" />
+          <div> Days used in a row </div>
+          <div>{JSON.parse(localStorage.getItem("returnUsage"))[1]}</div>
+          {bonusGemDate !== today && (
+            <div className={styles.gem}>
+              1 ×&nbsp;
+              <SlDiamond color={"deepSkyBlue"} size="20px" />
+            </div>
+          )}
+        </div>
       );
     }
+    localStorage.setItem("dailyBonusGemDate", today);
   }
+  return bonusGemDate !== today;
 };
 
-export const newReturnUsageAwardIfDue = () => {
+export const newReturnUsageAwardIfDue = (bonusGemDue) => {
   if (
     returnUserGoals.includes(JSON.parse(localStorage.getItem("returnUsage"))[1])
   ) {
@@ -188,16 +210,32 @@ export const newReturnUsageAwardIfDue = () => {
       const arr = JSON.parse(localStorage.getItem("isReturnUsageClaimed"));
       arr[index] = 0;
       localStorage.setItem("isReturnUsageClaimed", JSON.stringify(arr));
-      toast.success(
-        getReturnUserToastMessage(
-          returnUserGoals,
-          index,
-          JSON.parse(localStorage.getItem("returnUsage"))[1]
-        ),
-        {
-          id: "returnUsageAchievementInStreak",
-        }
+      toast.custom(
+        <div className={styles.returnUserToast}>
+          <FiAward color="gold" size="50px" />
+          {getReturnUserToastMessage(
+            returnUserGoals,
+            index,
+            JSON.parse(localStorage.getItem("returnUsage"))[1]
+          )}
+          {bonusGemDue && (
+            <div className={styles.gem}>
+              1 ×&nbsp;
+              <SlDiamond color={"deepSkyBlue"} size="20px" />
+            </div>
+          )}
+        </div>
       );
+      // toast.success(
+      //   getReturnUserToastMessage(
+      //     returnUserGoals,
+      //     index,
+      //     JSON.parse(localStorage.getItem("returnUsage"))[1]
+      //   ),
+      //   {
+      //     id: "returnUsageAchievementInStreak",
+      //   }
+      // );
     }
   }
 };

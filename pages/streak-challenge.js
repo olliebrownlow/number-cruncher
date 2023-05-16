@@ -161,36 +161,8 @@ const Streak = () => {
       // trigger counter movement in child component when blank answer
       setReRender(reRender + 1);
       // app loyalty tracking
-      trackAppUsageLoyalty();
-      newReturnUsageAwardIfDue();
-      // if (
-      //   returnUserGoals.includes(
-      //     JSON.parse(localStorage.getItem("returnUsage"))[1]
-      //   )
-      // ) {
-      //   const index = returnUserGoals.indexOf(
-      //     JSON.parse(localStorage.getItem("returnUsage"))[1]
-      //   );
-      //   if (
-      //     JSON.parse(localStorage.getItem("isReturnUsageClaimed"))[index] ===
-      //     false
-      //   ) {
-      //     const arr = JSON.parse(localStorage.getItem("isReturnUsageClaimed"));
-      //     arr[index] = 0;
-      //     localStorage.setItem("isReturnUsageClaimed", JSON.stringify(arr));
-      //     toast.success(
-      //       getReturnUserToastMessage(
-      //         returnUserGoals,
-      //         index,
-      //         JSON.parse(localStorage.getItem("returnUsage"))[1]
-      //       ),
-      //       {
-      //         id: "returnUsageAchievementInStreak",
-      //       }
-      //     );
-      //   }
-      // }
-
+      const bonusGemDue = trackAppUsageLoyalty();
+      newReturnUsageAwardIfDue(bonusGemDue);
       if (isCorrectAnswer(userAnswer)) {
         incrementAnswerCounter("correctCounter");
         // reserve best for addition to best streaks later

@@ -69,8 +69,8 @@ const PracticeMode = () => {
       // trigger counter movement in child component when blank answer
       setReRender(reRender + 1);
       // app loyalty tracking
-      trackAppUsageLoyalty();
-      newReturnUsageAwardIfDue();
+      const bonusGemDue = trackAppUsageLoyalty();
+      newReturnUsageAwardIfDue(bonusGemDue);
       if (isCorrectAnswer(userAnswer)) {
         incrementAnswerCounter("correctCounter");
         incrementAchCorrectAnswers();
@@ -87,7 +87,7 @@ const PracticeMode = () => {
         );
         if (
           gameOptions.difficultyLevel === "Hard" &&
-          hiddenAwardClicks.unlocked &&
+          hiddenAwardClicks.found &&
           !hiddenAwardClicks.challengeCompleted &&
           // use correct counter to check for 10 correct answers
           JSON.parse(sessionStorage.getItem("correctCounter")) === 20

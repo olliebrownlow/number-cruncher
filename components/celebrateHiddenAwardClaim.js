@@ -2,24 +2,39 @@ import ReactDOM from "react-dom";
 import Image from "next/image";
 import Spacer from "../components/spacer";
 import chalkboard from "../public/modalChalkboard2.jpg";
-import { GiGems, GiOpenTreasureChest } from "react-icons/gi";
+import { GiOpenTreasureChest, GiCircularSawblade } from "react-icons/gi";
+import { SlDiamond } from "react-icons/sl";
 import styles from "../componentStyles/CelebrateHiddenAwardClaim.module.css";
 import Confetti from "react-confetti";
 
 const CelebrateHiddenAwardClaim = (props) => {
-  const { closeModal, windowOnClick, awardIcon } = props;
+  const {
+    closeModal,
+    windowOnClick,
+    awardIcon,
+    awardGems,
+    isGemsClaimed,
+  } = props;
   const height = window.innerHeight;
   const width = window.innerWidth;
 
   const getAwardIcon = () => {
     switch (awardIcon) {
-      case "gems":
+      case "circularSaw":
         return (
-          <GiGems className={styles.gems + ` ${styles.fadeInDownDelayed}`} />
+          <GiCircularSawblade
+            color={"#A8A9AD"}
+            size="8rem"
+            className={styles.fadeInDownDelayed}
+          />
         );
       default:
         return (
-          <GiGems className={styles.gems + ` ${styles.fadeInDownDelayed}`} />
+          <GiCircularSawblade
+            color={"deepSkyBlue"}
+            size="20px"
+            className={styles.fadeInDownDelayed}
+          />
         );
     }
   };
@@ -50,11 +65,16 @@ const CelebrateHiddenAwardClaim = (props) => {
           />
         </div>
         <Spacer size={"0.5rem"} />
-        <div className={styles.text}>New Award!!</div>
-        <GiOpenTreasureChest
-          className={styles.chest + ` ${styles.pivotdrop}`}
-        />
+        <div className={styles.text}>Machine Part 7</div>
+        <div className={styles.text}>- Circular saw -</div>
+        <GiOpenTreasureChest className={styles.chest + ` ${styles.zoomOut}`} />
         {getAwardIcon()}
+        <Spacer size={"0.25rem"} />
+        {!isGemsClaimed && (
+          <div className={styles.fadeIn}>
+            {awardGems} × <SlDiamond color={"deepskyblue"} size={16} />
+          </div>
+        )}
         <Spacer size={"0.5rem"} />
         <div className={styles.button}>
           <div

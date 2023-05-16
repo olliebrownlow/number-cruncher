@@ -1,0 +1,15 @@
+.gemCount {
+  display: flex;
+  align-items: center;
+  right: auto;
+  font-size: 1.25rem;
+  background-color: rgb(32, 32, 32);
+  opacity: 0.9;
+  padding: 12px 12px;
+  z-index: 10;
+  margin-top: 8px;
+  border-radius: 4px;
+  border: solid 1px lightgrey;
+}
+
+

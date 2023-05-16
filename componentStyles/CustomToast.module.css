@@ -1,0 +1,26 @@
+.gem {
+  font-size: 2rem;
+  padding: 8px;
+}
+
+.toast {
+  color: white;
+  font-size: 2rem;
+  text-align: center;
+  background-color: black;
+  top: 200px;
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid lightgrey;
+}
+
+.returnUserToast {
+  color: white;
+  font-size: 1.5rem;
+  text-align: center;
+  background-color: dimgrey;
+  top: 200px;
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid lightgrey;
+}

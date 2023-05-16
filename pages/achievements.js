@@ -1,4 +1,6 @@
+import { useState } from "react";
 import BackButton from "../components/backButton";
+import GemCount from "../components/gemCount";
 import HomeButton from "../components/homeButton";
 import PageHeading from "../components/pageHeading";
 import AwardGridReturnUser from "../components/awardGridReturnUser";
@@ -10,22 +12,24 @@ import HiddenAwardClicks from "../components/hiddenAwardClicks";
 import Spacer from "../components/spacer";
 
 const Achievements = () => {
+  const [reload, setReload] = useState(0);
   return (
     <>
       <BackButton />
+      <GemCount reload={reload} fixedPosition={true} />
       <HomeButton />
       <PageHeading heading={"Achievements"} />
-      <AwardGridReturnUser />
+      <AwardGridReturnUser reload={reload} setReload={setReload} />
       <Spacer />
-      <AwardGridAtca />
+      <AwardGridAtca reload={reload} setReload={setReload} />
       <Spacer />
-      <AwardGridStreakEasy />
+      <AwardGridStreakEasy reload={reload} setReload={setReload} />
       <Spacer />
-      <AwardGridStreakMedium />
+      <AwardGridStreakMedium reload={reload} setReload={setReload} />
       <Spacer />
-      <AwardGridStreakHard />
-      <Spacer />
-      <HiddenAwardClicks />
+      <AwardGridStreakHard reload={reload} setReload={setReload} />
+      <PageHeading heading={"Challenges"} />
+      <HiddenAwardClicks reload={reload} setReload={setReload} />
       <Spacer />
     </>
   );

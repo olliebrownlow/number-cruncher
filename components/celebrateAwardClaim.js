@@ -1,8 +1,10 @@
+import { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import Image from "next/image";
 import Spacer from "../components/spacer";
 import chalkboard from "../public/modalChalkboard2.jpg";
 import { AiOutlineUnlock } from "react-icons/ai";
+import { SlDiamond } from "react-icons/sl";
 import {
   animalIcons,
   medalIcons,
@@ -14,9 +16,18 @@ import styles from "../componentStyles/CelebrateAwardClaim.module.css";
 import Confetti from "react-confetti";
 
 const CelebrateAwardClaim = (props) => {
-  const { closeModal, windowOnClick, index, iconType } = props;
+  const { closeModal, windowOnClick, index, iconType, gemType } = props;
+  const [claimed, setClaimed] = useState(false);
+
+  useEffect(() => {
+    const gemTypeStatus = JSON.parse(localStorage.getItem(gemType));
+    console.log(gemType + ": " + gemTypeStatus[index][0]);
+    setClaimed(gemTypeStatus[index][0]);
+  }, []);
+
   const height = window.innerHeight;
   const width = window.innerWidth;
+  const bonusGems = [1, 2, 3, 4, 5, 7, 10];
 
   const getIconType = () => {
     switch (iconType) {
@@ -50,7 +61,10 @@ const CelebrateAwardClaim = (props) => {
         recycle={false}
         tweenDuration={12000}
       />
-      <div className={styles.modalArea}>
+      <div
+        className={styles.modalArea}
+        style={{ height: claimed ? "40%" : "45%" }}
+      >
         <div className={styles.bgWrap}>
           <Image
             alt="chalkboard"
@@ -62,6 +76,12 @@ const CelebrateAwardClaim = (props) => {
         </div>
         <Spacer size={"0.5rem"} />
         <div className={styles.text}>New Award!!</div>
+        {!claimed && (
+          <div className={styles.gem}>
+            {bonusGems[index]} ×&nbsp;
+            <SlDiamond color={"deepSkyBlue"} size="20px" />
+          </div>
+        )}
         <AiOutlineUnlock className={styles.padlock + ` ${styles.pivotdrop}`} />
         {getIconType()[index]}
         <Spacer size={"0.5rem"} />

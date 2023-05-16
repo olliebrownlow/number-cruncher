@@ -8,10 +8,12 @@ import AwardsCompleted from "../components/awardsCompleted";
 import AwardProgress from "../components/awardProgress";
 import ResetAchievementButton from "../components/resetAchievementButton";
 import CelebrateAwardClaim from "../components/celebrateAwardClaim";
+import { handleGems } from "../core/gemLogic";
 import { returnUserGoals } from "../config/achievementGoals";
 import styles from "../componentStyles/Awards.module.css";
 
-const AwardGridReturnUser = () => {
+const AwardGridReturnUser = (props) => {
+  const { reload, setReload } = props;
   const [bestStreak, setBestStreak] = useState(0);
   const [currentStreak, setCurrentStreak] = useState(0);
   const [currentGoal, setCurrentGoal] = useState(50);
@@ -47,12 +49,16 @@ const AwardGridReturnUser = () => {
 
   const closeCelebrationModal = () => {
     setShowCelebration(false);
+    handleGems("returnUsageGems", index);
+    setReload(reload + 1);
   };
 
   // close modal from window surrounding the modal itself
   const celebrationWindowOnClick = (event) => {
     if (event.target === event.currentTarget) {
       setShowCelebration(false);
+      handleGems("returnUsageGems", index);
+      setReload(reload + 1);
     }
   };
 
@@ -291,6 +297,7 @@ const AwardGridReturnUser = () => {
           windowOnClick={celebrationWindowOnClick}
           index={index}
           iconType={"animalIcons"}
+          gemType={"returnUsageGems"}
         />
       )}
     </div>

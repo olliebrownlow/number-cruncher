@@ -21,7 +21,7 @@
   top: 50%;
   width: 95%;
   max-width: 95%;
-  height: 40%;
+  height: 50%;
   transform: translate(-50%, -50%);
   color: white;
   font-size: 20px;
@@ -60,80 +60,53 @@
 }
 
 .chest {
-  /* fill: gold; */
   color: gold;
   font-size: 8rem;
 }
 
-.gems {
-  /* fill: gold; */
-  color: gold;
-  font-size: 8rem;
-}
-
-@-webkit-keyframes pivotdrop {
+@-webkit-keyframes zoomOut {
   0% {
-    -webkit-animation-timing-function: ease-in-out;
-    animation-timing-function: ease-in-out;
-  }
-  20%,60% {
-    -webkit-transform: rotate(80deg); transform:rotate(80deg);
-    -webkit-animation-timing-function: ease-in-out;
-    animation-timing-function: ease-in-out;
-  }
-  40%,80% {
-    -webkit-transform:rotate(60deg); transform:rotate(60deg);
-    -webkit-animation-timing-function: ease-in-out;
-    animation-timing-function: ease-in-out;
-    opacity:1;
-    height: auto;
-  }
-  to {
-    -webkit-transform: translate3d(0,700px,0);
-    transform: translate3d(0,700px,0);
-    opacity: 0;
-    height: 0;
-    display: none;
-  }
-}
-@keyframes pivotdrop {
-  0% {
-    -webkit-animation-timing-function: ease-in-out;
-    animation-timing-function: ease-in-out 
-  }
-  20%,60% {
-    -webkit-transform: rotate(80deg);
-    transform: rotate(80deg);
-    -webkit-animation-timing-function: ease-in-out;
-    animation-timing-function: ease-in-out;
-  }
-  40%,80% {
-    -webkit-transform: rotate(60deg);
-    transform: rotate(60deg);
-    -webkit-animation-timing-function: ease-in-out;
-    animation-timing-function:ease-in-out;
+    opacity: 1;
+  } 
+  50% { 
     opacity: 1;
     height: auto;
+    -webkit-transform: scale3d(.3,.3,.3);
+    transform: scale3d(.3,.3,.3);
   }
   to {
-    -webkit-transform: translate3d(0,700px,0);
-    transform: translate3d(0,700px,0);
+    opacity:0;
+    height: 0;
+    display: none;
+  }
+}
+@keyframes zoomOut {
+  0% {
+    opacity:1;
+  }
+  50% {
+    opacity: 0;
+    height: auto;
+    -webkit-transform: scale3d(.3,.3,.3);
+    transform: scale3d(.3,.3,.3);
+  }
+  to {
     opacity: 0;
     height: 0;
     display: none;
   }
 }
-.pivotdrop {
-  -webkit-animation-name: pivotdrop;
-  animation-name: pivotdrop;
+.zoomOut {
+  -webkit-animation-name: zoomOut;
+  animation-name: zoomOut;
   -webkit-animation-duration: 2s;
   animation-duration: 2s;
   animation-iteration-count: 1;
   -webkit-animation-iteration-count: 1;
   animation-fill-mode: forwards;
   -webkit-animation-fill-mode: forwards;
-  -webkit-transform-origin: top left;
-  transform-origin:top left;
+  -webkit-transform-origin: center;
+  transform-origin: center;
   animation-delay: 500ms;
   -webkit-animation-delay: 500ms;
 }

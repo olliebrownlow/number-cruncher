@@ -8,10 +8,12 @@ import AwardsCompleted from "../components/awardsCompleted";
 import AwardProgress from "../components/awardProgress";
 import ResetAchievementButton from "../components/resetAchievementButton";
 import CelebrateAwardClaim from "../components/celebrateAwardClaim";
+import { handleGems } from "../core/gemLogic";
 import { streakMediumGoals } from "../config/achievementGoals";
 import styles from "../componentStyles/Awards.module.css";
 
-const AwardGridStreakMedium = () => {
+const AwardGridStreakMedium = (props) => {
+  const { reload, setReload } = props;
   const [bestStreak, setBestStreak] = useState(0);
   const [currentGoal, setCurrentGoal] = useState(50);
   const [isClaimed, setIsClaimed] = useState([]);
@@ -42,12 +44,16 @@ const AwardGridStreakMedium = () => {
 
   const closeCelebrationModal = () => {
     setShowCelebration(false);
+    handleGems("streakMediumGems", index);
+    setReload(reload + 1);
   };
 
   // close modal from window surrounding the modal itself
   const celebrationWindowOnClick = (event) => {
     if (event.target === event.currentTarget) {
       setShowCelebration(false);
+      handleGems("streakMediumGems", index);
+      setReload(reload + 1);
     }
   };
 
@@ -61,7 +67,10 @@ const AwardGridStreakMedium = () => {
       localStorage.getItem("isStreakMediumClaimed")
     );
     isClaimedArray[index] = true;
-    localStorage.setItem("isStreakMediumClaimed", JSON.stringify(isClaimedArray));
+    localStorage.setItem(
+      "isStreakMediumClaimed",
+      JSON.stringify(isClaimedArray)
+    );
     setIndex(index);
     setIsClaimed(isClaimedArray);
   };
@@ -274,6 +283,7 @@ const AwardGridStreakMedium = () => {
           windowOnClick={celebrationWindowOnClick}
           index={index}
           iconType={"starIcons"}
+          gemType={"streakMediumGems"}
         />
       )}
     </div>

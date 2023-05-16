@@ -8,10 +8,12 @@ import AwardsCompleted from "../components/awardsCompleted";
 import AwardProgress from "../components/awardProgress";
 import ResetAchievementButton from "../components/resetAchievementButton";
 import CelebrateAwardClaim from "../components/celebrateAwardClaim";
+import { handleGems } from "../core/gemLogic";
 import { correctAnswerGoals } from "../config/achievementGoals";
 import styles from "../componentStyles/Awards.module.css";
 
-const AwardGridAtca = () => {
+const AwardGridAtca = (props) => {
+  const { reload, setReload } = props;
   const [correctAnswers, setCorrectAnswers] = useState(0);
   const [currentGoal, setCurrentGoal] = useState(50);
   const [aTCAClaimed, setATCAClaimed] = useState([]);
@@ -38,12 +40,16 @@ const AwardGridAtca = () => {
 
   const closeCelebrationModal = () => {
     setShowCelebration(false);
+    handleGems("atcaGems", index);
+    setReload(reload + 1);
   };
 
   // close modal from window surrounding the modal itself
   const celebrationWindowOnClick = (event) => {
     if (event.target === event.currentTarget) {
       setShowCelebration(false);
+      handleGems("atcaGems", index);
+      setReload(reload + 1);
     }
   };
 
@@ -268,6 +274,7 @@ const AwardGridAtca = () => {
           windowOnClick={celebrationWindowOnClick}
           index={index}
           iconType={"medalIcons"}
+          gemType={"atcaGems"}
         />
       )}
     </div>

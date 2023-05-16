@@ -21,7 +21,6 @@
   top: 50%;
   width: 95%;
   max-width: 95%;
-  height: 40%;
   transform: translate(-50%, -50%);
   color: white;
   font-size: 20px;
@@ -36,7 +35,6 @@
 }
 
 .text {
-  margin: 0 0 16px 0;
   font-weight: 600;
   font-size: 2rem;
 }
@@ -88,6 +86,11 @@
   fill: gold;
   color: gold;
   font-size: 8rem;
+}
+
+.gem {
+  font-size: 2rem;
+  padding: 8px;
 }
 
 @-webkit-keyframes pivotdrop {

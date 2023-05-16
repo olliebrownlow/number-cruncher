@@ -30,9 +30,10 @@ const PageHeading = (props) => {
     if (
       refresh + 1 === 20 &&
       heading === "Number Cruncher" &&
-      !hiddenAwardClicks.unlocked
+      !hiddenAwardClicks.found &&
+      hiddenAwardClicks.unlocked
     ) {
-      hiddenAwardClicks.unlocked = true;
+      hiddenAwardClicks.found = true;
       localStorage.setItem(
         "hiddenAwardClicks",
         JSON.stringify(hiddenAwardClicks)

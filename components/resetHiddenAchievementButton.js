@@ -3,7 +3,7 @@ import ConfirmReset from "../components/confirmAchievementReset";
 import styles from "../componentStyles/resetAchievementButton.module.css";
 
 const ResetHiddenAchievementButton = (props) => {
-  const { refresh, setRefresh } = props;
+  const { refresh, setRefresh, isUnLocked, challengeType } = props;
 
   const [showConfirmReset, setShowConfirmReset] = useState(false);
 
@@ -20,11 +20,15 @@ const ResetHiddenAchievementButton = (props) => {
 
   const resetAchievement = () => {
     setShowConfirmReset(false);
-    // hidden click award
+    const challenge = JSON.parse(localStorage.getItem(challengeType));
     const resetObject = {
-      unlocked: false,
+      unlockCost: challenge.unlockCost,
+      unlocked: true,
+      found: false,
       challengeCompleted: false,
       awardClaimed: false,
+      awardGems: challenge.awardGems,
+      gemsClaimed: challenge.gemsClaimed,
     };
     localStorage.setItem("hiddenAwardClicks", JSON.stringify(resetObject));
     setRefresh(refresh + 1);
@@ -34,17 +38,17 @@ const ResetHiddenAchievementButton = (props) => {
     <>
       <div
         className={styles.resetButton}
-        onClick={() => setShowConfirmReset(true)}
+        onClick={() => isUnLocked && setShowConfirmReset(true)}
       >
-        Reset this achievement?
+        Reset this challenge?
       </div>
       {showConfirmReset && (
         <ConfirmReset
           closeModal={closeModal}
           windowOnClick={windowOnClick}
           handleReset={resetAchievement}
-          titleText={"reset this award"}
-          subText={"The award will be locked again!"}
+          titleText={"reset this challenge"}
+          subText={"The challenge will not be locked but you will lose your progress"}
         />
       )}
     </>
