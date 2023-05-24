@@ -40,8 +40,9 @@ const About = () => {
         <Spacer />
         <p>
           A series of times tables games developed using NextJs, a React
-          framework, and deployed on Vercel. Players can collect gems to 
-          unlock games and hidden challenges.
+          framework, and deployed on Vercel. Players collect gems to unlock more
+          games and challenges. The ultimate goal is to master all the times
+          tables, build the Number Cruncher machine and feed the tables in.
         </p>
         <Spacer />
         <h3

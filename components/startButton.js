@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import toast from "react-hot-toast";
 import { getDifficultyLevel } from "../utils/getDifficultyLevel";
+import colours from "../config/colours";
 import styles from "../componentStyles/StartButton.module.css";
 
 const StartButton = (props) => {
@@ -58,7 +59,13 @@ const StartButton = (props) => {
 
   return (
     <>
-      <div className={styles.startButton} onClick={playGame}>
+      <div
+        className={styles.startButton}
+        onClick={playGame}
+        style={{
+          borderColor: colours[Math.floor(Math.random() * colours.length)],
+        }}
+      >
         Start Game
       </div>
     </>

@@ -39,6 +39,10 @@ const ResetHiddenAchievementButton = (props) => {
       <div
         className={styles.resetButton}
         onClick={() => isUnLocked && setShowConfirmReset(true)}
+        style={{
+          filter: !isUnLocked && "blur(7px)",
+          WebkitFilter: !isUnLocked && "blur(7px)",
+        }}
       >
         Reset this challenge?
       </div>
@@ -48,7 +52,9 @@ const ResetHiddenAchievementButton = (props) => {
           windowOnClick={windowOnClick}
           handleReset={resetAchievement}
           titleText={"reset this challenge"}
-          subText={"The challenge will not be locked but you will lose your progress"}
+          subText={
+            "The challenge will not be locked and you won't lose the machone part if you have already won it, but you will lose your progress"
+          }
         />
       )}
     </>

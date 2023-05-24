@@ -6,6 +6,7 @@ import ResetHiddenAchievementButton from "./resetHiddenAchievementButton";
 import CelebrateHiddenAwardClaim from "./celebrateHiddenAwardClaim";
 import ConfirmPayForChallenge from "./confirmPayForChallenge";
 import { handleChallengeGems } from "../core/gemLogic";
+import { handleMachinePartClaim } from "../core/machinePartLogic";
 import styles from "../componentStyles/HiddenAwards.module.css";
 import {
   GiLockedChest,
@@ -46,6 +47,7 @@ const HiddenAwardClicks = (props) => {
   const closeCelebrationModal = () => {
     setShowCelebration(false);
     handleChallengeGems("hiddenAwardClicks");
+    handleMachinePartClaim(6);
     setReload(reload + 1);
   };
 
@@ -54,6 +56,7 @@ const HiddenAwardClicks = (props) => {
     if (event.target === event.currentTarget) {
       setShowCelebration(false);
       handleChallengeGems("hiddenAwardClicks");
+      handleMachinePartClaim(6);
       setReload(reload + 1);
     }
   };
@@ -100,7 +103,11 @@ const HiddenAwardClicks = (props) => {
             Collect {unlockCost - currentGemCount} ×{" "}
             <SlDiamond color={"deepskyblue"} size={16} /> more
           </div>
-        </div>
+        </div>,
+        {
+          id: "unlockBuriedTreasure",
+          duration: 2000,
+        }
       );
     }
   };
@@ -151,10 +158,7 @@ const HiddenAwardClicks = (props) => {
           </div>
         </div>
       )}
-      <div
-        className={styles.achievementContainer}
-        style={{ filter: !isUnLocked && "blur(7px)" }}
-      >
+      <div className={styles.achievementContainer}>
         <Spacer size={"0.5rem"} />
         <SubHeading
           subheading={"Buried Treasure"}
@@ -163,7 +167,12 @@ const HiddenAwardClicks = (props) => {
         />
         <Spacer size={"0.5rem"} />
         {!isFound && (
-          <div>
+          <div
+            style={{
+              filter: !isUnLocked && "blur(7px)",
+              WebkitFilter: !isUnLocked && "blur(7px)",
+            }}
+          >
             <div className={styles.chest}>
               <GiTreasureMap color={"sienna"} />
             </div>

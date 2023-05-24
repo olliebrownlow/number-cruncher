@@ -31,8 +31,8 @@ const CelebrateHiddenAwardClaim = (props) => {
       default:
         return (
           <GiCircularSawblade
-            color={"deepSkyBlue"}
-            size="20px"
+            color={"#A8A9AD"}
+            size="8rem"
             className={styles.fadeInDownDelayed}
           />
         );

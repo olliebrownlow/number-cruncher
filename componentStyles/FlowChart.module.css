@@ -1,0 +1,57 @@
+.moreInfoWrapper {
+  display: grid;
+  text-align: center;
+  grid-template-columns: 46% 7% 46%;
+  justify-items: center;
+  width: 84%;
+  font-size: 1.2rem;
+}
+
+.moreInfoTextWrapper {
+  text-align: justify;
+  width: 85%;
+  font-size: 0.9rem;
+}
+
+.machineInfoCells {
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.moreInfoButton {
+  white-space: nowrap;
+  border: solid lightgrey;
+  border-width: 4px 3px 3px 4px;
+  border-radius:95% 4% 97% 5%/4% 94% 3% 95%;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  padding: 0.2rem 1rem;
+  text-align: center;
+}
+
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.fadeIn {
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
+  -webkit-animation-duration: 500ms;
+  animation-duration: 500ms;
+  animation-iteration-count: 1;
+  -webkit-animation-iteration-count: 1;
+  animation-fill-mode: both;
+  -webkit-animation-fill-mode: both;
+}

@@ -1,0 +1,13 @@
+.seeMachineButton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: dashed lightgrey;
+  border-width: 8px 6px 7px 9px;
+  border-radius:95% 4% 97% 5%/4% 94% 3% 95%;
+  margin: 16px 0;
+  padding: 16px;
+  font-size: 1.25rem;
+  z-index: 1;
+  background-clip: content-box;
+}

@@ -3,6 +3,7 @@ import gameLinks from "../config/gameLinks";
 import AchievementsButton from "../components/achievementsButton";
 import GemCount from "../components/gemCount";
 import HistoryButton from "../components/historyButton";
+import SeeMachineButton from "../components/seeMachineButton"
 import GameLink from "../components/gameLink";
 import styles from "../styles/Home.module.css";
 
@@ -31,6 +32,7 @@ const Home = () => {
       <GemCount fixedPosition={false} />
       <HistoryButton />
       <PageHeading heading={"Number Cruncher"} />
+      <SeeMachineButton />
       {localStorageSpace()}
       <div className={styles.grid}>
         {gameLinks.map((link) => (
