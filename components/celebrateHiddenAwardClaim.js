@@ -2,7 +2,7 @@ import ReactDOM from "react-dom";
 import Image from "next/image";
 import Spacer from "../components/spacer";
 import chalkboard from "../public/modalChalkboard2.jpg";
-import { GiOpenTreasureChest, GiCircularSawblade } from "react-icons/gi";
+import { GiOpenChest, GiCircularSawblade } from "react-icons/gi";
 import { SlDiamond } from "react-icons/sl";
 import styles from "../componentStyles/CelebrateHiddenAwardClaim.module.css";
 import Confetti from "react-confetti";
@@ -67,7 +67,7 @@ const CelebrateHiddenAwardClaim = (props) => {
         <Spacer size={"0.5rem"} />
         <div className={styles.text}>Machine Part 7</div>
         <div className={styles.text}>- Circular saw -</div>
-        <GiOpenTreasureChest className={styles.chest + ` ${styles.zoomOut}`} />
+        <GiOpenChest className={styles.chest + ` ${styles.zoomOut}`} />
         {getAwardIcon()}
         <Spacer size={"0.25rem"} />
         {!isGemsClaimed && (

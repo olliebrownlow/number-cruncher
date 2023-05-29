@@ -27,7 +27,7 @@ import {
   questionNumber,
   setNewQuestion,
 } from "../core/gamePlayLogic";
-import { GiOpenTreasureChest } from "react-icons/gi";
+import { GiKey } from "react-icons/gi";
 import styles from "../componentStyles/PageHeading.module.css";
 
 const PracticeMode = () => {
@@ -106,7 +106,7 @@ const PracticeMode = () => {
             <div onClick={() => toast.remove()} className={styles.toast}>
               <div> TREASURE CHEST UNLOCKED! </div>
               <div className={styles.treasureChest}>
-                <GiOpenTreasureChest />
+                <GiKey />
               </div>
               <div> go to achievements</div>
             </div>

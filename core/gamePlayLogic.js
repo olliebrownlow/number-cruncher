@@ -226,16 +226,6 @@ export const newReturnUsageAwardIfDue = (bonusGemDue) => {
           )}
         </div>
       );
-      // toast.success(
-      //   getReturnUserToastMessage(
-      //     returnUserGoals,
-      //     index,
-      //     JSON.parse(localStorage.getItem("returnUsage"))[1]
-      //   ),
-      //   {
-      //     id: "returnUsageAchievementInStreak",
-      //   }
-      // );
     }
   }
 };

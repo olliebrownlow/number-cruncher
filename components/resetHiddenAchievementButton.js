@@ -53,7 +53,7 @@ const ResetHiddenAchievementButton = (props) => {
           handleReset={resetAchievement}
           titleText={"reset this challenge"}
           subText={
-            "The challenge will not be locked and you won't lose the machone part if you have already won it, but you will lose your progress"
+            "This challenge will be reset but not re-locked and you won't lose the machine part if you have already won it"
           }
         />
       )}

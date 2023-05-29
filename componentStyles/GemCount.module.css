@@ -2,6 +2,7 @@
   display: flex;
   align-items: center;
   right: auto;
+  flex-direction: column;
   font-size: 1.25rem;
   background-color: rgb(32, 32, 32);
   opacity: 0.9;
@@ -9,7 +10,81 @@
   z-index: 10;
   margin-top: 8px;
   border-radius: 4px;
-  border: solid 1px lightgrey;
+  border: solid 1px lightgrey; 
 }
 
+.mainText {
+  display: flex;
+  flex-direction: row;
+}
+
+.gemInfo {
+  color: white;
+  white-space: nowrap;
+}
+
+.grow {
+  animation: enlarge 500ms forwards ease-out;
+  transform-origin: top;
+}
+.shrink {
+  animation: getSmall 250ms;
+  transform-origin: top;
+}
+.grow2 {
+  animation: enlarge2 500ms none ease-out;
+  transform-origin: top;
+}
+.shrink2 {
+  animation: getSmall2 250ms forwards;
+  transform-origin: top;
+}
+.hide {
+  height: 0;
+  display: none;
+  line-height: 0;
+  width: 0;
+}
+
+@keyframes enlarge {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(2);
+  }
+}
+@keyframes enlarge2 {
+  from {
+    transform: scale(0);
+    opacity: 0;
+    height: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+    height: 23px;
+  }
+}
+@keyframes getSmall {
+  from {
+    transform: scale(2);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+@keyframes getSmall2 {
+  from {
+    transform: scale(1);
+    opacity: 1;
+    height: 23px;
+  }
+  to {
+    transform: scale(0);
+    opacity: 0;
+    height: 0;
+    width: 0;
+  }
+}
 

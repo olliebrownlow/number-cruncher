@@ -10,7 +10,7 @@ import { handleMachinePartClaim } from "../core/machinePartLogic";
 import styles from "../componentStyles/HiddenAwards.module.css";
 import {
   GiLockedChest,
-  GiOpenTreasureChest,
+  GiOpenChest,
   GiTreasureMap,
   GiCircularSawblade,
 } from "react-icons/gi";
@@ -232,9 +232,9 @@ const HiddenAwardClicks = (props) => {
         {isFound && isChallengeCompleted && !isAwardClaimed && (
           <div onClick={() => claimAward()}>
             <div className={styles.chest}>
-              <GiOpenTreasureChest />
+              <GiOpenChest />
             </div>
-            <div className={styles.status}>Claim award</div>
+            <div className={styles.status}>Claim reward</div>
           </div>
         )}
         {isFound && isChallengeCompleted && isAwardClaimed && (

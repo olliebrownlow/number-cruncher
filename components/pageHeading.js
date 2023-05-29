@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 import styles from "../componentStyles/PageHeading.module.css";
-import { GiLockedChest } from "react-icons/gi";
+import { GiChest } from "react-icons/gi";
 import colours from "../config/colours";
 
 const PageHeading = (props) => {
@@ -42,9 +42,13 @@ const PageHeading = (props) => {
         <div onClick={() => toast.remove()} className={styles.toast}>
           <div> BURIED TREASURE FOUND! </div>
           <div className={styles.treasureChest}>
-          <GiLockedChest /></div>
+            <GiChest />
+          </div>
           <div> go to achievements</div>
-        </div>
+        </div>,
+        {
+          position: "bottom-center",
+        }
       );
     }
   };

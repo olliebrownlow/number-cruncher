@@ -118,12 +118,12 @@ export default function App({ Component, pageProps }) {
       }
       if (localStorage.getItem("hiddenAwardClicks") === null) {
         const hiddenAwardClicks = {
-          unlockCost: 30,
+          unlockCost: 21,
           unlocked: false,
           found: false,
           challengeCompleted: false,
           awardClaimed: false,
-          awardGems: 10,
+          awardGems: 7,
           gemsClaimed: false,
         };
         localStorage.setItem(
