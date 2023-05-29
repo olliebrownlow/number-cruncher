@@ -6,8 +6,8 @@ const releaseInfo = [
   },
   {
     release: "6",
-    date: "May 24 2023",
-    features: "Introduces gem collection, the machine and the first challenge",
+    date: "May 29 2023",
+    features: "Introduces gems, the machine and the first challenge",
   },
   {
     release: "5",
