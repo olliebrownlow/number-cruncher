@@ -8,7 +8,7 @@ const GemCount = (props) => {
   const [isSizedUp, setIsSizedUp] = useState("mounted");
 
   useEffect(() => {
-    const gemCount = parseInt(localStorage.getItem("gemCount"));
+    const gemCount = JSON.parse(localStorage.getItem("gemCount"));
     setCurrentGemCount(gemCount);
   }, [reload]);
 
