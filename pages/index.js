@@ -9,6 +9,8 @@ import styles from "../styles/Home.module.css";
 
 const Home = () => {
   const localStorageSpace = () => {
+
+    // print to console local storage space used
     if (typeof window !== "undefined") {
       var _lsTotal = 0,
         _xLen,
