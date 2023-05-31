@@ -3,7 +3,7 @@ export const returnUserGoals = [2, 4, 7, 15, 30, 60, 100];
 // export const returnUserGoals = [1, 2, 4, 5, 6, 7, 8];
 // export const returnUserGoals = [1, 1, 1, 1, 1, 1, 1];
 
-export const correctAnswerGoals = [10, 50, 100, 200, 500, 1000, 1500];
+export const correctAnswerGoals = [10, 50, 100, 250, 500, 1000, 2500];
 // for testing
 // export const correctAnswerGoals = [1, 2, 3, 4, 5, 6, 7];
 
