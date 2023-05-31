@@ -1,3 +1,4 @@
+import { useState } from "react";
 import PageHeading from "../components/pageHeading";
 import gameLinks from "../config/gameLinks";
 import AchievementsButton from "../components/achievementsButton";
@@ -8,8 +9,9 @@ import GameLink from "../components/gameLink";
 import styles from "../styles/Home.module.css";
 
 const Home = () => {
-  const localStorageSpace = () => {
+  const [reload, setReload] = useState(0);
 
+  const localStorageSpace = () => {
     // print to console local storage space used
     if (typeof window !== "undefined") {
       var _lsTotal = 0,
@@ -25,13 +27,14 @@ const Home = () => {
       console.log(
         "Used localStorage = " + (_lsTotal / 1024).toFixed(2) + " KB"
       );
+      setReload(reload + 1);
     }
   };
 
   return (
     <>
       <AchievementsButton />
-      <GemCount reload={0} fixedPosition={false} />
+      <GemCount reload={reload} fixedPosition={false} />
       <HistoryButton />
       <PageHeading heading={"Number Cruncher"} />
       <SeeMachineButton />
