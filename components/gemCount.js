@@ -4,11 +4,16 @@ import styles from "../componentStyles/GemCount.module.css";
 
 const GemCount = (props) => {
   const { reload, fixedPosition } = props;
-  const [currentGemCount, setCurrentGemCount] = useState(0);
+  const [currentGemCount, setCurrentGemCount] = useState();
   const [isSizedUp, setIsSizedUp] = useState("mounted");
 
   useEffect(() => {
-    const gemCount = JSON.parse(localStorage.getItem("gemCount"));
+    let gemCount;
+    if (localStorage.getItem("gemCount")) {
+      gemCount = JSON.parse(localStorage.getItem("gemCount"));
+    } else {
+      gemCount = 0;
+    }
     setCurrentGemCount(gemCount);
   }, [reload]);
 
