@@ -27,7 +27,6 @@ const Home = () => {
       console.log(
         "Used localStorage = " + (_lsTotal / 1024).toFixed(2) + " KB"
       );
-      setReload(reload + 1);
     }
   };
 
