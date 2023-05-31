@@ -4,7 +4,7 @@ import styles from "../componentStyles/GemCount.module.css";
 
 const GemCount = (props) => {
   const { reload, fixedPosition } = props;
-  const [currentGemCount, setCurrentGemCount] = useState();
+  const [currentGemCount, setCurrentGemCount] = useState(0);
   const [isSizedUp, setIsSizedUp] = useState("mounted");
 
   useEffect(() => {

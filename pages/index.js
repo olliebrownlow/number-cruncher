@@ -1,4 +1,3 @@
-import { useState } from "react";
 import PageHeading from "../components/pageHeading";
 import gameLinks from "../config/gameLinks";
 import AchievementsButton from "../components/achievementsButton";
@@ -9,7 +8,6 @@ import GameLink from "../components/gameLink";
 import styles from "../styles/Home.module.css";
 
 const Home = () => {
-  const [reload, setReload] = useState(0);
 
   const localStorageSpace = () => {
     // print to console local storage space used
@@ -33,7 +31,7 @@ const Home = () => {
   return (
     <>
       <AchievementsButton />
-      <GemCount reload={reload} fixedPosition={false} />
+      <GemCount fixedPosition={false} />
       <HistoryButton />
       <PageHeading heading={"Number Cruncher"} />
       <SeeMachineButton />
