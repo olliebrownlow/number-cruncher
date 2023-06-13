@@ -3,6 +3,11 @@ import {
   returnUserGoals,
   correctAnswerGoals,
 } from "../config/achievementGoals";
+import { masterySkillLevels } from "../config/masteryGoals";
+import { getTotalCorrectForTable } from "../core/masteryLogic";
+import { getNumberOfMasteryGems } from "../utils/getNumberOfMasteryGems";
+import { getMasteryIconAndTitle } from "../utils/getMasteryIconAndTitle";
+import colours from "../config/colours";
 import { SlDiamond } from "react-icons/sl";
 import { TbCalendarStats } from "react-icons/tb";
 import { FiAward } from "react-icons/fi";
@@ -125,6 +130,50 @@ export const newAchCorrectAnswersAwardIfDue = () => {
       {
         id: "correctAnswersAchievement",
       }
+    );
+  }
+};
+
+export const awardMasteryGemsIfDue = () => {
+  // 1. get number of correct answers for table
+  const tableIndex = parseInt(sessionStorage.getItem("currentTable")) - 1;
+  const correctAnswersForTable = getTotalCorrectForTable(tableIndex);
+  // 2. get/create array of mastery goals for table
+  const masteryGoalsForTable = masterySkillLevels[tableIndex];
+  // 3. IF 2 includes 1, get index of goal from array
+  if (masteryGoalsForTable.includes(correctAnswersForTable)) {
+    const masteryGoalIndex = masteryGoalsForTable.indexOf(
+      correctAnswersForTable
+    );
+    // 4. use 3 to select number of gems to award
+    const gemsToAward = getNumberOfMasteryGems(masteryGoalIndex);
+    // 5. get gemCount
+    const currentGemCount = JSON.parse(localStorage.getItem("gemCount"));
+    // 6. add 4 to 5
+    const newGemCount = currentGemCount + gemsToAward;
+    // 7. save new gemCount
+    localStorage.setItem("gemCount", newGemCount);
+    // 8. trigger toast
+    toast.custom(
+      <div
+        onClick={() => toast.dismiss()}
+        className={styles.masteryToast}
+      >
+        <div style={{ fontWeight: "700" }}>NEW MASTERY LEVEL</div>
+        <div
+          style={{
+            color: colours[Math.floor(Math.random() * colours.length)],
+          }}
+        >
+          {tableIndex + 1} times table
+        </div>
+        <div>{getMasteryIconAndTitle(masteryGoalIndex)}</div>
+        <div style={{ fontSize: "1rem" }}>
+          Win {gemsToAward} ×{" "}
+          <SlDiamond size={12} color={"deepskyblue"} />
+        </div>
+      </div>,
+      { duration: 5000 }
     );
   }
 };

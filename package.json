@@ -18,6 +18,7 @@
     "react-dom": "18.2.0",
     "react-feather": "^2.0.10",
     "react-hot-toast": "^2.4.0",
+    "react-hydration-provider": "^1.0.2",
     "react-icons": "^4.7.1",
     "react-step-progress-bar": "^1.0.3"
   }

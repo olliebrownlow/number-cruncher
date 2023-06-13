@@ -13,6 +13,7 @@ import chalkboard from "../public/chalkboard.jpg";
 import { focusOnAnswerTextBox } from "../core/gamePlayLogic";
 import { Analytics } from "@vercel/analytics/react";
 import { machinePartsClaimed } from "../config/machinePartsClaimed";
+import { HydrationProvider, Server, Client } from "react-hydration-provider";
 
 export default function App({ Component, pageProps }) {
   const router = useRouter();
@@ -118,12 +119,12 @@ export default function App({ Component, pageProps }) {
       }
       if (localStorage.getItem("hiddenAwardClicks") === null) {
         const hiddenAwardClicks = {
-          unlockCost: 21,
+          unlockCost: 30,
           unlocked: false,
           found: false,
           challengeCompleted: false,
           awardClaimed: false,
-          awardGems: 7,
+          awardGems: 10,
           gemsClaimed: false,
         };
         localStorage.setItem(
@@ -133,6 +134,13 @@ export default function App({ Component, pageProps }) {
       }
       if (localStorage.getItem("historyInfo") === null) {
         localStorage.setItem("historyInfo", JSON.stringify(historyInfo));
+      }
+      if (localStorage.getItem("skillLevelsForTables") === null) {
+        const skillLevelsForTables = Array(12).fill("Sleeping noob");
+        localStorage.setItem(
+          "skillLevelsForTables",
+          JSON.stringify(skillLevelsForTables)
+        );
       }
       if (localStorage.getItem("bestStreaksByDifficulty") === null) {
         localStorage.setItem(
@@ -210,23 +218,27 @@ export default function App({ Component, pageProps }) {
           rel="stylesheet"
         />
       </Head>
-      <main className={styles.main}>
-        <ErrorBoundary>
-          <Component {...pageProps} />
-          <Analytics />
-        </ErrorBoundary>
-        <div className={styles.bgWrap}>
-          <Image
-            alt="chalkboard"
-            src={chalkboard}
-            quality={100}
-            fill
-            priority
-            sizes="100vw"
-            style={{ objectFit: "cover" }}
-          />
-        </div>
-      </main>
+      <HydrationProvider>
+        <main className={styles.main}>
+          <Client>
+            <ErrorBoundary>
+              <Component {...pageProps} />
+              <Analytics />
+            </ErrorBoundary>
+            <div className={styles.bgWrap}>
+              <Image
+                alt="chalkboard"
+                src={chalkboard}
+                quality={100}
+                fill
+                priority
+                sizes="100vw"
+                style={{ objectFit: "cover" }}
+              />
+            </div>
+          </Client>
+        </main>
+      </HydrationProvider>
       <div onClick={() => closeToast()}>
         <Toaster
           toastOptions={{

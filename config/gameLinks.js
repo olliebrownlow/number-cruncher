@@ -25,7 +25,7 @@ const gameLinks = [
     gameType: "against-the-clock",
     gameTitle: "Against the Clock",
     gameDescription:
-      "Set a time limit and compete for top scores. Tick tock tick tock...",
+      "Set a question limit and compete for best times. Tick tock tick tock...",
   },
   {
     pathName: "/journey",

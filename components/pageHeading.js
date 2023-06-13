@@ -55,7 +55,13 @@ const PageHeading = (props) => {
 
   return (
     <>
-      <div className={styles.center}>
+      <div
+        className={
+          heading === "Number Cruncher"
+            ? styles.center + ` ${styles.extraPadding}`
+            : styles.center + ` ${styles.padding}`
+        }
+      >
         <h1 className={styles.heading} onClick={() => handleClick()}>
           {formatHeading().map((letter, index) => (
             <span

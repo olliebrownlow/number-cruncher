@@ -28,13 +28,13 @@ import {
   incrementAchCorrectAnswers,
   addAnswerToHistoryInfo,
   newAchCorrectAnswersAwardIfDue,
+  awardMasteryGemsIfDue,
   // newAchStreakAwardIfDue,
   storePreviousQuestionAndAnswer,
   questionNumber,
   setNewQuestion,
 } from "../core/gamePlayLogic";
 import {
-  returnUserGoals,
   streakEasyGoals,
   streakMediumGoals,
   streakHardGoals,
@@ -183,6 +183,7 @@ const Streak = () => {
         incrementAchCorrectAnswers();
         addAnswerToHistoryInfo(true);
         newAchCorrectAnswersAwardIfDue();
+        awardMasteryGemsIfDue();
         // newAchStreakAwardIfDue();
         if (
           goals &&

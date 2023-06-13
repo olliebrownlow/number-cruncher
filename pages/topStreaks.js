@@ -4,7 +4,6 @@ import chalkboard from "../public/hangingChalkboard.png";
 import HomeButton from "../components/homeButton";
 import BackButton from "../components/backButton";
 import PageHeading from "../components/pageHeading";
-import Spacer from "../components/spacer";
 import styles from "../styles/TopStreaks.module.css";
 import colours from "../config/colours";
 

@@ -213,3 +213,77 @@ export const theNumberCruncherflowChart = [
     <div className={styles.machineInfoCells}>Complete the game</div>
   </>,
 ];
+
+export const masteryFlowChart = [
+  <>
+    <div className={styles.machineInfoCells}>
+      Answer questions <br /> correctly
+    </div>
+    <div className={styles.machineInfoCells}></div>
+    <div className={styles.machineInfoCells}></div>
+  </>,
+  <>
+    <HiArrowSmDown
+      size={25}
+      color={colours[Math.floor(Math.random() * colours.length)]}
+      className={styles.machineInfoCells}
+    />
+    <div className={styles.machineInfoCells}></div>
+    <div className={styles.machineInfoCells}></div>
+  </>,
+  <>
+    <div className={styles.machineInfoCells}>
+      Increase table
+      <br />
+      skill
+    </div>
+    <div className={styles.machineInfoCells}></div>
+    <div className={styles.machineInfoCells}>
+      Build the <br /> machine
+    </div>
+  </>,
+  <>
+    <HiArrowSmDown
+      size={25}
+      color={colours[Math.floor(Math.random() * colours.length)]}
+      className={styles.machineInfoCells}
+    />
+    <div className={styles.machineInfoCells}></div>
+    <HiArrowSmDown
+      size={25}
+      color={colours[Math.floor(Math.random() * colours.length)]}
+      className={styles.machineInfoCells}
+    />
+  </>,
+  <>
+    <div className={styles.machineInfoCells}>
+      Achieve full
+      <br />
+      mastery
+    </div>
+    <HiArrowNarrowRight
+      size={25}
+      color={colours[Math.floor(Math.random() * colours.length)]}
+      className={styles.machineInfoCells}
+    />
+    <div className={styles.machineInfoCells}>
+      Put all 12 in
+      <br />
+      the machine
+    </div>
+  </>,
+  <>
+    <div className={styles.machineInfoCells}></div>
+    <div className={styles.machineInfoCells}></div>
+    <HiArrowSmDown
+      size={25}
+      color={colours[Math.floor(Math.random() * colours.length)]}
+      className={styles.machineInfoCells}
+    />
+  </>,
+  <>
+    <div className={styles.machineInfoCells}></div>
+    <div className={styles.machineInfoCells}></div>
+    <div className={styles.machineInfoCells}>Complete the game</div>
+  </>,
+];

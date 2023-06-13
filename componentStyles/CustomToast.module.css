@@ -24,3 +24,17 @@
   border-radius: 8px;
   border: 1px solid lightgrey;
 }
+
+.masteryToast {
+  font-size: 1.5rem;
+  text-align: center;
+  background-color: black;
+  padding: 16px 32px;
+  border-radius: 8px;
+  border: 1px solid deepskyblue;
+}
+
+.gems {
+  color: white;
+  font-size: 2rem;
+}

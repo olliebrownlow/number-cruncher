@@ -18,3 +18,9 @@ export const theNumberCruncherInfoText =
   "pieces even if found. Find the pieces, complete those challenges, rebuild the " +
   "machine and fulfil your destiny to destroy the times tables... FOREVER! HaHaHa " +
   "(*evil laugh).";
+
+export const masteryInfoText =
+  "Here you can monitor your progression through skill levels for each times table. " +
+  "Your goal is to become an evil genius grand master for all 12 and feed them into The Number " +
+  "Cruncher machine to finally destroy them and sow ultimste confusion across the " +
+  "universe... FOREVER! HaHaHa (*evil laugh).";

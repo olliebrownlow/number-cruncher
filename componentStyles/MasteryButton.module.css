@@ -1,0 +1,26 @@
+.masteryButton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  top: 75px;
+  /* left: 20%;
+  right: auto; */
+  /* margin: 20px 28px; */
+  font-size: 0.9rem;
+  z-index: 1;
+}
+
+/* Mobile */
+@media (max-width: 700px) {
+  /* .masteryButton {
+    left: 2%;
+  } */
+}
+
+/* Tablet and Smaller Desktop */
+@media (min-width: 701px) and (max-width: 1120px) {
+  /* .masteryButton {
+    left: 12.5%;
+  } */
+}
