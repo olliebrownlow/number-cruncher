@@ -3,9 +3,9 @@
   grid-template-columns: 20% 20% 20% 20% 20%;
   width: var(--max-width);
   max-width: 90%;
-  padding-bottom: 8px;
-  margin-bottom: 4px;
-  border-bottom: solid lightgrey 1px;
+  padding: 8px 0;
+  border: solid lightgrey 1px;
+  border-radius: 8px;
   text-align: center;
 }
 
@@ -21,7 +21,7 @@
   margin: 3px 0;
   padding: 4px;
   border: solid lightgrey;
-  border-width: 2px 1px 1px 2px;
+  border-width: 3px 2px 2px 3px;
   border-radius:46% 55% 45% 54%/54% 45% 55% 46%;
   width: 2rem;
   height: auto;

@@ -1,10 +1,6 @@
 import { useState } from "react";
 import Image from "next/image";
 import eggm from "../public/overlord2.png";
-import sleepy from "../public/sleepy.png";
-import robe from "../public/robe2.png";
-import crown from "../public/queen-crown.png";
-import king from "../public/throne-king.png";
 import HomeButton from "../components/homeButton";
 import BackButton from "../components/backButton";
 import PageHeading from "../components/pageHeading";
@@ -45,20 +41,7 @@ const Mastery = () => {
     ["Emerging leader", <GiRobe size={size} />],
     ["Bombastic caesar", <GiQueenCrown size={size} />],
     ["Rising overlord", <GiThroneKing size={size} />],
-    [
-      "Evil genius grand master",
-      <GiOverlordHelm size={size} />,
-      // <div className={styles.container}>
-      //   <Image
-      //     alt="Evil genius grand master"
-      //     src={eggm}
-      //     quality={100}
-      //     height={size}
-      //     width={size}
-      //     priority
-      //   />
-      // </div>,
-    ],
+    ["Evil genius grand master", <GiOverlordHelm size={size} />],
   ];
 
   const getAllTablesAtSkillLevel = (skillLevel) => {
@@ -87,6 +70,23 @@ const Mastery = () => {
     }
   };
 
+  const fetchColour = (index) => {
+    switch (true) {
+      case index == 0:
+        return "#ff0000";
+      case index == 1:
+        return "#ff9700";
+      case index == 2:
+        return "#d8bf00";
+      case index == 3:
+        return "#9ab400";
+      case index == 4:
+        return "#008000";
+      default:
+        return "#ff0000";
+    }
+  };
+
   return (
     <>
       <BackButton />
@@ -105,7 +105,11 @@ const Mastery = () => {
           <div key={index} className={styles.tableList}>
             {typeof window !== "undefined" &&
               getAllTablesAtSkillLevel(level[0]).map((el, ind) => (
-                <div key={ind} className={styles.table}>
+                <div
+                  key={el}
+                  className={styles.table}
+                  style={{ borderColor: fetchColour(index) }}
+                >
                   {el}
                 </div>
               ))}
