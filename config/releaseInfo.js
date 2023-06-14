@@ -5,6 +5,11 @@ const releaseInfo = [
     features: "New feature(s)",
   },
   {
+    release: "7",
+    date: "Jun 14 2023",
+    features: "Introduces times table mastery page and goals",
+  },
+  {
     release: "6",
     date: "May 29 2023",
     features: "Introduces gems, the machine and the first challenge",
