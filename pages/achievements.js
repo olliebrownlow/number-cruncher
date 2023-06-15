@@ -9,13 +9,9 @@ import AwardGridAtca from "../components/awardGridAtca";
 import AwardGridStreakEasy from "../components/awardGridStreakEasy";
 import AwardGridStreakMedium from "../components/awardGridStreakMedium";
 import AwardGridStreakHard from "../components/awardGridStreakHard";
-import HiddenAwardClicks from "../components/hiddenAwardClicks";
 import Spacer from "../components/spacer";
-import {
-  theAwardsFlowChart,
-  theChallengesFlowChart,
-} from "../config/flowCharts";
-import { awardsInfoText, challengesInfoText } from "../config/infoTexts";
+import { theAwardsFlowChart } from "../config/flowCharts";
+import { awardsInfoText } from "../config/infoTexts";
 
 const Achievements = () => {
   const [reload, setReload] = useState(0);
@@ -24,7 +20,7 @@ const Achievements = () => {
       <BackButton />
       <GemCount reload={reload} fixedPosition={true} />
       <HomeButton />
-      <PageHeading heading={"Awards"} />
+      <PageHeading heading={"Achievements"} />
       <FlowChart infoText={awardsInfoText} flowChart={theAwardsFlowChart} />
       <AwardGridReturnUser reload={reload} setReload={setReload} />
       <Spacer />
@@ -35,12 +31,6 @@ const Achievements = () => {
       <AwardGridStreakMedium reload={reload} setReload={setReload} />
       <Spacer />
       <AwardGridStreakHard reload={reload} setReload={setReload} />
-      <PageHeading heading={"Challenges"} />
-      <FlowChart
-        infoText={challengesInfoText}
-        flowChart={theChallengesFlowChart}
-      />
-      <HiddenAwardClicks reload={reload} setReload={setReload} />
       <Spacer />
     </>
   );

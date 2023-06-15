@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { GiOrbDirection } from "react-icons/gi";
+import { GiMightyForce } from "react-icons/gi";
 import styles from "../componentStyles/MasteryButton.module.css";
 
 const MasteryButton = () => {
@@ -15,7 +15,7 @@ const MasteryButton = () => {
         className={styles.masteryButton}
         onClick={() => goToMasteryPage()}
       >
-        <GiOrbDirection size={20} />
+        <GiMightyForce size={20} />
         mastery
       </div>
     </>

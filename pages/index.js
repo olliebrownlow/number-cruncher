@@ -4,12 +4,12 @@ import AchievementsButton from "../components/achievementsButton";
 import GemCount from "../components/gemCount";
 import HistoryButton from "../components/historyButton";
 import MasteryButton from "../components/masteryButton";
+import ChallengesButton from "../components/challengesButton";
 import SeeMachineButton from "../components/seeMachineButton";
 import GameLink from "../components/gameLink";
 import styles from "../styles/Home.module.css";
 
 const Home = () => {
-
   const localStorageSpace = () => {
     // print to console local storage space used
     if (typeof window !== "undefined") {
@@ -35,6 +35,7 @@ const Home = () => {
       <GemCount fixedPosition={false} />
       <HistoryButton />
       <MasteryButton />
+      <ChallengesButton />
       <PageHeading heading={"Number Cruncher"} />
       <SeeMachineButton />
       {localStorageSpace()}

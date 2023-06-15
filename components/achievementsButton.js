@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { FiAward } from "react-icons/fi";
 import { RxDotFilled } from "react-icons/rx";
 import styles from "../componentStyles/AchievementsButton.module.css";
+import { GiAchievement } from "react-icons/gi";
 
 const AchievementsButton = () => {
   const router = useRouter();
@@ -51,7 +51,7 @@ const AchievementsButton = () => {
         className={styles.achievementsButton}
         onClick={() => router.push("/achievements")}
       >
-        <FiAward size={16} /> achievements
+        <GiAchievement size={16} /> achievements
       </div>
     </>
   );
