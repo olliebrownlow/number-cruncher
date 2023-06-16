@@ -51,7 +51,7 @@ const AchievementsButton = () => {
         className={styles.achievementsButton}
         onClick={() => router.push("/achievements")}
       >
-        <GiAchievement size={16} /> achievements
+        <GiAchievement size={20} /> achievements
       </div>
     </>
   );

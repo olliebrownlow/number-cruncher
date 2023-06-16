@@ -5,7 +5,7 @@
   position: absolute;
   left: auto;
   right: 20%;
-  margin: 20px 28px;
+  top: 20px;
   font-size: 0.9rem;
   z-index: 1;
 }
@@ -23,7 +23,7 @@
 /* Mobile */
 @media (max-width: 700px) {
   .achievementsButton {
-    right: -2%;
+    right: 5%;
   }
   .claimMarker {
     right: 12%;
