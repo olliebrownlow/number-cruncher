@@ -59,59 +59,7 @@
   font-family: 'Cabin Sketch', cursive;
 }
 
-.chest {
-  color: gold;
-  font-size: 8rem;
-}
-
-@-webkit-keyframes zoomOut {
-  0% {
-    opacity: 1;
-  } 
-  50% { 
-    opacity: 1;
-    height: auto;
-    -webkit-transform: scale3d(.3,.3,.3);
-    transform: scale3d(.3,.3,.3);
-  }
-  to {
-    opacity:0;
-    height: 0;
-    display: none;
-  }
-}
-@keyframes zoomOut {
-  0% {
-    opacity:1;
-  }
-  50% {
-    opacity: 0;
-    height: auto;
-    -webkit-transform: scale3d(.3,.3,.3);
-    transform: scale3d(.3,.3,.3);
-  }
-  to {
-    opacity: 0;
-    height: 0;
-    display: none;
-  }
-}
-.zoomOut {
-  -webkit-animation-name: zoomOut;
-  animation-name: zoomOut;
-  -webkit-animation-duration: 2s;
-  animation-duration: 2s;
-  animation-iteration-count: 1;
-  -webkit-animation-iteration-count: 1;
-  animation-fill-mode: forwards;
-  -webkit-animation-fill-mode: forwards;
-  -webkit-transform-origin: center;
-  transform-origin: center;
-  animation-delay: 500ms;
-  -webkit-animation-delay: 500ms;
-}
-
-@-webkit-keyframes fadeInDownDelayed {
+/* @-webkit-keyframes fadeInDownDelayed {
   0% {
     opacity: 0;
     height: 0;
@@ -150,7 +98,7 @@
   -webkit-animation-fill-mode: both;
   animation-delay: 2400ms;
   -webkit-animation-delay: 2400ms;
-}
+} */
 
 @-webkit-keyframes fadeIn {
   0% {

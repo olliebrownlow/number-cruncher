@@ -1,4 +1,9 @@
 import { useEffect, useState } from "react";
+import Image from "next/image";
+import treasureMap from "../public/treasureMap.png";
+import lockedChest from "../public/lockedChest.png";
+import openChest from "../public/openChest.png";
+import circularSaw from "../public/circularSaw.png";
 import toast from "react-hot-toast";
 import SubHeading from "./subHeading";
 import Spacer from "./spacer";
@@ -8,12 +13,6 @@ import ConfirmPayForChallenge from "./confirmPayForChallenge";
 import { handleChallengeGems } from "../core/gemLogic";
 import { handleMachinePartClaim } from "../core/machinePartLogic";
 import styles from "../componentStyles/HiddenAwards.module.css";
-import {
-  GiLockedChest,
-  GiOpenChest,
-  GiTreasureMap,
-  GiCircularSawblade,
-} from "react-icons/gi";
 import { SlDiamond } from "react-icons/sl";
 import { ImCross } from "react-icons/im";
 
@@ -132,17 +131,18 @@ const HiddenAwardClicks = (props) => {
   };
 
   const clue = [
+    "Go HOME and...",
     "Tap on something colourful",
-    "Keep going, don't stop",
+    "Keep going, don't sleep",
     "Click it enough times and",
-    "A challenge will unlock",
+    "You'll find what you seek",
   ];
 
   const challenge = [
     "To unlock the treasure chest:",
-    'In Practice Mode select the "hard" tables',
+    'In Practice Mode select the "easy" tables',
     "Within a single game",
-    "answer 20 questions correctly",
+    "answer 30 questions correctly",
   ];
 
   return (
@@ -173,8 +173,18 @@ const HiddenAwardClicks = (props) => {
               WebkitFilter: !isUnLocked && "blur(7px)",
             }}
           >
-            <div className={styles.chest}>
-              <GiTreasureMap color={"sienna"} />
+            <div className={styles.iconImages}>
+              <Image
+                alt="Treasure map"
+                src={treasureMap}
+                quality={100}
+                height={200}
+                width={200}
+                priority
+              />
+            </div>
+            <div style={{ fontWeight: "700", whiteSpace: "nowrap" }}>
+              find the treasure
             </div>
             <div onClick={() => toggleClue()} className={styles.status}>
               {showClue ? "Close" : "Tap for a clue"}
@@ -202,8 +212,18 @@ const HiddenAwardClicks = (props) => {
         )}
         {isFound && !isChallengeCompleted && (
           <div>
-            <div className={styles.chest}>
-              <GiLockedChest />
+            <div className={styles.iconImages}>
+              <Image
+                alt="Locked chest"
+                src={lockedChest}
+                quality={100}
+                height={200}
+                width={200}
+                priority
+              />
+            </div>
+            <div style={{ fontWeight: "700", whiteSpace: "nowrap" }}>
+              unlock the treasure chest
             </div>
             <div onClick={() => toggleClue()} className={styles.status}>
               {showClue ? "Close" : "Reveal challenge"}
@@ -231,34 +251,77 @@ const HiddenAwardClicks = (props) => {
         )}
         {isFound && isChallengeCompleted && !isAwardClaimed && (
           <div onClick={() => claimAward()}>
-            <div className={styles.chest}>
-              <GiOpenChest />
+            <div className={styles.iconImages}>
+              <Image
+                alt="Open chest"
+                src={openChest}
+                quality={100}
+                height={200}
+                width={200}
+                priority
+              />
             </div>
-            <div className={styles.status}>Claim reward</div>
+            <div className={styles.status}>Claim machine part</div>
           </div>
         )}
         {isFound && isChallengeCompleted && isAwardClaimed && (
           <div>
-            <GiCircularSawblade color={"#A8A9AD"} size="8rem" />
+            <div className={styles.iconImages}>
+              <Image
+                alt="Circular saw"
+                src={circularSaw}
+                quality={100}
+                height={200}
+                width={200}
+                priority
+              />
+            </div>
             <div className={styles.machinePartNumber}>Machine part 7</div>
             <div className={styles.machinePartName}>Circular saw</div>
             {awardGems} × <SlDiamond color={"deepskyblue"} size={16} />
           </div>
         )}
-        <ResetHiddenAchievementButton
-          refresh={refresh}
-          setRefresh={setRefresh}
-          isUnLocked={isUnLocked}
-          challengeType={"hiddenAwardClicks"}
-        />
+        {isAwardClaimed && (
+          <ResetHiddenAchievementButton
+            refresh={refresh}
+            setRefresh={setRefresh}
+            isUnLocked={isUnLocked}
+            challengeType={"hiddenAwardClicks"}
+          />
+        )}
         <Spacer />
         {showCelebration && (
           <CelebrateHiddenAwardClaim
             closeModal={closeCelebrationModal}
             windowOnClick={celebrationWindowOnClick}
-            awardIcon={"circularSaw"}
+            awardIcon={
+              <div className={styles.iconImages + ` ${styles.fadeInDownDelayed}`}>
+                <Image
+                  alt="Circular saw"
+                  src={circularSaw}
+                  quality={100}
+                  height={150}
+                  width={150}
+                  priority
+                />
+              </div>
+            }
             awardGems={awardGems}
             isGemsClaimed={isGemsClaimed}
+            machinePart={7}
+            machinePartName={"Circular saw"}
+            oldIcon={
+              <div className={styles.iconImages + ` ${styles.zoomOut}`}>
+                <Image
+                  alt="Open chest"
+                  src={openChest}
+                  quality={100}
+                  height={100}
+                  width={100}
+                  priority
+                />
+              </div>
+            }
           />
         )}
         {showPaymentConfirm && (

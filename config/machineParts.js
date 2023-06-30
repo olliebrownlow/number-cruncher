@@ -1,21 +1,34 @@
+import Image from "next/image";
+import circularSaw from "../public/circularSaw.png";
+import bearTrap from "../public/wolfTrap.png";
+import furnace from "../public/furnace.png";
 import {
-  GiCircularSawblade,
   GiPlug,
   GiProcessor,
-  GiFurnace,
   GiNeedleDrill,
   GiKeyboard,
   GiBlender,
-  GiWolfTrap,
   GiLaserTurret,
   GiDynamite,
   Gi3DHammer,
 } from "react-icons/gi";
 import { CgScreen } from "react-icons/cg";
+import styles from "../configStyles/MachineParts.module.css";
 
 export const machineParts = [
   {
-    icon: <GiFurnace size={75} color={"coral"} />,
+    icon: (
+      <div className={styles.iconImages}>
+        <Image
+          alt="Furnace"
+          src={furnace}
+          quality={100}
+          height={75}
+          width={75}
+          priority
+        />
+      </div>
+    ),
     name: "incinerator",
   },
   {
@@ -39,7 +52,18 @@ export const machineParts = [
     name: "drill",
   },
   {
-    icon: <GiCircularSawblade size={75} color={"#A8A9AD"} />,
+    icon: (
+      <div className={styles.iconImages}>
+        <Image
+          alt="Circular saw"
+          src={circularSaw}
+          quality={100}
+          height={75}
+          width={75}
+          priority
+        />
+      </div>
+    ),
     name: "circular saw",
   },
   { icon: <GiPlug size={75} />, name: "plug" },
@@ -56,7 +80,18 @@ export const machineParts = [
     name: "cpu",
   },
   {
-    icon: <GiWolfTrap size={75} color={"#A8A9AD"} />,
-    name: "trap",
+    icon: (
+      <div className={styles.iconImages}>
+        <Image
+          alt="Bear trap"
+          src={bearTrap}
+          quality={100}
+          height={75}
+          width={75}
+          priority
+        />
+      </div>
+    ),
+    name: "bear trap",
   },
 ];

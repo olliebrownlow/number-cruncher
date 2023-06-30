@@ -1,4 +1,6 @@
 import toast from "react-hot-toast";
+import Image from "next/image";
+import openSafe from "../public/openSafe2.png";
 import {
   returnUserGoals,
   correctAnswerGoals,
@@ -12,6 +14,7 @@ import { SlDiamond } from "react-icons/sl";
 import { TbCalendarStats } from "react-icons/tb";
 import { FiAward } from "react-icons/fi";
 import styles from "../componentStyles/CustomToast.module.css";
+import { GiUnlocking } from "react-icons/gi";
 
 export const focusOnAnswerTextBox = () => {
   if (document.getElementById("answer")) {
@@ -155,10 +158,7 @@ export const awardMasteryGemsIfDue = () => {
     localStorage.setItem("gemCount", newGemCount);
     // 8. trigger toast
     toast.custom(
-      <div
-        onClick={() => toast.dismiss()}
-        className={styles.masteryToast}
-      >
+      <div onClick={() => toast.dismiss()} className={styles.masteryToast}>
         <div style={{ fontWeight: "700" }}>NEW MASTERY LEVEL</div>
         <div
           style={{
@@ -169,11 +169,87 @@ export const awardMasteryGemsIfDue = () => {
         </div>
         <div>{getMasteryIconAndTitle(masteryGoalIndex)}</div>
         <div style={{ fontSize: "1rem" }}>
-          Win {gemsToAward} ×{" "}
-          <SlDiamond size={12} color={"deepskyblue"} />
+          Win {gemsToAward} × <SlDiamond size={12} color={"deepskyblue"} />
         </div>
       </div>,
       { duration: 5000 }
+    );
+  }
+};
+
+export const completeHiddenAwardClicksChallenge = () => {
+  // check if on easy level and
+  const gt = sessionStorage.getItem("gameType");
+  const gameOptions = JSON.parse(sessionStorage.getItem(`${gt}GameOptions`));
+  // if hidden click treasure is unlocked and challenge not complete and
+  const hiddenAwardClicks = JSON.parse(
+    localStorage.getItem("hiddenAwardClicks")
+  );
+  if (
+    gameOptions.difficultyLevel === "Easy" &&
+    hiddenAwardClicks.found &&
+    !hiddenAwardClicks.challengeCompleted &&
+    // use correct counter to check for 30 correct answers
+    JSON.parse(sessionStorage.getItem("correctCounter")) === 30
+  ) {
+    // mark challenge as complete
+    hiddenAwardClicks.challengeCompleted = true;
+    localStorage.setItem(
+      "hiddenAwardClicks",
+      JSON.stringify(hiddenAwardClicks)
+    );
+    // trigger toast
+    toast.custom(
+      <div onClick={() => toast.remove()} className={styles.toast}>
+        <div> TREASURE CHEST UNLOCKED! </div>
+        <div className={styles.treasureChest}>
+          <GiUnlocking />
+        </div>
+        <div> go to challenges </div>
+      </div>,
+      { duration: 4000 }
+    );
+  }
+};
+
+export const completeChallengeReleaseFlowChallenge = () => {
+  // check if on medium level and
+  const gt = sessionStorage.getItem("gameType");
+  const gameOptions = JSON.parse(sessionStorage.getItem(`${gt}GameOptions`));
+  // if release flow challenge is unlocked and challenge not complete and
+  const challengeReleaseFlow = JSON.parse(
+    localStorage.getItem("challengeReleaseFlow")
+  );
+  if (
+    gameOptions.difficultyLevel === "Medium" &&
+    challengeReleaseFlow.found &&
+    !challengeReleaseFlow.challengeCompleted &&
+    // use correct counter to check for 30 correct answers
+    JSON.parse(sessionStorage.getItem("correctCounter")) === 50
+  ) {
+    // mark challenge as complete
+    challengeReleaseFlow.challengeCompleted = true;
+    localStorage.setItem(
+      "challengeReleaseFlow",
+      JSON.stringify(challengeReleaseFlow)
+    );
+    // trigger toast
+    toast.custom(
+      <div onClick={() => toast.remove()} className={styles.toast}>
+        <div> SAFE CRACKED AND OPEN! </div>
+        <div className={styles.openSafe}>
+          <Image
+            alt="Open safe"
+            src={openSafe}
+            quality={100}
+            height={200}
+            width={200}
+            priority
+          />
+        </div>
+        <div> go to challenges </div>
+      </div>,
+      { duration: 4000 }
     );
   }
 };
@@ -228,7 +304,7 @@ export const trackAppUsageLoyalty = () => {
           false)
     ) {
       toast.custom(
-        <div className={styles.toast}>
+        <div onClick={() => toast.remove()} className={styles.toast}>
           <TbCalendarStats color="white" size="50px" />
           <div> Days used in a row </div>
           <div>{JSON.parse(localStorage.getItem("returnUsage"))[1]}</div>
@@ -238,7 +314,8 @@ export const trackAppUsageLoyalty = () => {
               <SlDiamond color={"deepSkyBlue"} size="20px" />
             </div>
           )}
-        </div>
+        </div>,
+        { duration: 3000 }
       );
     }
     localStorage.setItem("dailyBonusGemDate", today);
@@ -260,7 +337,7 @@ export const newReturnUsageAwardIfDue = (bonusGemDue) => {
       arr[index] = 0;
       localStorage.setItem("isReturnUsageClaimed", JSON.stringify(arr));
       toast.custom(
-        <div className={styles.returnUserToast}>
+        <div onClick={() => toast.remove()} className={styles.returnUserToast}>
           <FiAward color="gold" size="50px" />
           {getReturnUserToastMessage(
             returnUserGoals,
@@ -273,7 +350,8 @@ export const newReturnUsageAwardIfDue = (bonusGemDue) => {
               <SlDiamond color={"deepSkyBlue"} size="20px" />
             </div>
           )}
-        </div>
+        </div>,
+        { duration: 5000 }
       );
     }
   }

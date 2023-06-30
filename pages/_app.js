@@ -132,6 +132,35 @@ export default function App({ Component, pageProps }) {
           JSON.stringify(hiddenAwardClicks)
         );
       }
+      if (localStorage.getItem("challengeReleaseFlow") === null) {
+        const challengeReleaseFlow = {
+          unlockCost: 36,
+          unlocked: false,
+          found: false,
+          challengeCompleted: false,
+          awardClaimed: false,
+          awardGems: 12,
+          gemsClaimed: false,
+        };
+        localStorage.setItem(
+          "challengeReleaseFlow",
+          JSON.stringify(challengeReleaseFlow)
+        );
+      }
+      if (localStorage.getItem("releaseFlowIcons") === null) {
+        const releaseFlowIcons = Array(4).fill(0);
+        localStorage.setItem(
+          "releaseFlowIcons",
+          JSON.stringify(releaseFlowIcons)
+        );
+      }
+      if (localStorage.getItem("releaseFlowColours") === null) {
+        const releaseFlowColours = Array(4).fill(0);
+        localStorage.setItem(
+          "releaseFlowColours",
+          JSON.stringify(releaseFlowColours)
+        );
+      }
       if (localStorage.getItem("historyInfo") === null) {
         localStorage.setItem("historyInfo", JSON.stringify(historyInfo));
       }

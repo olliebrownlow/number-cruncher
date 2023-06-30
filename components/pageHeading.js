@@ -44,7 +44,7 @@ const PageHeading = (props) => {
           <div className={styles.treasureChest}>
             <GiChest />
           </div>
-          <div> go to achievements</div>
+          <div> go to challenges</div>
         </div>,
         {
           position: "bottom-center",

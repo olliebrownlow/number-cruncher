@@ -30,7 +30,7 @@ const ResetHiddenAchievementButton = (props) => {
       awardGems: challenge.awardGems,
       gemsClaimed: challenge.gemsClaimed,
     };
-    localStorage.setItem("hiddenAwardClicks", JSON.stringify(resetObject));
+    localStorage.setItem(challengeType, JSON.stringify(resetObject));
     setRefresh(refresh + 1);
   };
 
@@ -53,7 +53,7 @@ const ResetHiddenAchievementButton = (props) => {
           handleReset={resetAchievement}
           titleText={"reset this challenge"}
           subText={
-            "This challenge will be reset but not re-locked and you won't lose the machine part if you have already won it"
+            "This challenge will be reset but not re-locked. You won't need to pay again and you won't win any gems, but you also won't lose the machine part"
           }
         />
       )}

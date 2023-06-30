@@ -22,19 +22,13 @@ const AchievementsButton = () => {
     const isStreakHardClaimed = JSON.parse(
       localStorage.getItem("isStreakHardClaimed")
     );
-    const hiddenAwardClicks = JSON.parse(
-      localStorage.getItem("hiddenAwardClicks")
-    );
 
     if (
       (isReturnUsageClaimed && isReturnUsageClaimed.includes(0)) ||
       (isATCAClaimed && isATCAClaimed.includes(0)) ||
       (isStreakEasyClaimed && isStreakEasyClaimed.includes(0)) ||
       (isStreakMediumClaimed && isStreakMediumClaimed.includes(0)) ||
-      (isStreakHardClaimed && isStreakHardClaimed.includes(0)) ||
-      (hiddenAwardClicks &&
-        hiddenAwardClicks.challengeCompleted &&
-        !hiddenAwardClicks.awardClaimed)
+      (isStreakHardClaimed && isStreakHardClaimed.includes(0))
     ) {
       setAchievementsToClaim(true);
     } else setAchievementsToClaim(false);
