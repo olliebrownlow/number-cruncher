@@ -218,6 +218,7 @@ export default function App({ Component, pageProps }) {
       }
     }
     router.prefetch("/achievements");
+    router.prefetch("/challenges");
     router.prefetch("/progress");
     router.prefetch("/machine");
   }, [

@@ -10,9 +10,10 @@
   },
   "dependencies": {
     "@fireworks-js/react": "^2.10.2",
-    "@next/font": "13.1.1",
-    "@vercel/analytics": "^0.1.8",
-    "next": "13.1.1",
+    "@next/codemod": "13.4.7",
+    "@next/font": "13.4.7",
+    "@vercel/analytics": "^1.0.1",
+    "next": "13.4.7",
     "react": "18.2.0",
     "react-confetti": "^6.1.0",
     "react-dom": "18.2.0",
