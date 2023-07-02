@@ -100,22 +100,33 @@ const Mastery = () => {
           <div key={index}>{level[1]}</div>
         ))}
       </div>
-      <div className={styles.levelCheck}>
-        {skillLevelNamesAndIcons(40).map((level, index) => (
-          <div key={index} className={styles.tableList}>
-            {typeof window !== "undefined" &&
-              getAllTablesAtSkillLevel(level[0]).map((el, ind) => (
-                <div
-                  key={el}
-                  className={styles.table}
-                  style={{ borderColor: fetchColour(index) }}
-                >
-                  {el}
-                </div>
-              ))}
+      {typeof window !== "undefined" &&
+      getAllTablesAtSkillLevel("Evil genius grand master").length == 12 ? (
+        <div  className={styles.masteryComplete}>
+          <div className={styles.completedMessage}>
+            All tables mastered! Transition to
           </div>
-        ))}
-      </div>
+          <div className={styles.bold}>Evil Genius Grand Master</div>
+          <div className={styles.completedMessage}>complete.</div>
+        </div>
+      ) : (
+        <div className={styles.levelCheck}>
+          {skillLevelNamesAndIcons(40).map((level, index) => (
+            <div key={index} className={styles.tableList}>
+              {typeof window !== "undefined" &&
+                getAllTablesAtSkillLevel(level[0]).map((el, ind) => (
+                  <div
+                    key={el}
+                    className={styles.table}
+                    style={{ borderColor: fetchColour(index) }}
+                  >
+                    {el}
+                  </div>
+                ))}
+            </div>
+          ))}
+        </div>
+      )}
       <Spacer size={"0.75rem"} />
       {masterySkillLevels.map((table, index) => (
         <>

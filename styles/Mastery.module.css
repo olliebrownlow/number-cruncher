@@ -9,6 +9,24 @@
   text-align: center;
 }
 
+.masteryComplete {
+  max-width: 90%;
+  padding: 16px 8px;
+  border: solid lightgrey 1px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.completedMessage {
+  font-size: 1.2rem;
+}
+
+.bold {
+  font-weight: 700;
+  font-size: 2.5rem;
+  margin: 16px 4px;
+}
+
 .tableList {
   display: flex;
   flex-direction: column;
