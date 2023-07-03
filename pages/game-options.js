@@ -74,7 +74,7 @@ const GameOptions = () => {
           >
             Game rules and tips
           </div>
-          {showGameRules && <GameRules gameType={gameType} />}
+          {showGameRules && <GameRuuiiuiles gameType={gameType} />}
           <StartButton
             gameType={gameType}
             selectedTimesTables={selected}

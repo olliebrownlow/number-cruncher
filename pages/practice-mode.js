@@ -30,8 +30,6 @@ import {
   questionNumber,
   setNewQuestion,
 } from "../core/gamePlayLogic";
-// import { GiUnlocking } from "react-icons/gi";
-// import styles from "../componentStyles/PageHeading.module.css";
 
 const PracticeMode = () => {
   const [userAnswer, setUserAnswer] = useState("");

@@ -2,6 +2,7 @@ import BackButton from "../components/backButton";
 import HomeButton from "../components/homeButton";
 import PageHeading from "../components/pageHeading";
 import ReleaseTable from "../components/releaseTable";
+import ResetGameButton from "../components/resetGameButton";
 import Spacer from "../components/spacer";
 import styles from "../styles/About.module.css";
 import colours from "../config/colours";
@@ -141,6 +142,22 @@ const About = () => {
         </div>
         <Spacer />
         <ReleaseTable />
+        <Spacer />
+        <h3
+          style={{
+            color: colours[Math.floor(Math.random() * colours.length)],
+          }}
+        >
+          Caution
+        </h3>
+        <Spacer />
+        <p>
+          The button below is a total game reset button. It resets your,
+          progress history, mastery progress, challenges, achievements and gems
+          back to zero. Use it with caution!
+        </p>
+        <Spacer size={"0.75rem"} />
+        <ResetGameButton />
         <Spacer />
       </div>
     </>
