@@ -14,18 +14,18 @@ const gameLinks = [
   },
   {
     pathName: "/game-options",
+    gameType: "against-the-clock",
+    gameTitle: "Against the Clock",
+    gameDescription:
+      "Set a question limit and compete for best times. Tick tock tick tock...",
+  },
+  {
+    pathName: "/game-options",
     gameType: "high-score",
     gameTitle: "High Score",
     gameDescription:
       "Get one wrong and you'll lose a life. How many points can you score before the game ends?",
     // new: "New!",
-  },
-  {
-    pathName: "/game-options",
-    gameType: "against-the-clock",
-    gameTitle: "Against the Clock",
-    gameDescription:
-      "Set a question limit and compete for best times. Tick tock tick tock...",
   },
   {
     pathName: "/journey",
